@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="r-peridot">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/r-peridot.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
