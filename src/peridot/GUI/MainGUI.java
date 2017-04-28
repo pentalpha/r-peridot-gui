@@ -30,6 +30,7 @@ import javax.swing.JOptionPane;
 import peridot.GUI.component.Panel;
 import peridot.Global;
 import peridot.Log;
+import static peridot.Log.logger;
 /**
  *
  * @author pentalpha
@@ -46,11 +47,9 @@ public class MainGUI extends javax.swing.JFrame {
      * Creates new form MainGUI
      */
     public MainGUI() {
-        Log.logger.info("Start MainGUI");
-        Places.createSgsDir();
-        if(Places.scriptsDir.exists() == false){
-            Places.createScriptsDir();
-        }
+        logger.info("Start MainGUI");
+        Places.createPeridotDir();
+        Places.updateModulesDir(false);
         //Util.getRPath();
         
         //Log.logger.info("trying to load scripts");
