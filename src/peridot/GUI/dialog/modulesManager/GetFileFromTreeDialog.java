@@ -68,7 +68,7 @@ public class GetFileFromTreeDialog extends Dialog{
     
     private JTree getTreeOfFiles(){
         DefaultMutableTreeNode top = new DefaultMutableTreeNode("results/");
-        top.add(new DefaultMutableTreeNode(Places.rnaSeqInputFile.getName()));
+        top.add(new DefaultMutableTreeNode(Places.countReadsInputFile.getName()));
         top.add(new DefaultMutableTreeNode(Places.conditionInputFile.getName()));
         for(String modName : RScript.getAvailablePackages()){
             top.add(moduleToTreeNode(modName));

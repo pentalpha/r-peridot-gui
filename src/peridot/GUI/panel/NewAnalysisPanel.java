@@ -34,7 +34,6 @@ import peridot.RNASeq;
 import peridot.script.RScript;
 import peridot.Global;
 import peridot.script.AnalysisScript;
-import peridot.script.GeneOntologyScript;
 /**
  *
  * @author pentalpha
@@ -504,7 +503,7 @@ public class NewAnalysisPanel extends Panel {
         }
         for(String scriptName : selectedScripts){
             RScript script = RScript.availableScripts.get(scriptName);
-            if(script.requiredExternalFiles.contains(Places.rnaSeqInputFileName) && expression == null){
+            if(script.requiredExternalFiles.contains(Places.countReadsInputFileName) && expression == null){
                 JOptionPane.showMessageDialog(parentFrame, "To use a RNASeq module you need to define a count reads file.");
                 return;
             }

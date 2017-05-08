@@ -98,9 +98,8 @@ public class SpreadsheetInfoDialog extends JDialog{
                 }else{
                     info.dataType = Spreadsheet.DataType.Int;
                 }
-                
-                info.headerOnFirstLine = this.headerOnFirstLine.isSelected();
-                info.labelsOnFirstCol = this.labelsOnFirstColumn.isSelected();
+                info.setHeaderOnFirstLine(this.headerOnFirstLine.isSelected());
+                info.setLabelsOnFirstCol(this.labelsOnFirstColumn.isSelected());
                 //info.firstCellPresent = (this.firstCellPresent.isSelected());
                 
                 setVisible(false);
@@ -111,13 +110,13 @@ public class SpreadsheetInfoDialog extends JDialog{
     public void initCheckBoxes(){
         this.headerOnFirstLine = new CheckBox("Header on the first row");
         this.headerOnFirstLine.setSelected(false);
-        if(info.headerOnFirstLine){
+        if(info.getHeaderOnFirstLine()){
             this.headerOnFirstLine.doClick();
         }
         //headerOnFirstLine.setPreferredSize(new Dimension(300, 50));
         //headerOnFirstLine.set
         this.labelsOnFirstColumn = new CheckBox("Labels on first column");
-        if(info.labelsOnFirstCol){
+        if(info.getLabelsOnFirstCol()){
             this.labelsOnFirstColumn.doClick();
         }
         
@@ -165,7 +164,7 @@ public class SpreadsheetInfoDialog extends JDialog{
     }
     
     public static Spreadsheet.Info getInfo(File tableFile) throws IOException{
-        Spreadsheet.Info guessedInfo = Spreadsheet.getInfo(tableFile, true);
+        Spreadsheet.Info guessedInfo = Spreadsheet.getInfo(tableFile);
         return promptUserForSpreadsheetInfo(tableFile, guessedInfo);
     }
     

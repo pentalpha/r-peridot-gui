@@ -36,14 +36,13 @@ public class ParametersPanel extends Panel {
     Map<String, JCheckBox> paramCheckboxes;
     Map<String, JLabel> paramLabels;
     Map<String, JComponent> paramFields;
-    Map<String, Object> defaultValues;
+    Map<String, Object> defaultValues = AnalysisParameters.getDefaultValues();
     private boolean defaultValueButtons;
     /**
      * Creates new form ParametersPanel
      */
     public ParametersPanel(boolean defaultValueButtons) {
         super();
-        setDefaultValues();
         paramPanels = new HashMap<>();
         paramCheckboxes = new HashMap<>();
         paramLabels = new HashMap<>();
@@ -54,7 +53,6 @@ public class ParametersPanel extends Panel {
     
     public ParametersPanel(AnalysisParameters initialValues, boolean defaultValueButtons) {
         super();
-        setDefaultValues();
         paramPanels = new HashMap<>();
         paramCheckboxes = new HashMap<>();
         paramLabels = new HashMap<>();
@@ -64,14 +62,7 @@ public class ParametersPanel extends Panel {
         this.setParams(initialValues);
     }
     
-    public void setDefaultValues(){
-        defaultValues = new HashMap<>();
-        defaultValues.put("p-value", new Float(0.01));
-        defaultValues.put("fdr", new Float(0.05));
-        defaultValues.put("log2-fold-change", new Float(0.01));
-        defaultValues.put("tops", new Integer(0));
-        defaultValues.put("gene-id-type", new GeneIdType("None"));
-    }
+
     
     public void setParams(AnalysisParameters initialValues){
         if(initialValues != null){

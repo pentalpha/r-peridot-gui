@@ -151,12 +151,12 @@ public class MainGUI extends javax.swing.JFrame {
             if(ProcessingPanel.isProcessing() == false){
                 int reply = JOptionPane.showConfirmDialog(null, "This will erase user created scripts, erase not saved results and close R-Peridot.", "Reset User Scripts", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
-                    boolean result = Global.deleteScriptsFolder();
-                    if(result){
+                    //boolean result = peridot.CLI.PeridotCmd.clean();
+                    //if(result){
                         close();
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Could not delete ~/sgs-remake-files/");
-                    }
+                    //}else{
+                    //    JOptionPane.showMessageDialog(null, "Could not delete ~/sgs-remake-files/");
+                    //}
                 }
             }else{
                 MainGUI.showCannotDoThisWhileProcessing();

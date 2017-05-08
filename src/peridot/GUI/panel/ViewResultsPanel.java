@@ -50,7 +50,7 @@ public class ViewResultsPanel extends Panel {
             {
                  if(Manager.isImageFile(result)){
                     content = peridot.GUI.component.Label.getImageLabel(file);
-                }else if (Spreadsheet.isTableFile(result)){
+                }else if (Spreadsheet.fileIsCSVorTSV(file)){
                     if(headerAlwaysOnFirstLineOfTable){
                         content = JTableUtils.getTable(file, true);
                     }else{
