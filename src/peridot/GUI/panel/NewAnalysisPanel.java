@@ -13,11 +13,12 @@ import peridot.GUI.component.BigButton;
 import peridot.GUI.component.CheckBox;
 import peridot.Archiver.Spreadsheet;
 import peridot.Archiver.Places;
-import peridot.Archiver.Manager;
+import peridot.GUI.dialog.modulesManager.ScriptDetailsDialog;
 import peridot.Log;
 
-import java.io.File;
 import peridot.GUI.dialog.SpecificParametersDialog;
+
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -28,7 +29,6 @@ import javax.swing.event.*;
 import peridot.AnalysisParameters;
 import peridot.GUI.MainGUI;
 import peridot.GUI.WrapLayout;
-import peridot.GUI.dialog.GetDataFromColumnDialog;
 import peridot.GUI.dialog.NewExpressionDialog;
 import peridot.RNASeq;
 import peridot.script.RScript;
@@ -58,6 +58,7 @@ public class NewAnalysisPanel extends Panel {
     public NewAnalysisPanel(java.awt.Frame parentFrame) {
         super();
         //Log.logger.info("starting to build analysisPanel");
+        modulesAlwaysVisible = true;
         this.parentFrame = parentFrame;
         this.availableScripts = new TreeSet<String>();
         this.availablePackages = new TreeSet<String>();
@@ -100,11 +101,9 @@ public class NewAnalysisPanel extends Panel {
                 + nConditions + " conditions and "
                 + expression.getNumberOfGenes() + " genes.");
         if(moreThan2Conditions()){
-            this.multiConditionsLabel.setText(this.multiConditionsLabel.getText()
-                    + "More than 2 conditions. Some modules may be unable.");
+            this.multiConditionsLabel.setText("More than 2 conditions. Some modules may be disabled.");
         }else{
-            this.multiConditionsLabel.setText(this.multiConditionsLabel.getText()
-                    + "Only 2 conditions.");
+            this.multiConditionsLabel.setText("");
         }
     }
     
@@ -239,12 +238,14 @@ public class NewAnalysisPanel extends Panel {
                 
         packagesPanel = new Panel();
         packagesPanel.setMaximumSize(new java.awt.Dimension(modulesLeftSide.getPreferredSize().width-10, 3000));
-        packagesPanel.setLayout(new BoxLayout(packagesPanel, BoxLayout.PAGE_AXIS));
+        packagesPanel.setLayout(new BoxLayout(packagesPanel, BoxLayout.Y_AXIS));
+        //packagesPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         JScrollPane packagesScroller = new JScrollPane(packagesPanel);
         packagesScroller.setPreferredSize(new java.awt.Dimension(modulesLeftSide.getPreferredSize().width,
                                                                  modulesLeftSide.getPreferredSize().height-30));
         packagesScroller.setBorder(javax.swing.BorderFactory.createEmptyBorder());
-        
+        //packagesScroller.setAlignmentX(JScrollPane.LEFT_ALIGNMENT);
+
         modulesLeftSide.add(packagesLabel1);
         modulesLeftSide.add(packagesScroller);
 
@@ -260,13 +261,15 @@ public class NewAnalysisPanel extends Panel {
         
         scriptsPanel = new Panel();
         scriptsPanel.setMaximumSize(new java.awt.Dimension(modulesRightSide.getPreferredSize().width-10, 3000));;
-        scriptsPanel.setLayout(new WrapLayout());
-        //scriptsPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 1));
+        scriptsPanel.setLayout(new BoxLayout(scriptsPanel, BoxLayout.Y_AXIS));
+        //scriptsPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        //scriptsPanel.setLayout(new java.awt.FlowLayout(FlowLayout.LEFT, 10, 1));
         JScrollPane scriptsScroller = new JScrollPane(scriptsPanel);
         scriptsScroller.setPreferredSize(new java.awt.Dimension(modulesRightSide.getPreferredSize().width,
                                                                  modulesRightSide.getPreferredSize().height-30));
         scriptsScroller.setBorder(javax.swing.BorderFactory.createEmptyBorder());
-        
+        //scriptsScroller.setAlignmentX(JScrollPane.LEFT_ALIGNMENT);
+
         modulesRightSide.add(othersPackages);
         modulesRightSide.add(scriptsScroller);
         
@@ -290,7 +293,7 @@ public class NewAnalysisPanel extends Panel {
         expressionDescriptionLabel = new Label();
         multiConditionsLabel = new Label();
         expressionDescriptionLabel.setText("...");
-        multiConditionsLabel.setText("Not defined");
+        multiConditionsLabel.setText("");
         expressionDescriptionLabel.setPreferredSize(new java.awt.Dimension(370, 25));
         multiConditionsLabel.setPreferredSize(new java.awt.Dimension(370, 25));
         leftSide.add(geneExprLabel1);
@@ -378,7 +381,7 @@ public class NewAnalysisPanel extends Panel {
             //Log.logger.info(module + " wont be unabled this time.");
         }
         if(unabled != checkbox.isEnabled()){
-            JButton paramsButton = packageCheckboxesButton.get(module);
+            JButton paramsButton = editModuleParamsButtons.get(module);
             if(paramsButton != null){
                 //if(unabled)
                 //paramsButton.setEnabled(unabled);
@@ -425,7 +428,7 @@ public class NewAnalysisPanel extends Panel {
             }
         }
         if(unabled != checkbox.isEnabled()){
-            JButton paramsButton = packageCheckboxesButton.get(module);
+            JButton paramsButton = editModuleParamsButtons.get(module);
             if(paramsButton != null){
                 paramsButton.setEnabled(unabled);
                 this.updateUnabledScripts();
@@ -527,55 +530,83 @@ public class NewAnalysisPanel extends Panel {
     
     private void initScriptsCheckboxes(){
         this.scriptCheckboxes = new TreeMap<String, JCheckBox>();
-        this.packageCheckboxesButton = new TreeMap<String, JButton>();
-        
+        this.editModuleParamsButtons = new TreeMap<String, JButton>();
+        this.moduleDetailButtons = new TreeMap<String, JButton>();
         for(String pack : this.availableScripts.descendingSet()){
-            if(RScript.availableScripts.get(pack) instanceof AnalysisScript){
-                
-                JCheckBox checkBox = new CheckBox();
-                checkBox.setText(pack);
-                checkBox.addChangeListener(new ChangeListener() {
-                    public void stateChanged(ChangeEvent evt) {
-                        
-                        selectScript(checkBox.getText(), checkBox.isSelected(), true);  
-                    }
-                });
-                JButton button = new Button();
+            boolean isAnalysisScript =
+                    (RScript.availableScripts.get(pack) instanceof AnalysisScript);
 
-                button.setIcon(new ImageIcon(getClass().getResource("/peridot/GUI/icons/Write-Document-icon16.png"))); // NOI18N
-                button.setText("Detail");
-                button.setEnabled(false);
-                button.addActionListener((java.awt.event.ActionEvent evt) -> {
+            JPanel panel = new Panel();
+            panel.setLayout(new FlowLayout(FlowLayout.LEFT));
+            //panel.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black, 1));
+            JCheckBox checkBox = new CheckBox();
+            checkBox.setText(pack);
+            checkBox.addChangeListener(new ChangeListener() {
+                public void stateChanged(ChangeEvent evt) {
+                    selectScript(checkBox.getText(), checkBox.isSelected(), isAnalysisScript);
+                }
+            });
+            //checkBox.setAlignmentX(Component.LEFT_ALIGNMENT);
+            //checkBox.setHorizontalAlignment(JLabel.LEFT);
+
+            JButton detailButton = new Button();
+            detailButton.setIcon(
+                    new ImageIcon(getClass()
+                            .getResource("/peridot/GUI/icons/open-icon-16.png")
+                    )
+            );
+            detailButton.setText("Detail");
+            detailButton.setEnabled(true);
+            detailButton.addActionListener((java.awt.event.ActionEvent evt) -> {
+                ScriptDetailsDialog dialog = new ScriptDetailsDialog(pack,
+                        MainGUI.getInstance(),false);
+                dialog.setVisible(true);
+            });
+            //detailButton.setAlignmentX(Component.LEFT_ALIGNMENT);
+            //detailButton.setHorizontalAlignment(JLabel.LEFT);
+            moduleDetailButtons.put(pack, detailButton);
+
+            if(isAnalysisScript){
+                JButton paramsButton = new Button();
+                paramsButton.setIcon(new ImageIcon(getClass().getResource("/peridot/GUI/icons/Write-Document-icon16.png"))); // NOI18N
+                paramsButton.setText("");
+                paramsButton.setEnabled(false);
+                paramsButton.addActionListener((java.awt.event.ActionEvent evt) -> {
                     SpecificParametersDialog dialog = new SpecificParametersDialog(parentFrame, true,
                             specificParameters.get(pack), "Specific parameters for " + pack);
                     dialog.setVisible(true);
                     specificParameters.put(pack, dialog.parametersPanel.getParameters());
                 });
-                packageCheckboxesButton.put(pack, button);
-                scriptCheckboxes.put(pack, checkBox);
-                JPanel panel = new Panel();
+                //paramsButton.setAlignmentX(Component.LEFT_ALIGNMENT);
+                //paramsButton.setHorizontalAlignment(JLabel.LEFT);
+                editModuleParamsButtons.put(pack, paramsButton);
+
                 panel.add(checkBox);
-                panel.add(button);
-                packagesPanel.add(panel);
-                updateModuleUnabled(pack);
+                panel.add(paramsButton);
+                panel.add(detailButton);
+                //panel.setAlignmentX(Component.LEFT_ALIGNMENT);
+                packagesPanel.add(panel, BorderLayout.WEST);
             }else{
-                JCheckBox checkBox = new CheckBox();
-                checkBox.setText(pack);
-                checkBox.addChangeListener(new ChangeListener() {
-                    public void stateChanged(ChangeEvent evt) {
-                        
-                        selectScript(checkBox.getText(), checkBox.isSelected(), false);
-                    }
-                });
-                scriptCheckboxes.put(pack, checkBox);
-                JPanel panel = new Panel();
                 panel.add(checkBox);
-                scriptsPanel.add(panel);
-                //this.updateModuleUnabled(pack);
+                panel.add(detailButton);
+                //panel.setAlignmentX(Component.LEFT_ALIGNMENT);
+                scriptsPanel.add(panel, BorderLayout.WEST);
+            }
+            scriptCheckboxes.put(pack, checkBox);
+            if(isAnalysisScript){
+                updateModuleUnabled(pack);
             }
         }
         this.updateUnabledScripts();
-        
+    }
+
+    private Component leftJustify( JPanel panel )  {
+        Box  b = Box.createHorizontalBox();
+        b.add( panel );
+        b.add( Box.createHorizontalGlue() );
+        // (Note that you could throw a lot more components
+        // and struts and glue in here.)
+        return b;
     }
     
     public void selectScript(String name, boolean add, boolean analysisScript){
@@ -597,7 +628,7 @@ public class NewAnalysisPanel extends Panel {
             }
 
             if(analysisScript){
-                packageCheckboxesButton.get(name).setEnabled(add);
+                editModuleParamsButtons.get(name).setEnabled(add);
                 Log.logger.info("nPackages: " + nPackages);
             }
 
@@ -608,15 +639,8 @@ public class NewAnalysisPanel extends Panel {
     
     public void tryToHideModules(){
         try{
-            if(expression == null && modulesContainer.isVisible()){
-                SwingUtilities.invokeLater(() -> {
-                    separator1.setVisible(false);
-                });
-                Thread.sleep(sleepBetweenComponents);
-                SwingUtilities.invokeLater(() -> {
-                    modulesContainer.setVisible(false);
-                });
-            }else if (expression != null && modulesContainer.isVisible() == false){
+            if((modulesContainer.isVisible() == false && modulesAlwaysVisible)
+            || (expression != null && modulesContainer.isVisible() == false)){
                 SwingUtilities.invokeLater(() -> {
                     separator1.setVisible(true);
                 });
@@ -624,7 +648,23 @@ public class NewAnalysisPanel extends Panel {
                 SwingUtilities.invokeLater(() -> {
                     modulesContainer.setVisible(true);
                 });
-            }
+            }else if(expression == null && modulesContainer.isVisible() && !modulesAlwaysVisible){
+                SwingUtilities.invokeLater(() -> {
+                    separator1.setVisible(false);
+                });
+                Thread.sleep(sleepBetweenComponents);
+                SwingUtilities.invokeLater(() -> {
+                    modulesContainer.setVisible(false);
+                });
+            }/*else if (expression != null && modulesContainer.isVisible() == false){
+                SwingUtilities.invokeLater(() -> {
+                    separator1.setVisible(true);
+                });
+                Thread.sleep(sleepBetweenComponents);
+                SwingUtilities.invokeLater(() -> {
+                    modulesContainer.setVisible(true);
+                });
+            }*/
         }catch(Exception ex){
             ex.printStackTrace();
         }
@@ -699,7 +739,8 @@ public class NewAnalysisPanel extends Panel {
     private JPanel defineGeneListContainer;
     private JLabel geneListDescriptionLabel;
     private JLabel geneListLabel;
-    
+
+    private boolean modulesAlwaysVisible;
     private JPanel leftSide;
     private JPanel modulesContainer;
     private JLabel modulesLabel;
@@ -721,7 +762,8 @@ public class NewAnalysisPanel extends Panel {
     private JSeparator separator2;
     private JSeparator separator3;
     
-    private TreeMap<String, JButton> packageCheckboxesButton;
+    private TreeMap<String, JButton> editModuleParamsButtons;
+    private TreeMap<String, JButton> moduleDetailButtons;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

@@ -85,7 +85,8 @@ public class ScriptDetailsDialog extends Dialog {
         });
         openFileButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         openFileButton.setText("  Open " + script.getScriptFile().getName() + "  ");
-        openFileButton.setMinimumSize(new Dimension(150, 35));
+        openFileButton.setMinimumSize(new Dimension(150, 45));
+        openFileButton.setFocusable(false);
         max2CondLabel = new Label("Maximum of 2 conditions: " + script.max2Conditions);
         max2CondLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         canHandleFloatLabel = new Label("Can handle rational values: " + script.canHandleFloatValues);

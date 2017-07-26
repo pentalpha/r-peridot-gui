@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.logging.Level;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -328,7 +329,7 @@ public class ResultsPanel extends Panel {
             }
             FileUtils.copyDirectoryToDirectory(Places.finalResultsDir, saveFolder);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            Log.logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
     }
 
