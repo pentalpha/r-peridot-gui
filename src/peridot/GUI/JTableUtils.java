@@ -14,6 +14,7 @@ import static peridot.Archiver.Spreadsheet.getRowsFromCSV;
 import static peridot.Archiver.Spreadsheet.getRowsFromTSV;
 import static peridot.Archiver.Spreadsheet.lineIsSampleNames;
 import peridot.GUI.component.Table;
+import peridot.Log;
 
 /**
  *
@@ -73,6 +74,7 @@ public class JTableUtils {
         List<String[]> allRows;
         if(tableFile.getName().contains(".csv")){
             allRows = getRowsFromCSV(tableFile);
+            Log.logger.fine("Loading a CSV file with " + (allRows.get(0).length) + " columns.");
         }else if (tableFile.getName().contains(".tsv")){
             allRows = getRowsFromTSV(tableFile);
         }else{

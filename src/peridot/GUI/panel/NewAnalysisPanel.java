@@ -192,8 +192,8 @@ public class NewAnalysisPanel extends Panel {
     
     private void makeParametersContainer(){
         parametersContainer = new Panel();
-        parametersContainer.setPreferredSize(new java.awt.Dimension(530, 134));
-        parametersContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 1));
+        parametersContainer.setPreferredSize(new java.awt.Dimension(530, 138));
+        parametersContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 0));
         parametersLabel = new BiggerLabel();
         parametersLabel.setText("Parameters");
         parametersContainer.add(parametersLabel);
@@ -211,7 +211,7 @@ public class NewAnalysisPanel extends Panel {
         parametersPanel = new ParametersPanel(false);
         parametersPanel.setPreferredSize(new java.awt.Dimension(parametersContainer.getPreferredSize().width-20, 30));
         parametersPanel.setMaximumSize(new java.awt.Dimension(parametersContainer.getPreferredSize().width-20, 3000));
-        parametersPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 12, 2));
+        parametersPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 6, 0));
         JScrollPane scroller = new JScrollPane(parametersPanel);
         scroller.setPreferredSize(new java.awt.Dimension(parametersContainer.getPreferredSize().width-10, parametersContainer.getPreferredSize().height-30));
         scroller.setBorder(BorderFactory.createEmptyBorder());

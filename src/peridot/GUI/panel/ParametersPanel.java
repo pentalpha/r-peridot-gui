@@ -5,6 +5,7 @@
  */
 package peridot.GUI.panel;
 
+import peridot.*;
 import peridot.GUI.component.Label;
 import peridot.GUI.component.Panel;
 import peridot.GUI.component.CheckBox;
@@ -20,11 +21,8 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerListModel;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
-import peridot.AnalysisParameters;
+
 import peridot.Archiver.Places;
-import peridot.GeneIdType;
-import peridot.Global;
-import peridot.Log;
 
 /**
  *
@@ -141,9 +139,16 @@ public class ParametersPanel extends Panel {
                 {
                     //Log.logger.info("comboboxfield field");
                     JComboBox comboBox = (JComboBox)inputField;
-                    if(pair.getValue() == GeneIdType.class)
+                    if(pair.getValue() == GeneIdType.class) {
+                        GeneIdType selectedValue = (GeneIdType) comboBox.getSelectedItem();
+                        if (!values.passParameter(pair.getKey(), selectedValue)) {
+                            Log.logger.info("could not pass: " + pair.getKey() + " -> " + selectedValue);
+                        } else {
+                            //Log.logger.info("passing: " + pair.getKey() + " -> " + selectedValue);
+                        }
+                    }else if(pair.getValue() == Organism.class)
                     {
-                        GeneIdType selectedValue = (GeneIdType)comboBox.getSelectedItem();
+                        Organism selectedValue = (Organism)comboBox.getSelectedItem();
                         if(!values.passParameter(pair.getKey(), selectedValue)){
                             Log.logger.info("could not pass: " + pair.getKey() + " -> " + selectedValue);
                         }else{
@@ -277,6 +282,12 @@ public class ParametersPanel extends Panel {
                 JComboBox comboBox = new JComboBox();
                 for(String idType : GeneIdType.defaultIDTypes){
                     comboBox.addItem(new GeneIdType(idType));
+                }
+                field = comboBox;
+            }else if(pair.getValue() == Organism.class){
+                JComboBox comboBox = new JComboBox();
+                for(String idType : Organism.defaultDBs){
+                    comboBox.addItem(new Organism(idType));
                 }
                 field = comboBox;
             }else{
