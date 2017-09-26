@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Set;
 import javax.swing.JFrame;
 import peridot.AnalysisParameters;
-import peridot.RNASeq;
+import peridot.AnalysisData;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import javax.swing.BoxLayout;
@@ -76,7 +76,7 @@ public class ProcessingPanel extends Panel {
     
     public static void start(Set<String> scriptsToExec, AnalysisParameters params,
                             Map<String, AnalysisParameters> specificParams,
-                            RNASeq expression){
+                            AnalysisData expression){
         if(_instance == null){
             return;
         }
@@ -109,7 +109,7 @@ public class ProcessingPanel extends Panel {
     
     public void process(Set<String> scriptsToExec, AnalysisParameters params,
                             Map<String, AnalysisParameters> specificParams,
-                            RNASeq expression){
+                            AnalysisData expression){
         MainGUI.goToProcessingPanel();
         scripts = new HashSet<>();
         outputDialogs = new ConcurrentHashMap<>();

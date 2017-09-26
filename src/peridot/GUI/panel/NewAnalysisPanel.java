@@ -30,7 +30,7 @@ import peridot.AnalysisParameters;
 import peridot.GUI.MainGUI;
 import peridot.GUI.WrapLayout;
 import peridot.GUI.dialog.NewExpressionDialog;
-import peridot.RNASeq;
+import peridot.AnalysisData;
 import peridot.script.RScript;
 import peridot.Global;
 import peridot.script.AnalysisScript;
@@ -40,7 +40,7 @@ import peridot.script.AnalysisScript;
  */
 public class NewAnalysisPanel extends Panel {
     
-    private RNASeq expression;
+    private AnalysisData expression;
     private java.awt.Frame parentFrame;
     public TreeSet<String> selectedScripts;
     public TreeSet<String> availableScripts;
@@ -482,7 +482,6 @@ public class NewAnalysisPanel extends Panel {
                 //FileUtil.createTempFolder();
                 //expression.writeRNASeqWithConditions();
                 expression.writeExpression();
-                expression.writeFinalConditions();
                 deleteTempFiles();
                 //updateModuleUnabled("DESeq");
                 updateUnabledScripts();
