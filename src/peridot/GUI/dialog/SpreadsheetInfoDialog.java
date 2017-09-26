@@ -71,33 +71,11 @@ public class SpreadsheetInfoDialog extends JDialog{
         scroller.setPreferredSize(new Dimension(getPreferredSize().width-50, 200));
     }
     
-    public void initDataTypeQuestion(){
-        dataTypeLabel = new BigLabel("Only Integers or Rational numbers included?");
-        this.dataTypeRadios = new ButtonGroup();
-        this.onlyIntegersButton = new RadioButton("Only Integers");
-        onlyIntegersButton.setActionCommand("Only Integers");
-        if(info.dataType == Spreadsheet.DataType.Int){
-            onlyIntegersButton.setSelected(true);
-        }
-        this.rationalsTooButton = new RadioButton("Rationals too");
-        rationalsTooButton.setActionCommand("Rationals too");
-        if(info.dataType == Spreadsheet.DataType.Float){
-            rationalsTooButton.setSelected(true);
-        }
-        dataTypeRadios.add(rationalsTooButton);
-        dataTypeRadios.add(onlyIntegersButton);
-    }
-    
     public void initOkButton(){
         okButton = new BigButton();
         okButton.setText("OK");
         okButton.addActionListener((java.awt.event.ActionEvent evt) -> 
             {
-                if(rationalsTooButton.isSelected()){
-                    info.dataType = Spreadsheet.DataType.Float;
-                }else{
-                    info.dataType = Spreadsheet.DataType.Int;
-                }
                 info.setHeaderOnFirstLine(this.headerOnFirstLine.isSelected());
                 info.setLabelsOnFirstCol(this.labelsOnFirstColumn.isSelected());
                 //info.firstCellPresent = (this.firstCellPresent.isSelected());
@@ -129,13 +107,9 @@ public class SpreadsheetInfoDialog extends JDialog{
     private void initUpperPanel(){
         upperPanel = new Panel();
         upperPanel.setLayout(new WrapLayout());
-        this.initDataTypeQuestion();
         this.initTableScroller();
         upperPanel.add(titleLabel);
         upperPanel.add(scroller);
-        upperPanel.add(dataTypeLabel);
-        upperPanel.add(onlyIntegersButton);
-        upperPanel.add(rationalsTooButton);
     }
     
     private void initMiddlePanel(){
@@ -171,11 +145,6 @@ public class SpreadsheetInfoDialog extends JDialog{
     private CheckBox headerOnFirstLine;
     private CheckBox labelsOnFirstColumn;
     //private CheckBox firstCellPresent;
-    
-    private BigLabel dataTypeLabel;
-    private RadioButton onlyIntegersButton;
-    private RadioButton rationalsTooButton;
-    private ButtonGroup dataTypeRadios;
     
     private Table dataTable;
     private JScrollPane scroller;

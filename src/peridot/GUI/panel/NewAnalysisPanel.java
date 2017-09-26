@@ -367,14 +367,14 @@ public class NewAnalysisPanel extends Panel {
             if(script.max2Conditions && this.moreThan2Conditions()){
                 unabled = false;
             }
-            if(expression != null){
+            /*if(expression != null){
                 if(expression.info.dataType == Spreadsheet.DataType.Float){
                     if(script.canHandleFloatValues == false){
                         Log.logger.info(script.name + " cannot handle rational values, only integers.");
                         unabled = false;
                     }
                 }
-            }
+            }*/
         }
         
         if(unabled == false){
@@ -408,14 +408,14 @@ public class NewAnalysisPanel extends Panel {
             if(script.max2Conditions && this.moreThan2Conditions()){
                 unabled = false;
             }
-            if(expression != null){
+            /*if(expression != null){
                 if(expression.info.dataType == Spreadsheet.DataType.Float){
                     if(script.canHandleFloatValues == false){
                         Log.logger.info(script.name + " cannot handle rational values.");
                         unabled = false;
                     }
                 }
-            }
+            }*/
         }else{
             if(this.nPackages < 1){
                 unabled = false;
