@@ -71,7 +71,7 @@ public class NewModuleDialog extends Dialog {
         if(baseScript != null){
             editing = true;
             File temp = new File(System.getProperty("java.io.tmpdir"));
-            File scriptInTemp = new File(temp.getAbsolutePath() + script.getScriptFile().getName());
+            File scriptInTemp = new File(temp.getAbsolutePath() + "/" + script.getScriptFile().getName());
             originalScript = script.getScriptFile().getAbsolutePath();
             if(scriptInTemp.exists()){
                 scriptInTemp.delete();
@@ -107,7 +107,7 @@ public class NewModuleDialog extends Dialog {
         for(int i = 0; i < resultsListModel.size(); i++){
             String text = resultsListModel.get(i);
             if(text.contains(ModulesManager.mandatoryString)){
-                text.replace(ModulesManager.mandatoryString, "");
+                text = text.replace(ModulesManager.mandatoryString, "");
                 mandatory.add(text);
             }
             results.add(text);
@@ -197,7 +197,6 @@ public class NewModuleDialog extends Dialog {
     private void basicInfoFromUI(){
         name = scriptNameField.getText();
         max2Conditions = this.max2CondOption.isSelected();
-        canHandleFloatValues = this.canHandleFloatOption.isSelected();
     }
     
     private void scriptToBasicInfo(){
@@ -205,19 +204,12 @@ public class NewModuleDialog extends Dialog {
         if(script.max2Conditions){
             max2CondOption.doClick();
         }
-        if(script.canHandleFloatValues){
-            canHandleFloatOption.doClick();
-        }
         scriptFile = script.getScriptFile();
         this.fileNameLabel.setText("Script file: " + scriptFile.getName());
     }
     
     private void infoAreaFromString(String s){
-        if(s.contains("[LINE-BREAK]")){
-            this.infoArea.setText(s.replace("[LINE-BREAK]", "\n\n"));
-        }else{
-            this.infoArea.setText(s);
-        }
+        this.infoArea.setText(s);
     }
     private void infoFromTextArea(){
         String lineBreaker = null;
@@ -234,8 +226,7 @@ public class NewModuleDialog extends Dialog {
             this.info = infoArea.getText();
         }else{
             String multiLineInfo = infoArea.getText();
-            String oneLineInfo = multiLineInfo.replace(lineBreaker, "[LINE-BREAK]");
-            this.info = oneLineInfo;
+            this.info = multiLineInfo;
         }
     }
     
@@ -291,8 +282,7 @@ public class NewModuleDialog extends Dialog {
                 script = new AnalysisScript(this.name, this.scriptFile.getName(), true,
                                             this.requiredParameters, 
                                             this.requiredExternalFiles,
-                                            this.results,
-                                            this.canHandleFloatValues);
+                                            this.results);
             }else{
                 script = new PostAnalysisScript(this.name, this.scriptFile.getName(), true,
                                             this.requiredParameters, 
@@ -302,6 +292,11 @@ public class NewModuleDialog extends Dialog {
             }
             script.max2Conditions = this.max2Conditions;
             script.info = this.info;
+            for(String res : results){
+                if(mandatory.contains(res)){
+                    script.setResultAsMandatory(res);
+                }
+            }
             if(script.workingDirectory.exists()){
                 boolean answer = MainGUI.showYesNoDialog("Do you wish to overwrite the " + script.name + " module?");
                 if(answer){
@@ -413,15 +408,10 @@ public class NewModuleDialog extends Dialog {
         max2CondOption.setText("Maximum of 2 conditions");
         max2CondOption.setAlignmentX(Component.CENTER_ALIGNMENT);
         
-        canHandleFloatOption = new CheckBox();
-        canHandleFloatOption.setText("Can handle rational values");
-        canHandleFloatOption.setAlignmentX(Component.CENTER_ALIGNMENT);
-        
         generalInfoPanel.add(Box.createVerticalGlue());
         generalInfoPanel.add(scriptNamePanel);
         generalInfoPanel.add(fileNamePanel);
         generalInfoPanel.add(max2CondOption);
-        generalInfoPanel.add(canHandleFloatOption);
         generalInfoPanel.add(Box.createVerticalGlue());
     }
     
@@ -629,11 +619,16 @@ public class NewModuleDialog extends Dialog {
     }
     
     private void addNewResult() {
-        String resultName = JOptionPane.showInputDialog("Insert the name of a script result file: ");
-        if(resultName != null){
-            if(resultName.length() > 0){
-                resultsListModel.addElement(resultName);
+        //String resultName = JOptionPane.showInputDialog("Insert the name of a script result file: ");
+        GetNewResultDialog dialog = new GetNewResultDialog(publicParent, true);
+        dialog.setVisible(true);
+        if(dialog.validInfo()){
+            String toAdd = dialog.name;
+            if(dialog.mandatory){
+                toAdd += ModulesManager.mandatoryString;
+                //mandatory.add(dialog.name);
             }
+            resultsListModel.addElement(toAdd);
         }
     }
     
@@ -664,7 +659,7 @@ public class NewModuleDialog extends Dialog {
     Label scriptNameLabel, fileNameLabel, resultsLabel, paramsLabel, inputsLabel;
     JTextField scriptNameField, fileNameField, newResultField;
     JTextArea infoArea;
-    CheckBox max2CondOption, canHandleFloatOption;
+    CheckBox max2CondOption;
     DefaultListModel<String> resultsListModel, inputsListModel, paramsListModel;
     JList resultsList, inputsList, paramsList;
     JButton selectScriptFileButton, 

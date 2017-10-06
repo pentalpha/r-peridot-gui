@@ -29,8 +29,7 @@ public class ScriptDetailsDialog extends Dialog {
     public ScriptDetailsDialog(String scriptName, java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         this.script = RScript.availableScripts.get(scriptName);
-        String infoRaw = script.info;
-        this.info = infoRaw.replace("[LINE-BREAK]", "\n\n");
+        this.info = script.info;
         
         initComponents();
     }
@@ -89,8 +88,6 @@ public class ScriptDetailsDialog extends Dialog {
         openFileButton.setFocusable(false);
         max2CondLabel = new Label("Maximum of 2 conditions: " + script.max2Conditions);
         max2CondLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        canHandleFloatLabel = new Label("Can handle rational values: " + script.canHandleFloatValues);
-        canHandleFloatLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         //generalInfoPanel.add(Box.createRigidArea(new Dimension(10, 0)));
         generalInfoPanel.add(Box.createVerticalGlue());
@@ -98,7 +95,6 @@ public class ScriptDetailsDialog extends Dialog {
         generalInfoPanel.add(fileNameLabel);
         generalInfoPanel.add(openFileButton);
         generalInfoPanel.add(max2CondLabel);
-        generalInfoPanel.add(canHandleFloatLabel);
         generalInfoPanel.add(Box.createVerticalGlue());
     }
     
@@ -186,7 +182,6 @@ public class ScriptDetailsDialog extends Dialog {
     Label fileNameLabel;
     Button openFileButton;
     Label max2CondLabel;
-    Label canHandleFloatLabel;
     
     Panel resultsPanel;
     Label resultsLabel;

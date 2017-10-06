@@ -58,7 +58,7 @@ public class NewAnalysisPanel extends Panel {
     public NewAnalysisPanel(java.awt.Frame parentFrame) {
         super();
         //Log.logger.info("starting to build analysisPanel");
-        modulesAlwaysVisible = true;
+        modulesAlwaysVisible = false;
         this.parentFrame = parentFrame;
         this.availableScripts = new TreeSet<String>();
         this.availablePackages = new TreeSet<String>();
