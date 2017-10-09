@@ -195,9 +195,9 @@ public class ProcessingPanel extends Panel {
                         panel.switchToFailIcon();
                         if(pair.getValue().script instanceof AnalysisScript){
                             if(((AnalysisScript)pair.getValue().script).mandatoryFailed){
-                                pair.getValue().output.appendLine("Warning: "
-                                        + "This Analysis Module dit not found genes "
-                                        + "on the given data.");
+                                if(!pair.getValue().output.getText().contains(noGenesFoundStr)){
+                                    pair.getValue().output.appendLine(noGenesFoundStr);
+                                }
                             }
                         }
                     }else{
@@ -332,5 +332,9 @@ public class ProcessingPanel extends Panel {
     private javax.swing.JLabel packagesLabel;
     private javax.swing.JScrollPane packagesScroller;
     private javax.swing.JPanel scriptsBarsPanel;
+
+    String noGenesFoundStr = "Warning: "
+            + "This Analysis Module dit not found genes "
+            + "on the given data.";
     
 }

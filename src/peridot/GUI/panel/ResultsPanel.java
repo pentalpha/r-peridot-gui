@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package peridot.GUI.panel;
+import peridot.CLI.PeridotCmd;
 import peridot.GUI.component.Label;
 import peridot.GUI.component.BigLabel;
 import peridot.GUI.component.BiggerLabel;
@@ -323,11 +324,7 @@ public class ResultsPanel extends Panel {
         // TODO add your handling code here:
         try {
             File saveFolder = new File(saveFolderInputField.getText());
-            if (saveFolder.exists() == false) {
-                FileUtils.forceMkdirParent(saveFolder);
-                FileUtils.forceMkdir(saveFolder);
-            }
-            FileUtils.copyDirectoryToDirectory(Places.finalResultsDir, saveFolder);
+            PeridotCmd.saveResultsAt(saveFolder);
         } catch (Exception ex) {
             Log.logger.log(Level.SEVERE, ex.getMessage(), ex);
         }

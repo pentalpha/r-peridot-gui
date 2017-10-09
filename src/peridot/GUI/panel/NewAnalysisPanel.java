@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package peridot.GUI.panel;
+import peridot.Archiver.Manager;
 import peridot.GUI.component.Label;
 import peridot.GUI.component.BigLabel;
 import peridot.GUI.component.BiggerLabel;
@@ -19,6 +20,7 @@ import peridot.Log;
 import peridot.GUI.dialog.SpecificParametersDialog;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -97,9 +99,15 @@ public class NewAnalysisPanel extends Panel {
     
     private void updateRNASeqDescription(){
         int nConditions = expression.getNumberOfConditions();
+        String nLines;
+        try{
+            nLines = Integer.toString(Manager.countLines(Places.countReadsInputFile.getAbsolutePath())-1);
+        }catch(IOException ex){
+            nLines = "[could not read]";
+        }
         this.expressionDescriptionLabel.setText(expression.getNumberOfSamples() + " samples, " 
                 + nConditions + " conditions and "
-                + expression.getNumberOfGenes() + " genes.");
+                + nLines + " lines.");
         if(moreThan2Conditions()){
             this.multiConditionsLabel.setText("More than 2 conditions. Some modules may be disabled.");
         }else{
@@ -476,20 +484,21 @@ public class NewAnalysisPanel extends Panel {
         }
         
         expressionGUI.setVisible(true);
-        if(expressionGUI.expression != null){
-            expression = expressionGUI.getResults();
+        expression = expressionGUI.getResults();
+        if(expression != null){
+            //FileUtil.createTempFolder();
+            //expression.writeRNASeqWithConditions();
             try{
-                //FileUtil.createTempFolder();
-                //expression.writeRNASeqWithConditions();
                 expression.writeExpression();
-                deleteTempFiles();
-                //updateModuleUnabled("DESeq");
-                updateUnabledScripts();
-                RScript.removeScriptResults();
-                MainGUI.updateResultsPanel();
-            }catch(Exception ex){
+            }catch (java.lang.ArrayIndexOutOfBoundsException ex){
                 ex.printStackTrace();
+                Log.logger.severe("Could not write count reads file for analysis!");
             }
+            deleteTempFiles();
+            //updateModuleUnabled("DESeq");
+            updateUnabledScripts();
+            RScript.removeScriptResults();
+            MainGUI.updateResultsPanel();
             
             updateRNASeqDescription();
         }

@@ -251,7 +251,11 @@ public class NewExpressionDialog extends Dialog {
     private boolean selectConditionsByFile(String filePath){
         File file = new File(filePath);
         if(file.canRead()){
-            conditions = AnalysisData.loadConditionsFromFile(file);
+            //conditions = AnalysisData.getConditionsFromExpressionFile(file, info);
+            SortedMap<IndexedString, String> newConditions = AnalysisData.loadConditionsFromFile(file);
+            for(Map.Entry<IndexedString, String> entry : newConditions.entrySet()){
+                conditions.put(entry.getKey(), entry.getValue());
+            }
             this.conditionsFile = file;
             updateSetList();
             setChangedConditions(false);
@@ -465,8 +469,9 @@ public class NewExpressionDialog extends Dialog {
 
     private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButtonActionPerformed
         // TODO add your handling code here:
+        conditions = getConditionsFromUI();
         if(expressionFile != null){
-            try{
+            /*try{
                 if(this.changedConditions){
                     SortedMap<IndexedString, String> editedConditions = getConditionsFromUI();
                     expression = new AnalysisData(expressionFile, editedConditions, info,
@@ -484,14 +489,23 @@ public class NewExpressionDialog extends Dialog {
                 this.setVisible(false);
             }catch(IOException ex){
                 ex.printStackTrace();
-            }
+            }*/
+            this.setVisible(false);
         }else{
             JOptionPane.showMessageDialog(null, "Firstly, you must select a genetic expression file.");
         }
     }//GEN-LAST:event_createButtonActionPerformed
     
     public AnalysisData getResults(){
-        return expression;
+        try {
+            AnalysisData expr = new AnalysisData(expressionFile, getConditionsFromUI(), info,
+                    roundingModesComboBox.getItemAt(roundingModesComboBox.getSelectedIndex()),
+                    thresholdSlider.getValue());
+            return expr;
+        }catch(IOException ex){
+            ex.printStackTrace();
+            return null;
+        }
     }
     
     private void selectConditionsFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectConditionsFileButtonActionPerformed
