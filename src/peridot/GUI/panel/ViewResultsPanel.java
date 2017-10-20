@@ -14,6 +14,8 @@ import peridot.Archiver.Manager;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.io.File;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.logging.Level;
@@ -24,6 +26,8 @@ import javax.swing.JLabel;
 import peridot.script.RScript;
 import javax.swing.JScrollPane;
 import javax.swing.JPanel;
+import javax.swing.text.View;
+
 import org.apache.commons.lang3.SystemUtils;
 import peridot.GUI.JTableUtils;
 import peridot.Global;
@@ -34,40 +38,59 @@ import peridot.Log;
  */
 public class ViewResultsPanel extends Panel {
     HashMap<String, JPanel> resultViewers;
+    String scriptName;
+    File resultsDir;
+    boolean analysisModule;
     /**
      * Creates new form PackageResultsPanel
      */
-    public ViewResultsPanel(String scriptName, File resultsDir, boolean headerAlwaysOnFirstLineOfTable) {
+    public ViewResultsPanel(String scriptName, File resultsDir, boolean analysisModule) {
         super();
+        this.scriptName = scriptName;
+        this.resultsDir = resultsDir;
+        this.analysisModule = analysisModule;
         initComponents();
         resultViewers = new HashMap<>();
-        Set<String> results = RScript.availableScripts.get(scriptName).results;
-        for(String result : results)
-        {
-            JComponent content = null;
-            File file = new File(resultsDir.getAbsolutePath() + File.separator + result);
-            if(file.exists())
-            {
-                 if(Manager.isImageFile(result)){
-                    content = peridot.GUI.component.Label.getImageLabel(file);
-                }else if (Spreadsheet.fileIsCSVorTSV(file)){
-                    if(headerAlwaysOnFirstLineOfTable){
-                        content = JTableUtils.getTable(file, true);
-                    }else{
-                        content = JTableUtils.getTable(file, false);
-                    }
-                }else{
-                    content = ViewResultsPanel.getUnknownFormatMessage(file);
-                }
-                JScrollPane scroller = new JScrollPane(content);
-                scroller.getViewport().setBackground(Color.white);
-                //scroller.setLayout(new java.awt.CardLayout());
-                JPanel panel = new Panel();
-                panel.setLayout(new java.awt.CardLayout());
-                panel.add(scroller);
-                resultViewers.put(result, panel);
-                tabsPanel.add(result, panel);
+        RScript script = RScript.availableScripts.get(scriptName);
+        Set<String> allResults = script.results;
+        if(script.mandatoryResults.size() > 0){
+            String[] mandatoryResults = script.mandatoryResults.toArray(new String[script.mandatoryResults.size()]);
+            Arrays.sort(mandatoryResults);
+            for(int i = mandatoryResults.length-1; i >= 0; i--){
+                addResultTab(mandatoryResults[i]);
             }
+        }
+        for(String result : allResults)
+        {
+            if(!script.mandatoryResults.contains(result)){
+                addResultTab(result);
+            }
+        }
+    }
+
+    private void addResultTab(String result){
+        JComponent content = null;
+        File file = new File(resultsDir.getAbsolutePath() + File.separator + result);
+        if(file.exists())
+        {
+            if(Manager.isImageFile(result)){
+                content = peridot.GUI.component.Label.getImageLabel(file);
+            }else if (Spreadsheet.fileIsCSVorTSV(file)){
+                content = JTableUtils.getTable(file, analysisModule);
+                if(content == null){
+                    content = ViewResultsPanel.getEmptyTableMessage(analysisModule);
+                }
+            }else{
+                content = ViewResultsPanel.getUnknownFormatMessage(file);
+            }
+            JScrollPane scroller = new JScrollPane(content);
+            scroller.getViewport().setBackground(Color.white);
+            //scroller.setLayout(new java.awt.CardLayout());
+            JPanel panel = new Panel();
+            panel.setLayout(new java.awt.CardLayout());
+            panel.add(scroller);
+            resultViewers.put(result, panel);
+            tabsPanel.add(result, panel);
         }
     }
     
@@ -76,7 +99,7 @@ public class ViewResultsPanel extends Panel {
         panel.setMaximumSize(new java.awt.Dimension(300, 3000));
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         JLabel message = new BiggerLabel();
-        message.setText(file.getName() + " is in a format unknow to SGS.");
+        message.setText(file.getName() + " is in a format unknown to R-Peridot.");
         //JLabel message2 = new Label();
         //message2.setText("Please use other program to view this result.");
         BigButton openButton = new BigButton();
@@ -95,23 +118,26 @@ public class ViewResultsPanel extends Panel {
         return panel;
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private static JPanel getEmptyTableMessage(boolean analysisModule){
+        JPanel panel = new Panel();
+        panel.setMaximumSize(new java.awt.Dimension(300, 3000));
+        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+        JLabel message = new BiggerLabel();
+        if(analysisModule){
+            message.setText("No differential expression found by this module.");
+        }else{
+            message.setText("Empty table or list.");
+        }
+        panel.add(message);
+        return panel;
+    }
+
+
     private void initComponents() {
-
         tabsPanel = new TabbedPane();
-
         setLayout(new java.awt.CardLayout());
         add(tabsPanel, "card2");
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane tabsPanel;
-    // End of variables declaration//GEN-END:variables
 }

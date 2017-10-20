@@ -193,13 +193,13 @@ public class ProcessingPanel extends Panel {
                         panel.switchToSuccessIcon();
                     }else if(task.failedScripts.contains(pair.getKey())){
                         panel.switchToFailIcon();
-                        if(pair.getValue().script instanceof AnalysisScript){
+                        /*if(pair.getValue().script instanceof AnalysisScript){
                             if(((AnalysisScript)pair.getValue().script).mandatoryFailed){
                                 if(!pair.getValue().output.getText().contains(noGenesFoundStr)){
                                     pair.getValue().output.appendLine(noGenesFoundStr);
                                 }
                             }
-                        }
+                        }*/
                     }else{
                         panel.switchToStopIcon();
                     }

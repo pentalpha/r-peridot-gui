@@ -24,6 +24,14 @@ public class JTableUtils {
     public JTableUtils(){
         
     }
+
+    /**
+     * Generates a JTable based on a table file
+     * @param tableFile Spreadsheet table file
+     * @param columnNamesOnFirstLine    True if you are sure that the first line of the file is the names
+     *                                 of the columns (header)
+     * @return  JTable object. If the table is empty, returns NULL.
+     */
     public static JTable getTable(File tableFile, boolean columnNamesOnFirstLine){
         JTable table = null;
         List<String[]> allRows;
@@ -37,36 +45,44 @@ public class JTableUtils {
 
         Object[][] data;
         Object[] headers;
-        data = new Object[allRows.size()-1][];
-        headers = new Object[allRows.get(allRows.size()-1).length];
-        String[] firstRow = allRows.get(0);
-        boolean lessItensOnFirstRow = headers.length == firstRow.length + 1;
-        boolean firstRowIsHeader = lineIsSampleNames(firstRow);
-        if(columnNamesOnFirstLine || lessItensOnFirstRow || firstRowIsHeader){
-            if(headers.length == firstRow.length + 1){
-                //Log.logger.info("less headers than columns");
-                headers[0] = "ID";
-                for(int i = 1; i < headers.length; i++){
-                    headers[i] = firstRow[i-1];
+        if(allRows.size() > 0){
+            data = new Object[allRows.size()-1][];
+            headers = new Object[allRows.get(allRows.size()-1).length];
+            String[] firstRow = allRows.get(0);
+            boolean lessItensOnFirstRow = headers.length == firstRow.length + 1;
+            boolean firstRowIsHeader = lineIsSampleNames(firstRow);
+            if(columnNamesOnFirstLine || lessItensOnFirstRow || firstRowIsHeader){
+                if(allRows.size() == 1){
+                    return null;
                 }
-            }else {
-                headers = firstRow;
+                if(headers.length == firstRow.length + 1){
+                    //Log.logger.info("less headers than columns");
+                    headers[0] = "ID";
+                    for(int i = 1; i < headers.length; i++){
+                        headers[i] = firstRow[i-1];
+                    }
+                }else {
+                    headers = firstRow;
+                }
+                for(int i = 0; i < headers.length; i++){
+                    System.out.print(headers[i] + ", ");
+                }
+                for(int i = 0; i < data.length; i++){
+                    data[i] = allRows.get(i+1);
+                }
+            }else{
+                data = new Object[allRows.size()][];
+                data = allRows.toArray(data);
+                headers = getDefaultHeader(data[0].length);
             }
-            for(int i = 0; i < headers.length; i++){
-                System.out.print(headers[i] + ", ");
-            }
-            for(int i = 0; i < data.length; i++){
-                data[i] = allRows.get(i+1);
-            }
+
+            table = new Table(data, headers);
+            //table.setDefaultRenderer(Object.class, new NoHighlightCellRenderer());
+            return table;
         }else{
-            data = new Object[allRows.size()][];
-            data = allRows.toArray(data);
-            headers = getDefaultHeader(data[0].length);
+            return null;
         }
 
-        table = new Table(data, headers);
-        //table.setDefaultRenderer(Object.class, new NoHighlightCellRenderer());
-        return table;
     }
 
     public static Table getTableWithoutHeader(File tableFile, boolean defaultHeader){

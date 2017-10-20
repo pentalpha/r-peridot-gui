@@ -8,6 +8,7 @@ package peridot.GUI.dialog;
 import peridot.GUI.component.Dialog;
 import java.io.File;
 import peridot.GUI.panel.ViewResultsPanel;
+import peridot.script.RScript;
 
 /**
  *
@@ -22,7 +23,7 @@ public class ScriptResultsDialog extends Dialog {
         super(parent, modal);
         initComponents();
         setTitle(scriptName + " results");
-        results = new ViewResultsPanel(scriptName, resultsDir, false);
+        results = new ViewResultsPanel(scriptName, resultsDir, RScript.getAvailablePackages().contains(scriptName));
         this.getContentPane().add(results);
         pack();
     }
