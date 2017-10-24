@@ -48,7 +48,7 @@ public class NewModuleDialog extends Dialog {
     File scriptInTemp;
     String name; 
     //String scriptFile;
-    boolean max2Conditions;
+    boolean max2Conditions, needsReplicates;
     Map<String, Class> requiredParameters;
     Set<String> requiredExternalFiles;
     Set<String> results;
@@ -197,12 +197,16 @@ public class NewModuleDialog extends Dialog {
     private void basicInfoFromUI(){
         name = scriptNameField.getText();
         max2Conditions = this.max2CondOption.isSelected();
+        needsReplicates = this.needsReplicatesOption.isSelected();
     }
     
     private void scriptToBasicInfo(){
         scriptNameField.setText(script.name);
         if(script.max2Conditions){
             max2CondOption.doClick();
+        }
+        if(script.needsReplicates){
+            needsReplicatesOption.doClick();
         }
         scriptFile = script.getScriptFile();
         this.fileNameLabel.setText("Script file: " + scriptFile.getName());
@@ -291,6 +295,7 @@ public class NewModuleDialog extends Dialog {
                                             this.requiredScripts);
             }
             script.max2Conditions = this.max2Conditions;
+            script.needsReplicates = this.needsReplicates;
             script.info = this.info;
             for(String res : results){
                 if(mandatory.contains(res)){
@@ -407,11 +412,16 @@ public class NewModuleDialog extends Dialog {
         max2CondOption = new CheckBox();
         max2CondOption.setText("Maximum of 2 conditions");
         max2CondOption.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        needsReplicatesOption = new CheckBox();
+        needsReplicatesOption.setText("Needs replicates in samples");
+        needsReplicatesOption.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         generalInfoPanel.add(Box.createVerticalGlue());
         generalInfoPanel.add(scriptNamePanel);
         generalInfoPanel.add(fileNamePanel);
         generalInfoPanel.add(max2CondOption);
+        generalInfoPanel.add(needsReplicatesOption);
         generalInfoPanel.add(Box.createVerticalGlue());
     }
     
@@ -659,7 +669,7 @@ public class NewModuleDialog extends Dialog {
     Label scriptNameLabel, fileNameLabel, resultsLabel, paramsLabel, inputsLabel;
     JTextField scriptNameField, fileNameField, newResultField;
     JTextArea infoArea;
-    CheckBox max2CondOption;
+    CheckBox max2CondOption, needsReplicatesOption;
     DefaultListModel<String> resultsListModel, inputsListModel, paramsListModel;
     JList resultsList, inputsList, paramsList;
     JButton selectScriptFileButton, 

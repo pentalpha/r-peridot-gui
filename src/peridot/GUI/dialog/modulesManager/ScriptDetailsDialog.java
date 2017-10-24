@@ -88,6 +88,9 @@ public class ScriptDetailsDialog extends Dialog {
         openFileButton.setFocusable(false);
         max2CondLabel = new Label("Maximum of 2 conditions: " + script.max2Conditions);
         max2CondLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        needsReplicatesLabel = new Label("Needs replicates: " + script.needsReplicates);
+        needsReplicatesLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         //generalInfoPanel.add(Box.createRigidArea(new Dimension(10, 0)));
         generalInfoPanel.add(Box.createVerticalGlue());
@@ -95,6 +98,7 @@ public class ScriptDetailsDialog extends Dialog {
         generalInfoPanel.add(fileNameLabel);
         generalInfoPanel.add(openFileButton);
         generalInfoPanel.add(max2CondLabel);
+        generalInfoPanel.add(needsReplicatesLabel);
         generalInfoPanel.add(Box.createVerticalGlue());
     }
     
@@ -181,7 +185,7 @@ public class ScriptDetailsDialog extends Dialog {
     Label scriptNameLabel;
     Label fileNameLabel;
     Button openFileButton;
-    Label max2CondLabel;
+    Label max2CondLabel, needsReplicatesLabel;
     
     Panel resultsPanel;
     Label resultsLabel;

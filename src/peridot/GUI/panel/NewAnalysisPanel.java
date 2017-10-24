@@ -105,13 +105,19 @@ public class NewAnalysisPanel extends Panel {
         }catch(IOException ex){
             nLines = "[could not read]";
         }
-        this.expressionDescriptionLabel.setText(expression.getNumberOfSamples() + " samples, " 
+        this.expressionDescriptionLabel.setText(expression.getNumberOfSamples() + " samples, "
                 + nConditions + " conditions and "
                 + nLines + " lines.");
-        if(moreThan2Conditions()){
-            this.multiConditionsLabel.setText("More than 2 conditions. Some modules may be disabled.");
+        if(expression.hasMoreThanTwoConditions()){
+            this.multiConditionsLabel.setText("More than 2 conditions, some modules may be disabled.");
         }else{
             this.multiConditionsLabel.setText("");
+        }
+
+        if(expression.hasReplicatesInSamples() == false){
+            this.needsReplicatesLabel.setText("No replicates, some modules may be disabled.");
+        }else{
+            this.needsReplicatesLabel.setText("");
         }
     }
     
@@ -300,13 +306,17 @@ public class NewAnalysisPanel extends Panel {
         geneExprLabel1.setText("Expression Data (count reads):");
         expressionDescriptionLabel = new Label();
         multiConditionsLabel = new Label();
+        needsReplicatesLabel = new Label();
         expressionDescriptionLabel.setText("...");
         multiConditionsLabel.setText("");
-        expressionDescriptionLabel.setPreferredSize(new java.awt.Dimension(370, 25));
-        multiConditionsLabel.setPreferredSize(new java.awt.Dimension(370, 25));
+        needsReplicatesLabel.setText("");
+        expressionDescriptionLabel.setPreferredSize(new java.awt.Dimension(370, 15));
+        multiConditionsLabel.setPreferredSize(new java.awt.Dimension(370, 15));
+        needsReplicatesLabel.setPreferredSize(new java.awt.Dimension(370, 15));
         leftSide.add(geneExprLabel1);
         leftSide.add(expressionDescriptionLabel);
         leftSide.add(multiConditionsLabel);
+        leftSide.add(needsReplicatesLabel);
         
         rightSide = new Panel();
         rightSide.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
@@ -370,10 +380,13 @@ public class NewAnalysisPanel extends Panel {
         boolean unabled = true;
         RScript script = RScript.availableScripts.get(module);
         JCheckBox checkbox = this.scriptCheckboxes.get(module);
-        
+
         if(script instanceof AnalysisScript){
-            if(script.max2Conditions && this.moreThan2Conditions()){
-                unabled = false;
+            if(this.expression != null){
+                if((script.max2Conditions && this.expression.hasMoreThanTwoConditions())
+                        ||(script.needsReplicates && this.expression.hasReplicatesInSamples() == false)){
+                    unabled = false;
+                }
             }
             /*if(expression != null){
                 if(expression.info.dataType == Spreadsheet.DataType.Float){
@@ -413,8 +426,11 @@ public class NewAnalysisPanel extends Panel {
         JCheckBox checkbox = this.scriptCheckboxes.get(module);
         
         if(script instanceof AnalysisScript){
-            if(script.max2Conditions && this.moreThan2Conditions()){
-                unabled = false;
+            if(this.expression != null){
+                if((script.max2Conditions && this.expression.hasMoreThanTwoConditions())
+                        ||(script.needsReplicates && this.expression.hasReplicatesInSamples() == false)){
+                    unabled = false;
+                }
             }
             /*if(expression != null){
                 if(expression.info.dataType == Spreadsheet.DataType.Float){
@@ -740,7 +756,7 @@ public class NewAnalysisPanel extends Panel {
     private JButton defineButton;
     private JPanel defineExpressionContainer;
     private JLabel expressionDescriptionLabel;
-    private JLabel multiConditionsLabel;
+    private JLabel multiConditionsLabel, needsReplicatesLabel;
     private JLabel geneExprLabel1;
     
     private JButton defineGeneListButton;
