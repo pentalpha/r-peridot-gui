@@ -15,7 +15,7 @@ import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreeSelectionModel;
 import peridot.Archiver.Places;
 import peridot.GUI.component.*;
-import peridot.script.RScript;
+import peridot.script.RModule;
 /**
  *
  * @author pentalpha
@@ -70,10 +70,10 @@ public class GetFileFromTreeDialog extends Dialog{
         DefaultMutableTreeNode top = new DefaultMutableTreeNode("results/");
         top.add(new DefaultMutableTreeNode(Places.countReadsInputFile.getName()));
         top.add(new DefaultMutableTreeNode(Places.conditionInputFile.getName()));
-        for(String modName : RScript.getAvailablePackages()){
+        for(String modName : RModule.getAvailablePackages()){
             top.add(moduleToTreeNode(modName));
         }
-        for(String modName : RScript.getAvailablePostAnalysisScripts()){
+        for(String modName : RModule.getAvailablePostAnalysisScripts()){
             top.add(moduleToTreeNode(modName));
         }
         
@@ -94,7 +94,7 @@ public class GetFileFromTreeDialog extends Dialog{
     
     private DefaultMutableTreeNode moduleToTreeNode(String module){
         DefaultMutableTreeNode top = new DefaultMutableTreeNode(module);
-        RScript script = RScript.availableScripts.get(module);
+        RModule script = RModule.availableScripts.get(module);
         
         DefaultMutableTreeNode child = null;
         for(String result : script.results){

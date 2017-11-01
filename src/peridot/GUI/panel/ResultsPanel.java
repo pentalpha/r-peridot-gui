@@ -30,7 +30,7 @@ import peridot.Archiver.Places;
 import peridot.GUI.MainGUI;
 import peridot.GUI.WrapLayout;
 import peridot.GUI.dialog.ScriptResultsDialog;
-import peridot.script.RScript;
+import peridot.script.RModule;
 
 /**
  *
@@ -80,10 +80,10 @@ public class ResultsPanel extends Panel {
 
     private void updateScripts(Set<File> scriptResultsFolders) {
         //Log.logger.info("Updating available post analysis results");
-        for (String scriptName : RScript.getAvailableScripts()) {
+        for (String scriptName : RModule.getAvailableScripts()) {
             File dir = null;
             for (File scriptDir : scriptResultsFolders) {
-                if (scriptDir.getName().contains(".PostAnalysisScript")
+                if (scriptDir.getName().contains(".PostAnalysisModule")
                         && scriptDir.getName().contains(scriptName)) {
                     dir = scriptDir;
                     break;
@@ -98,17 +98,17 @@ public class ResultsPanel extends Panel {
 
     private void updatePackages(Set<File> scriptResultsFolders) {
         //Log.logger.info("Updating available analysis results");
-        for (String packName : RScript.getAvailablePackages()) {
+        for (String packName : RModule.getAvailablePackages()) {
             File dir = null;
             for (File packDir : scriptResultsFolders) {
                 //if (packDir.getName().contains("." + Package.class.getSimpleName())
                 //       && packDir.getName().contains(packName)) {
-                if(packDir.getName().contains(packName + ".AnalysisScript"))
+                if(packDir.getName().contains(packName + ".AnalysisModule"))
                 {
                     dir = packDir;
                     break;
                 }else{
-                    //Log.logger.info(packDir.getName() + " not contains " + packName + ".AnalysisScript");
+                    //Log.logger.info(packDir.getName() + " not contains " + packName + ".AnalysisModule");
                 }
             }
             if (dir != null) {
@@ -148,8 +148,8 @@ public class ResultsPanel extends Panel {
         for (File file : subFiles) {
             String filePath = file.getAbsolutePath();
             if ((filePath.equals(Places.finalResultsDir.getAbsolutePath()) == false)
-                    && (file.getAbsolutePath().contains(".AnalysisScript")
-                    || file.getAbsolutePath().contains(".PostAnalysisScript"))
+                    && (file.getAbsolutePath().contains(".AnalysisModule")
+                    || file.getAbsolutePath().contains(".PostAnalysisModule"))
                     && (file.isDirectory() == true)) {
                 subDirs.add(file);
             }else{

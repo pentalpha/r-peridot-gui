@@ -11,7 +11,7 @@ import javax.swing.*;
 import peridot.Archiver.Places;
 import peridot.GUI.component.*;
 import peridot.Log;
-import peridot.script.RScript;
+import peridot.script.RModule;
 
 public class GetNewResultDialog extends Dialog {
     public String name;

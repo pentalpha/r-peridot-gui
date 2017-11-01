@@ -11,8 +11,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import peridot.GUI.component.*;
 import peridot.Log;
-import peridot.script.AnalysisScript;
-import peridot.script.PostAnalysisScript;
+import peridot.script.AnalysisModule;
+import peridot.script.PostAnalysisModule;
 /**
  *
  * @author pentalpha
@@ -32,8 +32,8 @@ public class AskModuleType extends Dialog{
         this.setResizable(false);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         this.setLocationRelativeTo(null);
-        this.add(getOptionButton("Analysis Module", AnalysisScript.class));
-        this.add(getOptionButton("Post Analysis Module", PostAnalysisScript.class));
+        this.add(getOptionButton("Analysis Module", AnalysisModule.class));
+        this.add(getOptionButton("Post Analysis Module", PostAnalysisModule.class));
     }
     
     private JButton getOptionButton(String text, Class modtype){

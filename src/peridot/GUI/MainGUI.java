@@ -19,7 +19,7 @@ import peridot.GUI.panel.ProcessingPanel;
 import peridot.GUI.panel.NewAnalysisPanel;
 import java.util.HashSet;
 import peridot.Archiver.Places;
-import peridot.script.RScript;
+import peridot.script.RModule;
 import java.lang.ClassNotFoundException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -53,8 +53,8 @@ public class MainGUI extends javax.swing.JFrame {
         //Util.getRPath();
         
         //Log.logger.info("trying to load scripts");
-        RScript.loadUserScripts();
-        if(RScript.getAvailableScripts().size() == 0){
+        RModule.loadUserScripts();
+        if(RModule.getAvailableScripts().size() == 0){
             JOptionPane.showMessageDialog(null, "Scripts could not be loaded. We recommend using Menu > Tools > Reset User Scripts.");
         }
         //Log.logger.info("scripts loaded");
@@ -102,7 +102,7 @@ public class MainGUI extends javax.swing.JFrame {
     }
     
     public void makeTabs(){
-        RScript.updateUserScripts();
+        RModule.updateUserScripts();
         tabbedPanel.removeAll();
         tabbedPanel.setFocusable(false);
         

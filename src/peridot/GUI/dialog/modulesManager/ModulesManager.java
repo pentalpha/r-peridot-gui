@@ -28,9 +28,9 @@ import peridot.GUI.MainGUI;
 import static peridot.GUI.MainGUI._instance;
 import peridot.GUI.component.*;
 import peridot.Log;
-import peridot.script.AnalysisScript;
-import peridot.script.PostAnalysisScript;
-import peridot.script.RScript;
+import peridot.script.AnalysisModule;
+import peridot.script.PostAnalysisModule;
+import peridot.script.RModule;
 
 /**
  *
@@ -95,8 +95,8 @@ public class ModulesManager extends Dialog {
         modulesContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 1));
         
         
-        JList list = new JList(RScript.getAvailablePackages());
-        JList list2 = new JList(RScript.getAvailablePostAnalysisScripts());
+        JList list = new JList(RModule.getAvailablePackages());
+        JList list2 = new JList(RModule.getAvailablePostAnalysisScripts());
         analysisModListContainer = new Panel();
         analysisModListContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 1, 5));
         analysisModListContainer.setPreferredSize(containerSize);
@@ -216,7 +216,7 @@ public class ModulesManager extends Dialog {
     }
     
     private void updateButtons(){
-        if(RScript.availableScripts.keySet().contains(selectedScript)){
+        if(RModule.availableScripts.keySet().contains(selectedScript)){
             deleteButton.setEnabled(true);
             detailsButton.setEnabled(true);
             exportButton.setEnabled(true);
@@ -239,9 +239,9 @@ public class ModulesManager extends Dialog {
         if (result == JFileChooser.APPROVE_OPTION) {
             File folder = fileChooser.getSelectedFile();
             if (folder.exists()) {
-                RScript s = RScript.availableScripts.get(scriptName);
+                RModule s = RModule.availableScripts.get(scriptName);
                 File file = new File(folder.getAbsolutePath()
-                        + File.separator + s.name + "." + RScript.binExtension);
+                        + File.separator + s.name + "." + RModule.binExtension);
                 try{
                     s.toBin(file);
                 }catch (IOException ex){
@@ -258,7 +258,7 @@ public class ModulesManager extends Dialog {
         JFileChooser fileChooser = new JFileChooser(){
             public void approveSelection() {
                 File f = getSelectedFile();
-                if (f.isFile() && f.getName().contains("." + RScript.binExtension)) {
+                if (f.isFile() && f.getName().contains("." + RModule.binExtension)) {
                     super.approveSelection();
                 } else{
                     return;
@@ -266,30 +266,30 @@ public class ModulesManager extends Dialog {
             }
         };
         
-        if(fileChooser.showDialog(null, "Select a ." + RScript.binExtension + " file:") == JFileChooser.APPROVE_OPTION){
+        if(fileChooser.showDialog(null, "Select a ." + RModule.binExtension + " file:") == JFileChooser.APPROVE_OPTION){
             File binFile = fileChooser.getSelectedFile();
             Object bin = peridot.Archiver.Persistence.loadObjectFromBin(binFile.getAbsolutePath());
             if(bin == null){
-                Log.logger.log(Level.SEVERE, "Could not load RScript binary.");
+                Log.logger.log(Level.SEVERE, "Could not load RModule binary.");
                 JOptionPane.showMessageDialog(publicParent, "Error loading module. "
                     + "Maybe you don't have permission to read this file.",
                     "Cannot import " + binFile.getName(), JOptionPane.ERROR_MESSAGE);
                 return false;
             }
             
-            if(bin instanceof AnalysisScript || bin instanceof PostAnalysisScript){
-                RScript script = null;
+            if(bin instanceof AnalysisModule || bin instanceof PostAnalysisModule){
+                RModule script = null;
                 Class type = null;
-                if(bin instanceof AnalysisScript){
-                    script = (AnalysisScript)bin;
+                if(bin instanceof AnalysisModule){
+                    script = (AnalysisModule)bin;
                 }else{
-                    script = (PostAnalysisScript)bin;
+                    script = (PostAnalysisModule)bin;
                 }
                 script.createEnvironment(null);
-                RScript.availableScripts.put(script.name, script);
+                RModule.availableScripts.put(script.name, script);
                 return true;
             }else{
-                Log.logger.log(Level.SEVERE, "Could not load RScript binary. Unknown class.");
+                Log.logger.log(Level.SEVERE, "Could not load RModule binary. Unknown class.");
                 JOptionPane.showMessageDialog(publicParent,"Error loading module"
                     + "The file is in an unknown format.",
                     "Cannot import " + binFile.getName(), JOptionPane.ERROR_MESSAGE);
@@ -299,7 +299,7 @@ public class ModulesManager extends Dialog {
     }
     
     private void editScript(String scriptName){
-        RScript script = RScript.availableScripts.get(scriptName);
+        RModule script = RModule.availableScripts.get(scriptName);
         NewModuleDialog dialog = new NewModuleDialog(publicParent, true, script.getClass(), script);
         dialog.setVisible(true);
         if(dialog.script != null && dialog.editedScript){
@@ -332,7 +332,7 @@ public class ModulesManager extends Dialog {
     }
     
     private void deleteScript(String script){
-        boolean deleted = RScript.deleteScript(script);
+        boolean deleted = RModule.deleteScript(script);
         if(deleted){
             MainGUI.showRestartPeridotDialog();
             closeThisAndMainGUI();

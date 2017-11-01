@@ -32,17 +32,17 @@ import peridot.GUI.MainGUI;
 import peridot.GUI.component.*;
 import peridot.Global;
 import peridot.Log;
-import peridot.script.AnalysisScript;
-import peridot.script.PostAnalysisScript;
-import peridot.script.RNASeqPackage;
-import peridot.script.RScript;
+import peridot.script.AnalysisModule;
+import peridot.script.PostAnalysisModule;
+import peridot.script.DiffExpressionModule;
+import peridot.script.RModule;
 
 /**
  *
  * @author pentalpha
  */
 public class NewModuleDialog extends Dialog {
-    RScript script = null;
+    RModule script = null;
     String info;
     File scriptFile;
     File scriptInTemp;
@@ -60,7 +60,7 @@ public class NewModuleDialog extends Dialog {
     boolean editing, changedScript, editedScript;
     
     /** Creates new form ScriptDetailsDialog */
-    public NewModuleDialog(java.awt.Frame parent, boolean modal, Class type, RScript baseScript) {
+    public NewModuleDialog(java.awt.Frame parent, boolean modal, Class type, RModule baseScript) {
         super(parent, modal);
         assert(type != null) : "No Script Type specified for the creation";
         this.scriptType = type;
@@ -117,8 +117,8 @@ public class NewModuleDialog extends Dialog {
     private void inputsListModelFromInputList(Set<String> inputs){
         for(String file : inputs){
             String toAdd = null;
-            String analysisClassName = "." + AnalysisScript.class.getSimpleName();
-            String postAnalysisClassName = "." + PostAnalysisScript.class.getSimpleName();
+            String analysisClassName = "." + AnalysisModule.class.getSimpleName();
+            String postAnalysisClassName = "." + PostAnalysisModule.class.getSimpleName();
             if(file.contains(analysisClassName) || file.contains(postAnalysisClassName)){
                 System.out.println(file);
                 String[] splited = null;
@@ -154,12 +154,12 @@ public class NewModuleDialog extends Dialog {
             if(inputRaw.contains(": ")){
                 String[] splited = inputRaw.split(": ");
                 String first = splited[0];
-                RScript scr = RScript.availableScripts.get(first);
+                RModule scr = RModule.availableScripts.get(first);
                 String x = scr.name + ".";
-                if(scr instanceof AnalysisScript){
-                    x += AnalysisScript.class.getSimpleName();
-                }else if(scr instanceof PostAnalysisScript){
-                    x += PostAnalysisScript.class.getSimpleName();
+                if(scr instanceof AnalysisModule){
+                    x += AnalysisModule.class.getSimpleName();
+                }else if(scr instanceof PostAnalysisModule){
+                    x += PostAnalysisModule.class.getSimpleName();
                 }
                 x += File.separator;
                 x += splited[1];
@@ -186,7 +186,7 @@ public class NewModuleDialog extends Dialog {
             String[] typeAndName = rawParam.split("::");
             if(typeAndName.length == 2){
                 String param = typeAndName[1];
-                Class type = RScript.availableParamTypes.get(typeAndName[0]);
+                Class type = RModule.availableParamTypes.get(typeAndName[0]);
                 //System.out.println(param);
                 //System.out.println("puting: " + param + ", " + type.getSimpleName());
                 requiredParameters.put(param, type);
@@ -282,13 +282,13 @@ public class NewModuleDialog extends Dialog {
     private void create(){
         if(this.validateFields()){
             this.gatherInfoFromUI();
-            if(scriptType == AnalysisScript.class){
-                script = new AnalysisScript(this.name, this.scriptFile.getName(), true,
+            if(scriptType == AnalysisModule.class){
+                script = new AnalysisModule(this.name, this.scriptFile.getName(),
                                             this.requiredParameters, 
                                             this.requiredExternalFiles,
                                             this.results);
             }else{
-                script = new PostAnalysisScript(this.name, this.scriptFile.getName(), true,
+                script = new PostAnalysisModule(this.name, this.scriptFile.getName(),
                                             this.requiredParameters, 
                                             this.requiredExternalFiles,
                                             this.results,
@@ -305,7 +305,7 @@ public class NewModuleDialog extends Dialog {
             if(script.workingDirectory.exists()){
                 boolean answer = MainGUI.showYesNoDialog("Do you wish to overwrite the " + script.name + " module?");
                 if(answer){
-                    RScript.deleteScript(script.name);
+                    RModule.deleteScript(script.name);
                 }else{
                     script = null;
                     return;
@@ -330,11 +330,11 @@ public class NewModuleDialog extends Dialog {
         infoAreaFromString(script.info);
     }
     
-    private void populateFieldWithAnalysisScriptDefaults(){
-        listModelFromRequiredParameters(RNASeqPackage.getDefaultParameters());
-        inputsListModelFromInputList(RNASeqPackage.getDefaultRequiredFiles());
-        listModelFromResults(RNASeqPackage.getDefaultResults(), 
-                RNASeqPackage.getMandatoryResults());
+    private void populateFieldWithAnalysisModuleDefaults(){
+        listModelFromRequiredParameters(DiffExpressionModule.getDefaultParameters());
+        inputsListModelFromInputList(DiffExpressionModule.getDefaultRequiredFiles());
+        listModelFromResults(DiffExpressionModule.getDefaultResults(),
+                DiffExpressionModule.getMandatoryResults());
     }
     
     private void initComponents(){
@@ -371,8 +371,8 @@ public class NewModuleDialog extends Dialog {
         
         if(this.script != null){
             populateFieldsWithValuesFromScript();
-        }else if(this.scriptType == AnalysisScript.class){
-            populateFieldWithAnalysisScriptDefaults();
+        }else if(this.scriptType == AnalysisModule.class){
+            populateFieldWithAnalysisModuleDefaults();
         }
     }
     
@@ -495,7 +495,7 @@ public class NewModuleDialog extends Dialog {
         addNewInputButton.addActionListener((java.awt.event.ActionEvent evt) -> {
             addNewInput();
         });
-        addNewInputButton.setEnabled(scriptType != AnalysisScript.class);
+        addNewInputButton.setEnabled(scriptType != AnalysisModule.class);
         
         eraseInputButton = new Button();
         eraseInputButton.setIcon(new ImageIcon(getClass().getResource("/peridot/GUI/icons/Delete-icon-24.png")));
@@ -643,7 +643,7 @@ public class NewModuleDialog extends Dialog {
     }
     
     private void addNewInput(){
-        if(this.scriptType == AnalysisScript.class){
+        if(this.scriptType == AnalysisModule.class){
             return;
         }
         String result = GetFileFromTreeDialog.getAResult(publicParent, true);

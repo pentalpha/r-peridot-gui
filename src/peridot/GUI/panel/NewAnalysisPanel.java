@@ -33,9 +33,9 @@ import peridot.GUI.MainGUI;
 import peridot.GUI.WrapLayout;
 import peridot.GUI.dialog.NewExpressionDialog;
 import peridot.AnalysisData;
-import peridot.script.RScript;
+import peridot.script.RModule;
 import peridot.Global;
-import peridot.script.AnalysisScript;
+import peridot.script.AnalysisModule;
 /**
  *
  * @author pentalpha
@@ -64,14 +64,14 @@ public class NewAnalysisPanel extends Panel {
         this.parentFrame = parentFrame;
         this.availableScripts = new TreeSet<String>();
         this.availablePackages = new TreeSet<String>();
-        availableScripts.addAll(RScript.getAvailableScripts());
-        availableScripts.addAll(RScript.getAvailablePackages());
+        availableScripts.addAll(RModule.getAvailableScripts());
+        availableScripts.addAll(RModule.getAvailablePackages());
         this.selectedScripts = new TreeSet<String>();
         this.specificParameters = new TreeMap<>();
         for(String pack : availableScripts){
-            RScript aScript = RScript.availableScripts.get(pack);
+            RModule aScript = RModule.availableScripts.get(pack);
             //if(aScript == null){Log.logger.info(pack + " is null");}
-            if(aScript instanceof AnalysisScript){
+            if(aScript instanceof AnalysisModule){
                 AnalysisParameters params = new AnalysisParameters(
                                 aScript.requiredParameters, aScript.parameters);
                 specificParameters.put(pack, params);
@@ -89,8 +89,8 @@ public class NewAnalysisPanel extends Panel {
     public int getNPackagesSelected(){
         int n = 0;
         for(String scriptName : selectedScripts){
-            RScript script = RScript.availableScripts.get(scriptName);
-            if(script instanceof AnalysisScript){
+            RModule script = RModule.availableScripts.get(scriptName);
+            if(script instanceof AnalysisModule){
                 n++;
             }
         }
@@ -215,7 +215,7 @@ public class NewAnalysisPanel extends Panel {
         Map<String, Class> allParamsMap = new HashMap<>();
         for(String scriptName : availableScripts){
             Map<String, Class> scriptParams = null;
-            RScript script = RScript.availableScripts.get(scriptName);
+            RModule script = RModule.availableScripts.get(scriptName);
             if(script != null){
                 scriptParams = script.requiredParameters;
                 allParamsMap.putAll(scriptParams);
@@ -336,11 +336,11 @@ public class NewAnalysisPanel extends Panel {
     }
     
     private void updateUnabledScripts(){
-        for(String name : RScript.getAvailablePackages()){
+        for(String name : RModule.getAvailablePackages()){
             //Log.logger.info("Trying to unable " + name);
             updatePackageUnabledNoRecursion(name);
         }
-        for(String name : RScript.getAvailableScripts()){
+        for(String name : RModule.getAvailableScripts()){
             //Log.logger.info("Trying to unable " + name);
             updateModuleUnabled(name);
             if(this.scriptCheckboxes.get(name).isEnabled() == false){
@@ -349,7 +349,7 @@ public class NewAnalysisPanel extends Panel {
         }
         /*boolean multiConditions = this.moreThan2Conditions();
         if(multiConditions){
-            for(Map.Entry<String,RScript> pair : RScript.availableScripts.entrySet()){
+            for(Map.Entry<String,RModule> pair : RModule.availableScripts.entrySet()){
                 if(pair.getValue().max2Conditions){
                     String name = pair.getKey();
                     JCheckBox checkbox = this.scriptCheckboxes.get(name);
@@ -367,7 +367,7 @@ public class NewAnalysisPanel extends Panel {
             }
         }
         
-        for(Map.Entry<String,RScript> pair : RScript.availableScripts.entrySet()){
+        for(Map.Entry<String,RModule> pair : RModule.availableScripts.entrySet()){
             String name = pair.getKey();
             JCheckBox checkbox = this.scriptCheckboxes.get(name);
             if(checkbox != null){
@@ -378,10 +378,10 @@ public class NewAnalysisPanel extends Panel {
     
     private void updatePackageUnabledNoRecursion(String module){
         boolean unabled = true;
-        RScript script = RScript.availableScripts.get(module);
+        RModule script = RModule.availableScripts.get(module);
         JCheckBox checkbox = this.scriptCheckboxes.get(module);
 
-        if(script instanceof AnalysisScript){
+        if(script instanceof AnalysisModule){
             if(this.expression != null){
                 if((script.max2Conditions && this.expression.hasMoreThanTwoConditions())
                         ||(script.needsReplicates && this.expression.hasReplicatesInSamples() == false)){
@@ -422,10 +422,10 @@ public class NewAnalysisPanel extends Panel {
     
     private void updateModuleUnabled(String module){
         boolean unabled = true;
-        RScript script = RScript.availableScripts.get(module);
+        RModule script = RModule.availableScripts.get(module);
         JCheckBox checkbox = this.scriptCheckboxes.get(module);
         
-        if(script instanceof AnalysisScript){
+        if(script instanceof AnalysisModule){
             if(this.expression != null){
                 if((script.max2Conditions && this.expression.hasMoreThanTwoConditions())
                         ||(script.needsReplicates && this.expression.hasReplicatesInSamples() == false)){
@@ -444,7 +444,7 @@ public class NewAnalysisPanel extends Panel {
             if(this.nPackages < 1){
                 unabled = false;
             }
-            for(String name : RScript.availableScripts.get(module).requiredScripts){
+            for(String name : RModule.availableScripts.get(module).requiredScripts){
                 if(selectedScripts.contains(name) == false){
                     unabled = false;
                     break;
@@ -471,14 +471,14 @@ public class NewAnalysisPanel extends Panel {
     
     private void updateDependantModulesUnabled(String module){
         //Log.logger.info("Updating dependencies of " + module);
-        if(RScript.availableScripts.get(module) instanceof AnalysisScript){
+        if(RModule.availableScripts.get(module) instanceof AnalysisModule){
             //Log.logger.info("Which is a package.");
-            for(String script : RScript.getAvailableScripts()){
+            for(String script : RModule.getAvailableScripts()){
                 this.updateModuleUnabled(script);
             }
         }else{
             
-            for(Map.Entry<String,RScript> pair : RScript.availableScripts.entrySet()){
+            for(Map.Entry<String,RModule> pair : RModule.availableScripts.entrySet()){
                 boolean depends = false;
                 for(String required : pair.getValue().requiredScripts){
                     if(required.equals(module)){
@@ -513,7 +513,7 @@ public class NewAnalysisPanel extends Panel {
             deleteTempFiles();
             //updateModuleUnabled("DESeq");
             updateUnabledScripts();
-            RScript.removeScriptResults();
+            RModule.removeScriptResults();
             MainGUI.updateResultsPanel();
             
             updateRNASeqDescription();
@@ -529,7 +529,7 @@ public class NewAnalysisPanel extends Panel {
             return;
         }
         for(String scriptName : selectedScripts){
-            RScript script = RScript.availableScripts.get(scriptName);
+            RModule script = RModule.availableScripts.get(scriptName);
             if(script.requiredExternalFiles.contains(Places.countReadsInputFileName) && expression == null){
                 JOptionPane.showMessageDialog(parentFrame, "To use a RNASeq module you need to define a count reads file.");
                 return;
@@ -546,7 +546,7 @@ public class NewAnalysisPanel extends Panel {
     }
 
     public void deleteTempFiles(){
-        for(Map.Entry<String, RScript> pair : RScript.availableScripts.entrySet()){
+        for(Map.Entry<String, RModule> pair : RModule.availableScripts.entrySet()){
             pair.getValue().cleanTempFiles();
             pair.getValue().cleanLocalResults();
         }
@@ -557,8 +557,8 @@ public class NewAnalysisPanel extends Panel {
         this.editModuleParamsButtons = new TreeMap<String, JButton>();
         this.moduleDetailButtons = new TreeMap<String, JButton>();
         for(String pack : this.availableScripts.descendingSet()){
-            boolean isAnalysisScript =
-                    (RScript.availableScripts.get(pack) instanceof AnalysisScript);
+            boolean isAnalysisModule =
+                    (RModule.availableScripts.get(pack) instanceof AnalysisModule);
 
             JPanel panel = new Panel();
             panel.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -567,7 +567,7 @@ public class NewAnalysisPanel extends Panel {
             checkBox.setText(pack);
             checkBox.addChangeListener(new ChangeListener() {
                 public void stateChanged(ChangeEvent evt) {
-                    selectScript(checkBox.getText(), checkBox.isSelected(), isAnalysisScript);
+                    selectScript(checkBox.getText(), checkBox.isSelected(), isAnalysisModule);
                 }
             });
             //checkBox.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -590,7 +590,7 @@ public class NewAnalysisPanel extends Panel {
             //detailButton.setHorizontalAlignment(JLabel.LEFT);
             moduleDetailButtons.put(pack, detailButton);
 
-            if(isAnalysisScript){
+            if(isAnalysisModule){
                 JButton paramsButton = new Button();
                 paramsButton.setIcon(new ImageIcon(getClass().getResource("/peridot/GUI/icons/Write-Document-icon16.png"))); // NOI18N
                 paramsButton.setText("");
@@ -617,7 +617,7 @@ public class NewAnalysisPanel extends Panel {
                 scriptsPanel.add(panel, BorderLayout.WEST);
             }
             scriptCheckboxes.put(pack, checkBox);
-            if(isAnalysisScript){
+            if(isAnalysisModule){
                 updateModuleUnabled(pack);
             }
         }

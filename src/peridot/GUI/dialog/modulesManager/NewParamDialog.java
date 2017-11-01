@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import peridot.GUI.component.Panel;
 import peridot.GUI.component.RadioButton;
 import peridot.Global;
-import peridot.script.RScript;
+import peridot.script.RModule;
 
 /**
  *
@@ -69,9 +69,9 @@ public class NewParamDialog extends Dialog {
         
         optionsPanel = new Panel();
         this.optionsGroup = new ButtonGroup();
-        paramOptions = new RadioButton[RScript.availableParamTypes.keySet().size()];
+        paramOptions = new RadioButton[RModule.availableParamTypes.keySet().size()];
         int i = 0;
-        for(String name : RScript.availableParamTypes.keySet()){
+        for(String name : RModule.availableParamTypes.keySet()){
             paramOptions[i] = new RadioButton();
             paramOptions[i].setText(name);
             optionsGroup.add(paramOptions[i]);

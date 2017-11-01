@@ -25,12 +25,12 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import peridot.GUI.MainGUI;
 import peridot.GUI.dialog.ScriptOutputDialog;
-import peridot.script.RScript;
+import peridot.script.RModule;
 import peridot.script.ScriptExec;
 import javax.swing.JSeparator;
 import peridot.Log;
-import peridot.script.AnalysisScript;
-import peridot.script.RNASeqPackage;
+import peridot.script.AnalysisModule;
+import peridot.script.DiffExpressionModule;
 import peridot.script.Task;
 /**
  *
@@ -193,8 +193,8 @@ public class ProcessingPanel extends Panel {
                         panel.switchToSuccessIcon();
                     }else if(task.failedScripts.contains(pair.getKey())){
                         panel.switchToFailIcon();
-                        /*if(pair.getValue().script instanceof AnalysisScript){
-                            if(((AnalysisScript)pair.getValue().script).mandatoryFailed){
+                        /*if(pair.getValue().script instanceof AnalysisModule){
+                            if(((AnalysisModule)pair.getValue().script).mandatoryFailed){
                                 if(!pair.getValue().output.getText().contains(noGenesFoundStr)){
                                     pair.getValue().output.appendLine(noGenesFoundStr);
                                 }
@@ -240,7 +240,7 @@ public class ProcessingPanel extends Panel {
         //Log.info("Defining monitor panel for " + name + "...");
         SwingUtilities.invokeLater(() -> {
             JPanel outerPanel;
-            if(exec.script instanceof AnalysisScript){
+            if(exec.script instanceof AnalysisModule){
                 outerPanel = packagesBarsPanel;
             }else{
                 outerPanel = scriptsBarsPanel;
@@ -266,7 +266,7 @@ public class ProcessingPanel extends Panel {
         Panel leftPanel = new Panel();
         leftPanel.setPreferredSize(scriptPanelSize);
         packagesLabel = new BiggerLabel();
-        packagesLabel.setText("Analysis Scripts:");
+        packagesLabel.setText("Analysis Modules:");
         packagesBarsPanel = new Panel();
         packagesBarsPanel.setMaximumSize(new java.awt.Dimension(470, 3000));
         packagesBarsPanel.setLayout(new BoxLayout(packagesBarsPanel, BoxLayout.PAGE_AXIS));
@@ -282,7 +282,7 @@ public class ProcessingPanel extends Panel {
         Panel rightPanel = new Panel();
         rightPanel.setPreferredSize(scriptPanelSize);
         othersLabel = new BiggerLabel();
-        othersLabel.setText("Post Analysis Scripts:");
+        othersLabel.setText("Post Analysis Modules:");
         scriptsBarsPanel = new Panel();
         scriptsBarsPanel.setMaximumSize(new java.awt.Dimension(470, 3000));
         scriptsBarsPanel.setLayout(new BoxLayout(scriptsBarsPanel, BoxLayout.PAGE_AXIS));

@@ -14,7 +14,7 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
-import peridot.script.RScript;
+import peridot.script.RModule;
 import peridot.GUI.component.*;
 import peridot.Global;
 
@@ -23,12 +23,12 @@ import peridot.Global;
  * @author pentalpha
  */
 public class ScriptDetailsDialog extends Dialog {
-    RScript script;
+    RModule script;
     String info;
     /** Creates new form ScriptDetailsDialog */
     public ScriptDetailsDialog(String scriptName, java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        this.script = RScript.availableScripts.get(scriptName);
+        this.script = RModule.availableScripts.get(scriptName);
         this.info = script.info;
         
         initComponents();

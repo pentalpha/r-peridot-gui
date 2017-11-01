@@ -23,7 +23,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import peridot.script.RScript;
+import peridot.script.RModule;
 import javax.swing.JScrollPane;
 import javax.swing.JPanel;
 import javax.swing.text.View;
@@ -51,7 +51,7 @@ public class ViewResultsPanel extends Panel {
         this.analysisModule = analysisModule;
         initComponents();
         resultViewers = new HashMap<>();
-        RScript script = RScript.availableScripts.get(scriptName);
+        RModule script = RModule.availableScripts.get(scriptName);
         Set<String> allResults = script.results;
         if(script.mandatoryResults.size() > 0){
             String[] mandatoryResults = script.mandatoryResults.toArray(new String[script.mandatoryResults.size()]);

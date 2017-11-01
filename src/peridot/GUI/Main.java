@@ -5,7 +5,7 @@
  */
 package peridot.GUI;
 
-import peridot.script.RScript;
+import peridot.script.RModule;
 import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -41,7 +41,7 @@ public class Main {
     }
     
     public static void clean(){
-        for(Map.Entry<String, RScript> pair : RScript.availableScripts.entrySet()){
+        for(Map.Entry<String, RModule> pair : RModule.availableScripts.entrySet()){
             pair.getValue().cleanTempFiles();
         }
     }
