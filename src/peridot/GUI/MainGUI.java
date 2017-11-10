@@ -13,20 +13,22 @@ import java.awt.Container;
 import java.awt.FontMetrics;
 import peridot.GUI.component.TabbedPane;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import peridot.GUI.panel.ResultsPanel;
 import peridot.GUI.panel.ProcessingPanel;
 import peridot.GUI.panel.NewAnalysisPanel;
+
+import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashSet;
 import peridot.Archiver.Places;
 import peridot.script.RModule;
 import java.lang.ClassNotFoundException;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+
 import peridot.GUI.component.Panel;
 import peridot.Global;
 import peridot.Log;
@@ -144,8 +146,8 @@ public class MainGUI extends javax.swing.JFrame {
                 MainGUI.showCannotDoThisWhileProcessing();
             }
         });
-        JMenuItem settings = new JMenuItem("Configurations");
-        settings.setEnabled(false);
+        //JMenuItem settings = new JMenuItem("Configurations");
+        //settings.setEnabled(false);
         JMenuItem resetScripts = new JMenuItem("Reset User Scripts");
         resetScripts.addActionListener((java.awt.event.ActionEvent evt1) -> {
             if(ProcessingPanel.isProcessing() == false){
@@ -171,19 +173,28 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
         toolsMenu.add(modules);
-        toolsMenu.add(settings);
+        //toolsMenu.add(settings);
         toolsMenu.add(resetScripts);
         toolsMenu.add(refreshResults);
         /////////////////////////////////
         JMenu helpMenu = new JMenu("Help");
         helpMenu.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         JMenuItem about = new JMenuItem("About " + appName);
-        about.setEnabled(false);
-        JMenuItem manual = new JMenuItem("User Manual");
-        manual.setEnabled(false);
+        about.setEnabled(java.awt.Desktop.isDesktopSupported());
+        about.addActionListener((ActionEvent evt) -> {
+            try {
+                java.awt.Desktop.getDesktop().browse(new URI("http://www.bioinformatics-brazil.org/r-peridot/about.html"));
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
+        });
         JMenuItem developerManual = new JMenuItem("Developer Manual");
-        developerManual.setEnabled(false);
-        helpMenu.add(manual);
+        developerManual.setEnabled(true);
+        developerManual.addActionListener((ActionEvent evt) -> {
+            File devManualFile = new File(Places.jarFolder + File.separator + "how-do-r-peridot-modules-work.pdf");
+            Global.openFileWithSysApp(devManualFile);
+            Log.logger.info("Opening " + devManualFile.getAbsolutePath());
+        });
         helpMenu.add(developerManual);
         helpMenu.add(about);
         /////////////////////////////////

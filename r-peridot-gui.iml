@@ -14,5 +14,7 @@
     <orderEntry type="library" name="univocity-parsers-2.2.0" level="project" />
     <orderEntry type="library" name="r-peridot" level="project" />
     <orderEntry type="library" name="AbsoluteLayout" level="project" />
+    <orderEntry type="library" name="R User Library" level="project" />
+    <orderEntry type="library" name="R Skeletons" level="application" />
   </component>
 </module>
