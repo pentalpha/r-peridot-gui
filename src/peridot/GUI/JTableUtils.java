@@ -6,6 +6,7 @@
 package peridot.GUI;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.JTable;
 import static peridot.Archiver.Spreadsheet.fileIsCSVorTSV;
@@ -85,7 +86,40 @@ public class JTableUtils {
 
     }
 
-    public static Table getTableWithoutHeader(File tableFile, boolean defaultHeader){
+    private static String[] subStrArray(String[] array, int maxElements){
+        boolean equal = (maxElements == array.length);
+        String[] newArray = Arrays.copyOfRange(array, 0, maxElements);
+        if(!equal){
+            newArray[newArray.length-1] = "...";
+        }
+        return newArray;
+    }
+
+    private static List<String[]> cutTableMatrixCols(List<String[]> allRows, int maxCols){
+        for(int i = 0; i < allRows.size(); i++){
+            if(allRows.get(i).length > maxCols){
+                allRows.set(i, subStrArray(allRows.get(i), maxCols));
+            }
+        }
+        return allRows;
+    }
+
+    private static List<String[]> cutTableMatrixRows(List<String[]> allRows, int maxRows){
+        if(allRows.size() > maxRows){
+            while(allRows.size() > maxRows){
+                allRows.remove(allRows.size()-1);
+            }
+            allRows.remove(allRows.size()-1);
+            String[] lastRow = new String[allRows.get(0).length];
+            for(int i = 0; i < allRows.get(0).length; i++){
+                lastRow[i] = "...";
+            }
+            allRows.add(lastRow);
+        }
+        return allRows;
+    }
+
+    public static Table getTableWithoutHeader(File tableFile, boolean defaultHeader, int maxCols, int maxLines){
         Table table = null;
         List<String[]> allRows;
         if(tableFile.getName().contains(".csv")){
@@ -95,6 +129,19 @@ public class JTableUtils {
             allRows = getRowsFromTSV(tableFile);
         }else{
             allRows = null;
+        }
+
+        if(allRows != null){
+            if(allRows.size() > 0){
+                if(allRows.get(0).length > 0){
+                    if(maxCols > 0){
+                        allRows = cutTableMatrixCols(allRows, maxCols);
+                    }
+                    if(maxLines > 0){
+                        allRows = cutTableMatrixRows(allRows, maxLines);
+                    }
+                }
+            }
         }
 
         Object[][] data;

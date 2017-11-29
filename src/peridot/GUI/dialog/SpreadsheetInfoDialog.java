@@ -65,7 +65,7 @@ public class SpreadsheetInfoDialog extends JDialog{
     }
     
     public void initTableScroller(){
-        dataTable = JTableUtils.getTableWithoutHeader(file, false);
+        dataTable = JTableUtils.getTableWithoutHeader(file, false, 9,100);
         scroller = new JScrollPane(dataTable);
         scroller.getViewport().setBackground(Color.white);
         scroller.setPreferredSize(new Dimension(getPreferredSize().width-50, 200));
