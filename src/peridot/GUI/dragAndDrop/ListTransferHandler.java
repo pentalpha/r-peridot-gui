@@ -9,6 +9,7 @@ import peridot.IndexedString;
 import java.awt.Component;
 import java.awt.datatransfer.Transferable;
 import java.awt.dnd.DnDConstants;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -16,6 +17,7 @@ import javax.swing.JList;
 import javax.swing.TransferHandler;
 import peridot.GUI.panel.ConditionPanel;
 import peridot.GUI.dialog.NewExpressionDialog;
+import peridot.Log;
 
 /**
  *
@@ -26,7 +28,7 @@ public class ListTransferHandler extends TransferHandler {
         @Override
         public boolean canImport(TransferHandler.TransferSupport support) {
             return (support.getComponent() instanceof JList || support.getComponent() instanceof ConditionPanel) 
-                    && support.isDataFlavorSupported(IndexedStringTransferable.LIST_ITEM_DATA_FLAVOR);
+                    && support.isDataFlavorSupported(IndexedStringListTransferable.LIST_ITEMS_DATA_FLAVOR);
         }
 
         @Override
@@ -37,32 +39,25 @@ public class ListTransferHandler extends TransferHandler {
                 System.out.println("...can import the transfer");
                 try {
                     Transferable t = support.getTransferable();
-                    Object value = t.getTransferData(IndexedStringTransferable.LIST_ITEM_DATA_FLAVOR);
+                    Object value = t.getTransferData(IndexedStringListTransferable.LIST_ITEMS_DATA_FLAVOR);
                     System.out.println("value is...");
-                    
-                    if (value instanceof IndexedString) {
+                    if(value instanceof List){
                         System.out.println("a ListItem...");
                         Component component = support.getComponent();
                         System.out.println("component is...");
-                        if(component instanceof JList){
-                            System.out.println("a JList");
-                            DefaultListModel model = (DefaultListModel)((JList)component).getModel();
-                            model.addElement((IndexedString)value);
-                            ((JList)component).setModel(model);
-                            accept = true;
-                        }
-                        else if(component instanceof ConditionPanel)
-                        {
+                        if (component instanceof ConditionPanel) {
                             System.out.println("a ConditionPanel");
-                            DefaultListModel model = (DefaultListModel)((ConditionPanel)component).contents.getModel();
-                            model.addElement((IndexedString)value);
-                            ((ConditionPanel)component).contents.setModel(model);
+                            DefaultListModel model = (DefaultListModel) ((ConditionPanel) component).contents.getModel();
+                            List<IndexedString> list = (List<IndexedString>) value;
+                            for(IndexedString string : list){
+                                model.addElement(string);
+                            }
+                            ((ConditionPanel) component).contents.setModel(model);
                             accept = true;
-                        }
-                        else
-                        {
+                            System.out.println("accepted and added the list.");
+                        } else {
                             System.out.println("something not defined.");
-                            
+
                         }
                     }else{
                         System.out.println("something not defined.");
@@ -86,10 +81,12 @@ public class ListTransferHandler extends TransferHandler {
             Transferable t = null;
             if (c instanceof JList) {
                 JList list = (JList) c;
-                Object value = list.getSelectedValue();
-                if (value instanceof IndexedString) {
-                    IndexedString li = (IndexedString) value;
-                    t = new IndexedStringTransferable(li);
+                Object value = list.getSelectedValuesList();
+                if (value instanceof List) {
+                    List<IndexedString> li = (List<IndexedString>) value;
+                    t = new IndexedStringListTransferable(li);
+                }else{
+                    Log.logger.severe("What you are trying to export is no List");
                 }
             }
             return t;
@@ -104,13 +101,15 @@ public class ListTransferHandler extends TransferHandler {
             System.out.println("ExportDone, trying to remove: ");
             
             try {
-                Object value = data.getTransferData(IndexedStringTransferable.LIST_ITEM_DATA_FLAVOR);
-                if (value instanceof IndexedString) {
-                    text = ((IndexedString)value).getText();
-                    System.out.println(text);
+                Object value = data.getTransferData(IndexedStringListTransferable.LIST_ITEMS_DATA_FLAVOR);
+                if (value instanceof List) {
+                    List<IndexedString> list = (List<IndexedString>)value;
+                    //System.out.println(text);
                     if(source instanceof JList){
                         DefaultListModel model = (DefaultListModel)((JList) source).getModel();
-                        model.removeElement(value);
+                        for(IndexedString element : list){
+                            model.removeElement(element);
+                        }
                         NewExpressionDialog.setChangedConditions(true);
                     }
                 }else{
@@ -119,9 +118,5 @@ public class ListTransferHandler extends TransferHandler {
             } catch (Exception exp) {
                 exp.printStackTrace();
             }
-            
-            
-            // Here you need to decide how to handle the completion of the transfer,
-            // should you remove the item from the list or not...
         }
     }

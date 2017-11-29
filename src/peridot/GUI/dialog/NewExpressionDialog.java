@@ -6,6 +6,8 @@
 package peridot.GUI.dialog;
 
 import peridot.AnalysisData;
+import peridot.GUI.MainGUI;
+import peridot.GUI.WrapLayout;
 import peridot.GUI.component.Label;
 import peridot.GUI.component.Dialog;
 import peridot.GUI.component.Panel;
@@ -25,12 +27,8 @@ import java.util.TreeSet;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.filechooser.FileFilter;
 
-import peridot.Global;
-import peridot.Global.*;
 import peridot.IndexedString;
-import peridot.AnalysisData;
 
 /**
  *
@@ -55,6 +53,12 @@ public class NewExpressionDialog extends Dialog {
     boolean loadedFromPrevious = false;
     
     Spreadsheet.Info info;
+
+    static private Dimension dialogSize = new java.awt.Dimension(MainGUI.defaultSize.width+100, 700);
+    static private Dimension jSeparatorSize = new java.awt.Dimension(dialogSize.width-60, 3);
+    static private Dimension adjustPanelSize = new java.awt.Dimension(dialogSize.width-20, dialogSize.height-300);
+    static private Dimension scrollPaneSize = new java.awt.Dimension(adjustPanelSize.width-10, adjustPanelSize.height-30);
+    static public Dimension conditionsPaneSize = new java.awt.Dimension(scrollPaneSize.width-50, scrollPaneSize.height+10);
     
     /**
      * Creates new form newExpressionGUI
@@ -99,7 +103,7 @@ public class NewExpressionDialog extends Dialog {
         addNewConditionButton = new Button();
         addNewConditionButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/peridot/GUI/icons/Add-Green-Button-icon-32.png"))); // NOI18N
         addNewConditionButton.setText("Add New Condition");
-        addNewConditionButton.setPreferredSize(new java.awt.Dimension(220, 60));
+        addNewConditionButton.setPreferredSize(new java.awt.Dimension(conditionsPaneSize.width-50, 50));
         addNewConditionButton.setFocusable(false);
         addNewConditionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -287,6 +291,7 @@ public class NewExpressionDialog extends Dialog {
     }
 
     private void initComponents() {
+        this.setResizable(false);
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
@@ -299,15 +304,15 @@ public class NewExpressionDialog extends Dialog {
         cancelButton = new Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(450, 700));
+        setPreferredSize(dialogSize);
         getContentPane().setLayout(new java.awt.FlowLayout());
 
         makeSetFilesPanel();
 
-        jSeparator1.setPreferredSize(new java.awt.Dimension(390, 3));
+        jSeparator1.setPreferredSize(jSeparatorSize);
         getContentPane().add(jSeparator1);
 
-        adjustPanel.setPreferredSize(new java.awt.Dimension(430, 400));
+        adjustPanel.setPreferredSize(adjustPanelSize);
 
         jLabel1.setText("Adjust conditions of each sample (drag and drop):");
         adjustPanel.add(jLabel1);
@@ -316,23 +321,24 @@ public class NewExpressionDialog extends Dialog {
         conditionsScrollPane.setFocusTraversalPolicyProvider(true);
         conditionsScrollPane.setFocusable(false);
         //conditionsScrollPane.setMaximumSize(new java.awt.Dimension(100, 100));
-        conditionsScrollPane.setPreferredSize(new java.awt.Dimension(420, 370));
+        conditionsScrollPane.setPreferredSize(scrollPaneSize);
 
         conditionsPane.setFocusable(false);
-        conditionsPane.setMaximumSize(new java.awt.Dimension(380, 1930));
-        conditionsPane.setPreferredSize(new java.awt.Dimension(380, 730));
-        conditionsPane.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 3, 3));
+        conditionsPane.setMinimumSize(conditionsPaneSize);
+        conditionsPane.setMaximumSize(new java.awt.Dimension(conditionsPaneSize.width, 1930));
+        conditionsPane.setLayout(new WrapLayout(java.awt.FlowLayout.CENTER, 0, 3));
+        //conditionsPane.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 3, 3));
         conditionsScrollPane.setViewportView(conditionsPane);
 
         adjustPanel.add(conditionsScrollPane);
 
         getContentPane().add(adjustPanel);
 
-        jSeparator2.setPreferredSize(new java.awt.Dimension(390, 3));
+        jSeparator2.setPreferredSize(jSeparatorSize);
         getContentPane().add(jSeparator2);
 
         roundingPanel = new Panel();
-        roundingPanel.setPreferredSize(new java.awt.Dimension(430, 30));
+        roundingPanel.setPreferredSize(new java.awt.Dimension(dialogSize.width, 30));
 
         roundingModesLabel = new Label("Integer rounding: ");
         roundingModesComboBox = new JComboBox<>();
@@ -344,7 +350,7 @@ public class NewExpressionDialog extends Dialog {
         getContentPane().add(roundingPanel);
 
         thresholdPanel = new Panel();
-        thresholdPanel.setPreferredSize(new java.awt.Dimension(430, 80));
+        thresholdPanel.setPreferredSize(new java.awt.Dimension(dialogSize.width, 80));
         thresholdLabel = new Label("Count reads threshold: ");
         thresholdSlider = new JSlider(JSlider.HORIZONTAL,
                 thresholdMin, thresholdMax, threshold);
@@ -357,10 +363,10 @@ public class NewExpressionDialog extends Dialog {
         thresholdPanel.add(thresholdSlider);
         getContentPane().add(thresholdPanel);
 
-        jSeparator3.setPreferredSize(new java.awt.Dimension(390, 3));
+        jSeparator3.setPreferredSize(jSeparatorSize);
         getContentPane().add(jSeparator3);
 
-        bottomButtonsPanel.setPreferredSize(new java.awt.Dimension(430, 40));
+        bottomButtonsPanel.setPreferredSize(new java.awt.Dimension(dialogSize.width, 40));
         bottomButtonsPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
         createButton.setText("Create");
@@ -380,15 +386,18 @@ public class NewExpressionDialog extends Dialog {
     
     private void makeSetFilesPanel(){
         setFilesPanel = new Panel();
-        setFilesPanel.setPreferredSize(new java.awt.Dimension(430, 60));
+        Dimension size = new java.awt.Dimension(dialogSize.width-20, 60);
+        setFilesPanel.setPreferredSize(size);
         java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0);
         flowLayout1.setAlignOnBaseline(true);
         setFilesPanel.setLayout(flowLayout1);
-        
-        jPanel1 = new Panel();
-        jPanel1.setMinimumSize(new java.awt.Dimension(120, 60));
-        jPanel1.setPreferredSize(new java.awt.Dimension(160, 70));
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 6));
+
+        Dimension labelsSize = new java.awt.Dimension(160, 70);
+        labelsPanel = new Panel();
+        labelsPanel.setMinimumSize(new java.awt.Dimension(labelsSize.width-40,
+                labelsSize.height-10));
+        labelsPanel.setPreferredSize(labelsSize);
+        labelsPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 6));
         
         geneExpressionLabel = new Label();
         geneExpressionLabel.setText("Count reads:");
@@ -396,16 +405,17 @@ public class NewExpressionDialog extends Dialog {
         idAndConditionsLabel = new Label();
         idAndConditionsLabel.setText("Conditions (optional):");
         
-        jPanel1.add(geneExpressionLabel);
-        jPanel1.add(idAndConditionsLabel);
-        
-        jPanel2 = new Panel();
-        jPanel2.setPreferredSize(new java.awt.Dimension(270, 70));
-        jPanel2.setRequestFocusEnabled(false);
-        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 0, 0));
+        labelsPanel.add(geneExpressionLabel);
+        labelsPanel.add(idAndConditionsLabel);
+
+        Dimension pathsSize = new java.awt.Dimension(size.width-labelsSize.width-10, labelsSize.height);
+        pathsPanel = new Panel();
+        pathsPanel.setPreferredSize(pathsSize);
+        pathsPanel.setRequestFocusEnabled(false);
+        pathsPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 0, 0));
         
         expressionPathField = new javax.swing.JTextField();
-        expressionPathField.setPreferredSize(new java.awt.Dimension(220, 25));
+        expressionPathField.setPreferredSize(new java.awt.Dimension(pathsSize.width-50, 25));
         expressionPathField.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 expressionPathFieldInputMethodTextChanged(evt);
@@ -431,7 +441,7 @@ public class NewExpressionDialog extends Dialog {
         selectExpressionFileButton.setIcon(new ImageIcon(getClass().getResource("/peridot/GUI/icons/open-icon-24.png")));
         
         idAndConditionsField = new javax.swing.JTextField();
-        idAndConditionsField.setPreferredSize(new java.awt.Dimension(220, 25));
+        idAndConditionsField.setPreferredSize(new java.awt.Dimension(pathsSize.width-50, 25));
         idAndConditionsField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 idAndConditionsFieldActionPerformed(evt);
@@ -451,13 +461,13 @@ public class NewExpressionDialog extends Dialog {
         selectConditionsFileButton.setEnabled(false);
         selectConditionsFileButton.setIcon(new ImageIcon(getClass().getResource("/peridot/GUI/icons/open-icon-24.png")));
         
-        jPanel2.add(expressionPathField);
-        jPanel2.add(selectExpressionFileButton);
-        jPanel2.add(idAndConditionsField);
-        jPanel2.add(selectConditionsFileButton);
+        pathsPanel.add(expressionPathField);
+        pathsPanel.add(selectExpressionFileButton);
+        pathsPanel.add(idAndConditionsField);
+        pathsPanel.add(selectConditionsFileButton);
         
-        setFilesPanel.add(jPanel1);
-        setFilesPanel.add(jPanel2);
+        setFilesPanel.add(labelsPanel);
+        setFilesPanel.add(pathsPanel);
 
         getContentPane().add(setFilesPanel);
     }
@@ -614,8 +624,8 @@ public class NewExpressionDialog extends Dialog {
     private javax.swing.JTextField idAndConditionsField;
     private javax.swing.JLabel idAndConditionsLabel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel labelsPanel;
+    private javax.swing.JPanel pathsPanel;
     private javax.swing.JSeparator jSeparator1, jSeparator2, jSeparator3;
     private javax.swing.JButton selectConditionsFileButton;
     private javax.swing.JButton selectExpressionFileButton;
