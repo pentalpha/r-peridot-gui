@@ -120,7 +120,7 @@ public class NewModuleDialog extends Dialog {
             String analysisClassName = "." + AnalysisModule.class.getSimpleName();
             String postAnalysisClassName = "." + PostAnalysisModule.class.getSimpleName();
             if(file.contains(analysisClassName) || file.contains(postAnalysisClassName)){
-                System.out.println(file);
+                //System.out.println(file);
                 String[] splited = null;
                 if(file.contains(File.separator)){
                     splited = file.split(Pattern.quote(File.separator));

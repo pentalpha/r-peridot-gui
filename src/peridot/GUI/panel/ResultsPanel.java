@@ -142,7 +142,7 @@ public class ResultsPanel extends Panel {
     private Set<File> getScriptResultsFolders() {
         Set<File> subFiles;
         Set<File> subDirs = new TreeSet<File>();
-        Log.logger.info("trying to get final results");
+        //Log.logger.info("trying to get final results");
         subFiles = new TreeSet<File>(FileUtils.listFilesAndDirs(Places.finalResultsDir,
                 TrueFileFilter.TRUE, TrueFileFilter.TRUE));
         for (File file : subFiles) {

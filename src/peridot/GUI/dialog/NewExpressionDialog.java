@@ -5,16 +5,20 @@
  */
 package peridot.GUI.dialog;
 
+import org.apache.commons.lang3.SystemUtils;
 import peridot.AnalysisData;
 import peridot.GUI.MainGUI;
 import peridot.GUI.WrapLayout;
-import peridot.GUI.component.Label;
-import peridot.GUI.component.Dialog;
-import peridot.GUI.component.Panel;
-import peridot.GUI.component.Button;
+import peridot.GUI.component.*;
 import peridot.Archiver.Spreadsheet;
 import peridot.Archiver.Manager;
-import java.awt.Dimension;
+
+import java.awt.*;
+
+import peridot.GUI.component.Button;
+import peridot.GUI.component.Dialog;
+import peridot.GUI.component.Label;
+import peridot.GUI.component.Panel;
 import peridot.GUI.panel.ConditionPanel;
 import java.io.File;
 import java.io.IOException;
@@ -29,6 +33,8 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import peridot.IndexedString;
+
+import static peridot.GUI.JTableUtils.tableOverColumnLimit;
 
 /**
  *
@@ -54,7 +60,7 @@ public class NewExpressionDialog extends Dialog {
     
     Spreadsheet.Info info;
 
-    static private Dimension dialogSize = new java.awt.Dimension(MainGUI.defaultSize.width+100, 700);
+    static private Dimension dialogSize = new java.awt.Dimension(MainGUI.defaultSize.width+100, 690);
     static private Dimension jSeparatorSize = new java.awt.Dimension(dialogSize.width-60, 3);
     static private Dimension adjustPanelSize = new java.awt.Dimension(dialogSize.width-20, dialogSize.height-300);
     static private Dimension scrollPaneSize = new java.awt.Dimension(adjustPanelSize.width-10, adjustPanelSize.height-30);
@@ -300,12 +306,12 @@ public class NewExpressionDialog extends Dialog {
         conditionsScrollPane = new javax.swing.JScrollPane();
         conditionsPane = new Panel();
         bottomButtonsPanel = new Panel();
-        createButton = new Button();
-        cancelButton = new Button();
+        createButton = new BigButton();
+        cancelButton = new BigButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(dialogSize);
-        getContentPane().setLayout(new java.awt.FlowLayout());
+        getContentPane().setLayout(new WrapLayout(java.awt.FlowLayout.CENTER, 0, 5));
 
         makeSetFilesPanel();
 
@@ -366,16 +372,25 @@ public class NewExpressionDialog extends Dialog {
         jSeparator3.setPreferredSize(jSeparatorSize);
         getContentPane().add(jSeparator3);
 
-        bottomButtonsPanel.setPreferredSize(new java.awt.Dimension(dialogSize.width, 40));
-        bottomButtonsPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+        int usableHeight = getPreferredSize().height;
+        for(Component comp : getContentPane().getComponents()){
+            usableHeight -= comp.getPreferredSize().height + 5;
+        }
+
+        if(SystemUtils.IS_OS_WINDOWS){
+            usableHeight -= 20;
+        }
+
+        bottomButtonsPanel.setPreferredSize(new java.awt.Dimension(dialogSize.width, usableHeight-10));
+        bottomButtonsPanel.setLayout(new java.awt.FlowLayout(FlowLayout.RIGHT, 10, 0));
 
         createButton.setText("Create");
-        createButton.setPreferredSize(new Dimension(70, 35));
+        createButton.setPreferredSize(new Dimension(100, bottomButtonsPanel.getPreferredSize().height-10));
         createButton.addActionListener(evt -> createButtonActionPerformed(evt));
         bottomButtonsPanel.add(createButton);
 
         cancelButton.setText("Cancel");
-        cancelButton.setPreferredSize(new Dimension(70, 35));
+        cancelButton.setPreferredSize(new Dimension(100, bottomButtonsPanel.getPreferredSize().height-10));
         cancelButton.addActionListener(evt -> cancelButtonActionPerformed(evt));
         bottomButtonsPanel.add(cancelButton);
 
@@ -507,12 +522,15 @@ public class NewExpressionDialog extends Dialog {
     }//GEN-LAST:event_createButtonActionPerformed
     
     public AnalysisData getResults(){
+        if(expressionFile == null){
+            return null;
+        }
         try {
             AnalysisData expr = new AnalysisData(expressionFile, getConditionsFromUI(), info,
                     roundingModesComboBox.getItemAt(roundingModesComboBox.getSelectedIndex()),
                     thresholdSlider.getValue());
             return expr;
-        }catch(IOException ex){
+        }catch(Exception ex){
             ex.printStackTrace();
             return null;
         }
@@ -560,6 +578,11 @@ public class NewExpressionDialog extends Dialog {
         //fileChooser.setFileFilter(Places.Spreadsheet.getGeneFileFilter());
         if(fileChooser.showDialog(null, "Open File") == JFileChooser.APPROVE_OPTION){
             String filePath = fileChooser.getSelectedFile().getAbsolutePath();
+            if(tableOverColumnLimit(new File(filePath))){
+                MaxColumnsDialog dialog = new MaxColumnsDialog(parent);
+                dialog.setVisible(true);
+                return;
+            }
             try{
                 info = SpreadsheetInfoDialog.getInfo(fileChooser.getSelectedFile());
             }catch(Exception ex){

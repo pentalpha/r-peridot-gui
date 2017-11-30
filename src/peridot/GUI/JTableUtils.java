@@ -9,13 +9,12 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.JTable;
-import static peridot.Archiver.Spreadsheet.fileIsCSVorTSV;
-import static peridot.Archiver.Spreadsheet.getDefaultHeader;
-import static peridot.Archiver.Spreadsheet.getRowsFromCSV;
-import static peridot.Archiver.Spreadsheet.getRowsFromTSV;
-import static peridot.Archiver.Spreadsheet.lineIsSampleNames;
+
+import org.apache.commons.lang3.SystemUtils;
 import peridot.GUI.component.Table;
 import peridot.Log;
+
+import static peridot.Archiver.Spreadsheet.*;
 
 /**
  *
@@ -66,7 +65,7 @@ public class JTableUtils {
                     headers = firstRow;
                 }
                 for(int i = 0; i < headers.length; i++){
-                    System.out.print(headers[i] + ", ");
+                    //System.out.print(headers[i] + ", ");
                 }
                 for(int i = 0; i < data.length; i++){
                     data[i] = allRows.get(i+1);
@@ -117,6 +116,19 @@ public class JTableUtils {
             allRows.add(lastRow);
         }
         return allRows;
+    }
+
+    public static boolean tableOverColumnLimit(File tableFile){
+        String[] firstRow;
+        if(tableFile.getName().contains(".csv")){
+            firstRow = getFirstRowFromCSV(tableFile);
+        }else if (tableFile.getName().contains(".tsv")){
+            firstRow = getFirstRowFromTSV(tableFile);
+        }else{
+            return false;
+        }
+        //System.out.println(firstRow.length + " columns");
+        return (firstRow.length > 100);
     }
 
     public static Table getTableWithoutHeader(File tableFile, boolean defaultHeader, int maxCols, int maxLines){

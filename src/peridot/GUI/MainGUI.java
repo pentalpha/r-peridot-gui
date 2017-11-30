@@ -188,7 +188,7 @@ public class MainGUI extends javax.swing.JFrame {
                 ex.printStackTrace();
             }
         });
-        JMenuItem developerManual = new JMenuItem("Developer Manual");
+        JMenuItem developerManual = new JMenuItem("How do R-Peridot Works?");
         developerManual.setEnabled(true);
         developerManual.addActionListener((ActionEvent evt) -> {
             File devManualFile = new File(Places.jarFolder + File.separator + "how-do-r-peridot-modules-work.pdf");

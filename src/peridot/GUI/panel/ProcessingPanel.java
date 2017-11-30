@@ -225,7 +225,7 @@ public class ProcessingPanel extends Panel {
         }
         
         SwingUtilities.invokeLater(() ->{
-            Log.logger.info("Trying to update resultsPanel now");
+            Log.logger.info("Updating resultsPanel now");
             MainGUI.updateResultsPanel();
             Log.logger.info("Switching to resultsPanel now");
             MainGUI.goToResultsPanel();

@@ -34,19 +34,19 @@ public class ListTransferHandler extends TransferHandler {
         @Override
         public boolean importData(TransferHandler.TransferSupport support) {
             boolean accept = false;
-            System.out.println("checking if suport can import...");
+            //System.out.println("checking if suport can import...");
             if (canImport(support)) {
-                System.out.println("...can import the transfer");
+                //System.out.println("...can import the transfer");
                 try {
                     Transferable t = support.getTransferable();
                     Object value = t.getTransferData(IndexedStringListTransferable.LIST_ITEMS_DATA_FLAVOR);
-                    System.out.println("value is...");
+                    //System.out.println("value is...");
                     if(value instanceof List){
-                        System.out.println("a ListItem...");
+                        //System.out.println("a ListItem...");
                         Component component = support.getComponent();
-                        System.out.println("component is...");
+                        //System.out.println("component is...");
                         if (component instanceof ConditionPanel) {
-                            System.out.println("a ConditionPanel");
+                            //System.out.println("a ConditionPanel");
                             DefaultListModel model = (DefaultListModel) ((ConditionPanel) component).contents.getModel();
                             List<IndexedString> list = (List<IndexedString>) value;
                             for(IndexedString string : list){
@@ -54,19 +54,19 @@ public class ListTransferHandler extends TransferHandler {
                             }
                             ((ConditionPanel) component).contents.setModel(model);
                             accept = true;
-                            System.out.println("accepted and added the list.");
+                            //System.out.println("accepted and added the list.");
                         } else {
-                            System.out.println("something not defined.");
+                            //System.out.println("something not defined.");
 
                         }
                     }else{
-                        System.out.println("something not defined.");
+                        //System.out.println("something not defined.");
                     }
                 } catch (Exception exp) {
                     exp.printStackTrace();
                 }
             }else{
-                System.out.println("...can not import the transfer");
+                //System.out.println("...can not import the transfer");
             }
             return accept;
         }
@@ -98,7 +98,7 @@ public class ListTransferHandler extends TransferHandler {
             if(action == DnDConstants.ACTION_NONE){
                 return;
             }
-            System.out.println("ExportDone, trying to remove: ");
+            //System.out.println("ExportDone, trying to remove: ");
             
             try {
                 Object value = data.getTransferData(IndexedStringListTransferable.LIST_ITEMS_DATA_FLAVOR);
