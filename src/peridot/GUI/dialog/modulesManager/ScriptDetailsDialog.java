@@ -6,17 +6,16 @@
 
 package peridot.GUI.dialog.modulesManager;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.ListSelectionModel;
-import peridot.script.RModule;
 import peridot.GUI.component.*;
+import peridot.GUI.component.Button;
+import peridot.GUI.component.Dialog;
+import peridot.GUI.component.Label;
+import peridot.GUI.component.Panel;
 import peridot.Global;
+import peridot.script.RModule;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  *

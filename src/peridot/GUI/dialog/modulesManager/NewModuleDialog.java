@@ -1,41 +1,30 @@
 package peridot.GUI.dialog.modulesManager;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import org.apache.commons.io.FileUtils;
+import peridot.GUI.MainGUI;
+import peridot.GUI.component.*;
+import peridot.GUI.component.Button;
+import peridot.GUI.component.Dialog;
+import peridot.GUI.component.Label;
+import peridot.GUI.component.Panel;
+import peridot.Global;
+import peridot.Log;
+import peridot.script.AnalysisModule;
+import peridot.script.DiffExpressionModule;
+import peridot.script.PostAnalysisModule;
+import peridot.script.RModule;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import org.apache.commons.io.FileUtils;
-import peridot.Archiver.Spreadsheet;
-import peridot.GUI.MainGUI;
-import peridot.GUI.component.*;
-import peridot.Global;
-import peridot.Log;
-import peridot.script.AnalysisModule;
-import peridot.script.PostAnalysisModule;
-import peridot.script.DiffExpressionModule;
-import peridot.script.RModule;
 
 /**
  *

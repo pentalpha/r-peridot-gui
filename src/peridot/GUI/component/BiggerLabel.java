@@ -6,7 +6,6 @@
 package peridot.GUI.component;
 
 import peridot.GUI.Aesthetics;
-import javax.swing.JLabel;
 /**
  *
  * @author Pitágoras Alves

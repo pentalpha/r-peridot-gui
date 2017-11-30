@@ -4,38 +4,30 @@
  * and open the template in the editor.
  */
 package peridot.GUI.panel;
+
+import peridot.AnalysisData;
+import peridot.AnalysisParameters;
 import peridot.Archiver.Manager;
-import peridot.GUI.component.Label;
-import peridot.GUI.component.BigLabel;
-import peridot.GUI.component.BiggerLabel;
-import peridot.GUI.component.Panel;
-import peridot.GUI.component.Button;
-import peridot.GUI.component.BigButton;
-import peridot.GUI.component.CheckBox;
-import peridot.Archiver.Spreadsheet;
 import peridot.Archiver.Places;
-import peridot.GUI.dialog.modulesManager.ScriptDetailsDialog;
-import peridot.Log;
-
+import peridot.GUI.MainGUI;
+import peridot.GUI.component.*;
+import peridot.GUI.component.Button;
+import peridot.GUI.component.Label;
+import peridot.GUI.component.Panel;
+import peridot.GUI.dialog.NewExpressionDialog;
 import peridot.GUI.dialog.SpecificParametersDialog;
+import peridot.GUI.dialog.modulesManager.ScriptDetailsDialog;
+import peridot.Global;
+import peridot.Log;
+import peridot.script.AnalysisModule;
+import peridot.script.RModule;
 
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.TreeSet;
-import java.util.Vector;
-import javax.swing.*;
-import javax.swing.event.*;
-import peridot.AnalysisParameters;
-import peridot.GUI.MainGUI;
-import peridot.GUI.WrapLayout;
-import peridot.GUI.dialog.NewExpressionDialog;
-import peridot.AnalysisData;
-import peridot.script.RModule;
-import peridot.Global;
-import peridot.script.AnalysisModule;
+import java.util.*;
 /**
  *
  * @author pentalpha
@@ -52,8 +44,7 @@ public class NewAnalysisPanel extends Panel {
     private Map<String, JCheckBox> scriptCheckboxes;
     private ParametersPanel parametersPanel;
     private NewExpressionDialog expressionGUI;
-    //private SpinnerNumberModel spinnerIntModel, spinnerFloatModel;
-    //private SpinnerListModel spinnerNotUseOrIntModel, spinnerNotUseOrFloatModel;
+
     /**
      * Creates new form NewAnalysisPanel
      */
@@ -788,6 +779,4 @@ public class NewAnalysisPanel extends Panel {
     
     private TreeMap<String, JButton> editModuleParamsButtons;
     private TreeMap<String, JButton> moduleDetailButtons;
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    // End of variables declaration//GEN-END:variables
 }

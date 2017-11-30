@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 package peridot.GUI.component;
-import java.awt.Graphics;
-import javax.swing.JButton;
+
 import peridot.GUI.Aesthetics;
+
+import javax.swing.*;
 /**
  *
  * @author Pitágoras Alves
@@ -14,14 +15,9 @@ import peridot.GUI.Aesthetics;
 public class BigButton extends JButton{
     public BigButton(){
         super();
-        //this.setBackground(Aesthetics.element);
-        //this.set
-        //this.setForeground(Aesthetics.letter);
+
         this.setFont(Aesthetics.bigFont);
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder());
     }
-    //@Override
-    //protected void paintComponent(Graphics g){
-    //    
-    //}
+
 }

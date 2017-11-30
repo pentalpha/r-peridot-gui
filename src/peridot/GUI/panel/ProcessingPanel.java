@@ -5,33 +5,26 @@
  */
 package peridot.GUI.panel;
 
+import peridot.AnalysisData;
+import peridot.AnalysisParameters;
+import peridot.GUI.MainGUI;
+import peridot.GUI.component.BigButton;
 import peridot.GUI.component.BigLabel;
 import peridot.GUI.component.BiggerLabel;
 import peridot.GUI.component.Panel;
-import peridot.GUI.component.BigButton;
-import java.awt.Dimension;
-import java.util.HashMap;
+import peridot.GUI.dialog.ScriptOutputDialog;
+import peridot.Log;
+import peridot.script.AnalysisModule;
+import peridot.script.ScriptExec;
+import peridot.script.Task;
+
+import javax.swing.*;
+import java.awt.*;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import javax.swing.JFrame;
-import peridot.AnalysisParameters;
-import peridot.AnalysisData;
-import java.util.concurrent.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import peridot.GUI.MainGUI;
-import peridot.GUI.dialog.ScriptOutputDialog;
-import peridot.script.RModule;
-import peridot.script.ScriptExec;
-import javax.swing.JSeparator;
-import peridot.Log;
-import peridot.script.AnalysisModule;
-import peridot.script.DiffExpressionModule;
-import peridot.script.Task;
 /**
  *
  * @author pentalpha
@@ -315,8 +308,7 @@ public class ProcessingPanel extends Panel {
         add(finalResultDescription);
     }
     
-    private void abortAllButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        // TODO add your handling code here:
+    private void abortAllButtonActionPerformed(java.awt.event.ActionEvent evt) {
         for(Map.Entry<String, ScriptProgressMonitorPanel> pair : this.scriptMonitor.entrySet()){
             pair.getValue().requireToAbort();
         }

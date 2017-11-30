@@ -4,33 +4,30 @@
  * and open the template in the editor.
  */
 package peridot.GUI.panel;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.TrueFileFilter;
+import peridot.Archiver.Places;
 import peridot.CLI.PeridotCmd;
-import peridot.GUI.component.Label;
-import peridot.GUI.component.BigLabel;
-import peridot.GUI.component.BiggerLabel;
-import peridot.GUI.component.Panel;
+import peridot.GUI.MainGUI;
+import peridot.GUI.WrapLayout;
+import peridot.GUI.component.*;
 import peridot.GUI.component.Button;
-import peridot.GUI.component.BigButton;
-import peridot.Log;
-import java.awt.Dimension;
+import peridot.GUI.component.Label;
+import peridot.GUI.component.Panel;
 import peridot.GUI.dialog.PackagesResultsDialog;
+import peridot.GUI.dialog.ScriptResultsDialog;
+import peridot.Log;
+import peridot.script.RModule;
+
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.logging.Level;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.filefilter.TrueFileFilter;
-import peridot.Archiver.Places;
-import peridot.GUI.MainGUI;
-import peridot.GUI.WrapLayout;
-import peridot.GUI.dialog.ScriptResultsDialog;
-import peridot.script.RModule;
 
 /**
  *
@@ -180,7 +177,7 @@ public class ResultsPanel extends Panel {
         viewResultsButton.setText("View All");
         viewResultsButton.setPreferredSize(new Dimension(190, 120));
         viewResultsButton.setMinimumSize(new Dimension(190, 120));
-        //viewResultsButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         viewResultsButton.addActionListener((java.awt.event.ActionEvent evt) -> {
             viewResultsButtonActionPerformed(evt);
         });
@@ -189,13 +186,6 @@ public class ResultsPanel extends Panel {
         packListArea = new Panel();
         packListArea.setPreferredSize(new Dimension(140, 80));
         packListArea.setLayout(new WrapLayout());
-        
-        /*packListArea.setEditable(false);
-        packListArea.setColumns(12);
-        packListArea.setRows(5);
-        packListArea.setTabSize(4);
-        packListArea.setText("<pack> ");
-        packListArea.setWrapStyleWord(true);*/
         
         innerUpperPanel = new Panel();
         
@@ -302,7 +292,6 @@ public class ResultsPanel extends Panel {
     }
 
     private void openSaveFolderFileChooserActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int result = fileChooser.showOpenDialog(parent);
@@ -316,12 +305,10 @@ public class ResultsPanel extends Panel {
     }
 
     private void viewResultsButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         (new PackagesResultsDialog(parent, false, packages)).setVisible(true);
     }
 
     private void saveResultsButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         try {
             File saveFolder = new File(saveFolderInputField.getText());
             PeridotCmd.saveResultsAt(saveFolder);
@@ -330,9 +317,6 @@ public class ResultsPanel extends Panel {
         }
     }
 
-    
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bottomPanel;
     private javax.swing.JSeparator bottomSeparator;
     private javax.swing.JPanel innerUpperPanel;
@@ -348,5 +332,4 @@ public class ResultsPanel extends Panel {
     private javax.swing.JSeparator topSeparator;
     private javax.swing.JPanel upperPanel;
     private javax.swing.JButton viewResultsButton;
-    // End of variables declaration//GEN-END:variables
 }

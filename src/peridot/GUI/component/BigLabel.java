@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package peridot.GUI.component;
+
 import peridot.GUI.Aesthetics;
-import javax.swing.JLabel;
 
 public class BigLabel extends Label {
     public BigLabel(){

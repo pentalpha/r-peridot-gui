@@ -5,11 +5,9 @@
  */
 package peridot.GUI;
 
-import java.awt.Color;
-import java.awt.Component;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableCellRenderer;
+import java.awt.*;
 
 /**
  *

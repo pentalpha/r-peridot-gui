@@ -5,19 +5,15 @@
  */
 package peridot.GUI.panel;
 
-import peridot.GUI.component.Label;
 import peridot.GUI.component.BigLabel;
-import peridot.GUI.component.Panel;
 import peridot.GUI.component.Button;
-import java.awt.Dimension;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JProgressBar;
-import peridot.script.ScriptExec;
-import java.util.concurrent.atomic.*;
-import javax.swing.SwingUtilities;
+import peridot.GUI.component.Label;
+import peridot.GUI.component.Panel;
 import peridot.GUI.dialog.ScriptOutputDialog;
+import peridot.script.ScriptExec;
+
+import javax.swing.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 /**
  *
  * @author pentalpha
@@ -89,15 +85,6 @@ public class ScriptProgressMonitorPanel extends Panel {
         add(waitingLabel);
         add(outputButton);
     }
-    
-    //public void stopMonitoring(){
-    //    stopMonitoringFlag.set(true);
-    //}
-    
-    //public void startMonitoring(){
-    //    stopMonitoringFlag.set(false);
-    //    monitor.start();
-    //}
     
     public void switchToWaitingIcon(){
         if(this.iconState == IconState.WAITING){

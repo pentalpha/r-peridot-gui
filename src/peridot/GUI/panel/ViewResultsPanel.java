@@ -5,33 +5,22 @@
  */
 package peridot.GUI.panel;
 
+import peridot.Archiver.Manager;
+import peridot.Archiver.Spreadsheet;
+import peridot.GUI.JTableUtils;
+import peridot.GUI.component.BigButton;
 import peridot.GUI.component.BiggerLabel;
 import peridot.GUI.component.Panel;
 import peridot.GUI.component.TabbedPane;
-import peridot.GUI.component.BigButton;
-import peridot.Archiver.Spreadsheet;
-import peridot.Archiver.Manager;
-import java.awt.Color;
-import java.awt.Dimension;
+import peridot.Global;
+import peridot.script.RModule;
+
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
-import java.util.logging.Level;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import peridot.script.RModule;
-import javax.swing.JScrollPane;
-import javax.swing.JPanel;
-import javax.swing.text.View;
-
-import org.apache.commons.lang3.SystemUtils;
-import peridot.GUI.JTableUtils;
-import peridot.Global;
-import peridot.Log;
 /**
  *
  * @author pithagoras
@@ -100,8 +89,7 @@ public class ViewResultsPanel extends Panel {
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         JLabel message = new BiggerLabel();
         message.setText(file.getName() + " is in a format unknown to R-Peridot.");
-        //JLabel message2 = new Label();
-        //message2.setText("Please use other program to view this result.");
+
         BigButton openButton = new BigButton();
         openButton.setText("Open With External Program");
         openButton.addActionListener(new java.awt.event.ActionListener() {

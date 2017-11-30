@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package peridot.GUI.component;
-import java.awt.Color;
-import javax.swing.JPanel;
+
+import javax.swing.*;
 /**
  *
  * @author pentalpha
@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 public class Panel extends JPanel{
     public Panel(){
         super();
-        //this.setBackground(Color.white);
+
         this.setFocusable(false);
     }
 }

@@ -5,33 +5,25 @@
  */
 package peridot.GUI;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import peridot.GUI.dialog.modulesManager.ModulesManager;
-import java.awt.ComponentOrientation;
-import java.awt.Container;
-import java.awt.FontMetrics;
-import peridot.GUI.component.TabbedPane;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.WindowEvent;
-import peridot.GUI.panel.ResultsPanel;
-import peridot.GUI.panel.ProcessingPanel;
-import peridot.GUI.panel.NewAnalysisPanel;
-
-import java.io.File;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.HashSet;
 import peridot.Archiver.Places;
-import peridot.script.RModule;
-import java.lang.ClassNotFoundException;
-import javax.imageio.ImageIO;
-import javax.swing.*;
-
 import peridot.GUI.component.Panel;
+import peridot.GUI.component.TabbedPane;
+import peridot.GUI.dialog.modulesManager.ModulesManager;
+import peridot.GUI.panel.NewAnalysisPanel;
+import peridot.GUI.panel.ProcessingPanel;
+import peridot.GUI.panel.ResultsPanel;
 import peridot.Global;
 import peridot.Log;
+import peridot.script.RModule;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+import java.io.File;
+import java.net.URI;
+
 import static peridot.Log.logger;
 /**
  *
@@ -107,15 +99,9 @@ public class MainGUI extends javax.swing.JFrame {
         RModule.updateUserScripts();
         tabbedPanel.removeAll();
         tabbedPanel.setFocusable(false);
-        
-        //getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tabbedPanel.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
-        //getContentPane().add(tabbedPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-        //contentPane.add(tabbedPanel, java.awt.BorderLayout.CENTER);
-        //pack();
-        
-        //Log.logger.info("init components done");
+
         analysisPanel = new NewAnalysisPanel(this);
         analysisPanel.setFocusable(false);
         processingPanel = new ProcessingPanel(this);
@@ -242,14 +228,10 @@ public class MainGUI extends javax.swing.JFrame {
         Component[] components = container.getComponents();
         for (Component component : components) {
             component.setEnabled(enable);
-            /*if (component instanceof Container) {
-                setComponentsEnabled((Container)component, enable);
-            }*/
         }
         container.setEnabled(enable);
     }
     
     
     private javax.swing.JTabbedPane tabbedPanel;
-    // End of variables declaration//GEN-END:variables
 }

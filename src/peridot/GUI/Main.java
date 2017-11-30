@@ -5,13 +5,12 @@
  */
 package peridot.GUI;
 
-import peridot.script.RModule;
-import java.util.Map;
-import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
 import org.pushingpixels.substance.api.SubstanceLookAndFeel;
 import peridot.GUI.component.Label;
+import peridot.script.RModule;
+
+import javax.swing.*;
+import java.util.Map;
 
 /**
  *

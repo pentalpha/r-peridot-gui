@@ -5,11 +5,11 @@
  */
 package peridot.GUI.component;
 
-import java.awt.Color;
-import java.io.File;
-import javax.swing.ImageIcon;
 import peridot.GUI.Aesthetics;
-import javax.swing.JLabel;
+
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
 /**
  *
  * @author Pitágoras Alves

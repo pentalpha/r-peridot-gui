@@ -1,7 +1,6 @@
 package peridot.GUI.dialog;
 
 import peridot.GUI.WrapLayout;
-import peridot.GUI.component.BigButton;
 import peridot.GUI.component.BigLabel;
 import peridot.GUI.component.BiggerLabel;
 

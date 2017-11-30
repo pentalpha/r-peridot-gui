@@ -5,14 +5,12 @@
  */
 package peridot.GUI;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GraphicsEnvironment;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.TreeSet;
 import peridot.GUI.font.FontStreamer;
 import peridot.Log;
+
+import java.awt.*;
+import java.io.InputStream;
+import java.util.TreeSet;
 
 /**
  *

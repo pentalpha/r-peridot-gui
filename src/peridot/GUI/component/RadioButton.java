@@ -4,9 +4,11 @@
  * and open the template in the editor.
  */
 package peridot.GUI.component;
-import java.awt.Color;
-import javax.swing.JRadioButton;
+
 import peridot.GUI.Aesthetics;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  *

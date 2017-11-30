@@ -4,18 +4,17 @@
  * and open the template in the editor.
  */
 package peridot.GUI.dialog.modulesManager;
-import java.awt.Dimension;
-import java.io.File;
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTree;
+
+import peridot.Archiver.Places;
+import peridot.GUI.component.Dialog;
+import peridot.script.RModule;
+
+import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreeSelectionModel;
-import peridot.Archiver.Places;
-import peridot.GUI.component.*;
-import peridot.script.RModule;
+import java.awt.*;
 /**
  *
  * @author pentalpha

@@ -5,8 +5,9 @@
  */
 package peridot.GUI.component;
 
-import javax.swing.JTable;
 import peridot.GUI.NoHighlightCellRenderer;
+
+import javax.swing.*;
 
 /**
  *

@@ -5,28 +5,17 @@
  */
 package peridot.GUI.dialog;
 
-import peridot.GUI.component.Table;
-import peridot.GUI.component.BigLabel;
-import peridot.GUI.component.BiggerLabel;
-import peridot.GUI.component.Panel;
-import peridot.GUI.component.BigButton;
-import peridot.GUI.component.RadioButton;
-import peridot.GUI.component.CheckBox;
 import peridot.Archiver.Spreadsheet;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.io.File;
-import java.io.IOException;
-import java.util.LinkedList;
-import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JScrollPane;
 import peridot.GUI.JTableUtils;
 import peridot.GUI.MainGUI;
 import peridot.GUI.WrapLayout;
+import peridot.GUI.component.*;
+import peridot.GUI.component.Panel;
+
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 /**
  *
  * @author pitagoras

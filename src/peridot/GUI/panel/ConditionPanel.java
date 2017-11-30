@@ -5,16 +5,16 @@
  */
 package peridot.GUI.panel;
 
+import peridot.GUI.component.Button;
 import peridot.GUI.component.Label;
 import peridot.GUI.component.Panel;
-import peridot.GUI.component.Button;
-import java.awt.Dimension;
-//import javafx.scene.layout.Border;
-import javax.swing.*;
-
 import peridot.GUI.dialog.NewExpressionDialog;
-import peridot.IndexedString;
 import peridot.GUI.dragAndDrop.ListTransferHandler;
+import peridot.IndexedString;
+
+import javax.swing.*;
+import java.awt.*;
+
 /**
  *
  * @author pentalpha

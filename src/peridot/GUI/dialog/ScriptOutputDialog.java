@@ -6,15 +6,11 @@
 package peridot.GUI.dialog;
 
 import peridot.GUI.component.Dialog;
-import java.awt.BorderLayout;
-import java.util.concurrent.atomic.AtomicBoolean;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextPane;
-import javax.swing.SwingUtilities;
-
 import peridot.Output;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 /**
  *
  * @author pentalpha

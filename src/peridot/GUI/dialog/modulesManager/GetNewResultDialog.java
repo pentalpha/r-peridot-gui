@@ -1,17 +1,17 @@
 package peridot.GUI.dialog.modulesManager;
 
-import java.awt.Dimension;
+import peridot.GUI.component.BigButton;
+import peridot.GUI.component.CheckBox;
+import peridot.GUI.component.Dialog;
+import peridot.GUI.component.Label;
+import peridot.Log;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.File;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import javax.swing.*;
-
-import peridot.Archiver.Places;
-import peridot.GUI.component.*;
-import peridot.Log;
-import peridot.script.RModule;
 
 public class GetNewResultDialog extends Dialog {
     public String name;

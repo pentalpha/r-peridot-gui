@@ -1,15 +1,15 @@
 package peridot.GUI.dialog.modulesManager;
 
-import java.awt.Dimension;
-import javax.swing.ButtonGroup;
-import peridot.GUI.component.Label;
-import peridot.GUI.component.Dialog;
 import peridot.GUI.component.Button;
-import javax.swing.JOptionPane;
+import peridot.GUI.component.Dialog;
+import peridot.GUI.component.Label;
 import peridot.GUI.component.Panel;
-import peridot.GUI.component.RadioButton;
+import peridot.GUI.component.*;
 import peridot.Global;
 import peridot.script.RModule;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  *

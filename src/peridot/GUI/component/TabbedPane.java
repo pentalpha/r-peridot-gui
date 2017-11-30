@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package peridot.GUI.component;
-import javax.swing.JTabbedPane;
+
 import peridot.GUI.Aesthetics;
+
+import javax.swing.*;
 /**
  *
  * @author Pitágoras Alves

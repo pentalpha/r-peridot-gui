@@ -5,32 +5,22 @@
  */
 package peridot.GUI.dialog.modulesManager;
 
-import java.awt.Dimension;
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import peridot.GUI.MainGUI;
-import static peridot.GUI.MainGUI._instance;
-import peridot.GUI.component.*;
+import peridot.GUI.component.BigButton;
+import peridot.GUI.component.BigLabel;
+import peridot.GUI.component.Dialog;
+import peridot.GUI.component.Panel;
 import peridot.Log;
 import peridot.script.AnalysisModule;
 import peridot.script.PostAnalysisModule;
 import peridot.script.RModule;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
 
 /**
  *

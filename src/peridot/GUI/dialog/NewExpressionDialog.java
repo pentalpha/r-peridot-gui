@@ -7,32 +7,24 @@ package peridot.GUI.dialog;
 
 import org.apache.commons.lang3.SystemUtils;
 import peridot.AnalysisData;
+import peridot.Archiver.Manager;
+import peridot.Archiver.Spreadsheet;
 import peridot.GUI.MainGUI;
 import peridot.GUI.WrapLayout;
 import peridot.GUI.component.*;
-import peridot.Archiver.Spreadsheet;
-import peridot.Archiver.Manager;
-
-import java.awt.*;
-
 import peridot.GUI.component.Button;
 import peridot.GUI.component.Dialog;
 import peridot.GUI.component.Label;
 import peridot.GUI.component.Panel;
 import peridot.GUI.panel.ConditionPanel;
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.SortedMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import peridot.IndexedString;
+
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-
-import peridot.IndexedString;
+import java.awt.*;
+import java.io.File;
+import java.util.*;
 
 import static peridot.GUI.JTableUtils.tableOverColumnLimit;
 
@@ -121,8 +113,7 @@ public class NewExpressionDialog extends Dialog {
         expression = givenExpression;
         if(expression != null){
             loadedFromPrevious = true;
-            //this.noIDCell = expression.noGeneIDCell;
-            //this.headerOnFirstLine = expression.headerOnFirstLine;
+
             this.info = expression.info;
             if(expression.conditions != null){
                 conditions = expression.conditions;
@@ -487,13 +478,11 @@ public class NewExpressionDialog extends Dialog {
         getContentPane().add(setFilesPanel);
     }
     
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        // TODO add your handling code here:
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
         this.setVisible(false);
-    }//GEN-LAST:event_cancelButtonActionPerformed
+    }
 
-    private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButtonActionPerformed
-        // TODO add your handling code here:
+    private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {
         conditions = getConditionsFromUI();
         if(expressionFile != null){
             /*try{
@@ -519,7 +508,7 @@ public class NewExpressionDialog extends Dialog {
         }else{
             JOptionPane.showMessageDialog(null, "Firstly, you must select a genetic expression file.");
         }
-    }//GEN-LAST:event_createButtonActionPerformed
+    }
     
     public AnalysisData getResults(){
         if(expressionFile == null){
@@ -536,8 +525,7 @@ public class NewExpressionDialog extends Dialog {
         }
     }
     
-    private void selectConditionsFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectConditionsFileButtonActionPerformed
-        // TODO add your handling code here:
+    private void selectConditionsFileButtonActionPerformed(java.awt.event.ActionEvent evt) {
         JFileChooser fileChooser = new JFileChooser(){
             public void approveSelection() {
                 File f = getSelectedFile();

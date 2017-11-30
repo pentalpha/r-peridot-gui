@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 package peridot.GUI.component;
-import java.awt.Color;
-import javax.swing.JDialog;
+
 import peridot.GUI.MainGUI;
+
+import javax.swing.*;
 /**
  *
  * @author pentalpha
@@ -17,7 +18,5 @@ public class Dialog extends JDialog{
         super(parent, modal);
         publicParent = parent;
         this.setIconImage(MainGUI.getInstance().getDefaultIcon());
-        //this.setLocationRelativeTo(null);
-        //setBackground(Color.white);
     }
 }

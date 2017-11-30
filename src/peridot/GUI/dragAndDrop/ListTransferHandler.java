@@ -5,19 +5,16 @@
  */
 package peridot.GUI.dragAndDrop;
 
+import peridot.GUI.dialog.NewExpressionDialog;
+import peridot.GUI.panel.ConditionPanel;
 import peridot.IndexedString;
-import java.awt.Component;
+import peridot.Log;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.datatransfer.Transferable;
 import java.awt.dnd.DnDConstants;
 import java.util.List;
-import javax.swing.DefaultListModel;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.TransferHandler;
-import peridot.GUI.panel.ConditionPanel;
-import peridot.GUI.dialog.NewExpressionDialog;
-import peridot.Log;
 
 /**
  *

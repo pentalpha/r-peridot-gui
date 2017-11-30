@@ -5,14 +5,13 @@
  */
 package peridot.GUI;
 
+import peridot.GUI.component.Table;
+import peridot.Log;
+
+import javax.swing.*;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
-import javax.swing.JTable;
-
-import org.apache.commons.lang3.SystemUtils;
-import peridot.GUI.component.Table;
-import peridot.Log;
 
 import static peridot.Archiver.Spreadsheet.*;
 

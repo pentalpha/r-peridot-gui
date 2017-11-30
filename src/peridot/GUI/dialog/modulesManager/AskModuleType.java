@@ -4,15 +4,16 @@
  * and open the template in the editor.
  */
 package peridot.GUI.dialog.modulesManager;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Frame;
-import java.awt.event.ActionEvent;
-import javax.swing.JButton;
-import peridot.GUI.component.*;
+
+import peridot.GUI.component.BigButton;
+import peridot.GUI.component.Dialog;
 import peridot.Log;
 import peridot.script.AnalysisModule;
 import peridot.script.PostAnalysisModule;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 /**
  *
  * @author pentalpha
