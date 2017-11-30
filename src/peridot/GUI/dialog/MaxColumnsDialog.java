@@ -45,8 +45,8 @@ public class MaxColumnsDialog extends JDialog {
             }
         });
         add(contactLabel);
-        okButton = new peridot.GUI.component.Button();
-        okButton.setPreferredSize(new Dimension(150,40));
+        okButton = new peridot.GUI.component.BigButton();
+        okButton.setPreferredSize(new Dimension(200,40));
         okButton.setText("OK");
         okButton.addActionListener((java.awt.event.ActionEvent evt) ->
                 {
@@ -62,5 +62,5 @@ public class MaxColumnsDialog extends JDialog {
     }
 
     private BiggerLabel titleLabel;
-    private peridot.GUI.component.Button okButton;
+    private JButton okButton;
 }

@@ -6,144 +6,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4fbcb0b-00e3-4c1b-ab0c-a643ec73550d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/peridot/GUI/panel/ColumnPanel.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jar/r-peridot-gui.jar" afterPath="$PROJECT_DIR$/jar/r-peridot-gui.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/allclasses-frame.html" afterPath="$PROJECT_DIR$/docs/allclasses-frame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/allclasses-noframe.html" afterPath="$PROJECT_DIR$/docs/allclasses-noframe.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/constant-values.html" afterPath="$PROJECT_DIR$/docs/constant-values.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/deprecated-list.html" afterPath="$PROJECT_DIR$/docs/deprecated-list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/help-doc.html" afterPath="$PROJECT_DIR$/docs/help-doc.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-1.html" afterPath="$PROJECT_DIR$/docs/index-files/index-1.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-10.html" afterPath="$PROJECT_DIR$/docs/index-files/index-10.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-11.html" afterPath="$PROJECT_DIR$/docs/index-files/index-11.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-12.html" afterPath="$PROJECT_DIR$/docs/index-files/index-12.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-13.html" afterPath="$PROJECT_DIR$/docs/index-files/index-13.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-14.html" afterPath="$PROJECT_DIR$/docs/index-files/index-14.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-15.html" afterPath="$PROJECT_DIR$/docs/index-files/index-15.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-16.html" afterPath="$PROJECT_DIR$/docs/index-files/index-16.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-17.html" afterPath="$PROJECT_DIR$/docs/index-files/index-17.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-18.html" afterPath="$PROJECT_DIR$/docs/index-files/index-18.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-19.html" afterPath="$PROJECT_DIR$/docs/index-files/index-19.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-2.html" afterPath="$PROJECT_DIR$/docs/index-files/index-2.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-20.html" afterPath="$PROJECT_DIR$/docs/index-files/index-20.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-21.html" afterPath="$PROJECT_DIR$/docs/index-files/index-21.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-22.html" afterPath="$PROJECT_DIR$/docs/index-files/index-22.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-3.html" afterPath="$PROJECT_DIR$/docs/index-files/index-3.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-4.html" afterPath="$PROJECT_DIR$/docs/index-files/index-4.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-5.html" afterPath="$PROJECT_DIR$/docs/index-files/index-5.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-6.html" afterPath="$PROJECT_DIR$/docs/index-files/index-6.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-7.html" afterPath="$PROJECT_DIR$/docs/index-files/index-7.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-8.html" afterPath="$PROJECT_DIR$/docs/index-files/index-8.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-9.html" afterPath="$PROJECT_DIR$/docs/index-files/index-9.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index.html" afterPath="$PROJECT_DIR$/docs/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/overview-frame.html" afterPath="$PROJECT_DIR$/docs/overview-frame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/overview-summary.html" afterPath="$PROJECT_DIR$/docs/overview-summary.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/overview-tree.html" afterPath="$PROJECT_DIR$/docs/overview-tree.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/Aesthetics.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/Aesthetics.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/JTableUtils.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/JTableUtils.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/Main.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/Main.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/MainGUI.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/MainGUI.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/NoHighlightCellRenderer.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/NoHighlightCellRenderer.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/WrapLayout.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/WrapLayout.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/component/BigButton.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/component/BigButton.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/component/BigLabel.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/component/BigLabel.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/component/BiggerLabel.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/component/BiggerLabel.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/component/Button.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/component/Button.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/component/CheckBox.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/component/CheckBox.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/component/Dialog.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/component/Dialog.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/component/Label.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/component/Label.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/component/Panel.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/component/Panel.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/component/RadioButton.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/component/RadioButton.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/component/TabbedPane.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/component/TabbedPane.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/component/Table.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/component/Table.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/component/package-frame.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/component/package-frame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/component/package-summary.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/component/package-summary.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/component/package-tree.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/component/package-tree.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/dialog/InputConditionNameDialog.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/dialog/InputConditionNameDialog.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/dialog/NewExpressionDialog.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/dialog/NewExpressionDialog.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/dialog/PackagesResultsDialog.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/dialog/PackagesResultsDialog.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/dialog/ScriptOutputDialog.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/dialog/ScriptOutputDialog.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/dialog/ScriptResultsDialog.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/dialog/ScriptResultsDialog.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/dialog/SpecificParametersDialog.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/dialog/SpecificParametersDialog.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/dialog/SpreadsheetInfoDialog.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/dialog/SpreadsheetInfoDialog.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/dialog/modulesManager/AskModuleType.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/dialog/modulesManager/AskModuleType.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/dialog/modulesManager/GetFileFromTreeDialog.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/dialog/modulesManager/GetFileFromTreeDialog.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/dialog/modulesManager/GetNewResultDialog.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/dialog/modulesManager/GetNewResultDialog.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/dialog/modulesManager/ModulesManager.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/dialog/modulesManager/ModulesManager.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/dialog/modulesManager/NewModuleDialog.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/dialog/modulesManager/NewModuleDialog.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/dialog/modulesManager/NewParamDialog.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/dialog/modulesManager/NewParamDialog.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/dialog/modulesManager/ScriptDetailsDialog.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/dialog/modulesManager/ScriptDetailsDialog.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/dialog/modulesManager/package-frame.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/dialog/modulesManager/package-frame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/dialog/modulesManager/package-summary.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/dialog/modulesManager/package-summary.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/dialog/modulesManager/package-tree.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/dialog/modulesManager/package-tree.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/dialog/package-frame.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/dialog/package-frame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/dialog/package-summary.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/dialog/package-summary.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/dialog/package-tree.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/dialog/package-tree.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/dragAndDrop/ListTransferHandler.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/dragAndDrop/ListTransferHandler.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/dragAndDrop/package-frame.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/dragAndDrop/package-frame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/dragAndDrop/package-summary.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/dragAndDrop/package-summary.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/dragAndDrop/package-tree.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/dragAndDrop/package-tree.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/font/FontStreamer.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/font/FontStreamer.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/font/package-frame.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/font/package-frame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/font/package-summary.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/font/package-summary.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/font/package-tree.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/font/package-tree.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/package-frame.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/package-frame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/package-summary.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/package-summary.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/package-tree.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/package-tree.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/panel/ConditionPanel.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/panel/ConditionPanel.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/panel/NewAnalysisPanel.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/panel/NewAnalysisPanel.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/panel/ParametersPanel.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/panel/ParametersPanel.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/panel/ProcessingPanel.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/panel/ProcessingPanel.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/panel/ResultsPanel.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/panel/ResultsPanel.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/panel/ScriptProgressMonitorPanel.IconState.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/panel/ScriptProgressMonitorPanel.IconState.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/panel/ScriptProgressMonitorPanel.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/panel/ScriptProgressMonitorPanel.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/panel/ViewResultsPanel.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/panel/ViewResultsPanel.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/panel/package-frame.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/panel/package-frame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/panel/package-summary.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/panel/package-summary.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/peridot/GUI/panel/package-tree.html" afterPath="$PROJECT_DIR$/docs/peridot/GUI/panel/package-tree.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/serialized-form.html" afterPath="$PROJECT_DIR$/docs/serialized-form.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/Aesthetics.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/Aesthetics.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/JTableUtils.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/JTableUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/Main.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/MainGUI.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/MainGUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/NoHighlightCellRenderer.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/NoHighlightCellRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/WrapLayout.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/WrapLayout.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/component/BigButton.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/component/BigButton.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/component/BigLabel.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/component/BigLabel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/component/BiggerLabel.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/component/BiggerLabel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/component/Button.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/component/Button.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/component/CheckBox.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/component/CheckBox.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/component/Dialog.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/component/Dialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/component/Label.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/component/Label.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/component/Panel.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/component/Panel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/component/RadioButton.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/component/RadioButton.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/component/TabbedPane.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/component/TabbedPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/component/Table.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/component/Table.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/dialog/InputConditionNameDialog.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/dialog/InputConditionNameDialog.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/dialog/MaxColumnsDialog.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/dialog/MaxColumnsDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/dialog/NewExpressionDialog.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/dialog/NewExpressionDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/dialog/PackagesResultsDialog.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/dialog/PackagesResultsDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/dialog/ScriptOutputDialog.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/dialog/ScriptOutputDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/dialog/ScriptResultsDialog.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/dialog/ScriptResultsDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/dialog/SpecificParametersDialog.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/dialog/SpecificParametersDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/dialog/SpreadsheetInfoDialog.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/dialog/SpreadsheetInfoDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/dialog/modulesManager/AskModuleType.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/dialog/modulesManager/AskModuleType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/dialog/modulesManager/GetFileFromTreeDialog.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/dialog/modulesManager/GetFileFromTreeDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/dialog/modulesManager/GetNewResultDialog.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/dialog/modulesManager/GetNewResultDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/dialog/modulesManager/ModulesManager.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/dialog/modulesManager/ModulesManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/dialog/modulesManager/NewModuleDialog.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/dialog/modulesManager/NewModuleDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/dialog/modulesManager/NewParamDialog.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/dialog/modulesManager/NewParamDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/dialog/modulesManager/ScriptDetailsDialog.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/dialog/modulesManager/ScriptDetailsDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/dragAndDrop/IndexedStringListTransferable.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/dragAndDrop/IndexedStringListTransferable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/dragAndDrop/ListTransferHandler.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/dragAndDrop/ListTransferHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/panel/ConditionPanel.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/panel/ConditionPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/panel/NewAnalysisPanel.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/panel/NewAnalysisPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/panel/ParametersPanel.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/panel/ParametersPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/panel/ProcessingPanel.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/panel/ProcessingPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/panel/ResultsPanel.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/panel/ResultsPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/panel/ScriptProgressMonitorPanel.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/panel/ScriptProgressMonitorPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/panel/ViewResultsPanel.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/panel/ViewResultsPanel.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -155,16 +19,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BiggerLabel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/peridot/GUI/component/BiggerLabel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="BigLabel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/peridot/GUI/component/BigLabel.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -208,7 +62,7 @@
       <file leaf-file-name="Label.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/peridot/GUI/component/Label.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1">
+            <state relative-caret-position="104">
               <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
               <folding />
             </state>
@@ -245,11 +99,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Table.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Table.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/peridot/GUI/component/Table.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="52">
-              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+            <state relative-caret-position="169">
+              <caret line="19" column="5" lean-forward="true" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MaxColumnsDialog.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/peridot/GUI/dialog/MaxColumnsDialog.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="146">
+              <caret line="41" column="61" lean-forward="false" selection-start-line="41" selection-start-column="61" selection-end-line="41" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -348,7 +212,6 @@
         <option value="$PROJECT_DIR$/src/peridot/GUI/dialog/SpreadsheetInfoDialog.java" />
         <option value="$PROJECT_DIR$/lib/r-peridot.jar!/peridot/Archiver/Spreadsheet.class" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/JTableUtils.java" />
-        <option value="$PROJECT_DIR$/src/peridot/GUI/dialog/MaxColumnsDialog.java" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/MainGUI.java" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/panel/ViewResultsPanel.java" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/panel/ScriptProgressMonitorPanel.java" />
@@ -367,6 +230,7 @@
         <option value="$PROJECT_DIR$/src/peridot/GUI/component/Button.java" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/component/Dialog.java" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/component/Panel.java" />
+        <option value="$PROJECT_DIR$/src/peridot/GUI/dialog/MaxColumnsDialog.java" />
       </list>
     </option>
   </component>
@@ -393,6 +257,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -466,8 +332,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -591,32 +455,33 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="40" width="1366" height="728" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.49749583" sideWeight="0.475" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32053423" sideWeight="0.275" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32053423" sideWeight="0.27954546" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32053423" sideWeight="0.725" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17792422" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32053423" sideWeight="0.7204546" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294893" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26818183" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27272728" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="R Packages" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="R Graphics" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32888147" sideWeight="0.5598485" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37896493" sideWeight="0.48181817" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37896493" sideWeight="0.48181817" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32888147" sideWeight="0.5598485" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -795,14 +660,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/panel/ColumnPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="28" column="24" lean-forward="false" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/panel/ColumnPanel.java" />
     <entry file="file://$PROJECT_DIR$/src/peridot/GUI/panel/ConditionPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -892,14 +750,6 @@
             <element signature="e#20326#20327#0" expanded="true" />
             <marker date="1512062885281" expanded="true" signature="15132:15962" ph="{...}" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/dialog/MaxColumnsDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="455">
-          <caret line="48" column="50" lean-forward="false" selection-start-line="48" selection-start-column="50" selection-end-line="48" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1005,7 +855,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/peridot/GUI/component/Label.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1">
+        <state relative-caret-position="104">
           <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
           <folding />
         </state>
@@ -1037,8 +887,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/peridot/GUI/component/Table.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        <state relative-caret-position="169">
+          <caret line="19" column="5" lean-forward="true" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/dialog/MaxColumnsDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="41" column="61" lean-forward="false" selection-start-line="41" selection-start-column="61" selection-end-line="41" selection-end-column="61" />
           <folding />
         </state>
       </provider>
