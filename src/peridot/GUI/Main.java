@@ -51,20 +51,12 @@ public class Main {
                 if(Operations.loadInterpreters(func)){
                     MainGUI gui = new MainGUI();
                     gui.setVisible(true);
+                }else{
+                    endMain();
                 }
+            }else{
+                endMain();
             }
-
-            Log.logger.info("Cleaning temporary files.");
-            Main.clean();
-            try {
-                Log.logger.info("Saving configurations.");
-                PeridotConfig.save();
-            }catch (IOException ex){
-                Log.logger.severe("Error while saving the current configurations.");
-                ex.printStackTrace();
-            }
-            Log.logger.info("Finishing R-Peridot-GUI.");
-            System.exit(0);
         });
         //Log.logger.info("Really finishing R-Peridot-GUI.");
     }
@@ -108,5 +100,19 @@ public class Main {
         logoLoadingFrame.setAlwaysOnTop(true);
         logoLoadingFrame.setModal(false);
         logoLoadingFrame.setVisible(true);
+    }
+
+    public static void endMain(){
+        Log.logger.info("Cleaning temporary files.");
+        Main.clean();
+        try {
+            Log.logger.info("Saving configurations.");
+            PeridotConfig.save();
+        }catch (IOException ex){
+            Log.logger.severe("Error while saving the current configurations.");
+            ex.printStackTrace();
+        }
+        Log.logger.info("Finishing R-Peridot-GUI.");
+        System.exit(0);
     }
 }

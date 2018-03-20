@@ -21,6 +21,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.net.URI;
@@ -55,7 +56,18 @@ public class MainGUI extends javax.swing.JFrame {
         //Log.logger.info("scripts loaded");
         this.setTitle(appName);
         //this.setLayout(new BorderLayout());
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter()
+        {
+            public void windowClosing(WindowEvent e)
+            {
+                //setVisible(false);
+                //dispose();
+                Main.endMain();
+            }
+        });
+
         setResizable(false);
         makeMenuBar();
         Panel contentPane = new Panel();
