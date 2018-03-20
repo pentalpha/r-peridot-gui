@@ -13,6 +13,7 @@ import javafx.scene.web.WebView;
 import peridot.GUI.MainGUI;
 import peridot.GUI.component.*;
 import peridot.Log;
+import peridot.script.r.Interpreter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,7 +42,13 @@ public class InterpreterManagerGUI extends JDialog {
         int y = (int)(screenSize.height - defaultSize.getHeight()) / 2;
         this.setLocation(x, y);
         setTitle("R Environment Manager");
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                closeEvent();
+            }
+        });
         setResizable(false);
         this.setIconImage(MainGUI.getDefaultIcon(this));
         this.setLayout(new FlowLayout(FlowLayout.LEFT ,spacing, spacing));
@@ -54,7 +61,7 @@ public class InterpreterManagerGUI extends JDialog {
         Platform.runLater(() -> {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("InterpreterManager.fxml"));
-                jfxPanel.setScene(new Scene(root, defaultSize.width-20, defaultSize.height-30));
+                jfxPanel.setScene(new Scene(root, defaultSize.width-7, defaultSize.height-28));
             }catch (IOException ex){
                 Log.logger.severe("Could not load InterpreterManager scene.");
                 ex.printStackTrace();
@@ -63,14 +70,17 @@ public class InterpreterManagerGUI extends JDialog {
         this.setVisible(true);
     }
 
-    public void finish(){
+    private void closeEvent(){
+        if(Interpreter.isDefaultInterpreterDefined() == false){
+            int reply = JOptionPane.showConfirmDialog(_instance, "Since no R environment was chosen,"
+                            + " R-Peridot will have to close.",
+                    "Exiting Environment Manager without choosing an environment!"
+                    , JOptionPane.OK_CANCEL_OPTION);
+            if(reply == JOptionPane.CANCEL_OPTION){
+                return;
+            }
+        }
         this.setVisible(false);
         this.dispose();
-    }
-
-    public static void end(){
-        SwingUtilities.invokeLater(() -> {
-            _instance.finish();
-        });
     }
 }

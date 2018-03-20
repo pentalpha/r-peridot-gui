@@ -63,16 +63,13 @@ public class Main {
 
     public static boolean launchInterpreterManagerGUI(){
         logoLoadingFrame.setVisible(false);
-        InterpreterManagerGUI managerGUI = new InterpreterManagerGUI();
-        //managerGUI.setVisible(true);
+        try {
+            InterpreterManagerGUI managerGUI = new InterpreterManagerGUI();
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
         boolean defined = Interpreter.isDefaultInterpreterDefined();
-        if(!defined){
-            Log.logger.severe("No environment selected.");
-            JOptionPane.showMessageDialog(null,"No R environment was chosen."
-                            + " Exiting.",
-                    "Cannot start R-Peridot!", JOptionPane.ERROR_MESSAGE);
-            logoLoadingFrame.setVisible(false);
-        }else{
+        if(defined){
             Log.logger.info("R environment selected.");
             logoLoadingFrame.setVisible(true);
         }
