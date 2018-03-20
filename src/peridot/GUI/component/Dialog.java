@@ -17,6 +17,6 @@ public class Dialog extends JDialog{
     public Dialog(java.awt.Frame parent, boolean modal){
         super(parent, modal);
         publicParent = parent;
-        this.setIconImage(MainGUI.getInstance().getDefaultIcon());
+        this.setIconImage(MainGUI.getInstance().getDefaultIcon(this));
     }
 }

@@ -15,6 +15,7 @@ import peridot.script.AnalysisModule;
 import peridot.script.PostAnalysisModule;
 import peridot.script.RModule;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.*;
@@ -60,7 +61,7 @@ public class ModulesManager extends Dialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, wGap, 1));
         setResizable(false);
-        this.setIconImage(MainGUI.getInstance().getDefaultIcon());
+        this.setIconImage(MainGUI.getInstance().getDefaultIcon(this));
         makeModulesContainer();
         makeButtonsContainer();
         add(modulesContainer);
@@ -71,12 +72,12 @@ public class ModulesManager extends Dialog {
     
     public Image getDefaultIcon(){
         Image frameIcon = null;
-        /*try{
+        try{
             frameIcon = ImageIO.read(getClass().getClassLoader().getResource("peridot/GUI/icons/logo64.png"));
         }catch(Exception ex){
             ex.printStackTrace();
             Log.logger.info("Default ImageIcon not loaded");
-        }*/
+        }
         return frameIcon;
     }
     
@@ -85,8 +86,8 @@ public class ModulesManager extends Dialog {
         modulesContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 1));
         
         
-        JList list = new JList(RModule.getAvailablePackages());
-        JList list2 = new JList(RModule.getAvailablePostAnalysisScripts());
+        JList list = new JList(RModule.getAvailableAnalysisModules());
+        JList list2 = new JList(RModule.getAvailablePostAnalysisModules());
         analysisModListContainer = new Panel();
         analysisModListContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 1, 5));
         analysisModListContainer.setPreferredSize(containerSize);
@@ -206,7 +207,7 @@ public class ModulesManager extends Dialog {
     }
     
     private void updateButtons(){
-        if(RModule.availableScripts.keySet().contains(selectedScript)){
+        if(RModule.availableModules.keySet().contains(selectedScript)){
             deleteButton.setEnabled(true);
             detailsButton.setEnabled(true);
             exportButton.setEnabled(true);
@@ -229,7 +230,7 @@ public class ModulesManager extends Dialog {
         if (result == JFileChooser.APPROVE_OPTION) {
             File folder = fileChooser.getSelectedFile();
             if (folder.exists()) {
-                RModule s = RModule.availableScripts.get(scriptName);
+                RModule s = RModule.availableModules.get(scriptName);
                 File file = new File(folder.getAbsolutePath()
                         + File.separator + s.name + "." + RModule.binExtension);
                 try{
@@ -276,7 +277,7 @@ public class ModulesManager extends Dialog {
                     script = (PostAnalysisModule)bin;
                 }
                 script.createEnvironment(null);
-                RModule.availableScripts.put(script.name, script);
+                RModule.availableModules.put(script.name, script);
                 return true;
             }else{
                 Log.logger.log(Level.SEVERE, "Could not load RModule binary. Unknown class.");
@@ -289,7 +290,7 @@ public class ModulesManager extends Dialog {
     }
     
     private void editScript(String scriptName){
-        RModule script = RModule.availableScripts.get(scriptName);
+        RModule script = RModule.availableModules.get(scriptName);
         NewModuleDialog dialog = new NewModuleDialog(publicParent, true, script.getClass(), script);
         dialog.setVisible(true);
         if(dialog.script != null && dialog.editedScript){

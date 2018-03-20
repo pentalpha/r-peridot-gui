@@ -5,11 +5,13 @@
  */
 package peridot.GUI;
 
+import peridot.Archiver.Spreadsheet;
 import peridot.GUI.component.Table;
 import peridot.Log;
 
 import javax.swing.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,21 +28,12 @@ public class JTableUtils {
 
     /**
      * Generates a JTable based on a table file
-     * @param tableFile Spreadsheet table file
-     * @param columnNamesOnFirstLine    True if you are sure that the first line of the file is the names
-     *                                 of the columns (header)
+     * @param spreadsheet Spreadsheet table file
      * @return  JTable object. If the table is empty, returns NULL.
      */
-    public static JTable getTable(File tableFile, boolean columnNamesOnFirstLine){
+    public static JTable getJTable(Spreadsheet spreadsheet){
         JTable table = null;
-        List<String[]> allRows;
-        if(tableFile.getName().contains(".csv")){
-            allRows = getRowsFromCSV(tableFile);
-        }else if (tableFile.getName().contains(".tsv")){
-            allRows = getRowsFromTSV(tableFile);
-        }else{
-            allRows = null;
-        }
+        List<String[]> allRows = spreadsheet.getRows();
 
         Object[][] data;
         Object[] headers;
@@ -48,13 +41,13 @@ public class JTableUtils {
             data = new Object[allRows.size()-1][];
             headers = new Object[allRows.get(allRows.size()-1).length];
             String[] firstRow = allRows.get(0);
-            boolean lessItensOnFirstRow = headers.length == firstRow.length + 1;
-            boolean firstRowIsHeader = lineIsSampleNames(firstRow);
-            if(columnNamesOnFirstLine || lessItensOnFirstRow || firstRowIsHeader){
+            boolean lessItensOnFirstRow = spreadsheet.getInfo().getFirstCellPresent();
+            boolean firstRowIsHeader = spreadsheet.getInfo().getHeaderOnFirstLine();
+            if(lessItensOnFirstRow || firstRowIsHeader){
                 if(allRows.size() == 1){
                     return null;
                 }
-                if(headers.length == firstRow.length + 1){
+                if(lessItensOnFirstRow && firstRowIsHeader){
                     //Log.logger.info("less headers than columns");
                     headers[0] = "ID";
                     for(int i = 1; i < headers.length; i++){
@@ -63,9 +56,7 @@ public class JTableUtils {
                 }else {
                     headers = firstRow;
                 }
-                for(int i = 0; i < headers.length; i++){
-                    //System.out.print(headers[i] + ", ");
-                }
+
                 for(int i = 0; i < data.length; i++){
                     data[i] = allRows.get(i+1);
                 }
@@ -117,30 +108,23 @@ public class JTableUtils {
         return allRows;
     }
 
-    public static boolean tableOverColumnLimit(File tableFile){
+    public static boolean tableOverColumnLimit(File tableFile, String sep){
         String[] firstRow;
-        if(tableFile.getName().contains(".csv")){
-            firstRow = getFirstRowFromCSV(tableFile);
-        }else if (tableFile.getName().contains(".tsv")){
-            firstRow = getFirstRowFromTSV(tableFile);
-        }else{
-            return false;
-        }
+        firstRow = Spreadsheet.getFirstRowFromFile(tableFile, sep);
         //System.out.println(firstRow.length + " columns");
-        return (firstRow.length > 100);
+
+        if(Main.deployType.equals("simple")){
+            return (firstRow.length > Main.maxColsSimple);
+        }else{
+            return (firstRow.length > Main.maxColsPlus);
+        }
+
     }
 
-    public static Table getTableWithoutHeader(File tableFile, boolean defaultHeader, int maxCols, int maxLines){
+    public static Table getTableWithoutHeader(List<String[]> allRows,
+                                              boolean defaultHeader, int maxCols, int maxLines,
+                                              String sep){
         Table table = null;
-        List<String[]> allRows;
-        if(tableFile.getName().contains(".csv")){
-            allRows = getRowsFromCSV(tableFile);
-            Log.logger.fine("Loading a CSV file with " + (allRows.get(0).length) + " columns.");
-        }else if (tableFile.getName().contains(".tsv")){
-            allRows = getRowsFromTSV(tableFile);
-        }else{
-            allRows = null;
-        }
 
         if(allRows != null){
             if(allRows.size() > 0){
@@ -172,10 +156,10 @@ public class JTableUtils {
         return new javax.swing.filechooser.FileFilter()
         {
             public boolean accept(File f){
-               return fileIsCSVorTSV(f);
+               return f.isFile() && f.exists() && f.canRead();
             }
             public String getDescription(){
-                return "*.csv/.tsv";
+                return "Plain text spreadsheet file";
             }
         };
     }

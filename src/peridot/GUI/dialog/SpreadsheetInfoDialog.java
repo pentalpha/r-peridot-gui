@@ -21,11 +21,17 @@ import java.io.IOException;
  * @author pitagoras
  */
 public class SpreadsheetInfoDialog extends JDialog{
-    public Spreadsheet.Info info;
+    public Spreadsheet table;
     public File file;
-    public SpreadsheetInfoDialog(java.awt.Frame parent, File file, Spreadsheet.Info info){
+    public boolean cancel = false;
+
+    public SpreadsheetInfoDialog(java.awt.Frame parent, File file){
         super(parent, true);
-        this.info = info;
+        try {
+            this.table = new Spreadsheet(file);
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }
         this.file = file;
         initComponents();
     }
@@ -51,12 +57,25 @@ public class SpreadsheetInfoDialog extends JDialog{
         String question = "Give us some info on this data: ";
         this.setTitle(question);
         titleLabel = new peridot.GUI.component.BiggerLabel(question);
+
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                cancel = true;
+                setVisible(false);
+            }
+        });
     }
-    
-    public void initTableScroller(){
-        dataTable = JTableUtils.getTableWithoutHeader(file, false, 9,100);
+
+    public void loadTableInScroller(){
+        dataTable = JTableUtils.getTableWithoutHeader(table.getRows(),
+                false, 9,100, table.getSeparator());
         scroller = new JScrollPane(dataTable);
         scroller.getViewport().setBackground(Color.white);
+    }
+
+    public void initTableScroller(){
+        loadTableInScroller();
         scroller.setPreferredSize(new Dimension(getPreferredSize().width-50, 200));
     }
     
@@ -65,8 +84,8 @@ public class SpreadsheetInfoDialog extends JDialog{
         okButton.setText("OK");
         okButton.addActionListener((java.awt.event.ActionEvent evt) -> 
             {
-                info.setHeaderOnFirstLine(this.headerOnFirstLine.isSelected());
-                info.setLabelsOnFirstCol(this.labelsOnFirstColumn.isSelected());
+                table.getInfo().setHeaderOnFirstLine(this.headerOnFirstLine.isSelected());
+                table.getInfo().setLabelsOnFirstCol(this.labelsOnFirstColumn.isSelected());
                 //info.firstCellPresent = (this.firstCellPresent.isSelected());
                 
                 setVisible(false);
@@ -77,13 +96,13 @@ public class SpreadsheetInfoDialog extends JDialog{
     public void initCheckBoxes(){
         this.headerOnFirstLine = new CheckBox("Header on the first row");
         this.headerOnFirstLine.setSelected(false);
-        if(info.getHeaderOnFirstLine()){
+        if(table.getInfo().getHeaderOnFirstLine()){
             this.headerOnFirstLine.doClick();
         }
         //headerOnFirstLine.setPreferredSize(new Dimension(300, 50));
         //headerOnFirstLine.set
         this.labelsOnFirstColumn = new CheckBox("Labels on first column");
-        if(info.getLabelsOnFirstCol()){
+        if(table.getInfo().getLabelsOnFirstCol()){
             this.labelsOnFirstColumn.doClick();
         }
         
@@ -116,19 +135,6 @@ public class SpreadsheetInfoDialog extends JDialog{
         bottomPanel.setLayout(new WrapLayout());
         initOkButton();
         bottomPanel.add(okButton, BorderLayout.PAGE_END);
-    }
-    
-    public static Spreadsheet.Info promptUserForSpreadsheetInfo(File tableFile, Spreadsheet.Info info){
-        SpreadsheetInfoDialog dialog = new peridot.GUI.dialog.SpreadsheetInfoDialog(MainGUI._instance, 
-                tableFile, info);
-        dialog.setVisible(true);
-        
-        return dialog.info;
-    }
-    
-    public static Spreadsheet.Info getInfo(File tableFile) throws IOException{
-        Spreadsheet.Info guessedInfo = Spreadsheet.getInfo(tableFile);
-        return promptUserForSpreadsheetInfo(tableFile, guessedInfo);
     }
     
     private CheckBox headerOnFirstLine;

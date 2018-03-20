@@ -15,6 +15,7 @@ import peridot.GUI.panel.ResultsPanel;
 import peridot.Global;
 import peridot.Log;
 import peridot.script.RModule;
+import peridot.script.r.Interpreter;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -42,13 +43,13 @@ public class MainGUI extends javax.swing.JFrame {
      */
     public MainGUI() {
         logger.info("Start MainGUI");
-        Places.createPeridotDir();
-        Places.updateModulesDir(false);
+        //Places.createPeridotDir();
+        //Places.updateModulesDir(false);
         //Util.getRPath();
         
         //Log.logger.info("trying to load scripts");
-        RModule.loadUserScripts();
-        if(RModule.getAvailableScripts().size() == 0){
+        //RModule.loadUserScripts();
+        if(RModule.getAvailableModules().size() == 0){
             JOptionPane.showMessageDialog(null, "Scripts could not be loaded. We recommend using Menu > Tools > Reset User Scripts.");
         }
         //Log.logger.info("scripts loaded");
@@ -73,21 +74,18 @@ public class MainGUI extends javax.swing.JFrame {
         pack();
         _instance = this;
         Main.logoLoadingFrame.setVisible(false);
-        if(Places.rExec == null){
-            JOptionPane.showMessageDialog(null, "R portable not found, using system PATH instead.");
-        }
         setLocationRelativeTo(null);
-        this.setIconImage(getDefaultIcon());
+        this.setIconImage(getDefaultIcon(this));
     }
     
     public static MainGUI getInstance(){
         return MainGUI._instance;
     }
     
-    public Image getDefaultIcon(){
+    public static Image getDefaultIcon(Object receiver){
         Image frameIcon = null;
         try{
-            frameIcon = ImageIO.read(getClass().getClassLoader().getResource("peridot/GUI/icons/logo64.png"));
+            frameIcon = ImageIO.read(receiver.getClass().getClassLoader().getResource("peridot/GUI/icons/logo64.png"));
         }catch(Exception ex){
             ex.printStackTrace();
             Log.logger.info("Default ImageIcon not loaded");

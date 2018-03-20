@@ -55,12 +55,12 @@ public class NewAnalysisPanel extends Panel {
         this.parentFrame = parentFrame;
         this.availableScripts = new TreeSet<String>();
         this.availablePackages = new TreeSet<String>();
-        availableScripts.addAll(RModule.getAvailableScripts());
-        availableScripts.addAll(RModule.getAvailablePackages());
+        availableScripts.addAll(RModule.getAvailablePostAnalysisModules());
+        availableScripts.addAll(RModule.getAvailableAnalysisModules());
         this.selectedScripts = new TreeSet<String>();
         this.specificParameters = new TreeMap<>();
         for(String pack : availableScripts){
-            RModule aScript = RModule.availableScripts.get(pack);
+            RModule aScript = RModule.availableModules.get(pack);
             //if(aScript == null){Log.logger.info(pack + " is null");}
             if(aScript instanceof AnalysisModule){
                 AnalysisParameters params = new AnalysisParameters(
@@ -80,7 +80,7 @@ public class NewAnalysisPanel extends Panel {
     public int getNPackagesSelected(){
         int n = 0;
         for(String scriptName : selectedScripts){
-            RModule script = RModule.availableScripts.get(scriptName);
+            RModule script = RModule.availableModules.get(scriptName);
             if(script instanceof AnalysisModule){
                 n++;
             }
@@ -206,7 +206,7 @@ public class NewAnalysisPanel extends Panel {
         Map<String, Class> allParamsMap = new HashMap<>();
         for(String scriptName : availableScripts){
             Map<String, Class> scriptParams = null;
-            RModule script = RModule.availableScripts.get(scriptName);
+            RModule script = RModule.availableModules.get(scriptName);
             if(script != null){
                 scriptParams = script.requiredParameters;
                 allParamsMap.putAll(scriptParams);
@@ -327,11 +327,11 @@ public class NewAnalysisPanel extends Panel {
     }
     
     private void updateUnabledScripts(){
-        for(String name : RModule.getAvailablePackages()){
+        for(String name : RModule.getAvailableAnalysisModules()){
             //Log.logger.info("Trying to unable " + name);
             updatePackageUnabledNoRecursion(name);
         }
-        for(String name : RModule.getAvailableScripts()){
+        for(String name : RModule.getAvailablePostAnalysisModules()){
             //Log.logger.info("Trying to unable " + name);
             updateModuleUnabled(name);
             if(this.scriptCheckboxes.get(name).isEnabled() == false){
@@ -369,7 +369,7 @@ public class NewAnalysisPanel extends Panel {
     
     private void updatePackageUnabledNoRecursion(String module){
         boolean unabled = true;
-        RModule script = RModule.availableScripts.get(module);
+        RModule script = RModule.availableModules.get(module);
         JCheckBox checkbox = this.scriptCheckboxes.get(module);
 
         if(script instanceof AnalysisModule){
@@ -413,7 +413,7 @@ public class NewAnalysisPanel extends Panel {
     
     private void updateModuleUnabled(String module){
         boolean unabled = true;
-        RModule script = RModule.availableScripts.get(module);
+        RModule script = RModule.availableModules.get(module);
         JCheckBox checkbox = this.scriptCheckboxes.get(module);
         
         if(script instanceof AnalysisModule){
@@ -435,7 +435,7 @@ public class NewAnalysisPanel extends Panel {
             if(this.nPackages < 1){
                 unabled = false;
             }
-            for(String name : RModule.availableScripts.get(module).requiredScripts){
+            for(String name : RModule.availableModules.get(module).requiredScripts){
                 if(selectedScripts.contains(name) == false){
                     unabled = false;
                     break;
@@ -462,14 +462,14 @@ public class NewAnalysisPanel extends Panel {
     
     private void updateDependantModulesUnabled(String module){
         //Log.logger.info("Updating dependencies of " + module);
-        if(RModule.availableScripts.get(module) instanceof AnalysisModule){
+        if(RModule.availableModules.get(module) instanceof AnalysisModule){
             //Log.logger.info("Which is a package.");
-            for(String script : RModule.getAvailableScripts()){
+            for(String script : RModule.getAvailablePostAnalysisModules()){
                 this.updateModuleUnabled(script);
             }
         }else{
             
-            for(Map.Entry<String,RModule> pair : RModule.availableScripts.entrySet()){
+            for(Map.Entry<String,RModule> pair : RModule.availableModules.entrySet()){
                 boolean depends = false;
                 for(String required : pair.getValue().requiredScripts){
                     if(required.equals(module)){
@@ -520,7 +520,7 @@ public class NewAnalysisPanel extends Panel {
             return;
         }
         for(String scriptName : selectedScripts){
-            RModule script = RModule.availableScripts.get(scriptName);
+            RModule script = RModule.availableModules.get(scriptName);
             if(script.requiredExternalFiles.contains(Places.countReadsInputFileName) && expression == null){
                 JOptionPane.showMessageDialog(parentFrame, "To use a RNASeq module you need to define a count reads file.");
                 return;
@@ -537,7 +537,7 @@ public class NewAnalysisPanel extends Panel {
     }
 
     public void deleteTempFiles(){
-        for(Map.Entry<String, RModule> pair : RModule.availableScripts.entrySet()){
+        for(Map.Entry<String, RModule> pair : RModule.availableModules.entrySet()){
             pair.getValue().cleanTempFiles();
             pair.getValue().cleanLocalResults();
         }
@@ -549,7 +549,7 @@ public class NewAnalysisPanel extends Panel {
         this.moduleDetailButtons = new TreeMap<String, JButton>();
         for(String pack : this.availableScripts.descendingSet()){
             boolean isAnalysisModule =
-                    (RModule.availableScripts.get(pack) instanceof AnalysisModule);
+                    (RModule.availableModules.get(pack) instanceof AnalysisModule);
 
             JPanel panel = new Panel();
             panel.setLayout(new FlowLayout(FlowLayout.LEFT));

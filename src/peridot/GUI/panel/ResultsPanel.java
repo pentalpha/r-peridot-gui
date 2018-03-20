@@ -18,6 +18,7 @@ import peridot.GUI.component.Panel;
 import peridot.GUI.dialog.PackagesResultsDialog;
 import peridot.GUI.dialog.ScriptResultsDialog;
 import peridot.Log;
+import peridot.Operations;
 import peridot.script.RModule;
 
 import javax.swing.*;
@@ -58,8 +59,8 @@ public class ResultsPanel extends Panel {
         Set<File> scriptResultsFolders = this.getScriptResultsFolders();
         this.packages.clear();
         this.scripts.clear();
-        updateScripts(scriptResultsFolders);
-        updatePackages(scriptResultsFolders);
+        updatePostAnalysisModules(scriptResultsFolders);
+        updateAnalysisModules(scriptResultsFolders);
 
         this.packListArea.removeAll();
         if(packages.isEmpty()){
@@ -75,9 +76,9 @@ public class ResultsPanel extends Panel {
         updateScriptsButtons();
     }
 
-    private void updateScripts(Set<File> scriptResultsFolders) {
+    private void updatePostAnalysisModules(Set<File> scriptResultsFolders) {
         //Log.logger.info("Updating available post analysis results");
-        for (String scriptName : RModule.getAvailableScripts()) {
+        for (String scriptName : RModule.getAvailablePostAnalysisModules()) {
             File dir = null;
             for (File scriptDir : scriptResultsFolders) {
                 if (scriptDir.getName().contains(".PostAnalysisModule")
@@ -93,9 +94,9 @@ public class ResultsPanel extends Panel {
         }
     }
 
-    private void updatePackages(Set<File> scriptResultsFolders) {
+    private void updateAnalysisModules(Set<File> scriptResultsFolders) {
         //Log.logger.info("Updating available analysis results");
-        for (String packName : RModule.getAvailablePackages()) {
+        for (String packName : RModule.getAvailableAnalysisModules()) {
             File dir = null;
             for (File packDir : scriptResultsFolders) {
                 //if (packDir.getName().contains("." + Package.class.getSimpleName())
@@ -104,8 +105,6 @@ public class ResultsPanel extends Panel {
                 {
                     dir = packDir;
                     break;
-                }else{
-                    //Log.logger.info(packDir.getName() + " not contains " + packName + ".AnalysisModule");
                 }
             }
             if (dir != null) {
@@ -311,7 +310,7 @@ public class ResultsPanel extends Panel {
     private void saveResultsButtonActionPerformed(java.awt.event.ActionEvent evt) {
         try {
             File saveFolder = new File(saveFolderInputField.getText());
-            PeridotCmd.saveResultsAt(saveFolder);
+            Operations.saveResultsAt(saveFolder);
         } catch (Exception ex) {
             Log.logger.log(Level.SEVERE, ex.getMessage(), ex);
         }

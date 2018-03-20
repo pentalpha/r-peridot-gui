@@ -24,7 +24,7 @@ public class ScriptResultsDialog extends Dialog {
         super(parent, modal);
         initComponents();
         setTitle(scriptName + " results");
-        results = new ViewResultsPanel(scriptName, resultsDir, RModule.getAvailablePackages().contains(scriptName));
+        results = new ViewResultsPanel(scriptName, resultsDir, RModule.getAvailableModules().contains(scriptName));
         this.getContentPane().add(results);
         pack();
     }

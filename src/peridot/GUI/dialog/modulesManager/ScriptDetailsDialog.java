@@ -27,7 +27,7 @@ public class ScriptDetailsDialog extends Dialog {
     /** Creates new form ScriptDetailsDialog */
     public ScriptDetailsDialog(String scriptName, java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        this.script = RModule.availableScripts.get(scriptName);
+        this.script = RModule.availableModules.get(scriptName);
         this.info = script.info;
         
         initComponents();
@@ -176,7 +176,7 @@ public class ScriptDetailsDialog extends Dialog {
         infoArea.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
         infoArea.setLineWrap(true);
         infoScroller = new JScrollPane(infoArea);
-        infoScroller.setPreferredSize(new Dimension(availableSize.width, componentPanelHeight-20));
+        infoScroller.setPreferredSize(new Dimension(componentPanelWidth, componentPanelHeight-20));
         //infoScroller.setMaximumSize(new Dimension(componentPanelWidth, 1000));
     }
     

@@ -17,6 +17,7 @@ import peridot.GUI.component.Dialog;
 import peridot.GUI.component.Label;
 import peridot.GUI.component.Panel;
 import peridot.GUI.panel.ConditionPanel;
+import peridot.Global;
 import peridot.IndexedString;
 
 import javax.swing.*;
@@ -233,7 +234,7 @@ public class NewExpressionDialog extends Dialog {
     private boolean selectExpressionByFile(String filePath){
         File file = new File(filePath);
         if(file.canRead()){
-            if(Spreadsheet.fileIsCSVorTSV(file)){
+            if(Global.fileIsPlainText(file)){
                 conditions = AnalysisData.getConditionsFromExpressionFile(file, info);
                 expressionFile = file;
                 updateSetList();
@@ -241,10 +242,10 @@ public class NewExpressionDialog extends Dialog {
                 return true;
             }
             else{
-                JOptionPane.showMessageDialog(null, "Please select the correct file format (.csv/.tsv)");
+                JOptionPane.showMessageDialog(null, "Please select a plain text spreadsheet file.");
             }
         }else{
-            JOptionPane.showMessageDialog(null, "The file cant be read.");
+            JOptionPane.showMessageDialog(null, "The file can't be read.");
         }
         return false;
     }
@@ -566,33 +567,41 @@ public class NewExpressionDialog extends Dialog {
         //fileChooser.setFileFilter(Places.Spreadsheet.getGeneFileFilter());
         if(fileChooser.showDialog(null, "Open File") == JFileChooser.APPROVE_OPTION){
             String filePath = fileChooser.getSelectedFile().getAbsolutePath();
-            if(tableOverColumnLimit(new File(filePath))){
-                MaxColumnsDialog dialog = new MaxColumnsDialog(parent);
-                dialog.setVisible(true);
-                return;
-            }
+
             try{
-                info = SpreadsheetInfoDialog.getInfo(fileChooser.getSelectedFile());
+                SpreadsheetInfoDialog dialog = new peridot.GUI.dialog.SpreadsheetInfoDialog(MainGUI._instance,
+                        fileChooser.getSelectedFile());
+                dialog.setVisible(true);
+                if(dialog.cancel){
+                    return;
+                }
+                Spreadsheet.Info info = dialog.table.getInfo();
+
+                if(tableOverColumnLimit(new File(filePath), info.separator)){
+                    MaxColumnsDialog dialogMax = new MaxColumnsDialog(parent);
+                    dialogMax.setVisible(true);
+                    return;
+                }
+
+                this.info = info;
             }catch(Exception ex){
                 
             }
+
             expressionPathField.setText(filePath);
             idAndConditionsField.setText(filePath + ".conditions");
             idAndConditionsField.setEnabled(true);
             selectConditionsFileButton.setEnabled(true);
         }
-    }//GEN-LAST:event_selectExpressionFileButtonActionPerformed
+    }
     //i have no idea when exactly this event happens, so just leave it empty...
-    private void expressionPathFieldInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_expressionPathFieldInputMethodTextChanged
+    private void expressionPathFieldInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
         // TODO add your handling code here:
-        
-        
-    }//GEN-LAST:event_expressionPathFieldInputMethodTextChanged
+    }
     //but those events happen after the user hits ENTER
-    private void expressionPathFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expressionPathFieldActionPerformed
-        // TODO add your handling code here:
+    private void expressionPathFieldActionPerformed(java.awt.event.ActionEvent evt) {
         this.expressionFieldValueChanged();
-    }//GEN-LAST:event_expressionPathFieldActionPerformed
+    }
 
     private void idAndConditionsFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idAndConditionsFieldActionPerformed
         // TODO add your handling code here:

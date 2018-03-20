@@ -110,22 +110,22 @@ public class NewModuleDialog extends Dialog {
             String postAnalysisClassName = "." + PostAnalysisModule.class.getSimpleName();
             if(file.contains(analysisClassName) || file.contains(postAnalysisClassName)){
                 //System.out.println(file);
-                String[] splited = null;
+                String[] splitted = null;
                 if(file.contains(File.separator)){
-                    splited = file.split(Pattern.quote(File.separator));
+                    splitted = file.split(Pattern.quote(File.separator));
                 }else if(file.contains("/")){
-                    splited = file.split("/");
+                    splitted = file.split("/");
                 }
-                String scriptFolder = splited[0];
+                String scriptFolder = splitted[0];
                 String scriptName = "";
                 if(file.contains(analysisClassName)){
                     scriptName = scriptFolder.replace(analysisClassName, "");
                 }else{
                     scriptName = scriptFolder.replace(postAnalysisClassName, "");
                 }
-                String finalInput = scriptName + ": " + splited[1];
-                for(int i = 2; i < splited.length; i++){
-                    finalInput += File.separator + splited[i];
+                String finalInput = scriptName + ": " + splitted[1];
+                for(int i = 2; i < splitted.length; i++){
+                    finalInput += File.separator + splitted[i];
                 }
                 toAdd = finalInput;
             }else{
@@ -143,7 +143,7 @@ public class NewModuleDialog extends Dialog {
             if(inputRaw.contains(": ")){
                 String[] splited = inputRaw.split(": ");
                 String first = splited[0];
-                RModule scr = RModule.availableScripts.get(first);
+                RModule scr = RModule.availableModules.get(first);
                 String x = scr.name + ".";
                 if(scr instanceof AnalysisModule){
                     x += AnalysisModule.class.getSimpleName();

@@ -13,11 +13,13 @@ import peridot.GUI.component.BiggerLabel;
 import peridot.GUI.component.Panel;
 import peridot.GUI.component.TabbedPane;
 import peridot.Global;
+import peridot.Log;
 import peridot.script.RModule;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
@@ -40,7 +42,7 @@ public class ViewResultsPanel extends Panel {
         this.analysisModule = analysisModule;
         initComponents();
         resultViewers = new HashMap<>();
-        RModule script = RModule.availableScripts.get(scriptName);
+        RModule script = RModule.availableModules.get(scriptName);
         Set<String> allResults = script.results;
         if(script.mandatoryResults.size() > 0){
             String[] mandatoryResults = script.mandatoryResults.toArray(new String[script.mandatoryResults.size()]);
@@ -62,15 +64,23 @@ public class ViewResultsPanel extends Panel {
         File file = new File(resultsDir.getAbsolutePath() + File.separator + result);
         if(file.exists())
         {
+            boolean unknownFormat = false;
             if(Manager.isImageFile(result)){
                 content = peridot.GUI.component.Label.getImageLabel(file);
-            }else if (Spreadsheet.fileIsCSVorTSV(file)){
-                content = JTableUtils.getTable(file, analysisModule);
+            }else if (Global.fileIsPlainText(file)){
+                try {
+                    Spreadsheet spreadsheet = new Spreadsheet(file);
+                    content = JTableUtils.getJTable(spreadsheet);
+                }catch (IOException ex){
+                    Log.logger.warning("Could not open file " + file.getAbsolutePath());
+                    ex.printStackTrace();
+                }
                 if(content == null){
                     content = ViewResultsPanel.getEmptyTableMessage(analysisModule);
                 }
             }else{
                 content = ViewResultsPanel.getUnknownFormatMessage(file);
+                unknownFormat = true;
             }
             JScrollPane scroller = new JScrollPane(content);
             scroller.getViewport().setBackground(Color.white);
@@ -79,7 +89,11 @@ public class ViewResultsPanel extends Panel {
             panel.setLayout(new java.awt.CardLayout());
             panel.add(scroller);
             resultViewers.put(result, panel);
-            tabsPanel.add(result, panel);
+            if(unknownFormat){
+                tabsPanel.add("Open " + result, panel);
+            }else{
+                tabsPanel.add(result, panel);
+            }
         }
     }
     

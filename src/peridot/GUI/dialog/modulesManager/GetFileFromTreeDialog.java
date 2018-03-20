@@ -69,10 +69,10 @@ public class GetFileFromTreeDialog extends Dialog{
         DefaultMutableTreeNode top = new DefaultMutableTreeNode("results/");
         top.add(new DefaultMutableTreeNode(Places.countReadsInputFile.getName()));
         top.add(new DefaultMutableTreeNode(Places.conditionInputFile.getName()));
-        for(String modName : RModule.getAvailablePackages()){
+        for(String modName : RModule.getAvailableAnalysisModules()){
             top.add(moduleToTreeNode(modName));
         }
-        for(String modName : RModule.getAvailablePostAnalysisScripts()){
+        for(String modName : RModule.getAvailablePostAnalysisModules()){
             top.add(moduleToTreeNode(modName));
         }
         
@@ -93,7 +93,7 @@ public class GetFileFromTreeDialog extends Dialog{
     
     private DefaultMutableTreeNode moduleToTreeNode(String module){
         DefaultMutableTreeNode top = new DefaultMutableTreeNode(module);
-        RModule script = RModule.availableScripts.get(module);
+        RModule script = RModule.availableModules.get(module);
         
         DefaultMutableTreeNode child = null;
         for(String result : script.results){

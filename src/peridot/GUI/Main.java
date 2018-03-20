@@ -6,10 +6,19 @@
 package peridot.GUI;
 
 import org.pushingpixels.substance.api.SubstanceLookAndFeel;
+import peridot.Archiver.PeridotConfig;
+import peridot.CLI.PeridotCmd;
+import peridot.CLI.UserInterface;
 import peridot.GUI.component.Label;
+import peridot.GUI.javaFXPanels.InterpreterManagerGUI;
+import peridot.Log;
+import peridot.Operations;
 import peridot.script.RModule;
+import peridot.script.r.Interpreter;
 
 import javax.swing.*;
+import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,9 +26,11 @@ import java.util.Map;
  * @author pentalpha
  */
 public class Main {
-    public static final String deployType = "simple";
+    public static final String deployType = "simple"; //or "plus"
+    public static final int maxColsSimple = 100;
+    public static final int maxColsPlus = 10000;
     public static JDialog logoLoadingFrame;
-    //public static final String deployType = "plus";
+
     /**
      * @param args the command line arguments
      */
@@ -27,20 +38,57 @@ public class Main {
         showLogoLoadingScreen();
         SubstanceLookAndFeel.setSkin(new org.pushingpixels.substance.api.skin.GraphiteSkin());
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
+        SwingUtilities.invokeLater(() -> {
             Aesthetics.loadFonts();
-            if(deployType.equals("simple")){
-                MainGUI gui = new MainGUI();
-                gui.setVisible(true);
-            }else if (deployType.equals("plus")){
-                //new MainGUIPlus().setVisible(true);
+
+            Operations.createNecessaryDirs();
+
+            java.util.function.BooleanSupplier func = () -> {
+                return launchInterpreterManagerGUI();
+            };
+
+            if(Operations.loadModules()){
+                if(Operations.loadInterpreters(func)){
+                    MainGUI gui = new MainGUI();
+                    gui.setVisible(true);
+                }
             }
+
+            Log.logger.info("Cleaning temporary files.");
             Main.clean();
+            try {
+                Log.logger.info("Saving configurations.");
+                PeridotConfig.save();
+            }catch (IOException ex){
+                Log.logger.severe("Error while saving the current configurations.");
+                ex.printStackTrace();
+            }
+            Log.logger.info("Finishing R-Peridot-GUI.");
+            System.exit(0);
         });
+        //Log.logger.info("Really finishing R-Peridot-GUI.");
+    }
+
+    public static boolean launchInterpreterManagerGUI(){
+        logoLoadingFrame.setVisible(false);
+        InterpreterManagerGUI managerGUI = new InterpreterManagerGUI();
+        //managerGUI.setVisible(true);
+        boolean defined = Interpreter.isDefaultInterpreterDefined();
+        if(!defined){
+            Log.logger.severe("No environment selected.");
+            JOptionPane.showMessageDialog(null,"No R environment was chosen."
+                            + " Exiting.",
+                    "Cannot start R-Peridot!", JOptionPane.ERROR_MESSAGE);
+            logoLoadingFrame.setVisible(false);
+        }else{
+            Log.logger.info("R environment selected.");
+            logoLoadingFrame.setVisible(true);
+        }
+        return defined;
     }
     
     public static void clean(){
-        for(Map.Entry<String, RModule> pair : RModule.availableScripts.entrySet()){
+        for(Map.Entry<String, RModule> pair : RModule.availableModules.entrySet()){
             pair.getValue().cleanTempFiles();
         }
     }
