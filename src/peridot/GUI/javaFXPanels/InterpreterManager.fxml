@@ -6,7 +6,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="372.0" prefWidth="593.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="peridot.GUI.javaFXPanels.InterpreterManager">
+<AnchorPane fx:id="anchorPane" prefHeight="372.0" prefWidth="593.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="peridot.GUI.javaFXPanels.InterpreterManager">
    <children>
       <ScrollPane layoutX="14.0" layoutY="37.0" prefHeight="261.0" prefWidth="550.0">
         <content>
@@ -20,9 +20,9 @@
                </children></AnchorPane>
         </content>
       </ScrollPane>
-      <Button layoutX="47.0" layoutY="331.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="157.0" text="Add Environment" />
-      <Button disable="true" layoutX="211.0" layoutY="331.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="157.0" text="Remove Environment" />
-      <Button disable="true" layoutX="374.0" layoutY="331.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="157.0" text="Install Packages" />
+      <Button fx:id="addEnvButton" layoutX="47.0" layoutY="331.0" mnemonicParsing="false" onAction="#addInterpreter" prefHeight="25.0" prefWidth="157.0" text="Add Environment" />
+      <Button fx:id="rmEnvButton" disable="true" layoutX="211.0" layoutY="331.0" mnemonicParsing="false" onAction="#removeInterpreter" prefHeight="25.0" prefWidth="157.0" text="Remove Environment" />
+      <Button fx:id="installButton" disable="true" layoutX="374.0" layoutY="331.0" mnemonicParsing="false" onAction="#installPackages" prefHeight="25.0" prefWidth="157.0" text="Install Packages" />
       <Label layoutX="14.0" layoutY="12.0" prefHeight="17.0" prefWidth="550.0" text="Choose one of the following R environments:" textAlignment="CENTER" />
       <Label fx:id="recommendation" layoutX="63.0" layoutY="306.0" prefHeight="17.0" prefWidth="453.0" text="The active R environment is missing some packages. We recommend installing them." visible="false" />
    </children>

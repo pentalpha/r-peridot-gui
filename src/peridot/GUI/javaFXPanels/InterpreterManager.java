@@ -6,16 +6,19 @@ import javafx.fxml.FXML;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Accordion;
-import javafx.scene.control.Label;
-import javafx.scene.control.TitledPane;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import peridot.Operations;
 import peridot.script.r.Interpreter;
 import sun.rmi.runtime.Log;
 
+import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -32,6 +35,12 @@ public class InterpreterManager implements Initializable{
     Accordion accordion;
     @FXML
     Label recommendation;
+    @FXML
+    Button rmEnvButton;
+    @FXML
+    Button installButton;
+    @FXML
+    AnchorPane anchorPane;
 
     @FXML
     public void installPackages(ActionEvent event){
@@ -55,12 +64,37 @@ public class InterpreterManager implements Initializable{
 
     @FXML
     public void addInterpreter(ActionEvent event){
+        Node source = (Node) event.getSource();
+        Window theStage = source.getScene().getWindow();
+        FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showOpenDialog(theStage);
+        if(file != null){
+            if(file.exists() && file.isFile()){
+                boolean valid = Interpreter.addInterpreter(file.getAbsolutePath());
+                if(valid){
+                    startAccordion();
+                    return;
+                }
+            }
+        }
 
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Invalid R Environment");
+        alert.setHeaderText(null);
+        alert.setContentText("Please choose a R executable next time.");
+
+        alert.showAndWait();
     }
 
     @FXML
     public void removeInterpreter(ActionEvent event){
-
+        if(selectedPane != null){
+            int activeInterpreter = interpreterOfPane.get(selectedPane);
+            boolean removed = Interpreter.removeInterpreter(activeInterpreter);
+            if(removed){
+                startAccordion();
+            }
+        }
     }
 
     public void updateInterpreterAccordion(){
@@ -71,6 +105,7 @@ public class InterpreterManager implements Initializable{
         interpreterOfPane = new HashMap<>();
         accordion.getPanes().remove(0, accordion.getPanes().size());
         int i = 0;
+        selectedPane = null;
         for(Interpreter interpreter : Interpreter.interpreters){
             TitledPane pane = getTitledPaneFromEnvironment(interpreter);
             accordion.getPanes().add(pane);
@@ -79,15 +114,20 @@ public class InterpreterManager implements Initializable{
         }
     }
 
+    public void updateButtonsEnabled(){
+        if(selectedPane != null){
+            rmEnvButton.setDisable(false);
+            installButton.setDisable(false);
+        }else{
+            rmEnvButton.setDisable(true);
+            installButton.setDisable(true);
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         peridot.Log.logger.info("Initializing R Environment Manager");
         startAccordion();
-        //accordion.
-    }
-
-    public void paneExpanded(TitledPane pane, boolean expanded){
-
     }
 
     public TitledPane getTitledPaneFromEnvironment(Interpreter interpreter){
@@ -102,6 +142,7 @@ public class InterpreterManager implements Initializable{
             if(Interpreter.defaultInterpreter.exe.equals(interpreter.exe)){
                 pane.setFont(Font.font(pane.getFont().getFamily(), FontWeight.BOLD, pane.getFont().getSize()));
                 pane.setText("Active: " + interpreter.titleString());
+                selectedPane = pane;
             }
         }
 
@@ -131,6 +172,7 @@ public class InterpreterManager implements Initializable{
                     //    pane.setFont(Font.font(pane.getFont().getFamily(), FontWeight.NORMAL, pane.getFont().getSize()));
                     //}
                 }
+                updateButtonsEnabled();
             }
         });
         return pane;

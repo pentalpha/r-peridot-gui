@@ -7,11 +7,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b4fbcb0b-00e3-4c1b-ab0c-a643ec73550d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jar/r-peridot-gui.jar" afterPath="$PROJECT_DIR$/jar/r-peridot-gui.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/r-peridot.jar" afterPath="$PROJECT_DIR$/lib/r-peridot.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/Main.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManager.fxml" afterPath="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManager.fxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManager.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManagerGUI.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManagerGUI.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,10 +26,45 @@
       <file leaf-file-name="Dialog.java" pinned="false" current-in-tab="false">
         <entry file="jar://C:/Program Files/Java/jdk1.8.0_102/src.zip!/java/awt/Dialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
+            <state relative-caret-position="16014">
               <caret line="1004" column="0" lean-forward="false" selection-start-line="1004" selection-start-column="0" selection-end-line="1004" selection-end-column="0" />
               <folding>
-                <element signature="e#39727#39728#0" expanded="true" />
+                <element signature="e#0#65587#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#11868#11869#0" expanded="false" />
+                <element signature="e#11908#11909#0" expanded="false" />
+                <element signature="e#13078#13079#0" expanded="false" />
+                <element signature="e#13118#13119#0" expanded="false" />
+                <element signature="e#13922#13923#0" expanded="false" />
+                <element signature="e#13965#13966#0" expanded="false" />
+                <element signature="e#17727#17728#0" expanded="false" />
+                <element signature="e#17767#17768#0" expanded="false" />
+                <element signature="e#18531#18532#0" expanded="false" />
+                <element signature="e#18574#18575#0" expanded="false" />
+                <element signature="e#22621#22622#0" expanded="false" />
+                <element signature="e#22675#22676#0" expanded="false" />
+                <element signature="e#23742#23743#0" expanded="false" />
+                <element signature="e#23799#23800#0" expanded="false" />
+                <element signature="e#25330#25331#0" expanded="false" />
+                <element signature="e#25375#25376#0" expanded="false" />
+                <element signature="e#31221#31222#0" expanded="false" />
+                <element signature="e#31266#31267#0" expanded="false" />
+                <element signature="e#31309#31310#0" expanded="false" />
+                <element signature="e#31369#31370#0" expanded="false" />
+                <element signature="e#32780#32781#0" expanded="false" />
+                <element signature="e#32815#32816#0" expanded="false" />
+                <element signature="e#34606#34607#0" expanded="false" />
+                <element signature="e#34634#34635#0" expanded="false" />
+                <element signature="e#41527#41528#0" expanded="false" />
+                <element signature="e#41620#41621#0" expanded="false" />
+                <element signature="e#43196#43197#0" expanded="false" />
+                <element signature="e#43324#43325#0" expanded="false" />
+                <element signature="e#48414#48415#0" expanded="false" />
+                <element signature="e#48446#48447#0" expanded="false" />
+                <element signature="e#52060#52061#0" expanded="false" />
+                <element signature="e#52094#52095#0" expanded="false" />
+                <element signature="e#64796#64797#0" expanded="false" />
+                <element signature="e#64848#64849#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -39,10 +73,10 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/peridot/GUI/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="74" column="9" lean-forward="true" selection-start-line="74" selection-start-column="9" selection-end-line="74" selection-end-column="9" />
+            <state relative-caret-position="952">
+              <caret line="74" column="9" lean-forward="false" selection-start-line="74" selection-start-column="9" selection-end-line="74" selection-end-column="9" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#0#3815#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -51,7 +85,7 @@
       <file leaf-file-name="Operations.class" pinned="false" current-in-tab="false">
         <entry file="jar://$PROJECT_DIR$/lib/r-peridot.jar!/peridot/Operations.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
+            <state relative-caret-position="918">
               <caret line="77" column="0" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
               <folding />
             </state>
@@ -61,34 +95,28 @@
       <file leaf-file-name="MainGUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/peridot/GUI/MainGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="73" column="50" lean-forward="true" selection-start-line="73" selection-start-column="50" selection-end-line="73" selection-end-column="50" />
-              <folding>
-                <element signature="e#2042#2260#0" expanded="true" />
-                <element signature="e#2259#2260#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="816">
+              <caret line="73" column="50" lean-forward="false" selection-start-line="73" selection-start-column="50" selection-end-line="73" selection-end-column="50" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InterpreterManager.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="InterpreterManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="83">
-              <caret line="33" column="25" lean-forward="false" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
-              <folding>
-                <element signature="e#1758#1759#0" expanded="true" />
-                <element signature="e#1795#1796#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="117">
+              <caret line="71" column="47" lean-forward="true" selection-start-line="71" selection-start-column="47" selection-end-line="71" selection-end-column="47" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InterpreterManagerGUI.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="InterpreterManagerGUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManagerGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1088">
-              <caret line="84" column="5" lean-forward="false" selection-start-line="84" selection-start-column="5" selection-end-line="84" selection-end-column="5" />
+            <state relative-caret-position="901">
+              <caret line="75" column="54" lean-forward="false" selection-start-line="75" selection-start-column="54" selection-end-line="75" selection-end-column="54" />
               <folding>
                 <element signature="e#1750#1942#0" expanded="true" />
                 <element signature="e#1941#1942#0" expanded="true" />
@@ -99,16 +127,16 @@
       </file>
       <file leaf-file-name="InterpreterManager.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManager.fxml">
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="45" lean-forward="false" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
+            <state relative-caret-position="249">
+              <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding>
-                <marker date="1521584174408" expanded="true" signature="1706:1741" ph="..." />
+                <marker date="1521665914899" expanded="true" signature="1873:1908" ph="..." />
               </folding>
             </state>
+          </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder">
+            <state />
           </provider>
         </entry>
       </file>
@@ -175,7 +203,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/java/nio/file/FileSystem.class" />
         <option value="/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/java/lang/String.class" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/dialog/modulesManager/GetNewResultDialog.java" />
         <option value="$PROJECT_DIR$/lib/r-peridot.jar!/peridot/script/RScript.class" />
@@ -221,11 +248,12 @@
         <option value="$PROJECT_DIR$/src/fxExample.java" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/panel/InterpreterManagerGUI.java" />
         <option value="$PROJECT_DIR$/src/SimpleSwingBrowser.java" />
-        <option value="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManager.fxml" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/MainGUI.java" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/Main.java" />
-        <option value="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManager.java" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManagerGUI.java" />
+        <option value="$PROJECT_DIR$/lib/r-peridot.jar!/peridot/script/r/Interpreter.class" />
+        <option value="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManager.fxml" />
+        <option value="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManager.java" />
       </list>
     </option>
   </component>
@@ -253,7 +281,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -366,8 +393,9 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -514,10 +542,9 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17792422" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294893" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1952381" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1984127" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="R Packages" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="R Graphics" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16666667" sideWeight="0.55673224" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -529,6 +556,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16666667" sideWeight="0.55673224" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -634,7 +662,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="15" column="22" lean-forward="false" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -683,7 +710,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4811">
           <caret line="312" column="22" lean-forward="false" selection-start-line="312" selection-start-column="22" selection-end-line="312" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -698,7 +724,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1904">
           <caret line="126" column="27" lean-forward="false" selection-start-line="126" selection-start-column="27" selection-end-line="126" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -721,7 +746,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="223">
           <caret line="543" column="5" lean-forward="true" selection-start-line="543" selection-start-column="5" selection-end-line="543" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -744,7 +768,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2805">
           <caret line="178" column="71" lean-forward="false" selection-start-line="178" selection-start-column="71" selection-end-line="178" selection-end-column="71" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -769,18 +792,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="18" column="30" lean-forward="true" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SimpleSwingBrowser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="74" column="8" lean-forward="false" selection-start-line="74" selection-start-column="8" selection-end-line="151" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SimpleSwingBrowser.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_102/jre/lib/rt.jar!/sun/awt/windows/WToolkit.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1477">
@@ -792,11 +807,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1037">
           <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
-          <folding>
-            <element signature="e#2191#2192#0" expanded="false" />
-            <element signature="e#2234#2235#0" expanded="false" />
-            <element signature="e#2487#2488#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -804,13 +814,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2397">
           <caret line="174" column="0" lean-forward="false" selection-start-line="174" selection-start-column="0" selection-end-line="174" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#15121#0" expanded="false" />
-            <element signature="e#10983#10984#0" expanded="false" />
-            <element signature="e#11021#11022#0" expanded="false" />
-            <element signature="e#13575#13576#0" expanded="false" />
-            <element signature="e#13618#13619#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -818,40 +821,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="33609">
           <caret line="2038" column="0" lean-forward="false" selection-start-line="2038" selection-start-column="0" selection-end-line="2038" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#90972#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#20991#20992#0" expanded="false" />
-            <element signature="e#21042#21043#0" expanded="false" />
-            <element signature="e#22675#22676#0" expanded="false" />
-            <element signature="e#22703#22704#0" expanded="false" />
-            <element signature="e#22933#22934#0" expanded="false" />
-            <element signature="e#22965#22966#0" expanded="false" />
-            <element signature="e#32644#32645#0" expanded="false" />
-            <element signature="e#32694#32695#0" expanded="false" />
-            <element signature="e#41392#41393#0" expanded="false" />
-            <element signature="e#41449#41450#0" expanded="false" />
-            <element signature="e#42562#42563#0" expanded="false" />
-            <element signature="e#42619#42620#0" expanded="false" />
-            <element signature="e#44444#44445#0" expanded="false" />
-            <element signature="e#44501#44502#0" expanded="false" />
-            <element signature="e#45599#45600#0" expanded="false" />
-            <element signature="e#45656#45657#0" expanded="false" />
-            <element signature="e#46422#46423#0" expanded="false" />
-            <element signature="e#46479#46480#0" expanded="false" />
-            <element signature="e#53988#53989#0" expanded="false" />
-            <element signature="e#54023#54024#0" expanded="false" />
-            <element signature="e#54379#54380#0" expanded="false" />
-            <element signature="e#54414#54415#0" expanded="false" />
-            <element signature="e#61323#61331#0" expanded="false" />
-            <element signature="e#61946#61954#0" expanded="false" />
-            <element signature="e#62618#62626#0" expanded="false" />
-            <element signature="e#67632#67633#0" expanded="false" />
-            <element signature="e#67680#67681#0" expanded="false" />
-            <element signature="e#85889#85890#0" expanded="false" />
-            <element signature="e#85959#85960#0" expanded="false" />
-            <element signature="e#88061#88069#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -859,32 +828,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8483">
           <caret line="553" column="0" lean-forward="false" selection-start-line="553" selection-start-column="0" selection-end-line="553" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#49769#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#6070#6071#0" expanded="false" />
-            <element signature="e#6147#6148#0" expanded="false" />
-            <element signature="e#6224#6225#0" expanded="false" />
-            <element signature="e#6304#6305#0" expanded="false" />
-            <element signature="e#6685#6686#0" expanded="false" />
-            <element signature="e#6753#6754#0" expanded="false" />
-            <element signature="e#6833#6834#0" expanded="false" />
-            <element signature="e#6902#6903#0" expanded="false" />
-            <element signature="e#23671#24429#0" expanded="false" />
-            <element signature="e#24155#24356#0" expanded="false" />
-            <element signature="e#24355#24356#0" expanded="false" />
-            <element signature="e#24428#24429#0" expanded="false" />
-            <element signature="e#24863#25096#0" expanded="false" />
-            <element signature="e#25095#25096#0" expanded="false" />
-            <element signature="e#28190#28191#0" expanded="false" />
-            <element signature="e#28265#28266#0" expanded="false" />
-            <element signature="e#29515#29516#0" expanded="false" />
-            <element signature="e#29583#29584#0" expanded="false" />
-            <element signature="e#35454#35455#0" expanded="false" />
-            <element signature="e#35511#35512#0" expanded="false" />
-            <element signature="e#37911#38620#0" expanded="false" />
-            <element signature="e#38619#38620#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -906,17 +849,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1343">
           <caret line="107" column="0" lean-forward="false" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#5989#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#1268#1278#0" expanded="false" />
-            <element signature="e#2425#2426#0" expanded="false" />
-            <element signature="e#2466#2467#0" expanded="false" />
-            <element signature="e#2657#2658#0" expanded="false" />
-            <element signature="e#2692#2693#0" expanded="false" />
-            <element signature="e#4979#4980#0" expanded="false" />
-            <element signature="e#5017#5018#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -924,7 +856,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5253">
           <caret line="354" column="0" lean-forward="false" selection-start-line="354" selection-start-column="0" selection-end-line="354" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -932,12 +863,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4505">
           <caret line="285" column="85" lean-forward="false" selection-start-line="283" selection-start-column="16" selection-end-line="285" selection-end-column="85" />
-          <folding>
-            <element signature="e#0#14394#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#13081#13082#0" expanded="false" />
-            <element signature="e#13165#13166#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -945,89 +870,117 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="491">
           <caret line="62" column="9" lean-forward="false" selection-start-line="62" selection-start-column="9" selection-end-line="62" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/r-peridot.jar!/peridot/script/r/Interpreter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="107" column="26" lean-forward="false" selection-start-line="107" selection-start-column="26" selection-end-line="107" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_102/src.zip!/java/awt/Dialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
+        <state relative-caret-position="16014">
           <caret line="1004" column="0" lean-forward="false" selection-start-line="1004" selection-start-column="0" selection-end-line="1004" selection-end-column="0" />
           <folding>
-            <element signature="e#39727#39728#0" expanded="true" />
+            <element signature="e#0#65587#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#11868#11869#0" expanded="false" />
+            <element signature="e#11908#11909#0" expanded="false" />
+            <element signature="e#13078#13079#0" expanded="false" />
+            <element signature="e#13118#13119#0" expanded="false" />
+            <element signature="e#13922#13923#0" expanded="false" />
+            <element signature="e#13965#13966#0" expanded="false" />
+            <element signature="e#17727#17728#0" expanded="false" />
+            <element signature="e#17767#17768#0" expanded="false" />
+            <element signature="e#18531#18532#0" expanded="false" />
+            <element signature="e#18574#18575#0" expanded="false" />
+            <element signature="e#22621#22622#0" expanded="false" />
+            <element signature="e#22675#22676#0" expanded="false" />
+            <element signature="e#23742#23743#0" expanded="false" />
+            <element signature="e#23799#23800#0" expanded="false" />
+            <element signature="e#25330#25331#0" expanded="false" />
+            <element signature="e#25375#25376#0" expanded="false" />
+            <element signature="e#31221#31222#0" expanded="false" />
+            <element signature="e#31266#31267#0" expanded="false" />
+            <element signature="e#31309#31310#0" expanded="false" />
+            <element signature="e#31369#31370#0" expanded="false" />
+            <element signature="e#32780#32781#0" expanded="false" />
+            <element signature="e#32815#32816#0" expanded="false" />
+            <element signature="e#34606#34607#0" expanded="false" />
+            <element signature="e#34634#34635#0" expanded="false" />
+            <element signature="e#41527#41528#0" expanded="false" />
+            <element signature="e#41620#41621#0" expanded="false" />
+            <element signature="e#43196#43197#0" expanded="false" />
+            <element signature="e#43324#43325#0" expanded="false" />
+            <element signature="e#48414#48415#0" expanded="false" />
+            <element signature="e#48446#48447#0" expanded="false" />
+            <element signature="e#52060#52061#0" expanded="false" />
+            <element signature="e#52094#52095#0" expanded="false" />
+            <element signature="e#64796#64797#0" expanded="false" />
+            <element signature="e#64848#64849#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/lib/r-peridot.jar!/peridot/Operations.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
+        <state relative-caret-position="918">
           <caret line="77" column="0" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManager.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="45" lean-forward="false" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
-          <folding>
-            <marker date="1521584174408" expanded="true" signature="1706:1741" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/peridot/GUI/MainGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="73" column="50" lean-forward="true" selection-start-line="73" selection-start-column="50" selection-end-line="73" selection-end-column="50" />
-          <folding>
-            <element signature="e#2042#2260#0" expanded="true" />
-            <element signature="e#2259#2260#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="816">
+          <caret line="73" column="50" lean-forward="false" selection-start-line="73" selection-start-column="50" selection-end-line="73" selection-end-column="50" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/peridot/GUI/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="74" column="9" lean-forward="true" selection-start-line="74" selection-start-column="9" selection-end-line="74" selection-end-column="9" />
+        <state relative-caret-position="952">
+          <caret line="74" column="9" lean-forward="false" selection-start-line="74" selection-start-column="9" selection-end-line="74" selection-end-column="9" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#3815#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/r-peridot.jar!/peridot/script/r/Interpreter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="102" column="50" lean-forward="true" selection-start-line="102" selection-start-column="50" selection-end-line="102" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManager.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <marker date="1521665914899" expanded="true" signature="1873:1908" ph="..." />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManagerGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="901">
+          <caret line="75" column="54" lean-forward="false" selection-start-line="75" selection-start-column="54" selection-end-line="75" selection-end-column="54" />
+          <folding>
+            <element signature="e#1750#1942#0" expanded="true" />
+            <element signature="e#1941#1942#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="33" column="25" lean-forward="false" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
-          <folding>
-            <element signature="e#1758#1759#0" expanded="true" />
-            <element signature="e#1795#1796#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManagerGUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1088">
-          <caret line="84" column="5" lean-forward="false" selection-start-line="84" selection-start-column="5" selection-end-line="84" selection-end-column="5" />
-          <folding>
-            <element signature="e#1750#1942#0" expanded="true" />
-            <element signature="e#1941#1942#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="117">
+          <caret line="71" column="47" lean-forward="true" selection-start-line="71" selection-start-column="47" selection-end-line="71" selection-end-column="47" />
+          <folding />
         </state>
       </provider>
     </entry>
