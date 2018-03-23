@@ -6,11 +6,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4fbcb0b-00e3-4c1b-ab0c-a643ec73550d" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/peridot/GUI/GUIUtils.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InstallationBatchJX.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InstallationBatchJX.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jar/r-peridot-gui.jar" afterPath="$PROJECT_DIR$/jar/r-peridot-gui.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/r-peridot.jar" afterPath="$PROJECT_DIR$/lib/r-peridot.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/Main.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManager.fxml" afterPath="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManager.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManager.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManager.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManager.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManagerJX.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManagerGUI.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManagerSwingDialog.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,49 +28,71 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Dialog.java" pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_102/src.zip!/java/awt/Dialog.java">
+      <file leaf-file-name="InterpreterManagerJX.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManagerJX.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16014">
-              <caret line="1004" column="0" lean-forward="false" selection-start-line="1004" selection-start-column="0" selection-end-line="1004" selection-end-column="0" />
+            <state relative-caret-position="272">
+              <caret line="42" column="9" lean-forward="false" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GUIUtils.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/peridot/GUI/GUIUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="20" column="38" lean-forward="false" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
               <folding>
-                <element signature="e#0#65587#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#11868#11869#0" expanded="false" />
-                <element signature="e#11908#11909#0" expanded="false" />
-                <element signature="e#13078#13079#0" expanded="false" />
-                <element signature="e#13118#13119#0" expanded="false" />
-                <element signature="e#13922#13923#0" expanded="false" />
-                <element signature="e#13965#13966#0" expanded="false" />
-                <element signature="e#17727#17728#0" expanded="false" />
-                <element signature="e#17767#17768#0" expanded="false" />
-                <element signature="e#18531#18532#0" expanded="false" />
-                <element signature="e#18574#18575#0" expanded="false" />
-                <element signature="e#22621#22622#0" expanded="false" />
-                <element signature="e#22675#22676#0" expanded="false" />
-                <element signature="e#23742#23743#0" expanded="false" />
-                <element signature="e#23799#23800#0" expanded="false" />
-                <element signature="e#25330#25331#0" expanded="false" />
-                <element signature="e#25375#25376#0" expanded="false" />
-                <element signature="e#31221#31222#0" expanded="false" />
-                <element signature="e#31266#31267#0" expanded="false" />
-                <element signature="e#31309#31310#0" expanded="false" />
-                <element signature="e#31369#31370#0" expanded="false" />
-                <element signature="e#32780#32781#0" expanded="false" />
-                <element signature="e#32815#32816#0" expanded="false" />
-                <element signature="e#34606#34607#0" expanded="false" />
-                <element signature="e#34634#34635#0" expanded="false" />
-                <element signature="e#41527#41528#0" expanded="false" />
-                <element signature="e#41620#41621#0" expanded="false" />
-                <element signature="e#43196#43197#0" expanded="false" />
-                <element signature="e#43324#43325#0" expanded="false" />
-                <element signature="e#48414#48415#0" expanded="false" />
-                <element signature="e#48446#48447#0" expanded="false" />
-                <element signature="e#52060#52061#0" expanded="false" />
-                <element signature="e#52094#52095#0" expanded="false" />
-                <element signature="e#64796#64797#0" expanded="false" />
-                <element signature="e#64848#64849#0" expanded="false" />
+                <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InstallationBatchJX.fxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InstallationBatchJX.fxml">
+          <provider editor-type-id="JavaFX-Scene-Builder">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="45" lean-forward="false" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InstallationBatchJX.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InstallationBatchJX.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="205">
+              <caret line="65" column="30" lean-forward="true" selection-start-line="65" selection-start-column="30" selection-end-line="65" selection-end-column="30" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2295#2296#0" expanded="true" />
+                <element signature="e#2329#2330#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InstallationBatch.class" pinned="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/lib/r-peridot.jar!/peridot/script/r/InstallationBatch.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-102">
+              <caret line="29" column="40" lean-forward="false" selection-start-line="29" selection-start-column="40" selection-end-line="29" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InterpreterManagerSwingDialog.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManagerSwingDialog.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="45" column="54" lean-forward="false" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="54" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -73,70 +100,10 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/peridot/GUI/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="952">
-              <caret line="74" column="9" lean-forward="false" selection-start-line="74" selection-start-column="9" selection-end-line="74" selection-end-column="9" />
-              <folding>
-                <element signature="e#0#3815#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Operations.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/lib/r-peridot.jar!/peridot/Operations.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="918">
-              <caret line="77" column="0" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+            <state relative-caret-position="190">
+              <caret line="65" column="64" lean-forward="false" selection-start-line="65" selection-start-column="64" selection-end-line="65" selection-end-column="64" />
               <folding />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainGUI.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/peridot/GUI/MainGUI.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="816">
-              <caret line="73" column="50" lean-forward="false" selection-start-line="73" selection-start-column="50" selection-end-line="73" selection-end-column="50" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InterpreterManager.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="117">
-              <caret line="71" column="47" lean-forward="true" selection-start-line="71" selection-start-column="47" selection-end-line="71" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InterpreterManagerGUI.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManagerGUI.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="901">
-              <caret line="75" column="54" lean-forward="false" selection-start-line="75" selection-start-column="54" selection-end-line="75" selection-end-column="54" />
-              <folding>
-                <element signature="e#1750#1942#0" expanded="true" />
-                <element signature="e#1941#1942#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InterpreterManager.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManager.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-              <folding>
-                <marker date="1521665914899" expanded="true" signature="1873:1908" ph="..." />
-              </folding>
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
           </provider>
         </entry>
       </file>
@@ -203,11 +170,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/java/lang/String.class" />
-        <option value="$PROJECT_DIR$/src/peridot/GUI/dialog/modulesManager/GetNewResultDialog.java" />
-        <option value="$PROJECT_DIR$/lib/r-peridot.jar!/peridot/script/RScript.class" />
-        <option value="$PROJECT_DIR$/lib/r-peridot.jar!/peridot/AnalysisData.class" />
-        <option value="$PROJECT_DIR$/src/peridot/GUI/dialog/modulesManager/AskModuleType.java" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/WrapLayout.java" />
         <option value="$PROJECT_DIR$/lib/r-peridot.jar!/peridot/Global.class" />
@@ -249,11 +211,16 @@
         <option value="$PROJECT_DIR$/src/peridot/GUI/panel/InterpreterManagerGUI.java" />
         <option value="$PROJECT_DIR$/src/SimpleSwingBrowser.java" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/MainGUI.java" />
-        <option value="$PROJECT_DIR$/src/peridot/GUI/Main.java" />
-        <option value="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManagerGUI.java" />
         <option value="$PROJECT_DIR$/lib/r-peridot.jar!/peridot/script/r/Interpreter.class" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManager.fxml" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManager.java" />
+        <option value="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManagerGUI.java" />
+        <option value="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InstallationBatchJX.fxml" />
+        <option value="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManagerSwingDialog.java" />
+        <option value="$PROJECT_DIR$/src/peridot/GUI/Main.java" />
+        <option value="$PROJECT_DIR$/src/peridot/GUI/GUIUtils.java" />
+        <option value="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManagerJX.java" />
+        <option value="$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InstallationBatchJX.java" />
       </list>
     </option>
   </component>
@@ -373,6 +340,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="dialog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="r-peridot-gui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="r-peridot-gui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="component" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -389,6 +378,116 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="r-peridot-gui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="r-peridot-gui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="r-peridot-gui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="r-peridot-gui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="r-peridot.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="peridot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="r-peridot-gui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="r-peridot-gui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="r-peridot.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="peridot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="script" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="r-peridot-gui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="r-peridot-gui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="r-peridot.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="peridot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="script" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="r" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="r-peridot-gui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="r-peridot-gui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="r-peridot.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -538,11 +637,11 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22875817" sideWeight="0.5340393" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.303681" sideWeight="0.7204546" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32055214" sideWeight="0.7204546" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17792422" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294893" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1984127" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27142859" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="R Packages" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="R Graphics" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -556,7 +655,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16666667" sideWeight="0.55673224" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5030675" sideWeight="0.55673224" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -588,34 +687,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/component/BigButton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="17" column="8" lean-forward="false" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/component/BiggerLabel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/component/BigLabel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/component/Button.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/peridot/GUI/component/CheckBox.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -788,13 +859,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/component/Dialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="18" column="30" lean-forward="true" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/SimpleSwingBrowser.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_102/jre/lib/rt.jar!/sun/awt/windows/WToolkit.class">
       <provider selected="true" editor-type-id="text-editor">
@@ -922,24 +986,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="918">
           <caret line="77" column="0" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/peridot/GUI/MainGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
+        <state relative-caret-position="748">
           <caret line="73" column="50" lean-forward="false" selection-start-line="73" selection-start-column="50" selection-end-line="73" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
-          <caret line="74" column="9" lean-forward="false" selection-start-line="74" selection-start-column="9" selection-end-line="74" selection-end-column="9" />
           <folding>
-            <element signature="e#0#3815#0" expanded="false" />
+            <element signature="e#0#9511#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#2042#2260#0" expanded="false" />
+            <element signature="e#2259#2260#0" expanded="false" />
+            <element signature="e#2474#2759#0" expanded="false" />
+            <element signature="e#2758#2759#0" expanded="false" />
+            <element signature="e#3108#3109#0" expanded="false" />
+            <element signature="e#3148#3149#0" expanded="false" />
+            <element signature="e#8568#8569#0" expanded="false" />
+            <element signature="e#8651#8652#0" expanded="false" />
+            <element signature="e#8702#8703#0" expanded="false" />
+            <element signature="e#8787#8788#0" expanded="false" />
+            <element signature="e#8835#8836#0" expanded="false" />
+            <element signature="e#8917#8918#0" expanded="false" />
+            <element signature="e#9060#9061#0" expanded="false" />
+            <element signature="e#9155#9156#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -948,39 +1018,92 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="259">
           <caret line="102" column="50" lean-forward="true" selection-start-line="102" selection-start-column="50" selection-end-line="102" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManager.fxml">
-      <provider selected="true" editor-type-id="text-editor">
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
         <state relative-caret-position="249">
-          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding>
-            <marker date="1521665914899" expanded="true" signature="1873:1908" ph="..." />
+            <marker date="1521825051810" expanded="true" signature="1875:1910" ph="..." />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/component/Dialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="16" column="54" lean-forward="false" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="65" column="64" lean-forward="false" selection-start-line="65" selection-start-column="64" selection-end-line="65" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManagerSwingDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="45" column="54" lean-forward="false" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InstallationBatchJX.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManagerGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
-          <caret line="75" column="54" lean-forward="false" selection-start-line="75" selection-start-column="54" selection-end-line="75" selection-end-column="54" />
+        <state relative-caret-position="187">
+          <caret line="11" column="45" lean-forward="false" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/GUIUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="20" column="38" lean-forward="false" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
           <folding>
-            <element signature="e#1750#1942#0" expanded="true" />
-            <element signature="e#1941#1942#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManager.java">
+    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InterpreterManagerJX.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="71" column="47" lean-forward="true" selection-start-line="71" selection-start-column="47" selection-end-line="71" selection-end-column="47" />
+        <state relative-caret-position="272">
+          <caret line="42" column="9" lean-forward="false" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/r-peridot.jar!/peridot/script/r/InstallationBatch.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-102">
+          <caret line="29" column="40" lean-forward="false" selection-start-line="29" selection-start-column="40" selection-end-line="29" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/javaFXPanels/InstallationBatchJX.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="65" column="30" lean-forward="true" selection-start-line="65" selection-start-column="30" selection-end-line="65" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2295#2296#0" expanded="true" />
+            <element signature="e#2329#2330#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

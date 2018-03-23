@@ -7,10 +7,8 @@ package peridot.GUI;
 
 import org.pushingpixels.substance.api.SubstanceLookAndFeel;
 import peridot.Archiver.PeridotConfig;
-import peridot.CLI.PeridotCmd;
-import peridot.CLI.UserInterface;
 import peridot.GUI.component.Label;
-import peridot.GUI.javaFXPanels.InterpreterManagerGUI;
+import peridot.GUI.javaFXPanels.InterpreterManagerSwingDialog;
 import peridot.Log;
 import peridot.Operations;
 import peridot.script.RModule;
@@ -18,7 +16,6 @@ import peridot.script.r.Interpreter;
 
 import javax.swing.*;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -64,7 +61,10 @@ public class Main {
     public static boolean launchInterpreterManagerGUI(){
         logoLoadingFrame.setVisible(false);
         try {
-            InterpreterManagerGUI managerGUI = new InterpreterManagerGUI();
+            InterpreterManagerSwingDialog.DummyFrame dummy = new InterpreterManagerSwingDialog.DummyFrame(
+                    InterpreterManagerSwingDialog.titleString
+            );//just so that the dialog can have an taskbar icon
+            InterpreterManagerSwingDialog managerGUI = new InterpreterManagerSwingDialog(dummy);
         }catch (Exception ex){
             ex.printStackTrace();
         }
