@@ -1,8 +1,10 @@
 package peridot.GUI.javaFXPanels;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 
 import javafx.event.ActionEvent;
@@ -32,6 +34,7 @@ import java.util.ResourceBundle;
  * Created by pentalpha on 20/03/2018.
  */
 public class InterpreterManagerJX implements Initializable{
+    static private InterpreterManagerJX _instance = null;
 
     HashMap<TitledPane, Integer> interpreterOfPane;
     TitledPane selectedPane = null;
@@ -59,7 +62,7 @@ public class InterpreterManagerJX implements Initializable{
             Parent root = loader.getRoot();
             InstallationBatchJX control = loader.getController();
             Stage stage = new Stage();
-            Scene scene = new Scene(root, 395, 400);
+            Scene scene = new Scene(root, 326, 400);
             stage.initStyle(StageStyle.DECORATED);
             stage.setTitle("Installation Queue");
             stage.setScene(scene);
@@ -69,7 +72,14 @@ public class InterpreterManagerJX implements Initializable{
             Image fxIcon = SwingFXUtils.toFXImage(buffImage, null);
             stage.getIcons().add(fxIcon);
             control.installPackagesIn(Interpreter.interpreters.get(interpreterOfPane.get(selectedPane)));
+            stage.setResizable(false);
             stage.show();
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                public void handle(WindowEvent we) {
+                    control.askToStopNow();
+                    startAccordion();
+                }
+            });
             // Hide this current window (if this is what you want)
             //((Node)(event.getSource())).getScene().getWindow().hide();
         }
@@ -89,6 +99,7 @@ public class InterpreterManagerJX implements Initializable{
                 recommendation.setVisible(false);
             }
             expanded.setFont(Font.font(expanded.getFont().getFamily(), FontWeight.BOLD, expanded.getFont().getSize()));
+            expanded.setText(Interpreter.interpreters.get(interpreterOfPane.get(expanded)).titleString());
         }else{
             peridot.Log.logger.warning("Invalid environment chosen, not using it.");
         }
@@ -149,7 +160,13 @@ public class InterpreterManagerJX implements Initializable{
     public void updateButtonsEnabled(){
         if(selectedPane != null){
             rmEnvButton.setDisable(false);
-            installButton.setDisable(false);
+            try {
+                if (Interpreter.interpreters.get(interpreterOfPane.get(selectedPane)).getPackagesToInstall().size() > 0) {
+                    installButton.setDisable(false);
+                }
+            }catch (NullPointerException ex){
+                //do nothing
+            }
         }else{
             rmEnvButton.setDisable(true);
             installButton.setDisable(true);
@@ -158,6 +175,7 @@ public class InterpreterManagerJX implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
+        _instance = this;
         peridot.Log.logger.info("Initializing R Environment Manager");
         startAccordion();
     }
@@ -173,7 +191,7 @@ public class InterpreterManagerJX implements Initializable{
         if(Interpreter.isDefaultInterpreterDefined()){
             if(Interpreter.defaultInterpreter.exe.equals(interpreter.exe)){
                 pane.setFont(Font.font(pane.getFont().getFamily(), FontWeight.BOLD, pane.getFont().getSize()));
-                pane.setText("Active: " + interpreter.titleString());
+                pane.setText(interpreter.titleString());
                 selectedPane = pane;
             }
         }
@@ -185,10 +203,12 @@ public class InterpreterManagerJX implements Initializable{
                     //peridot.Log.logger.info(pane.getText() + " pane expanded!");
                     if(pane != selectedPane){
                         pane.setFont(Font.font(pane.getFont().getFamily(), FontWeight.BOLD, pane.getFont().getSize()));
+                        pane.setText(interpreter.titleString());
                         chooseInterpreter(pane);
                         for(TitledPane p : accordion.getPanes()){
                             if(p != pane){
                                 p.setFont(Font.font(p.getFont().getFamily(), FontWeight.NORMAL, p.getFont().getSize()));
+                                pane.setText(interpreter.titleString());
                             }
                         }
                     }
@@ -208,5 +228,13 @@ public class InterpreterManagerJX implements Initializable{
             }
         });
         return pane;
+    }
+
+    public static void askToUpdateListOfInterpreters(){
+        if(_instance != null){
+            Platform.runLater(() -> {
+                _instance.startAccordion();
+            });
+        }
     }
 }

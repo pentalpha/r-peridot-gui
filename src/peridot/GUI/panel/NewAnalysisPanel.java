@@ -51,6 +51,15 @@ public class NewAnalysisPanel extends Panel {
     public NewAnalysisPanel(java.awt.Frame parentFrame) {
         super();
         //Log.logger.info("starting to build analysisPanel");
+        createInterface();
+        
+        //Log.logger.info("no error");
+        
+    }
+
+    public void createInterface(){
+        this.removeAll();
+
         modulesAlwaysVisible = false;
         this.parentFrame = parentFrame;
         this.availableScripts = new TreeSet<String>();
@@ -64,17 +73,14 @@ public class NewAnalysisPanel extends Panel {
             //if(aScript == null){Log.logger.info(pack + " is null");}
             if(aScript instanceof AnalysisModule){
                 AnalysisParameters params = new AnalysisParameters(
-                                aScript.requiredParameters, aScript.parameters);
+                        aScript.requiredParameters, aScript.parameters);
                 specificParameters.put(pack, params);
                 //Log.logger.info("package " + pack);
                 this.availablePackages.add(pack);
             }
         }
-        
+
         this.customInit();
-        
-        //Log.logger.info("no error");
-        
     }
     
     public int getNPackagesSelected(){
@@ -741,7 +747,7 @@ public class NewAnalysisPanel extends Panel {
     public int nScripts = 0;
     public int nPackages = 0;
     
-    private JButton createButton;
+    public JButton createButton;
     private JPanel createContainer;
     
     private JButton defineButton;

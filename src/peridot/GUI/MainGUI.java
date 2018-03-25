@@ -9,6 +9,7 @@ import peridot.Archiver.Places;
 import peridot.GUI.component.Panel;
 import peridot.GUI.component.TabbedPane;
 import peridot.GUI.dialog.modulesManager.ModulesManager;
+import peridot.GUI.javaFXPanels.InterpreterManagerSwingDialog;
 import peridot.GUI.panel.NewAnalysisPanel;
 import peridot.GUI.panel.ProcessingPanel;
 import peridot.GUI.panel.ResultsPanel;
@@ -142,6 +143,19 @@ public class MainGUI extends javax.swing.JFrame {
                 MainGUI.showCannotDoThisWhileProcessing();
             }
         });
+        JMenuItem interpreters = new JMenuItem("R Environments");
+        interpreters.addActionListener((ActionEvent evt1) -> {
+            if(ProcessingPanel.isProcessing() == false){
+                analysisPanel.createButton.setEnabled(false);
+                InterpreterManagerSwingDialog.openInterpreterManager(() -> {
+                    Log.logger.info("Restarting AnalysisPanel");
+                    analysisPanel.createInterface();
+                    analysisPanel.createButton.setEnabled(true);
+                });
+            }else{
+                MainGUI.showCannotDoThisWhileProcessing();
+            }
+        });
         //JMenuItem settings = new JMenuItem("Configurations");
         //settings.setEnabled(false);
         JMenuItem resetScripts = new JMenuItem("Reset User Scripts");
@@ -169,7 +183,7 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
         toolsMenu.add(modules);
-        //toolsMenu.add(settings);
+        toolsMenu.add(interpreters);
         toolsMenu.add(resetScripts);
         toolsMenu.add(refreshResults);
         /////////////////////////////////

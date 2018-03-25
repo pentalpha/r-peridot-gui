@@ -5,6 +5,8 @@ import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import org.apache.commons.lang3.ObjectUtils;
+import peridot.GUI.Main;
 import peridot.GUI.MainGUI;
 import peridot.Log;
 import peridot.script.r.Interpreter;
@@ -27,9 +29,14 @@ public class InterpreterManagerSwingDialog extends JDialog {
     public static final String titleString = "R Environment Manager";
     private final JFXPanel jfxPanel = new JFXPanel();
 
-    public InterpreterManagerSwingDialog(java.awt.Frame parent){
+    private boolean onStart;
+
+    private Runnable onEnd;
+
+    public InterpreterManagerSwingDialog(java.awt.Frame parent, Runnable onEnd){
         super(parent, true);
-        this.setModal(true);
+        this.onEnd = onEnd;
+        this.setModal(false);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int)(screenSize.width - defaultSize.getWidth()) / 2;
         int y = (int)(screenSize.height - defaultSize.getHeight()) / 2;
@@ -53,18 +60,24 @@ public class InterpreterManagerSwingDialog extends JDialog {
 
         Platform.runLater(() -> {
             try {
+                Log.logger.severe("Loading InterpreterManagerJX scene.");
                 Parent root = FXMLLoader.load(getClass().getResource("InterpreterManager.fxml"));
                 jfxPanel.setScene(new Scene(root, defaultSize.width-7, defaultSize.height-28));
+                Log.logger.severe("Loaded InterpreterManagerJX scene.");
             }catch (IOException ex){
                 Log.logger.severe("Could not load InterpreterManagerJX scene.");
                 ex.printStackTrace();
             }
         });
         this.setVisible(true);
+
+
     }
 
     private void closeEvent(){
+        boolean closeEverything = false;
         if(Interpreter.isDefaultInterpreterDefined() == false){
+            closeEverything = true;
             int reply = JOptionPane.showConfirmDialog(_instance, "Since no R environment was chosen,"
                             + " R-Peridot will have to close.",
                     "Exiting Environment Manager without choosing an environment!"
@@ -73,16 +86,37 @@ public class InterpreterManagerSwingDialog extends JDialog {
                 return;
             }
         }
+
+        /*try{
+            this.removeAll();
+            this.jfxPanel.removeAll();
+            this.dispose();
+        }catch (NullPointerException ex){
+            //Log.logger.info("Catched an exception");
+            //ex.printStackTrace();
+            //this.setVisible(false);
+            getParent().setVisible(false);
+        }*/
         this.setVisible(false);
-        this.dispose();
+        //Log.logger.info("InterpreterManager onEnd action or close everything?");
+        if(closeEverything) {
+            Main.endMain();
+        }else{
+            //Log.logger.info("InterpreterManager onEnd action: ");
+            onEnd.run();
+        }
     }
 
     @Override
     public void setVisible(boolean visible) {
+        getParent().setVisible(visible);
         super.setVisible(visible);
-        if (!visible) {
-            ((DummyFrame)getParent()).dispose();
+        if(visible){
+            InterpreterManagerJX.askToUpdateListOfInterpreters();
         }
+        /*if (!visible) {
+            ((DummyFrame)getParent()).dispose();
+        }*/
     }
 
     public static class DummyFrame extends JFrame {
@@ -93,5 +127,12 @@ public class InterpreterManagerSwingDialog extends JDialog {
             setLocationRelativeTo(null);
             this.setIconImage(MainGUI.getDefaultIcon(this));
         }
+    }
+
+    public static void openInterpreterManager(Runnable onEnd){
+        InterpreterManagerSwingDialog.DummyFrame dummy = new InterpreterManagerSwingDialog.DummyFrame(
+                InterpreterManagerSwingDialog.titleString
+        );//just so that the dialog can have an taskbar icon
+        InterpreterManagerSwingDialog managerGUI = new InterpreterManagerSwingDialog(dummy, onEnd);
     }
 }

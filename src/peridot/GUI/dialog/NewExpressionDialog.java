@@ -551,11 +551,7 @@ public class NewExpressionDialog extends Dialog {
         JFileChooser fileChooser = new JFileChooser(){
             public void approveSelection() {
                 File f = getSelectedFile();
-                if (f.isFile()
-                    &&(f.getName().contains(".tsv")
-                       || f.getName().contains(".TSV")
-                       || f.getName().contains(".csv")
-                       || f.getName().contains(".csv"))) {
+                if (f.isFile() && f.exists()) {
                     super.approveSelection();
                 } else{
                     return;

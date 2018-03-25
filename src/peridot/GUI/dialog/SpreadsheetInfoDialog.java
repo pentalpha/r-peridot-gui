@@ -11,6 +11,7 @@ import peridot.GUI.MainGUI;
 import peridot.GUI.WrapLayout;
 import peridot.GUI.component.*;
 import peridot.GUI.component.Panel;
+import peridot.Log;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,6 +28,7 @@ public class SpreadsheetInfoDialog extends JDialog{
 
     public SpreadsheetInfoDialog(java.awt.Frame parent, File file){
         super(parent, true);
+        Log.logger.info("Starting Spreadsheet Info Dialog");
         try {
             this.table = new Spreadsheet(file);
         }catch (IOException ex){
@@ -68,15 +70,17 @@ public class SpreadsheetInfoDialog extends JDialog{
     }
 
     public void loadTableInScroller(){
-        dataTable = JTableUtils.getTableWithoutHeader(table.getRows(),
+        dataTable = JTableUtils.getTableWithoutHeader(table.getRows(100),
                 false, 9,100, table.getSeparator());
         scroller = new JScrollPane(dataTable);
         scroller.getViewport().setBackground(Color.white);
     }
 
     public void initTableScroller(){
+        Log.logger.info("Loading table scroller for " + table.tableFile.getName());
         loadTableInScroller();
         scroller.setPreferredSize(new Dimension(getPreferredSize().width-50, 200));
+        Log.logger.info("Loaded table scroller for " + table.tableFile.getName());
     }
     
     public void initOkButton(){

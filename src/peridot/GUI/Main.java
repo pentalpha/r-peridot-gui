@@ -41,15 +41,19 @@ public class Main {
             Operations.createNecessaryDirs();
 
             java.util.function.BooleanSupplier func = () -> {
-                return launchInterpreterManagerGUI();
+                return false;
             };
 
             if(Operations.loadModules()){
+                logoLoadingFrame.setVisible(false);
                 if(Operations.loadInterpreters(func)){
                     MainGUI gui = new MainGUI();
                     gui.setVisible(true);
                 }else{
-                    endMain();
+                    InterpreterManagerSwingDialog.openInterpreterManager(() -> {
+                        MainGUI gui = new MainGUI();
+                        gui.setVisible(true);
+                    });
                 }
             }else{
                 endMain();
@@ -58,23 +62,16 @@ public class Main {
         //Log.logger.info("Really finishing R-Peridot-GUI.");
     }
 
-    public static boolean launchInterpreterManagerGUI(){
-        logoLoadingFrame.setVisible(false);
-        try {
-            InterpreterManagerSwingDialog.DummyFrame dummy = new InterpreterManagerSwingDialog.DummyFrame(
-                    InterpreterManagerSwingDialog.titleString
-            );//just so that the dialog can have an taskbar icon
-            InterpreterManagerSwingDialog managerGUI = new InterpreterManagerSwingDialog(dummy);
-        }catch (Exception ex){
-            ex.printStackTrace();
-        }
+    /*public static boolean launchInterpreterManagerGUI(){
+
+
         boolean defined = Interpreter.isDefaultInterpreterDefined();
         if(defined){
             Log.logger.info("R environment selected.");
             logoLoadingFrame.setVisible(true);
         }
         return defined;
-    }
+    }*/
     
     public static void clean(){
         for(Map.Entry<String, RModule> pair : RModule.availableModules.entrySet()){
