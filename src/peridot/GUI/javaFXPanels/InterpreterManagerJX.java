@@ -106,6 +106,11 @@ public class InterpreterManagerJX implements Initializable{
     }
 
     @FXML
+    public void okButton(ActionEvent event){
+        InterpreterManagerSwingDialog.closeWindow();
+    }
+
+    @FXML
     public void addInterpreter(ActionEvent event){
         Node source = (Node) event.getSource();
         Window theStage = source.getScene().getWindow();
@@ -158,6 +163,8 @@ public class InterpreterManagerJX implements Initializable{
     }
 
     public void updateButtonsEnabled(){
+        rmEnvButton.setDisable(true);
+        installButton.setDisable(true);
         if(selectedPane != null){
             rmEnvButton.setDisable(false);
             try {
@@ -167,9 +174,6 @@ public class InterpreterManagerJX implements Initializable{
             }catch (NullPointerException ex){
                 //do nothing
             }
-        }else{
-            rmEnvButton.setDisable(true);
-            installButton.setDisable(true);
         }
     }
 

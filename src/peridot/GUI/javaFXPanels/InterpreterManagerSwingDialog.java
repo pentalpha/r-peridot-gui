@@ -129,6 +129,13 @@ public class InterpreterManagerSwingDialog extends JDialog {
         }
     }
 
+    public static void closeWindow(){
+        SwingUtilities.invokeLater(() -> {
+            _instance.closeEvent();
+        });
+
+    }
+
     public static void openInterpreterManager(Runnable onEnd){
         InterpreterManagerSwingDialog.DummyFrame dummy = new InterpreterManagerSwingDialog.DummyFrame(
                 InterpreterManagerSwingDialog.titleString
