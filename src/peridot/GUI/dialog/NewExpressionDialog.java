@@ -19,12 +19,14 @@ import peridot.GUI.component.Panel;
 import peridot.GUI.panel.ConditionPanel;
 import peridot.Global;
 import peridot.IndexedString;
+import peridot.Log;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 import static peridot.GUI.JTableUtils.tableOverColumnLimit;
@@ -68,6 +70,7 @@ public class NewExpressionDialog extends Dialog {
         initComponents();
         this.setFocusable(false);
         this.setTitle("Define Expression Data");
+        this.setLocationRelativeTo(null);
         
         expressionPathField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -235,6 +238,13 @@ public class NewExpressionDialog extends Dialog {
         File file = new File(filePath);
         if(file.canRead()){
             if(Global.fileIsPlainText(file)){
+                if(info == null){
+                    try{
+                        info = new Spreadsheet.Info(file);
+                    }catch (IOException ex){
+                        info = new Spreadsheet.Info(true, true, false, ",");
+                    }
+                }
                 conditions = AnalysisData.getConditionsFromExpressionFile(file, info);
                 expressionFile = file;
                 updateSetList();
@@ -581,7 +591,10 @@ public class NewExpressionDialog extends Dialog {
 
                 this.info = info;
             }catch(Exception ex){
-                
+                ex.printStackTrace();
+                if(this.info != null){
+                    Log.logger.severe("Error while getting user info for count reads file!");
+                }
             }
 
             expressionPathField.setText(filePath);

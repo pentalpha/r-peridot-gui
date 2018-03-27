@@ -122,8 +122,7 @@ public class JTableUtils {
     }
 
     public static Table getTableWithoutHeader(List<String[]> allRows,
-                                              boolean defaultHeader, int maxCols, int maxLines,
-                                              String sep){
+                                              boolean defaultHeader, int maxCols, int maxLines){
         Table table = null;
 
         if(allRows != null){
