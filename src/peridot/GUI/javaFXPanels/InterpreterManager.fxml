@@ -9,11 +9,11 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="372.0" prefWidth="593.0" stylesheets="@modena_dark.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="peridot.GUI.javaFXPanels.InterpreterManagerJX">
    <children>
-      <ScrollPane layoutX="14.0" layoutY="37.0" prefHeight="294.0" prefWidth="393.0">
+      <ScrollPane layoutX="14.0" layoutY="37.0" prefHeight="294.0" prefWidth="378.0">
         <content>
-          <AnchorPane disable="false" prefHeight="251.0" prefWidth="378.0">
+          <AnchorPane disable="false" prefHeight="286.0" prefWidth="376.0">
                <children>
-                  <Accordion fx:id="accordion" layoutX="4.0" layoutY="3.0" prefHeight="283.0" prefWidth="380.0">
+                  <Accordion fx:id="accordion" layoutX="4.0" layoutY="2.0" prefHeight="284.0" prefWidth="371.0">
                     <panes>
 
                     </panes>
@@ -21,14 +21,14 @@
                </children></AnchorPane>
         </content>
       </ScrollPane>
-      <Button fx:id="addEnvButton" layoutX="422.0" layoutY="37.0" mnemonicParsing="false" onAction="#addInterpreter" prefHeight="25.0" prefWidth="157.0" text="Add Environment" />
-      <Button fx:id="rmEnvButton" disable="true" layoutX="422.0" layoutY="73.0" mnemonicParsing="false" onAction="#removeInterpreter" prefHeight="25.0" prefWidth="157.0" text="Remove Environment" />
-      <Button fx:id="installButton" disable="true" layoutX="422.0" layoutY="111.0" mnemonicParsing="false" onAction="#installPackages" prefHeight="25.0" prefWidth="157.0" text="Install Packages" />
+      <Button fx:id="addEnvButton" layoutX="401.0" layoutY="37.0" mnemonicParsing="false" onAction="#addInterpreter" prefHeight="25.0" prefWidth="184.0" text="Add Environment" />
+      <Button fx:id="rmEnvButton" disable="true" layoutX="401.0" layoutY="73.0" mnemonicParsing="false" onAction="#removeInterpreter" prefHeight="25.0" prefWidth="184.0" text="Remove Environment" />
+      <Button fx:id="installButton" disable="true" layoutX="401.0" layoutY="111.0" mnemonicParsing="false" onAction="#installPackages" prefHeight="25.0" prefWidth="184.0" text="Install Packages" />
       <Label layoutX="14.0" layoutY="12.0" prefHeight="17.0" prefWidth="550.0" text="Choose one of the following R environments:" textAlignment="CENTER" />
-      <Label fx:id="recommendation" alignment="TOP_CENTER" layoutX="14.0" layoutY="339.0" prefHeight="17.0" prefWidth="393.0" text="The active R environment is missing some packages. We recommend installing them." textAlignment="CENTER" visible="false">
+      <Label fx:id="recommendation" alignment="TOP_CENTER" layoutX="14.0" layoutY="339.0" prefHeight="17.0" prefWidth="378.0" text="The active R environment is missing some packages. We recommend installing them." textAlignment="CENTER" visible="false">
          <font>
-            <Font size="10.0" />
+            <Font size="9.0" />
          </font></Label>
-      <Button layoutX="422.0" layoutY="333.0" mnemonicParsing="false" onAction="#okButton" prefHeight="25.0" prefWidth="157.0" text="OK" />
+      <Button fx:id="okButton" layoutX="401.0" layoutY="335.0" mnemonicParsing="false" onAction="#okButton" prefHeight="25.0" prefWidth="184.0" text="OK" />
    </children>
 </AnchorPane>

@@ -28,8 +28,8 @@
 
 /* Redefine base colors */
 .root {
-    -fx-base: rgb(50, 50, 50);
-    -fx-background: rgb(50, 50, 50);
+    -fx-base: rgb(76, 76, 76);
+    -fx-background: rgb(76, 76, 76);
 
     /* make controls (buttons, thumb, etc.) slightly lighter */
     -fx-color: derive(-fx-base, 10%);
@@ -40,16 +40,16 @@
     -fx-control-inner-background-alt: derive(-fx-control-inner-background, 2.5%);
 
     /* text colors depending on background's brightness */
-    -fx-light-text-color: rgb(220, 220, 220);
-    -fx-mid-text-color: rgb(100, 100, 100);
-    -fx-dark-text-color: rgb(20, 20, 20);
+    -fx-light-text-color: rgb(230, 230, 230);
+    -fx-mid-text-color: rgb(130, 130, 130);
+    -fx-dark-text-color: rgb(40, 40, 40);
 
     /* A bright blue for highlighting/accenting objects.  For example: selected
      * text; selected items in menus, lists, trees, and tables; progress bars */
     -fx-accent: rgb(0, 80, 100);
 
     /* color of non-focused yet selected elements */
-    -fx-selection-bar-non-focused: rgb(50, 50, 50);
+    -fx-selection-bar-non-focused: rgb(76, 76, 76);
 }
 
 /* Fix derived prompt color for text fields */

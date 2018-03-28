@@ -318,7 +318,7 @@ public class NewAnalysisPanel extends Panel {
         rightSide = new Panel();
         rightSide.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
         defineButton = new BigButton();
-        defineButton.setText("Define");
+        defineButton.setText("Open File");
         defineButton.setPreferredSize(new java.awt.Dimension(112, 70));
         defineButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

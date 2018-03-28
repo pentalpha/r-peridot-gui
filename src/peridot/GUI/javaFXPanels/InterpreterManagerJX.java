@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -47,6 +48,10 @@ public class InterpreterManagerJX implements Initializable{
     Button rmEnvButton;
     @FXML
     Button installButton;
+    @FXML
+    Button addEnvButton;
+    @FXML
+    Button okButton;
     @FXML
     AnchorPane anchorPane;
 
@@ -160,6 +165,7 @@ public class InterpreterManagerJX implements Initializable{
             interpreterOfPane.put(pane, i);
             i++;
         }
+
     }
 
     public void updateButtonsEnabled(){
@@ -182,6 +188,19 @@ public class InterpreterManagerJX implements Initializable{
         _instance = this;
         peridot.Log.logger.info("Initializing R Environment Manager");
         startAccordion();
+        okButton.setGraphic(new ImageView(
+                new Image(getClass().getResourceAsStream("/peridot/GUI/icons/Clear-Green-Button-icon24.png")
+                )));
+        addEnvButton.setGraphic(new ImageView(
+                new Image(getClass().getResourceAsStream("/peridot/GUI/icons/add-green-button-icon-24.png")
+                )));
+        rmEnvButton.setGraphic(new ImageView(
+                new Image(getClass().getResourceAsStream("/peridot/GUI/icons/Delete-icon-24.png")
+                )));
+        installButton.setGraphic(new ImageView(
+                new Image(getClass().getResourceAsStream("/peridot/GUI/icons/download-icon-24.png")
+                )));
+
     }
 
     public TitledPane getTitledPaneFromEnvironment(Interpreter interpreter){
@@ -197,6 +216,7 @@ public class InterpreterManagerJX implements Initializable{
                 pane.setFont(Font.font(pane.getFont().getFamily(), FontWeight.BOLD, pane.getFont().getSize()));
                 pane.setText(interpreter.titleString());
                 selectedPane = pane;
+                pane.setExpanded(true);
             }
         }
 
