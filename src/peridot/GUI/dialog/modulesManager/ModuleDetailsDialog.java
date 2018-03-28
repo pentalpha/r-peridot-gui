@@ -13,6 +13,7 @@ import peridot.GUI.component.Dialog;
 import peridot.GUI.component.Label;
 import peridot.GUI.component.Panel;
 import peridot.Global;
+import peridot.Log;
 import peridot.script.RModule;
 import peridot.script.r.Package;
 
@@ -163,6 +164,7 @@ public class ModuleDetailsDialog extends Dialog {
         int i = 0;
         for(Package pack : script.requiredPackages){
             packStrs[i] = pack.name + " " + pack.version.toString();
+            i++;
         }
 
         packagesList = new JList(packStrs);
