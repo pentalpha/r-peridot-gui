@@ -332,10 +332,10 @@ public class NewAnalysisPanel extends Panel {
         defineExpressionContainer.add(rightSide);
     }
     
-    private void updateUnabledScripts(){
+    public void updateUnabledScripts(){
         for(String name : RModule.getAvailableAnalysisModules()){
             //Log.logger.info("Trying to unable " + name);
-            updatePackageUnabledNoRecursion(name);
+            updateAnalysisModuleUnabledNoRecursion(name);
         }
         for(String name : RModule.getAvailablePostAnalysisModules()){
             //Log.logger.info("Trying to unable " + name);
@@ -373,7 +373,7 @@ public class NewAnalysisPanel extends Panel {
         }*/
     }
     
-    private void updatePackageUnabledNoRecursion(String module){
+    private void updateAnalysisModuleUnabledNoRecursion(String module){
         boolean unabled = true;
         RModule script = RModule.availableModules.get(module);
         JCheckBox checkbox = this.scriptCheckboxes.get(module);
@@ -393,6 +393,10 @@ public class NewAnalysisPanel extends Panel {
                     }
                 }
             }*/
+        }
+
+        if(!script.requiredPackagesInstalled()){
+            unabled = false;
         }
         
         if(unabled == false){
@@ -448,6 +452,11 @@ public class NewAnalysisPanel extends Panel {
                 }
             }
         }
+
+        if(!script.requiredPackagesInstalled()){
+            unabled = false;
+        }
+
         if(unabled != checkbox.isEnabled()){
             JButton paramsButton = editModuleParamsButtons.get(module);
             if(paramsButton != null){

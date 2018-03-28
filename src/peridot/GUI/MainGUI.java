@@ -151,6 +151,7 @@ public class MainGUI extends javax.swing.JFrame {
                     Log.logger.info("Restarting AnalysisPanel");
                     analysisPanel.createInterface();
                     analysisPanel.createButton.setEnabled(true);
+                    analysisPanel.updateUnabledScripts();
                 });
             }else{
                 MainGUI.showCannotDoThisWhileProcessing();
@@ -237,6 +238,14 @@ public class MainGUI extends javax.swing.JFrame {
     
     public static void goToResultsPanel(){
         _instance.tabbedPanel.setSelectedComponent(_instance.resultsPanel);
+    }
+
+    public static void updateModulesEnabled(){
+        if(_instance != null){
+            if(_instance.analysisPanel != null){
+                _instance.analysisPanel.updateUnabledScripts();
+            }
+        }
     }
 
     public static void updateResultsPanel(){
