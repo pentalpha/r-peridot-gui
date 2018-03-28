@@ -36,4 +36,11 @@ public class GUIUtils {
         // Return the buffered image
         return bimage;
     }
+
+    public static Dimension getCenterLocation(int width, int height){
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int)(screenSize.width - width) / 2;
+        int y = (int)(screenSize.height - height) / 2;
+        return new Dimension(x, y);
+    }
 }

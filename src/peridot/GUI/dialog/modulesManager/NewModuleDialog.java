@@ -1,6 +1,7 @@
 package peridot.GUI.dialog.modulesManager;
 
 import org.apache.commons.io.FileUtils;
+import peridot.GUI.GUIUtils;
 import peridot.GUI.MainGUI;
 import peridot.GUI.component.*;
 import peridot.GUI.component.Button;
@@ -48,7 +49,7 @@ public class NewModuleDialog extends Dialog {
     String originalScript;
     boolean editing, changedScript, editedScript;
     
-    /** Creates new form ScriptDetailsDialog */
+    /** Creates new form ModuleDetailsDialog */
     public NewModuleDialog(java.awt.Frame parent, boolean modal, Class type, RModule baseScript) {
         super(parent, modal);
         assert(type != null) : "No Script Type specified for the creation";
@@ -363,6 +364,9 @@ public class NewModuleDialog extends Dialog {
         }else if(this.scriptType == AnalysisModule.class){
             populateFieldWithAnalysisModuleDefaults();
         }
+
+        Dimension loc = GUIUtils.getCenterLocation(dialogSize.width, dialogSize.height);
+        setLocation(loc.width, loc.height);
     }
     
     private void initGeneralInfo(){

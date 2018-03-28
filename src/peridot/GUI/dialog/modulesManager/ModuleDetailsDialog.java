@@ -6,6 +6,7 @@
 
 package peridot.GUI.dialog.modulesManager;
 
+import peridot.GUI.GUIUtils;
 import peridot.GUI.component.*;
 import peridot.GUI.component.Button;
 import peridot.GUI.component.Dialog;
@@ -13,6 +14,7 @@ import peridot.GUI.component.Label;
 import peridot.GUI.component.Panel;
 import peridot.Global;
 import peridot.script.RModule;
+import peridot.script.r.Package;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,11 +23,11 @@ import java.awt.*;
  *
  * @author pentalpha
  */
-public class ScriptDetailsDialog extends Dialog {
+public class ModuleDetailsDialog extends Dialog {
     RModule script;
     String info;
-    /** Creates new form ScriptDetailsDialog */
-    public ScriptDetailsDialog(String scriptName, java.awt.Frame parent, boolean modal) {
+    /** Creates new form ModuleDetailsDialog */
+    public ModuleDetailsDialog(String scriptName, java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         this.script = RModule.availableModules.get(scriptName);
         this.info = script.info;
@@ -40,11 +42,11 @@ public class ScriptDetailsDialog extends Dialog {
         }catch(IOException ex){
             Log.logger.log(Level.SEVERE, ex.getMessage(), ex);
         }*/
-        dialogSize = new Dimension(530, 450);
+        dialogSize = new Dimension(560, 700);
         int wGap = 5;
         int hGap = 5;
         availableSize = new Dimension(dialogSize.width-20, dialogSize.height-20);
-        componentPanelHeight = (availableSize.height-(hGap*2))/3;
+        componentPanelHeight = (availableSize.height-(hGap*2)-20)/3;
         componentPanelWidth = (availableSize.width-wGap)/2;
         scrollerSize = new Dimension(componentPanelWidth, componentPanelHeight-35);
         defaultPanelSize = new Dimension(componentPanelWidth, componentPanelHeight);
@@ -57,13 +59,18 @@ public class ScriptDetailsDialog extends Dialog {
         initResults();
         initInputs();
         initParams();
+        initPackages();
         initInfoArea();
         
         add(generalInfoPanel);
         add(resultsPanel);
         add(inputPanel);
         add(paramsPanel);
+        add(packagesPanel);
         add(infoScroller);
+
+        Dimension loc = GUIUtils.getCenterLocation(dialogSize.width, dialogSize.height);
+        setLocation(loc.width, loc.height);
     }
     
     private void initGeneralInfo(){
@@ -150,6 +157,30 @@ public class ScriptDetailsDialog extends Dialog {
         inputPanel.add(inputLabel);
         inputPanel.add(inputScroller);
     }
+
+    private void initPackages(){
+        String[] packStrs = new String[script.requiredPackages.size()];
+        int i = 0;
+        for(Package pack : script.requiredPackages){
+            packStrs[i] = pack.name + " " + pack.version.toString();
+        }
+
+        packagesList = new JList(packStrs);
+        packagesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        packagesList.setLayoutOrientation(JList.VERTICAL);
+        packagesList.setVisibleRowCount(-1);
+        packagesLabel = new BigLabel("Required Packages:");
+
+        packagesPanel = new Panel();
+        packagesPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 1, 5));
+        packagesPanel.setPreferredSize(defaultPanelSize);
+
+        packagesScroller = new JScrollPane(packagesList);
+        packagesScroller.setPreferredSize(scrollerSize);
+
+        packagesPanel.add(packagesLabel);
+        packagesPanel.add(packagesScroller);
+    }
     
     private void initParams(){
         paramsList = new JList(script.getParamsDescription());
@@ -175,8 +206,10 @@ public class ScriptDetailsDialog extends Dialog {
         infoArea.setEditable(false);
         infoArea.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
         infoArea.setLineWrap(true);
+        infoArea.setWrapStyleWord(true);
         infoScroller = new JScrollPane(infoArea);
-        infoScroller.setPreferredSize(new Dimension(componentPanelWidth, componentPanelHeight-20));
+        infoScroller.setPreferredSize(new Dimension(componentPanelWidth, componentPanelHeight-10));
+
         //infoScroller.setMaximumSize(new Dimension(componentPanelWidth, 1000));
     }
     
@@ -200,6 +233,11 @@ public class ScriptDetailsDialog extends Dialog {
     Label paramsLabel;
     JScrollPane paramsScroller;
     JList paramsList;
+
+    Panel packagesPanel;
+    Label packagesLabel;
+    JScrollPane packagesScroller;
+    JList packagesList;
     
     JTextArea infoArea;
     JScrollPane infoScroller;

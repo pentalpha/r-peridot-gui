@@ -16,7 +16,7 @@ import peridot.GUI.component.Label;
 import peridot.GUI.component.Panel;
 import peridot.GUI.dialog.NewExpressionDialog;
 import peridot.GUI.dialog.SpecificParametersDialog;
-import peridot.GUI.dialog.modulesManager.ScriptDetailsDialog;
+import peridot.GUI.dialog.modulesManager.ModuleDetailsDialog;
 import peridot.Global;
 import peridot.Log;
 import peridot.script.AnalysisModule;
@@ -579,7 +579,7 @@ public class NewAnalysisPanel extends Panel {
             detailButton.setText("Detail");
             detailButton.setEnabled(true);
             detailButton.addActionListener((java.awt.event.ActionEvent evt) -> {
-                ScriptDetailsDialog dialog = new ScriptDetailsDialog(pack,
+                ModuleDetailsDialog dialog = new ModuleDetailsDialog(pack,
                         MainGUI.getInstance(),false);
                 dialog.setVisible(true);
             });

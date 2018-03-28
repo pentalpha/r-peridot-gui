@@ -49,6 +49,7 @@ public class NewParamDialog extends Dialog {
         getContentPane().setLayout(new java.awt.FlowLayout());
         this.setPreferredSize(new Dimension(400, 155));
         this.setResizable(false);
+        this.setLocationRelativeTo(null);
         
         Panel namePanel = new Panel();
         

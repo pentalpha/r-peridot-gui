@@ -319,7 +319,7 @@ public class ModulesManager extends Dialog {
     }
     
     private void scriptDetails(String script){
-        new ScriptDetailsDialog(script, publicParent, true).setVisible(true);
+        new ModuleDetailsDialog(script, publicParent, true).setVisible(true);
     }
     
     private void deleteScript(String script){
