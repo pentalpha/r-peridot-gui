@@ -1,5 +1,6 @@
 package peridot.GUI.dialog.modulesManager;
 
+import peridot.GUI.GUIUtils;
 import peridot.GUI.component.BigButton;
 import peridot.GUI.component.CheckBox;
 import peridot.GUI.component.Dialog;
@@ -99,6 +100,9 @@ public class GetNewResultDialog extends Dialog {
         add(nameField);
         add(mandatoryCheckBox);
         add(addButton);
+
+        Dimension loc = GUIUtils.getCenterLocation(dialogSize.width, dialogSize.height);
+        setLocation(loc.width, loc.height);
     }
 
     public boolean validInfo(){

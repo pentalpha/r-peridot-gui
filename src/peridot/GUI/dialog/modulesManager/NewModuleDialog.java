@@ -14,16 +14,15 @@ import peridot.script.AnalysisModule;
 import peridot.script.DiffExpressionModule;
 import peridot.script.PostAnalysisModule;
 import peridot.script.RModule;
+import peridot.script.r.Package;
+import peridot.script.r.VersionNumber;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
 
@@ -41,6 +40,7 @@ public class NewModuleDialog extends Dialog {
     boolean max2Conditions, needsReplicates;
     Map<String, Class> requiredParameters;
     Set<String> requiredExternalFiles;
+    Set<Package> requiredPackages;
     Set<String> results;
     Set<String> mandatory;
     Set<String> requiredScripts;
@@ -55,11 +55,17 @@ public class NewModuleDialog extends Dialog {
         assert(type != null) : "No Script Type specified for the creation";
         this.scriptType = type;
         this.script = baseScript;
-        
+        editing = baseScript != null;
+
+        if(editing){
+            Log.logger.info("Editing " + baseScript.name);
+        }else {
+            Log.logger.info("Creating " + type.getSimpleName());
+        }
+
         initComponents();
         
         if(baseScript != null){
-            editing = true;
             File temp = new File(System.getProperty("java.io.tmpdir"));
             File scriptInTemp = new File(temp.getAbsolutePath() + "/" + script.getScriptFile().getName());
             originalScript = script.getScriptFile().getAbsolutePath();
@@ -73,7 +79,6 @@ public class NewModuleDialog extends Dialog {
                 Log.logger.log(Level.SEVERE, ex.getMessage(), ex);
             }
         }else{
-            editing = false;
             originalScript = "";
         }
         changedScript = false;
@@ -182,6 +187,27 @@ public class NewModuleDialog extends Dialog {
                 requiredParameters.put(param, type);
             }
         }
+        return;
+    }
+
+    private void listModelFromRequiredPackages(Set<Package> packages){
+        packagesListModel.removeAllElements();
+        for(Package pack : script.requiredPackages){
+            packagesListModel.addElement(pack.name + " " + pack.version.toString());
+        }
+    }
+
+    private void requiredPackagesFromListModel(){
+        Set<Package> packages = new HashSet<>();
+        for(int i = 0; i < this.packagesListModel.size(); i++) {
+            String rawPack = packagesListModel.get(i);
+            String[] nameAndVersion = rawPack.split(" ");
+            if(nameAndVersion.length == 2){
+                Package pack = new Package(nameAndVersion[0], nameAndVersion[1]);
+                packages.add(pack);
+            }
+        }
+        requiredPackages = packages;
     }
     
     private void basicInfoFromUI(){
@@ -229,6 +255,7 @@ public class NewModuleDialog extends Dialog {
         resultsFromListModel();
         requiredFilesAndScriptsFromListModel();
         requiredParametersFromListModel();
+        requiredPackagesFromListModel();
         infoFromTextArea();
     }
     
@@ -284,6 +311,7 @@ public class NewModuleDialog extends Dialog {
                                             this.results,
                                             this.requiredScripts);
             }
+            script.requiredPackages = requiredPackages;
             script.max2Conditions = this.max2Conditions;
             script.needsReplicates = this.needsReplicates;
             script.info = this.info;
@@ -307,8 +335,9 @@ public class NewModuleDialog extends Dialog {
                 script.createEnvironment(scriptFile.getAbsolutePath());
             }
             editedScript = true;
+            this.setVisible(false);
         }
-        this.setVisible(false);
+
     }
 
     private void populateFieldsWithValuesFromScript(){
@@ -317,6 +346,7 @@ public class NewModuleDialog extends Dialog {
         listModelFromResults(script.results, script.mandatoryResults);
         inputsListModelFromInputList(script.requiredExternalFiles);
         listModelFromRequiredParameters(script.requiredParameters);
+        listModelFromRequiredPackages(script.requiredPackages);
         infoAreaFromString(script.info);
     }
     
@@ -329,13 +359,13 @@ public class NewModuleDialog extends Dialog {
     
     private void initComponents(){
         this.setTitle("New " + scriptType.getSimpleName() + " Module");
-        dialogSize = new Dimension(500, 620);
+        dialogSize = new Dimension(560, 685);
         int wGap = 5;
         int hGap = 5;
         int rows = 3;
         int cols = 2;
         buttonPanelHeight = 32;
-        availableSize = new Dimension(dialogSize.width-20, dialogSize.height-20);
+        availableSize = new Dimension(dialogSize.width-20, dialogSize.height-40);
         componentPanelHeight = (availableSize.height-(hGap*(rows))-buttonPanelHeight)/rows;
         componentPanelWidth = (availableSize.width-(wGap*(cols-1)))/cols;
         componentPanelSize = new Dimension(componentPanelWidth, componentPanelHeight);
@@ -350,12 +380,14 @@ public class NewModuleDialog extends Dialog {
         initInputs();
         initInfoArea();
         initParams();
+        initPackages();
         initButtons();
         
         add(generalInfoPanel);
         add(resultsPanel);
         add(inputsPanel);
         add(paramsPanel);
+        add(packagesPanel);
         add(infoScroller);
         add(buttonsPanel);
         
@@ -544,6 +576,65 @@ public class NewModuleDialog extends Dialog {
         paramsPanel.add(addNewParamButton);
         paramsPanel.add(eraseParamButton);
     }
+
+    private void initPackages(){
+        packagesPanel = new Panel();
+        packagesPanel.setLayout(new FlowLayout(java.awt.FlowLayout.CENTER, 1, 5));
+        packagesPanel.setPreferredSize(new Dimension(componentPanelWidth, componentPanelHeight));
+
+        packagesLabel = new BigLabel("Required Packages: ");
+        packagesListModel = new DefaultListModel<String>();
+        packagesList = new JList(packagesListModel);
+        packagesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        packagesList.setLayoutOrientation(JList.VERTICAL);
+        packagesList.setVisibleRowCount(-1);
+        packagesList.addListSelectionListener((ListSelectionEvent e) -> {
+            String selected = (String)packagesList.getSelectedValue();
+            if(selected == null){
+                rmPackageButton.setEnabled(false);
+            }else{
+                rmPackageButton.setEnabled(true);
+            }
+        });
+        packagesScroller = new JScrollPane(packagesList);
+        packagesScroller.setPreferredSize(new Dimension(scrollerSize.width, scrollerSize.height));
+
+        addPackageButton = new Button();
+        addPackageButton.setIcon(new ImageIcon(getClass().getResource("/peridot/GUI/icons/add-icon-24.png")));
+        addPackageButton.addActionListener((java.awt.event.ActionEvent evt) -> {
+            addNewPackage();
+        });
+
+        rmPackageButton = new Button();
+        rmPackageButton.setIcon(new ImageIcon(getClass().getResource("/peridot/GUI/icons/Delete-icon-24.png")));
+        rmPackageButton.setEnabled(false);
+        rmPackageButton.addActionListener((java.awt.event.ActionEvent evt) -> {
+            rmPackage();
+        });
+
+        packagesPanel.add(packagesLabel);
+        packagesPanel.add(packagesScroller);
+        packagesPanel.add(addPackageButton);
+        packagesPanel.add(rmPackageButton);
+    }
+
+    private void addNewPackage(){
+        NewPackageDialog dialog = new NewPackageDialog(publicParent);
+        dialog.setVisible(true);
+        if(dialog.isSuccessful()){
+            packagesListModel.addElement(dialog.name + " " + dialog.version);
+        }
+    }
+
+    private void rmPackage(){
+        int index = packagesList.getSelectedIndex();
+        try {
+            packagesListModel.remove(index);
+        }catch (java.lang.ArrayIndexOutOfBoundsException ex){
+            Log.logger.severe("Cannot remove package "
+                    + index + " because it is out of bounds (max " + (packagesListModel.getSize()-1) + ").");
+        }
+    }
     
     private void initInfoArea(){
         infoArea = new JTextArea();
@@ -551,8 +642,9 @@ public class NewModuleDialog extends Dialog {
         infoArea.setEditable(true);
         infoArea.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
         infoArea.setLineWrap(true);
+        infoArea.setWrapStyleWord(true);
         infoScroller = new JScrollPane(infoArea);
-        infoScroller.setPreferredSize(new Dimension(availableSize.width, componentPanelHeight-20));
+        infoScroller.setPreferredSize(new Dimension(componentPanelWidth, componentPanelHeight-10));
         infoArea.setText("[describe the module here]");
     }
     
@@ -563,7 +655,11 @@ public class NewModuleDialog extends Dialog {
         
         Dimension buttonSize = new Dimension((availableSize.width-20)/2, this.buttonPanelHeight);
         createButton = new BigButton();
-        createButton.setText("Create");
+        if (editing) {
+            createButton.setText("Save");
+        }else{
+            createButton.setText("Create");
+        }
         createButton.setIcon(new ImageIcon(getClass().getResource("/peridot/GUI/icons/check-icon-32.png")));
         createButton.setPreferredSize(buttonSize);
         createButton.addActionListener((java.awt.event.ActionEvent evt) ->{
@@ -673,4 +769,12 @@ public class NewModuleDialog extends Dialog {
     
     Dimension dialogSize, availableSize, componentPanelSize, scrollerSize;
     int componentPanelHeight, componentPanelWidth, buttonPanelHeight;
+
+    Panel packagesPanel;
+    Label packagesLabel;
+    JScrollPane packagesScroller;
+    JList packagesList;
+    DefaultListModel<String> packagesListModel;
+
+    JButton addPackageButton, rmPackageButton;
 }

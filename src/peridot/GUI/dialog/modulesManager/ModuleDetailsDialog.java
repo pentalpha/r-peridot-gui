@@ -42,7 +42,7 @@ public class ModuleDetailsDialog extends Dialog {
         }catch(IOException ex){
             Log.logger.log(Level.SEVERE, ex.getMessage(), ex);
         }*/
-        dialogSize = new Dimension(560, 700);
+        dialogSize = new Dimension(560, 685);
         int wGap = 5;
         int hGap = 5;
         availableSize = new Dimension(dialogSize.width-20, dialogSize.height-20);

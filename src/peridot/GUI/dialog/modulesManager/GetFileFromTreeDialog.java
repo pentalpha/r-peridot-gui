@@ -6,6 +6,7 @@
 package peridot.GUI.dialog.modulesManager;
 
 import peridot.Archiver.Places;
+import peridot.GUI.GUIUtils;
 import peridot.GUI.component.Dialog;
 import peridot.script.RModule;
 
@@ -35,7 +36,9 @@ public class GetFileFromTreeDialog extends Dialog{
         JScrollPane treeView = new JScrollPane(tree);
         treeView.setPreferredSize(scrollerSize);
         add(treeView);
-        
+
+        Dimension loc = GUIUtils.getCenterLocation(dialogSize.width, dialogSize.height);
+        setLocation(loc.width, loc.height);
         //setResizable(false);
     }
     
