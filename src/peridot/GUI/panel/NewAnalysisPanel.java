@@ -182,6 +182,11 @@ public class NewAnalysisPanel extends Panel {
         
         tryToHideModules();
         tryToHideParamsAndCreate();
+
+        JCheckBox box = scriptCheckboxes.get("VennDiagram");
+        if(box != null){
+            box.doClick();
+        }
     }
     
     private void makeCreateContainer(){
@@ -442,7 +447,7 @@ public class NewAnalysisPanel extends Panel {
                 }
             }*/
         }else{
-            if(this.nPackages < 1){
+            if(this.nAnalysisModules < 1){
                 unabled = false;
             }
             for(String name : RModule.availableModules.get(module).requiredScripts){
@@ -640,26 +645,40 @@ public class NewAnalysisPanel extends Panel {
     }
     
     public void selectScript(String name, boolean add, boolean analysisScript){
+        //VennDiagram specific behaviour:
+        if(name.equals("VennDiagram")){
+            if(add){
+                if(!selectedScripts.contains("VennDiagram")){
+                    selectedScripts.add(name);
+                    nPostAnalysisModules++;
+                    updateDependantModulesUnabled("VennDiagram");
+                }
+            }else{
+                scriptCheckboxes.get("VennDiagram").doClick();
+            }
+            return;
+        }
+        //General behaviour:
         if(selectedScripts.contains(name) != add){
             if(add){
                 selectedScripts.add(name);
                 if(analysisScript){
-                    nPackages++;
+                    nAnalysisModules++;
                 }else{
-                    nScripts++;
+                    nPostAnalysisModules++;
                 }
             }else{
                 selectedScripts.remove(name);
                 if(analysisScript){
-                    nPackages--;
+                    nAnalysisModules--;
                 }else{
-                    nScripts--;
+                    nPostAnalysisModules--;
                 }
             }
 
             if(analysisScript){
                 editModuleParamsButtons.get(name).setEnabled(add);
-                Log.logger.info("nPackages: " + nPackages);
+                Log.logger.info("nAnalysisModules: " + nAnalysisModules);
             }
 
             updateDependantModulesUnabled(name);
@@ -703,7 +722,7 @@ public class NewAnalysisPanel extends Panel {
     
     public void tryToHideParamsAndCreate(){
         try{
-            if(nPackages >= 1){
+            if(nAnalysisModules >= 1){
                 if(this.parametersContainer.isVisible() == false){
                     SwingUtilities.invokeLater(() -> {
                         separator2.setVisible(true);
@@ -753,8 +772,8 @@ public class NewAnalysisPanel extends Panel {
     public int sleepBetweenComponents = 120;
     public int sleepBetweenChecks = 100;
     
-    public int nScripts = 0;
-    public int nPackages = 0;
+    public int nPostAnalysisModules = 0;
+    public int nAnalysisModules = 0;
     
     public JButton createButton;
     private JPanel createContainer;
