@@ -50,9 +50,7 @@ public class ParametersPanel extends Panel {
         this.defaultValueButtons = defaultValueButtons;
         this.setParams(initialValues);
     }
-    
 
-    
     public void setParams(AnalysisParameters initialValues){
         if(initialValues != null){
             params = initialValues;
@@ -145,8 +143,19 @@ public class ParametersPanel extends Panel {
                         }else{
                             //Log.logger.info("passing: " + pair.getKey() + " -> " + selectedValue);
                         }
-                    }else{
-                        //Log.logger.info(pair.getValue().getName() + " != " + GeneIdType.class.getName());
+                    }else if(pair.getValue() == Float.class){
+                        Object fieldValue = comboBox.getSelectedItem();
+                        if(fieldValue instanceof Float){
+                            values.passParameter(pair.getKey(), (Float)fieldValue);
+                        }else if(fieldValue instanceof String){
+                            Float floatValue = null;
+                            try{
+                                floatValue = Float.parseFloat((String)fieldValue);
+                            }catch(Exception ex){
+                                floatValue = new Float(0);
+                            }
+                            values.passParameter(pair.getKey(), floatValue);
+                        }
                     }
                 }else{
                     Log.logger.info("unidentified field");
@@ -182,18 +191,18 @@ public class ParametersPanel extends Panel {
                         model = getSpinnerNotUseOrFloatModel();
                     }else{
                         model = new javax.swing.SpinnerNumberModel(
-                               defaultValue.floatValue(), 0f, null, 0.001f);
+                               defaultValue.floatValue(), 0f, null, 0.1f);
                     }
                 }else{
                     model = new javax.swing.SpinnerNumberModel(
-                                                        0.01f, 0f, null, 0.001f);
+                                                        0.01f, 0f, null, 0.1f);
                 }
             }else{
                 if(value.equals(new Float(0))){
                     model = getSpinnerNotUseOrFloatModel();
                 }else{
                     model = new javax.swing.SpinnerNumberModel(
-                            ((Float)value).floatValue(), 0f, null, 0.001f);
+                            ((Float)value).floatValue(), 0f, null, 0.01f);
                 }
             }
         }
@@ -233,8 +242,13 @@ public class ParametersPanel extends Panel {
             JCheckBox checkbox = new CheckBox();
             
             label.setText(Global.getNaturallyWritenString(pair.getKey()));
-            
-            if(pair.getValue() == Integer.class || pair.getValue() == Float.class){
+            if(pair.getKey().equals("pValue") || pair.getKey().equals("fdr")){
+                JComboBox comboBox = new JComboBox();
+                comboBox.addItem("0.01");
+                comboBox.addItem("0.05");
+                comboBox.addItem("not-use");
+                field = comboBox;
+            }else if(pair.getValue() == Integer.class || pair.getValue() == Float.class){
                 JSpinner spinner = new JSpinner();
                 spinner.setPreferredSize(new java.awt.Dimension(90, 28));
                 Class type = pair.getValue();
