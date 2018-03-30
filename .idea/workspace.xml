@@ -7,8 +7,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b4fbcb0b-00e3-4c1b-ab0c-a643ec73550d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jar/r-peridot-gui.jar" afterPath="$PROJECT_DIR$/jar/r-peridot-gui.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/r-peridot.jar" afterPath="$PROJECT_DIR$/lib/r-peridot.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/panel/NewAnalysisPanel.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/panel/NewAnalysisPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/panel/ResultsPanel.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/panel/ResultsPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/panel/ViewResultsPanel.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/panel/ViewResultsPanel.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,38 +23,13 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ModuleDetailsDialog.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/peridot/GUI/dialog/modulesManager/ModuleDetailsDialog.java">
+      <file leaf-file-name="ResultsPanel.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/peridot/GUI/panel/ResultsPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="178" column="0" lean-forward="true" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NewAnalysisPanel.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/peridot/GUI/panel/NewAnalysisPanel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="47">
-              <caret line="636" column="0" lean-forward="true" selection-start-line="636" selection-start-column="0" selection-end-line="636" selection-end-column="0" />
+            <state relative-caret-position="179">
+              <caret line="202" column="33" lean-forward="true" selection-start-line="202" selection-start-column="33" selection-end-line="202" selection-end-column="33" />
               <folding>
-                <element signature="method#getNPackagesSelected#0;class#NewAnalysisPanel#0" expanded="false" />
-                <element signature="method#updateRNASeqDescription#0;class#NewAnalysisPanel#0" expanded="false" />
-                <element signature="method#moreThan2Conditions#0;class#NewAnalysisPanel#0" expanded="false" />
-                <element signature="method#makeCreateContainer#0;class#NewAnalysisPanel#0" expanded="false" />
-                <element signature="method#makeParametersContainer#0;class#NewAnalysisPanel#0" expanded="false" />
-                <element signature="method#makeDefineExpressionContainer#0;class#NewAnalysisPanel#0" expanded="false" />
-                <element signature="method#updateUnabledScripts#0;class#NewAnalysisPanel#0" expanded="false" />
-                <element signature="method#updateAnalysisModuleUnabledNoRecursion#0;class#NewAnalysisPanel#0" expanded="false" />
-                <element signature="method#updateModuleUnabled#0;class#NewAnalysisPanel#0" expanded="false" />
-                <element signature="method#updateDependantModulesUnabled#0;class#NewAnalysisPanel#0" expanded="false" />
-                <element signature="method#defineButtonActionPerformed#0;class#NewAnalysisPanel#0" expanded="false" />
-                <element signature="method#createButtonActionPerformed#0;class#NewAnalysisPanel#0" expanded="false" />
-                <element signature="method#deleteTempFiles#0;class#NewAnalysisPanel#0" expanded="false" />
-                <element signature="method#leftJustify#0;class#NewAnalysisPanel#0" expanded="false" />
-                <element signature="method#tryToHideModules#0;class#NewAnalysisPanel#0" expanded="false" />
-                <element signature="method#tryToHideParamsAndCreate#0;class#NewAnalysisPanel#0" expanded="false" />
+                <element signature="method#makeUpperPanel#0;class#ResultsPanel#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -123,8 +100,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/peridot/GUI/dialog/ConfirmNoHeaderDialog.java" />
-        <option value="$PROJECT_DIR$/lib/r-peridot.jar!/peridot/Archiver/Spreadsheet.class" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/panel/ScriptProgressMonitorPanel.java" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/panel/ProcessingPanel.java" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/panel/ParametersPanel.java" />
@@ -137,8 +112,6 @@
         <option value="$PROJECT_DIR$/src/peridot/GUI/component/Button.java" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/component/Panel.java" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/dialog/MaxColumnsDialog.java" />
-        <option value="$PROJECT_DIR$/src/peridot/GUI/panel/ViewResultsPanel.java" />
-        <option value="$PROJECT_DIR$/src/peridot/GUI/panel/ResultsPanel.java" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/dialog/ScriptResultsDialog.java" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/InterpreterManagerGUI.form" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/InterpreterManagerGUI.java" />
@@ -174,6 +147,10 @@
         <option value="$PROJECT_DIR$/lib/r-peridot.jar!/peridot/script/RModule.class" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/dialog/modulesManager/ModuleDetailsDialog.java" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/panel/NewAnalysisPanel.java" />
+        <option value="$PROJECT_DIR$/lib/r-peridot.jar!/peridot/Global.class" />
+        <option value="$PROJECT_DIR$/lib/r-peridot.jar!/peridot/Archiver/Spreadsheet.class" />
+        <option value="$PROJECT_DIR$/src/peridot/GUI/panel/ViewResultsPanel.java" />
+        <option value="$PROJECT_DIR$/src/peridot/GUI/panel/ResultsPanel.java" />
       </list>
     </option>
   </component>
@@ -201,9 +178,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -356,6 +332,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -498,14 +475,13 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22875817" sideWeight="0.5340393" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24846625" sideWeight="0.7204546" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2530675" sideWeight="0.7204546" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17792422" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294893" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2888889" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2984127" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="R Packages" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="R Graphics" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.52607363" sideWeight="0.55673224" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -517,6 +493,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.52607363" sideWeight="0.55673224" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -554,28 +531,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_102/javafx-src.zip!/javafx/application/Platform.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="35" column="19" lean-forward="false" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SimpleSwingBrowser.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_102/jre/lib/rt.jar!/sun/awt/windows/WToolkit.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1477">
-          <caret line="250" column="5" lean-forward="true" selection-start-line="250" selection-start-column="5" selection-end-line="250" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_102/src.zip!/java/awt/EventDispatchThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1037">
-          <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_102/src.zip!/java/util/concurrent/locks/LockSupport.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2397">
@@ -629,44 +584,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="16014">
           <caret line="1004" column="0" lean-forward="false" selection-start-line="1004" selection-start-column="0" selection-end-line="1004" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#65587#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#11868#11869#0" expanded="false" />
-            <element signature="e#11908#11909#0" expanded="false" />
-            <element signature="e#13078#13079#0" expanded="false" />
-            <element signature="e#13118#13119#0" expanded="false" />
-            <element signature="e#13922#13923#0" expanded="false" />
-            <element signature="e#13965#13966#0" expanded="false" />
-            <element signature="e#17727#17728#0" expanded="false" />
-            <element signature="e#17767#17768#0" expanded="false" />
-            <element signature="e#18531#18532#0" expanded="false" />
-            <element signature="e#18574#18575#0" expanded="false" />
-            <element signature="e#22621#22622#0" expanded="false" />
-            <element signature="e#22675#22676#0" expanded="false" />
-            <element signature="e#23742#23743#0" expanded="false" />
-            <element signature="e#23799#23800#0" expanded="false" />
-            <element signature="e#25330#25331#0" expanded="false" />
-            <element signature="e#25375#25376#0" expanded="false" />
-            <element signature="e#31221#31222#0" expanded="false" />
-            <element signature="e#31266#31267#0" expanded="false" />
-            <element signature="e#31309#31310#0" expanded="false" />
-            <element signature="e#31369#31370#0" expanded="false" />
-            <element signature="e#32780#32781#0" expanded="false" />
-            <element signature="e#32815#32816#0" expanded="false" />
-            <element signature="e#34606#34607#0" expanded="false" />
-            <element signature="e#34634#34635#0" expanded="false" />
-            <element signature="e#41527#41528#0" expanded="false" />
-            <element signature="e#41620#41621#0" expanded="false" />
-            <element signature="e#43196#43197#0" expanded="false" />
-            <element signature="e#43324#43325#0" expanded="false" />
-            <element signature="e#48414#48415#0" expanded="false" />
-            <element signature="e#48446#48447#0" expanded="false" />
-            <element signature="e#52060#52061#0" expanded="false" />
-            <element signature="e#52094#52095#0" expanded="false" />
-            <element signature="e#64796#64797#0" expanded="false" />
-            <element signature="e#64848#64849#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -802,7 +719,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="316">
           <caret line="43" column="35" lean-forward="true" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -919,7 +835,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
           <caret line="153" column="57" lean-forward="false" selection-start-line="153" selection-start-column="57" selection-end-line="153" selection-end-column="57" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -927,6 +842,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="112">
           <caret line="63" column="0" lean-forward="false" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -934,7 +850,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="112">
           <caret line="1293" column="0" lean-forward="false" selection-start-line="1293" selection-start-column="0" selection-end-line="1293" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -949,21 +864,36 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="112">
           <caret line="207" column="0" lean-forward="false" selection-start-line="207" selection-start-column="0" selection-end-line="207" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/dialog/modulesManager/ModuleDetailsDialog.java">
+    <entry file="jar://$PROJECT_DIR$/lib/r-peridot.jar!/peridot/Global.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="178" column="0" lean-forward="true" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
+        <state relative-caret-position="1428">
+          <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/r-peridot.jar!/peridot/Archiver/Spreadsheet.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="249" column="32" lean-forward="false" selection-start-line="249" selection-start-column="32" selection-end-line="249" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/panel/ViewResultsPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="47" column="8" lean-forward="false" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/peridot/GUI/panel/NewAnalysisPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="47">
-          <caret line="636" column="0" lean-forward="true" selection-start-line="636" selection-start-column="0" selection-end-line="636" selection-end-column="0" />
+        <state relative-caret-position="17">
+          <caret line="648" column="39" lean-forward="false" selection-start-line="648" selection-start-column="39" selection-end-line="648" selection-end-column="39" />
           <folding>
             <element signature="method#getNPackagesSelected#0;class#NewAnalysisPanel#0" expanded="false" />
             <element signature="method#updateRNASeqDescription#0;class#NewAnalysisPanel#0" expanded="false" />
@@ -981,6 +911,24 @@
             <element signature="method#leftJustify#0;class#NewAnalysisPanel#0" expanded="false" />
             <element signature="method#tryToHideModules#0;class#NewAnalysisPanel#0" expanded="false" />
             <element signature="method#tryToHideParamsAndCreate#0;class#NewAnalysisPanel#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/dialog/modulesManager/ModuleDetailsDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="178" column="0" lean-forward="false" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/panel/ResultsPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="202" column="33" lean-forward="true" selection-start-line="202" selection-start-column="33" selection-end-line="202" selection-end-column="33" />
+          <folding>
+            <element signature="method#makeUpperPanel#0;class#ResultsPanel#0" expanded="false" />
           </folding>
         </state>
       </provider>

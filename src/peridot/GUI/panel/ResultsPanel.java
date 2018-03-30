@@ -8,7 +8,6 @@ package peridot.GUI.panel;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 import peridot.Archiver.Places;
-import peridot.CLI.PeridotCmd;
 import peridot.GUI.MainGUI;
 import peridot.GUI.WrapLayout;
 import peridot.GUI.component.*;
@@ -37,8 +36,9 @@ import java.util.logging.Level;
 public class ResultsPanel extends Panel {
 
     JFrame parent;
-    private HashMap<String, File> packages;
-    private HashMap<String, File> scripts;
+    private HashMap<String, File> analysisModules;
+    private HashMap<String, File> postAnalysisModules;
+    private File vennDiagramDir = null;
 
     /**
      * Creates new form ResultsPanel
@@ -46,38 +46,23 @@ public class ResultsPanel extends Panel {
      */
     public ResultsPanel(JFrame parent) {
         super();
-        this.scripts = new HashMap<>();
-        this.packages = new HashMap<>();
+        this.postAnalysisModules = new HashMap<>();
+        this.analysisModules = new HashMap<>();
 
         this.parent = parent;
         customInit();
         updateData();
     }
 
-    public void updateData() {
-        //Log.logger.info("updating available results");
+    private void updateAvailableResults(){
         Set<File> scriptResultsFolders = this.getScriptResultsFolders();
-        this.packages.clear();
-        this.scripts.clear();
         updatePostAnalysisModules(scriptResultsFolders);
         updateAnalysisModules(scriptResultsFolders);
-
-        this.packListArea.removeAll();
-        if(packages.isEmpty()){
-            this.packListArea.add(new Label("None"));
-        }else{
-            String[] packNames = packages.keySet().toArray(new String[0]);
-            for (int i = 0; i < packNames.length-1; i++) {
-                this.packListArea.add(new Label(packNames[i] + ","));
-            }
-            this.packListArea.add(new Label(packNames[packNames.length-1] + "."));
-        }
-        
-        updateScriptsButtons();
     }
 
     private void updatePostAnalysisModules(Set<File> scriptResultsFolders) {
         //Log.logger.info("Updating available post analysis results");
+        vennDiagramDir = null;
         for (String scriptName : RModule.getAvailablePostAnalysisModules()) {
             File dir = null;
             for (File scriptDir : scriptResultsFolders) {
@@ -88,8 +73,11 @@ public class ResultsPanel extends Panel {
                 }
             }
             if (dir != null) {
-                this.scripts.put(scriptName, dir);
-                
+                if(scriptName.equals("VennDiagram")){
+                    vennDiagramDir = dir;
+                }else {
+                    this.postAnalysisModules.put(scriptName, dir);
+                }
             }
         }
     }
@@ -108,21 +96,64 @@ public class ResultsPanel extends Panel {
                 }
             }
             if (dir != null) {
-                this.packages.put(packName, dir);
+                this.analysisModules.put(packName, dir);
             }
         }
     }
+
+    public void updateData() {
+        //Log.logger.info("updating available results");
+        this.analysisModules.clear();
+        this.postAnalysisModules.clear();
+        updateAvailableResults();
+
+        //updatePackListArea();
+        updateUpperPanel();
+        updatePostAnalysisButtons();
+    }
+
+    private void updateUpperPanel(){
+        viewResultsButton.setEnabled(vennDiagramDir != null);
+        individualPanel.removeAll();
+        if(analysisModules.isEmpty()){
+            this.individualPanel.add(new BigLabel("None"));
+        }else{
+            this.individualPanel.add(new BigLabel("Individual Packages:"));
+            for(Map.Entry<String, File> entry : analysisModules.entrySet()){
+                Button newButton = new Button();
+                newButton.setText(entry.getKey());
+                newButton.addActionListener((java.awt.event.ActionEvent evt) -> {
+                    (new ScriptResultsDialog(parent, false, entry.getKey(), entry.getValue())).setVisible(true);
+                });
+                newButton.setPreferredSize(smallButtonSize);
+                individualPanel.add(newButton);
+            }
+        }
+    }
+
+    private void updatePackListArea(){
+        this.packListArea.removeAll();
+        if(analysisModules.isEmpty()){
+            this.packListArea.add(new Label("None"));
+        }else{
+            String[] packNames = analysisModules.keySet().toArray(new String[0]);
+            for (int i = 0; i < packNames.length-1; i++) {
+                this.packListArea.add(new Label(packNames[i] + ","));
+            }
+            this.packListArea.add(new Label(packNames[packNames.length-1] + "."));
+        }
+    }
     
-    private void updateScriptsButtons() {
+    private void updatePostAnalysisButtons() {
         postAnalysisPanel.removeAll();
-        if(scripts.isEmpty()){
+        if(postAnalysisModules.isEmpty()){
             JButton button = new BigButton();
             button.setText("No post analysis available");
             button.setPreferredSize(new Dimension(400, 40));
             button.setEnabled(false);
             this.postAnalysisPanel.add(button);
         }else{    
-            for (Map.Entry<String, File> pair : scripts.entrySet()) {
+            for (Map.Entry<String, File> pair : postAnalysisModules.entrySet()) {
                 JButton button = new BigButton();
                 button.setText(pair.getKey());
                 button.addActionListener((java.awt.event.ActionEvent evt) -> {
@@ -159,9 +190,61 @@ public class ResultsPanel extends Panel {
         setMinimumSize(new java.awt.Dimension(546, 495));
         setPreferredSize(MainGUI.defaultSize);
         
-        makeUpperPanel();
+        makeNewUpperPanel();
         makeMiddlePanel();
         makeBottomPanel();
+    }
+
+    private void makeNewUpperPanel(){
+        Dimension size = new java.awt.Dimension(546, 160);
+        Dimension innerSize = new Dimension(size.width, size.height-32);
+        Dimension subSize = new java.awt.Dimension(160, innerSize.height);
+        smallButtonSize = new Dimension((subSize.width-5)/2, 30);
+        upperPanel = new Panel();
+        upperPanel.setPreferredSize(size);
+        upperPanel.setLayout(new WrapLayout(java.awt.FlowLayout.CENTER, 5, 5));
+
+        topLabel = new BiggerLabel();
+        topLabel.setText("Differential Expression:");
+        upperPanel.add(topLabel);
+        //start inner panel
+        Panel innerPanel = new Panel();
+        innerPanel.setPreferredSize(innerSize);
+        innerPanel.setLayout(new WrapLayout(java.awt.FlowLayout.CENTER, 5, 0));
+
+        viewResultsButton = new BigButton();
+        viewResultsButton.setText("Consensus");
+        viewResultsButton.setPreferredSize(subSize);
+        viewResultsButton.setMinimumSize(subSize);
+
+        viewResultsButton.addActionListener((java.awt.event.ActionEvent evt) -> {
+            if(vennDiagramDir != null) {
+                (new ScriptResultsDialog(parent, false,
+                        "VennDiagram", vennDiagramDir)).setVisible(true);
+            }
+        });
+        viewResultsButton.setIcon(
+                new ImageIcon(getClass().getResource("/peridot/GUI/icons/Clear-Green-Button-icon32.png"))
+        );
+        innerPanel.add(viewResultsButton);
+
+        JSeparator middleSeparator = new JSeparator(JSeparator.VERTICAL);
+        middleSeparator.setPreferredSize(new java.awt.Dimension(3, 90));
+        innerPanel.add(middleSeparator);
+
+        individualPanel = new Panel();
+        individualPanel.setPreferredSize(new Dimension(subSize.width, subSize.height));
+        individualPanel.setLayout(new WrapLayout(java.awt.FlowLayout.CENTER, 3, 3));
+        innerPanel.add(individualPanel);
+        //end inner panel
+        upperPanel.add(innerPanel);
+
+        topSeparator = new javax.swing.JSeparator();
+        topSeparator.setPreferredSize(new java.awt.Dimension(520, 3));
+        //upperPanel.add(topSeparator);
+
+        add(upperPanel);
+        add(topSeparator);
     }
     
     private void makeUpperPanel(){
@@ -169,8 +252,8 @@ public class ResultsPanel extends Panel {
         upperPanel.setPreferredSize(new java.awt.Dimension(546, 140));
         upperPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
         
-        successfulPacksLabel1 = new BiggerLabel();
-        successfulPacksLabel1.setText("Successful Analysis:");
+        topLabel = new BiggerLabel();
+        topLabel.setText("Differential Expression:");
         
         viewResultsButton = new BigButton();
         viewResultsButton.setText("View All");
@@ -197,7 +280,7 @@ public class ResultsPanel extends Panel {
                         .addGroup(innerUpperPanelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(innerUpperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(successfulPacksLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(topLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(packListArea, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(viewResultsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -211,7 +294,7 @@ public class ResultsPanel extends Panel {
                                 .addContainerGap()
                                 .addGroup(innerUpperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addGroup(innerUpperPanelLayout.createSequentialGroup()
-                                                .addComponent(successfulPacksLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(topLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(packListArea, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                                         .addComponent(viewResultsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -233,7 +316,7 @@ public class ResultsPanel extends Panel {
         
         successfulOthersLabel = new BigLabel();
         successfulOthersLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        successfulOthersLabel.setText("Successful Post Analysis:");
+        successfulOthersLabel.setText("Post Analysis:");
         
         postAnalysisPanel = new Panel();
         postAnalysisPanel.setPreferredSize(new java.awt.Dimension(545, 300));
@@ -304,7 +387,7 @@ public class ResultsPanel extends Panel {
     }
 
     private void viewResultsButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        (new PackagesResultsDialog(parent, false, packages)).setVisible(true);
+        (new PackagesResultsDialog(parent, false, analysisModules)).setVisible(true);
     }
 
     private void saveResultsButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -327,8 +410,11 @@ public class ResultsPanel extends Panel {
     private javax.swing.JLabel saveInLabel;
     private javax.swing.JButton saveResultsButton;
     private javax.swing.JLabel successfulOthersLabel;
-    private javax.swing.JLabel successfulPacksLabel1;
+    private javax.swing.JLabel topLabel;
     private javax.swing.JSeparator topSeparator;
     private javax.swing.JPanel upperPanel;
     private javax.swing.JButton viewResultsButton;
+
+    private JPanel consensusPanel, individualPanel;
+    private Dimension smallButtonSize;
 }

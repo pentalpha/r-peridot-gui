@@ -44,13 +44,15 @@ public class ViewResultsPanel extends Panel {
         resultViewers = new HashMap<>();
         RModule script = RModule.availableModules.get(scriptName);
         Set<String> allResults = script.results;
-        if(script.mandatoryResults.size() > 0){
+        if(script.mandatoryResults.size() > 0)
+        {
             String[] mandatoryResults = script.mandatoryResults.toArray(new String[script.mandatoryResults.size()]);
             Arrays.sort(mandatoryResults);
             for(int i = mandatoryResults.length-1; i >= 0; i--){
                 addResultTab(mandatoryResults[i]);
             }
         }
+
         for(String result : allResults)
         {
             if(!script.mandatoryResults.contains(result)){
