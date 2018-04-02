@@ -41,7 +41,7 @@ public class JTableUtils {
             data = new Object[allRows.size()-1][];
             headers = new Object[allRows.get(allRows.size()-1).length];
             String[] firstRow = allRows.get(0);
-            boolean lessItensOnFirstRow = spreadsheet.getInfo().getFirstCellPresent();
+            boolean lessItensOnFirstRow = !spreadsheet.getInfo().getFirstCellPresent();
             boolean firstRowIsHeader = spreadsheet.getInfo().getHeaderOnFirstLine();
             if(lessItensOnFirstRow || firstRowIsHeader){
                 if(allRows.size() == 1){
