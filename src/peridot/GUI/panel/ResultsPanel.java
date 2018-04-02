@@ -75,6 +75,7 @@ public class ResultsPanel extends Panel {
             if (dir != null) {
                 if(scriptName.equals("VennDiagram")){
                     vennDiagramDir = dir;
+                    ScriptResultsDialog.fillCountPlots(vennDiagramDir);
                 }else {
                     this.postAnalysisModules.put(scriptName, dir);
                 }

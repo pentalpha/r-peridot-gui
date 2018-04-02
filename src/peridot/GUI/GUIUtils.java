@@ -1,7 +1,13 @@
 package peridot.GUI;
 
+import peridot.GUI.component.*;
+import peridot.GUI.component.Label;
+import peridot.Log;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 /**
  * Created by pentalpha on 23/03/2018.
@@ -42,5 +48,24 @@ public class GUIUtils {
         int x = (int)(screenSize.width - width) / 2;
         int y = (int)(screenSize.height - height) / 2;
         return new Dimension(x, y);
+    }
+
+    public static boolean showImageDialog(File file){
+        JLabel logoLabel = Label.getImageLabel(file);
+        if(logoLabel != null){
+            JDialog frame = new JDialog();
+            frame.getContentPane().add(logoLabel);
+            frame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            frame.setSize(600, 615);
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setModal(false);
+            frame.setVisible(true);
+            return true;
+        }else{
+            Log.logger.info("Could not load image " + file.getAbsolutePath());
+            return false;
+        }
+
     }
 }
