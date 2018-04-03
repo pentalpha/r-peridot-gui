@@ -81,10 +81,10 @@ public class SpreadsheetInfoDialog extends JDialog{
     public void loadTableInScroller(){
         //Log.logger.info("Reloading preview table...");
         java.util.List<String[]> rows = table.getRows(100);
-        Log.logger.info(rows.size() + " lines");
-        for(String[] line : rows){
-            Log.logger.info(line.length + " cols");
-        }
+        //Log.logger.info(rows.size() + " lines");
+        //for(String[] line : rows){
+        //    Log.logger.info(line.length + " cols");
+        //}
         dataTable = JTableUtils.getTableWithoutHeader(rows,
                 false, 9,100);
         scroller = new JScrollPane(dataTable);

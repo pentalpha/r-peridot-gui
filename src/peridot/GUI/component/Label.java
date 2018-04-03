@@ -32,6 +32,7 @@ public class Label extends JLabel {
         ImageIcon imageIcon = new ImageIcon(file.getAbsolutePath());
         JLabel img = new JLabel();
         img.setIcon(imageIcon);
+        imageIcon.getImage().flush();
         return img;
     }
 }

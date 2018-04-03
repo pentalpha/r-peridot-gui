@@ -8,6 +8,7 @@ package peridot.GUI.dialog;
 import org.apache.commons.lang3.SystemUtils;
 import peridot.AnalysisData;
 import peridot.Archiver.Manager;
+import peridot.Archiver.Places;
 import peridot.Archiver.Spreadsheet;
 import peridot.GUI.MainGUI;
 import peridot.GUI.WrapLayout;
@@ -20,6 +21,8 @@ import peridot.GUI.panel.ConditionPanel;
 import peridot.Global;
 import peridot.IndexedString;
 import peridot.Log;
+import peridot.script.r.Interpreter;
+import peridot.script.r.Script;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -39,7 +42,7 @@ public class NewExpressionDialog extends Dialog {
     public AnalysisData expression;
     int thresholdMin = 0;
     int thresholdMax = 10;
-    int threshold = 5;
+    int threshold = 0;
     String roundingMode = "HALF_UP";
     String[] roundingModes = {"HALF_UP","HALF_DOWN","UP","DOWN"};
     private File expressionFile, conditionsFile;
@@ -51,6 +54,15 @@ public class NewExpressionDialog extends Dialog {
     //boolean headerOnFirstLine = false;
     //boolean noIDCell = false;
     private static NewExpressionDialog _instance = null;
+    private static File rawCountReadsFile = new File(Places.finalResultsDir.getAbsolutePath() +
+    File.separator + "rawCountReads.tsv");
+    private static File rawConditionsFile = new File(Places.finalResultsDir.getAbsolutePath() +
+            File.separator + "rawConditions.tsv");
+    private static File boxPlotFile = new File(Places.finalResultsDir.getAbsolutePath() +
+            File.separator + "rawCountsBoxPlot.png");
+    private static File boxPlotScript = new File(Places.modulesDir.getAbsolutePath() +
+            File.separator + "boxPlot.R");
+
     boolean loadedFromPrevious = false;
     
     Spreadsheet.Info info;
@@ -101,6 +113,7 @@ public class NewExpressionDialog extends Dialog {
                 idAndConditionsFieldValueChanged();
             }
         });
+
         conditionPanels = new HashMap<String, ConditionPanel>();
         addNewConditionButton = new Button();
         addNewConditionButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/peridot/GUI/icons/Add-Green-Button-icon-32.png"))); // NOI18N
@@ -233,6 +246,54 @@ public class NewExpressionDialog extends Dialog {
         
         return newConditions;
     }
+
+    private void loadBoxPlot(){
+        SortedMap<IndexedString, String> notUseConditions =
+                AnalysisData.getConditionsFromExpressionFile(expressionFile, info);
+        SortedMap<IndexedString, String> singleGroupConditions = new TreeMap<>();
+
+        for(Map.Entry<IndexedString, String> entry : notUseConditions.entrySet()){
+            singleGroupConditions.put(entry.getKey(), "groupA");
+        }
+
+        try{
+            AnalysisData expr = new AnalysisData(expressionFile, singleGroupConditions, info,
+                    "DOWN",
+                    0);
+            expr.setCountReadsFile(rawCountReadsFile);
+            expr.setConditionsFile(rawConditionsFile);
+
+            expr.writeExpression();
+        }catch (IOException ex){
+            ex.printStackTrace();
+            return;
+        }
+
+
+        String[] args = {NewExpressionDialog.rawCountReadsFile.getAbsolutePath(),
+                rawConditionsFile.getAbsolutePath(),
+                boxPlotFile.getAbsolutePath()};
+        Script boxPlotScript = new Script(NewExpressionDialog.boxPlotScript, args, false);
+        try{
+            //Log.logger.info("Running boxPlot script");
+            boxPlotScript.run(Interpreter.defaultInterpreter, true);
+            //Log.logger.info("boxPlot script finished");
+            //Log.logger.info(boxPlotScript.getOutputString());
+        }catch (Exception ex){
+            ex.printStackTrace();
+            Log.logger.info(boxPlotScript.getOutputString());
+            return;
+        }
+
+        if(boxPlotFile.exists()){
+            Log.logger.info("Loading boxplot image into GUI");
+            reloadRightPanel();
+            rightPanel.repaint();
+        }else{
+            Log.logger.info("Boxplot file was not created.");
+        }
+
+    }
     
     private boolean selectExpressionByFile(String filePath){
         File file = new File(filePath);
@@ -247,6 +308,7 @@ public class NewExpressionDialog extends Dialog {
                 }
                 conditions = AnalysisData.getConditionsFromExpressionFile(file, info);
                 expressionFile = file;
+                loadBoxPlot();
                 updateSetList();
                 setChangedConditions(false);
                 return true;
@@ -311,14 +373,22 @@ public class NewExpressionDialog extends Dialog {
         createButton = new BigButton();
         cancelButton = new BigButton();
 
+        leftPanel = new Panel();
+        rightPanel = new Panel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(dialogSize);
-        getContentPane().setLayout(new WrapLayout(java.awt.FlowLayout.CENTER, 0, 5));
+        setPreferredSize(new Dimension(dialogSize.width+620, dialogSize.height));
+        getContentPane().setLayout(new WrapLayout(FlowLayout.LEFT, 0, 0));
+        leftPanel.setPreferredSize(new Dimension(dialogSize.width, dialogSize.height-10));
+        leftPanel.setLayout(new WrapLayout(FlowLayout.CENTER, 0, 5));
+
+        rightPanel.setPreferredSize(new Dimension(610, 640));
+        rightPanel.setLayout(new WrapLayout(FlowLayout.CENTER, 400, 5));
 
         makeSetFilesPanel();
 
         jSeparator1.setPreferredSize(jSeparatorSize);
-        getContentPane().add(jSeparator1);
+        leftPanel.add(jSeparator1);
 
         adjustPanel.setPreferredSize(adjustPanelSize);
 
@@ -340,10 +410,10 @@ public class NewExpressionDialog extends Dialog {
 
         adjustPanel.add(conditionsScrollPane);
 
-        getContentPane().add(adjustPanel);
+        leftPanel.add(adjustPanel);
 
         jSeparator2.setPreferredSize(jSeparatorSize);
-        getContentPane().add(jSeparator2);
+        leftPanel.add(jSeparator2);
 
         roundingPanel = new Panel();
         roundingPanel.setPreferredSize(new java.awt.Dimension(dialogSize.width, 30));
@@ -355,35 +425,32 @@ public class NewExpressionDialog extends Dialog {
         }
         roundingPanel.add(roundingModesLabel);
         roundingPanel.add(roundingModesComboBox);
-        getContentPane().add(roundingPanel);
+        leftPanel.add(roundingPanel);
 
         thresholdPanel = new Panel();
         thresholdPanel.setPreferredSize(new java.awt.Dimension(dialogSize.width, 80));
         thresholdLabel = new Label("Count reads threshold: ");
         thresholdSlider = new JSlider(JSlider.HORIZONTAL,
                 thresholdMin, thresholdMax, threshold);
-        thresholdSlider.setMajorTickSpacing(2);
+        thresholdSlider.setMajorTickSpacing(1);
         thresholdSlider.setMinorTickSpacing(1);
         thresholdSlider.setPaintTicks(true);
         thresholdSlider.setPaintLabels(true);
 
         thresholdPanel.add(thresholdLabel);
         thresholdPanel.add(thresholdSlider);
-        getContentPane().add(thresholdPanel);
+        leftPanel.add(thresholdPanel);
 
         jSeparator3.setPreferredSize(jSeparatorSize);
-        getContentPane().add(jSeparator3);
+        leftPanel.add(jSeparator3);
 
-        int usableHeight = getPreferredSize().height;
-        for(Component comp : getContentPane().getComponents()){
-            usableHeight -= comp.getPreferredSize().height + 5;
-        }
+        int usableHeight = 65;
 
         if(SystemUtils.IS_OS_WINDOWS){
             usableHeight -= 20;
         }
 
-        bottomButtonsPanel.setPreferredSize(new java.awt.Dimension(dialogSize.width, usableHeight-10));
+        bottomButtonsPanel.setPreferredSize(new java.awt.Dimension(dialogSize.width, usableHeight));
         bottomButtonsPanel.setLayout(new java.awt.FlowLayout(FlowLayout.RIGHT, 10, 0));
 
         createButton.setText("Create");
@@ -396,9 +463,29 @@ public class NewExpressionDialog extends Dialog {
         cancelButton.addActionListener(evt -> cancelButtonActionPerformed(evt));
         bottomButtonsPanel.add(cancelButton);
 
-        getContentPane().add(bottomButtonsPanel);
+        leftPanel.add(bottomButtonsPanel);
+        getContentPane().add(leftPanel);
 
+        getContentPane().add(rightPanel);
         pack();
+    }
+
+    private void reloadRightPanel(){
+        rightPanel.removeAll();
+
+        boxPlotTitle = new BiggerLabel("Box Plot:");
+        boxPlotSubtitle = new Label("         Distribution of counts in different samples.");
+        boxPlot = Label.getImageLabel(boxPlotFile);
+
+        rightPanel.add(boxPlotTitle);
+        rightPanel.add(boxPlotSubtitle);
+        rightPanel.add(boxPlot);
+
+        rightPanel.repaint();
+        rightPanel.revalidate();
+        this.repaint();
+        this.revalidate();
+        //this.pack();
     }
     
     private void makeSetFilesPanel(){
@@ -486,7 +573,7 @@ public class NewExpressionDialog extends Dialog {
         setFilesPanel.add(labelsPanel);
         setFilesPanel.add(pathsPanel);
 
-        getContentPane().add(setFilesPanel);
+        leftPanel.add(setFilesPanel);
     }
     
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -667,4 +754,10 @@ public class NewExpressionDialog extends Dialog {
     private javax.swing.JPanel thresholdPanel;
     private javax.swing.JLabel thresholdLabel;
     private javax.swing.JSlider thresholdSlider;
+
+    private javax.swing.JPanel leftPanel, rightPanel;
+
+    private BiggerLabel boxPlotTitle;
+    private Label boxPlotSubtitle;
+    private JLabel boxPlot;
 }
