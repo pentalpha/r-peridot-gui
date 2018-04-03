@@ -28,6 +28,8 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -39,6 +41,7 @@ import static peridot.GUI.JTableUtils.tableOverColumnLimit;
  * @author pentalpha
  */
 public class NewExpressionDialog extends Dialog {
+    public boolean success;
     public AnalysisData expression;
     int thresholdMin = 0;
     int thresholdMax = 10;
@@ -54,11 +57,11 @@ public class NewExpressionDialog extends Dialog {
     //boolean headerOnFirstLine = false;
     //boolean noIDCell = false;
     private static NewExpressionDialog _instance = null;
-    private static File rawCountReadsFile = new File(Places.finalResultsDir.getAbsolutePath() +
+    private static File rawCountReadsFile = new File(Places.peridotDir.getAbsolutePath() +
     File.separator + "rawCountReads.tsv");
-    private static File rawConditionsFile = new File(Places.finalResultsDir.getAbsolutePath() +
+    private static File rawConditionsFile = new File(Places.peridotDir.getAbsolutePath() +
             File.separator + "rawConditions.tsv");
-    private static File boxPlotFile = new File(Places.finalResultsDir.getAbsolutePath() +
+    private static File boxPlotFile = new File(Places.peridotDir.getAbsolutePath() +
             File.separator + "rawCountsBoxPlot.png");
     private static File boxPlotScript = new File(Places.modulesDir.getAbsolutePath() +
             File.separator + "boxPlot.R");
@@ -146,6 +149,7 @@ public class NewExpressionDialog extends Dialog {
         }
         
         _instance = this;
+        success = false;
     }
     
     public static void setChangedConditions(boolean x){
@@ -377,6 +381,13 @@ public class NewExpressionDialog extends Dialog {
         rightPanel = new Panel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                success = false;
+            }
+        });
         setPreferredSize(new Dimension(dialogSize.width+620, dialogSize.height));
         getContentPane().setLayout(new WrapLayout(FlowLayout.LEFT, 0, 0));
         leftPanel.setPreferredSize(new Dimension(dialogSize.width, dialogSize.height-10));
@@ -577,6 +588,7 @@ public class NewExpressionDialog extends Dialog {
     }
     
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        success = false;
         this.setVisible(false);
     }
 
@@ -603,6 +615,7 @@ public class NewExpressionDialog extends Dialog {
                 ex.printStackTrace();
             }*/
             this.setVisible(false);
+            success = true;
         }else{
             JOptionPane.showMessageDialog(null, "Firstly, you must select a genetic expression file.");
         }

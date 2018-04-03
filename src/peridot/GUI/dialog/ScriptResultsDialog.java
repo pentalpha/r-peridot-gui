@@ -30,12 +30,16 @@ public class ScriptResultsDialog extends Dialog {
         countPlots = new HashMap<>();
         File countPlotsDir = new File(vennDiagramDir.getAbsolutePath() + File.separator + "countPlots");
         File[] files = countPlotsDir.listFiles();
-        for(File file : files){
-            if(file.isFile()){
-                String fileName = file.getName();
-                fileName = fileName.substring(0, fileName.length()-4);
-                countPlots.put(fileName, file);
-                //Log.logger.info(fileName + " -> " + file.getName());
+        if(files != null){
+            if(files.length >= 1){
+                for(File file : files){
+                    if(file.isFile()){
+                        String fileName = file.getName();
+                        fileName = fileName.substring(0, fileName.length()-4);
+                        countPlots.put(fileName, file);
+                        //Log.logger.info(fileName + " -> " + file.getName());
+                    }
+                }
             }
         }
     }

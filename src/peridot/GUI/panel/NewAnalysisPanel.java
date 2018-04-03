@@ -511,6 +511,9 @@ public class NewAnalysisPanel extends Panel {
         }
         
         expressionGUI.setVisible(true);
+        if(expressionGUI.success == false){
+            return;
+        }
         expression = expressionGUI.getResults();
         if(expression != null){
             //FileUtil.createTempFolder();
