@@ -313,14 +313,14 @@ public class ResultsPanel extends Panel {
     
     private void makeMiddlePanel(){
         middlePanel = new Panel();
-        middlePanel.setPreferredSize(new java.awt.Dimension(546, 360));
+        middlePanel.setPreferredSize(new java.awt.Dimension(546, 330));
         
         successfulOthersLabel = new BigLabel();
         successfulOthersLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         successfulOthersLabel.setText("Post Analysis:");
         
         postAnalysisPanel = new Panel();
-        postAnalysisPanel.setPreferredSize(new java.awt.Dimension(545, 300));
+        postAnalysisPanel.setPreferredSize(new java.awt.Dimension(545, 270));
         
         middlePanel.add(successfulOthersLabel);
         middlePanel.add(postAnalysisPanel);

@@ -8,9 +8,8 @@
     <list default="true" id="b4fbcb0b-00e3-4c1b-ab0c-a643ec73550d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jar/r-peridot-gui.jar" afterPath="$PROJECT_DIR$/jar/r-peridot-gui.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/dialog/NewExpressionDialog.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/dialog/NewExpressionDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/dialog/ScriptResultsDialog.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/dialog/ScriptResultsDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/panel/NewAnalysisPanel.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/panel/NewAnalysisPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/component/Table.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/component/Table.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/peridot/GUI/panel/ResultsPanel.java" afterPath="$PROJECT_DIR$/src/peridot/GUI/panel/ResultsPanel.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,18 +25,12 @@
       <file leaf-file-name="NewExpressionDialog.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/peridot/GUI/dialog/NewExpressionDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="64" column="53" lean-forward="true" selection-start-line="64" selection-start-column="53" selection-end-line="64" selection-end-column="53" />
+            <state relative-caret-position="527">
+              <caret line="64" column="53" lean-forward="false" selection-start-line="64" selection-start-column="53" selection-end-line="64" selection-end-column="53" />
               <folding>
                 <element signature="e#0#32147#0" expanded="true" />
                 <element signature="method#idAndConditionsFieldValueChanged#0;class#NewExpressionDialog#0" expanded="false" />
-                <element signature="e#15357#15552#0" expanded="true" />
-                <element signature="e#15551#15552#0" expanded="true" />
                 <element signature="method#selectConditionsFileButtonActionPerformed#0;class#NewExpressionDialog#0" expanded="false" />
-                <element signature="e#26465#26747#0" expanded="true" />
-                <element signature="e#26746#26747#0" expanded="true" />
-                <element signature="e#27270#27566#0" expanded="true" />
-                <element signature="e#27565#27566#0" expanded="true" />
                 <element signature="method#expressionPathFieldInputMethodTextChanged#0;class#NewExpressionDialog#0" expanded="false" />
                 <element signature="e#29548#29601#0" expanded="false" />
                 <element signature="method#addNewConditionButtonActionPerformed#0;class#NewExpressionDialog#0" expanded="false" />
@@ -50,18 +43,18 @@
       <file leaf-file-name="ScriptResultsDialog.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/peridot/GUI/dialog/ScriptResultsDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
+            <state relative-caret-position="561">
               <caret line="43" column="9" lean-forward="false" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NewAnalysisPanel.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="NewAnalysisPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/peridot/GUI/panel/NewAnalysisPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="553" column="52" lean-forward="true" selection-start-line="553" selection-start-column="52" selection-end-line="553" selection-end-column="52" />
+            <state relative-caret-position="153">
+              <caret line="566" column="5" lean-forward="true" selection-start-line="566" selection-start-column="5" selection-end-line="566" selection-end-column="5" />
               <folding>
                 <element signature="method#getNPackagesSelected#0;class#NewAnalysisPanel#0" expanded="false" />
                 <element signature="method#updateRNASeqDescription#0;class#NewAnalysisPanel#0" expanded="false" />
@@ -83,6 +76,31 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="ResultsPanel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/peridot/GUI/panel/ResultsPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="305">
+              <caret line="322" column="73" lean-forward="false" selection-start-line="322" selection-start-column="73" selection-end-line="322" selection-end-column="73" />
+              <folding>
+                <element signature="method#makeUpperPanel#0;class#ResultsPanel#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Table.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/peridot/GUI/component/Table.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="54" column="55" lean-forward="false" selection-start-line="54" selection-start-column="55" selection-end-line="54" selection-end-column="55" />
+              <folding>
+                <element signature="e#2336#2337#0" expanded="true" />
+                <element signature="e#2364#2365#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Label.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/peridot/GUI/component/Label.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -96,7 +114,7 @@
       <file leaf-file-name="SpreadsheetInfoDialog.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/peridot/GUI/dialog/SpreadsheetInfoDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1054">
+            <state relative-caret-position="1105">
               <caret line="83" column="10" lean-forward="false" selection-start-line="83" selection-start-column="10" selection-end-line="83" selection-end-column="10" />
               <folding />
             </state>
@@ -219,15 +237,15 @@
         <option value="$PROJECT_DIR$/lib/r-peridot.jar!/peridot/Archiver/Spreadsheet.class" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/panel/ViewResultsPanel.java" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/panel/ParametersPanel.java" />
-        <option value="$PROJECT_DIR$/src/peridot/GUI/panel/ResultsPanel.java" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/GUIUtils.java" />
-        <option value="$PROJECT_DIR$/src/peridot/GUI/component/Table.java" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/JTableUtils.java" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/dialog/SpreadsheetInfoDialog.java" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/component/Label.java" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/panel/NewAnalysisPanel.java" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/dialog/NewExpressionDialog.java" />
         <option value="$PROJECT_DIR$/src/peridot/GUI/dialog/ScriptResultsDialog.java" />
+        <option value="$PROJECT_DIR$/src/peridot/GUI/panel/ResultsPanel.java" />
+        <option value="$PROJECT_DIR$/src/peridot/GUI/component/Table.java" />
       </list>
     </option>
   </component>
@@ -255,6 +273,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -421,8 +441,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -566,11 +584,11 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22875817" sideWeight="0.5340393" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22239263" sideWeight="0.7204546" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22239263" sideWeight="0.7204546" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17792422" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294893" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32222223" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32777777" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="R Packages" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="R Graphics" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -897,16 +915,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/panel/ResultsPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="77" column="50" lean-forward="false" selection-start-line="77" selection-start-column="50" selection-end-line="77" selection-end-column="50" />
-          <folding>
-            <element signature="method#makeUpperPanel#0;class#ResultsPanel#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/peridot/GUI/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1360">
@@ -925,14 +933,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="217">
           <caret line="217" column="146" lean-forward="false" selection-start-line="217" selection-start-column="8" selection-end-line="217" selection-end-column="146" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/component/Table.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="35" column="61" lean-forward="false" selection-start-line="35" selection-start-column="61" selection-end-line="35" selection-end-column="61" />
           <folding />
         </state>
       </provider>
@@ -969,7 +969,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/peridot/GUI/dialog/SpreadsheetInfoDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
+        <state relative-caret-position="1105">
           <caret line="83" column="10" lean-forward="false" selection-start-line="83" selection-start-column="10" selection-end-line="83" selection-end-column="10" />
           <folding />
         </state>
@@ -985,18 +985,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/peridot/GUI/dialog/NewExpressionDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="64" column="53" lean-forward="true" selection-start-line="64" selection-start-column="53" selection-end-line="64" selection-end-column="53" />
+        <state relative-caret-position="527">
+          <caret line="64" column="53" lean-forward="false" selection-start-line="64" selection-start-column="53" selection-end-line="64" selection-end-column="53" />
           <folding>
             <element signature="e#0#32147#0" expanded="true" />
             <element signature="method#idAndConditionsFieldValueChanged#0;class#NewExpressionDialog#0" expanded="false" />
-            <element signature="e#15357#15552#0" expanded="true" />
-            <element signature="e#15551#15552#0" expanded="true" />
             <element signature="method#selectConditionsFileButtonActionPerformed#0;class#NewExpressionDialog#0" expanded="false" />
-            <element signature="e#26465#26747#0" expanded="true" />
-            <element signature="e#26746#26747#0" expanded="true" />
-            <element signature="e#27270#27566#0" expanded="true" />
-            <element signature="e#27565#27566#0" expanded="true" />
             <element signature="method#expressionPathFieldInputMethodTextChanged#0;class#NewExpressionDialog#0" expanded="false" />
             <element signature="e#29548#29601#0" expanded="false" />
             <element signature="method#addNewConditionButtonActionPerformed#0;class#NewExpressionDialog#0" expanded="false" />
@@ -1007,7 +1001,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/peridot/GUI/dialog/ScriptResultsDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
+        <state relative-caret-position="561">
           <caret line="43" column="9" lean-forward="false" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
           <folding />
         </state>
@@ -1015,8 +1009,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/peridot/GUI/panel/NewAnalysisPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="553" column="52" lean-forward="true" selection-start-line="553" selection-start-column="52" selection-end-line="553" selection-end-column="52" />
+        <state relative-caret-position="153">
+          <caret line="566" column="5" lean-forward="true" selection-start-line="566" selection-start-column="5" selection-end-line="566" selection-end-column="5" />
           <folding>
             <element signature="method#getNPackagesSelected#0;class#NewAnalysisPanel#0" expanded="false" />
             <element signature="method#updateRNASeqDescription#0;class#NewAnalysisPanel#0" expanded="false" />
@@ -1033,6 +1027,27 @@
             <element signature="method#leftJustify#0;class#NewAnalysisPanel#0" expanded="false" />
             <element signature="method#tryToHideModules#0;class#NewAnalysisPanel#0" expanded="false" />
             <element signature="method#tryToHideParamsAndCreate#0;class#NewAnalysisPanel#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/panel/ResultsPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="322" column="73" lean-forward="false" selection-start-line="322" selection-start-column="73" selection-end-line="322" selection-end-column="73" />
+          <folding>
+            <element signature="method#makeUpperPanel#0;class#ResultsPanel#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/peridot/GUI/component/Table.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="54" column="55" lean-forward="false" selection-start-line="54" selection-start-column="55" selection-end-line="54" selection-end-column="55" />
+          <folding>
+            <element signature="e#2336#2337#0" expanded="true" />
+            <element signature="e#2364#2365#0" expanded="true" />
           </folding>
         </state>
       </provider>

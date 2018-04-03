@@ -12,6 +12,8 @@ import peridot.GUI.dialog.ScriptResultsDialog;
 import peridot.Log;
 
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -28,27 +30,40 @@ public class Table extends JTable{
         this.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 boolean success = false;
-                if (e.getClickCount() >= 1) {
+                if (e.getClickCount() >= 2) {
                     int row = getSelectedRow();
-                    int column = getSelectedColumn();
-                    String str = getValueAt(row, column).toString();
-                    if(str.charAt(0) == ' '){
-                        str = str.substring(1, str.length());
+                    //int column = getSelectedColumn();
+                    String str = getValueAt(row, 0).toString();
+                    //Log.logger.info(row + " " + column);
+                    if(str != null){
+                        while(str.charAt(0) == ' '){
+                            str = str.substring(1, str.length());
+                        }
+                        while(str.charAt(str.length()-1) == ' '){
+                            str = str.substring(0, str.length()-1);
+                        }
+                        //Log.logger.info(str);
+                        File file = ScriptResultsDialog.getCountPlotFile(str);
+                        if(file != null){
+                            success = GUIUtils.showImageDialog(file);
+                        }
                     }
-                    Log.logger.info(str);
-                    File file = ScriptResultsDialog.getCountPlotFile(str);
-                    if(file != null){
-                        success = GUIUtils.showImageDialog(file);
+
+                    if(!success){
+                        JOptionPane.showMessageDialog(MainGUI._instance,
+                                "This entry is not in the differential expression consensus.",
+                                "Counts plot not found!",
+                                JOptionPane.OK_OPTION);
                     }
                 }
 
-                if(!success){
-                    JOptionPane.showMessageDialog(MainGUI._instance,
-                            "R-Peridot could not find a counts plot for this entry.",
-                            "Could not open image!",
-                            JOptionPane.OK_OPTION);
-                }
+
             }
         });
+    }
+
+    @Override
+    public boolean isCellEditable(int row, int col){
+        return false;
     }
 }
