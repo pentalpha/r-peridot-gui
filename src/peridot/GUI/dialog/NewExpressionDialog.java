@@ -257,7 +257,7 @@ public class NewExpressionDialog extends Dialog {
         SortedMap<IndexedString, String> singleGroupConditions = new TreeMap<>();
 
         for(Map.Entry<IndexedString, String> entry : notUseConditions.entrySet()){
-            singleGroupConditions.put(entry.getKey(), "groupA");
+            singleGroupConditions.put(entry.getKey(), "condition1");
         }
 
         try{
