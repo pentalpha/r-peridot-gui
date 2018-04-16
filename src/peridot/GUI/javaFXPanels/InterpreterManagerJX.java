@@ -67,7 +67,7 @@ public class InterpreterManagerJX implements Initializable{
             Parent root = loader.getRoot();
             InstallationBatchJX control = loader.getController();
             Stage stage = new Stage();
-            Scene scene = new Scene(root, 326, 400);
+            Scene scene = new Scene(root, 396, 400);
             stage.initStyle(StageStyle.DECORATED);
             stage.setTitle("Installation Queue");
             stage.setScene(scene);

@@ -345,9 +345,9 @@ public class NewAnalysisPanel extends Panel {
         for(String name : RModule.getAvailablePostAnalysisModules()){
             //Log.logger.info("Trying to unable " + name);
             updateModuleUnabled(name);
-            if(this.scriptCheckboxes.get(name).isEnabled() == false){
+            //if(this.scriptCheckboxes.get(name).isEnabled() == false){
                 //Log.logger.info("But could not.");
-            }
+            //}
         }
         /*boolean multiConditions = this.moreThan2Conditions();
         if(multiConditions){
@@ -407,6 +407,7 @@ public class NewAnalysisPanel extends Panel {
         if(unabled == false){
             //Log.logger.info(module + " wont be unabled this time.");
         }
+        if(checkbox != null){
         if(unabled != checkbox.isEnabled()){
             JButton paramsButton = editModuleParamsButtons.get(module);
             if(paramsButton != null){
@@ -423,6 +424,7 @@ public class NewAnalysisPanel extends Panel {
                 checkbox.setEnabled(false);
                 //paramsButton.setEnabled(false);
             }
+        }
         }
     }
     
@@ -461,23 +463,27 @@ public class NewAnalysisPanel extends Panel {
         if(!script.requiredPackagesInstalled()){
             unabled = false;
         }
-
-        if(unabled != checkbox.isEnabled()){
-            JButton paramsButton = editModuleParamsButtons.get(module);
-            if(paramsButton != null){
-                paramsButton.setEnabled(unabled);
-                this.updateUnabledScripts();
-            }
-            if(unabled){
-                    checkbox.setEnabled(true);
-            }else{    
-                if(checkbox.isSelected()){
-                    checkbox.doClick();
+        if(checkbox != null){
+            if(unabled != checkbox.isEnabled()){
+                JButton paramsButton = editModuleParamsButtons.get(module);
+                if(paramsButton != null){
+                    paramsButton.setEnabled(unabled);
+                    this.updateUnabledScripts();
                 }
-                checkbox.setEnabled(false);
+                if(unabled){
+                    checkbox.setEnabled(true);
+                }else{
+                    if(checkbox.isSelected()){
+                        checkbox.doClick();
+                    }
+                    checkbox.setEnabled(false);
+                }
+                updateDependantModulesUnabled(module);
             }
-            updateDependantModulesUnabled(module);
+        }else{
+            unabled = false;
         }
+
     }
     
     private void updateDependantModulesUnabled(String module){

@@ -9,6 +9,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import peridot.GUI.Main;
 import peridot.GUI.MainGUI;
 import peridot.Log;
+import peridot.script.RModule;
 import peridot.script.r.Interpreter;
 
 import javax.swing.*;
@@ -19,7 +20,7 @@ import java.io.IOException;
  * Created by pentalpha on 24/02/2018.
  */
 public class InterpreterManagerSwingDialog extends JDialog {
-    public static java.awt.Dimension defaultSize = new java.awt.Dimension(600, 400);
+    public static java.awt.Dimension defaultSize = new java.awt.Dimension(637, 400);
     private static int spacing = 0;
     //public static java.awt.Dimension rightButtonsSize = new java.awt.Dimension(160, defaultSize.height -spacing*2);
     //public static java.awt.Dimension leftListSize = new java.awt.Dimension(defaultSize.width-rightButtonsSize.width-spacing*3,
@@ -84,6 +85,16 @@ public class InterpreterManagerSwingDialog extends JDialog {
                     , JOptionPane.OK_CANCEL_OPTION);
             if(reply == JOptionPane.CANCEL_OPTION){
                 return;
+            }
+        }else{
+            if(RModule.modulesWithUnmetDependencies().containsAll(RModule.getAvailableAnalysisModules())){
+                int reply = JOptionPane.showConfirmDialog(_instance, "The selected R environment does not have the dependencies to run any module,"
+                                + " are you sure you want to use it?",
+                        "This environment cannot run any module!"
+                        , JOptionPane.OK_CANCEL_OPTION);
+                if(reply == JOptionPane.CANCEL_OPTION){
+                    return;
+                }
             }
         }
 
