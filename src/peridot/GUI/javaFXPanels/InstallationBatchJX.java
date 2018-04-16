@@ -170,6 +170,7 @@ public class InstallationBatchJX implements Initializable {
             Stage stage = (Stage) autoCloseCheckBox.getScene().getWindow();
             stage.close();
         }
+        InterpreterManagerJX.askToUpdateListOfInterpreters();
     }
 
 }
