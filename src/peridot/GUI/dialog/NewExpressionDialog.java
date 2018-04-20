@@ -43,9 +43,9 @@ import static peridot.GUI.JTableUtils.tableOverColumnLimit;
 public class NewExpressionDialog extends Dialog {
     public boolean success;
     public AnalysisData expression;
-    int thresholdMin = 0;
+    int thresholdMin = 1;
     int thresholdMax = 10;
-    int threshold = 0;
+    int threshold = 1;
     String roundingMode = "HALF_UP";
     String[] roundingModes = {"HALF_UP","HALF_DOWN","UP","DOWN"};
     private File expressionFile, conditionsFile;

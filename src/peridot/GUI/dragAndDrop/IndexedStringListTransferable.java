@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class IndexedStringListTransferable implements Transferable {
     public static final DataFlavor LIST_ITEMS_DATA_FLAVOR = new DataFlavor(List.class, "java/List");
+
     private List<IndexedString> items;
 
     public IndexedStringListTransferable(List<IndexedString> items) {

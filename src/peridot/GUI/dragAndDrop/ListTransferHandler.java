@@ -33,13 +33,13 @@ public class ListTransferHandler extends TransferHandler {
             boolean accept = false;
             //System.out.println("checking if suport can import...");
             if (canImport(support)) {
-                //System.out.println("...can import the transfer");
+                System.out.println("...can import the transfer");
                 try {
                     Transferable t = support.getTransferable();
                     Object value = t.getTransferData(IndexedStringListTransferable.LIST_ITEMS_DATA_FLAVOR);
                     //System.out.println("value is...");
                     if(value instanceof List){
-                        //System.out.println("a ListItem...");
+                        System.out.println("It is a ListItem...");
                         Component component = support.getComponent();
                         //System.out.println("component is...");
                         if (component instanceof ConditionPanel) {
@@ -52,9 +52,17 @@ public class ListTransferHandler extends TransferHandler {
                             ((ConditionPanel) component).contents.setModel(model);
                             accept = true;
                             //System.out.println("accepted and added the list.");
-                        } else {
-                            //System.out.println("something not defined.");
-
+                        } else if (component instanceof JList){
+                            System.out.println("It is a JList");
+                            DefaultListModel model = (DefaultListModel) ((JList)component).getModel();
+                            List<IndexedString> list = (List<IndexedString>) value;
+                            for(IndexedString string : list){
+                                model.addElement(string);
+                            }
+                            ((JList)component).setModel(model);
+                            accept = true;
+                        } else{
+                            System.out.println("It is something not defined.");
                         }
                     }else{
                         //System.out.println("something not defined.");
@@ -63,7 +71,7 @@ public class ListTransferHandler extends TransferHandler {
                     exp.printStackTrace();
                 }
             }else{
-                //System.out.println("...can not import the transfer");
+                System.out.println("...can not import the transfer");
             }
             return accept;
         }
