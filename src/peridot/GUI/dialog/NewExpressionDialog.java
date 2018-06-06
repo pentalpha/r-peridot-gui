@@ -686,7 +686,6 @@ public class NewExpressionDialog extends Dialog {
                 if(tableOverColumnLimit(new File(filePath), info.separator)){
                     MaxColumnsDialog dialogMax = new MaxColumnsDialog(parent);
                     dialogMax.setVisible(true);
-                    return;
                 }
 
                 this.info = info;

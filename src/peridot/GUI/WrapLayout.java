@@ -4,9 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
+ * FlowLayout subclass that fully supports wrapping of components.
+ * https://tips4java.wordpress.com/2008/11/06/wrap-layout/
  * @author Rob Camick
- * @see https://tips4java.wordpress.com/2008/11/06/wrap-layout/
- *  FlowLayout subclass that fully supports wrapping of components.
  * @version November 2008
  */
 public class WrapLayout extends FlowLayout

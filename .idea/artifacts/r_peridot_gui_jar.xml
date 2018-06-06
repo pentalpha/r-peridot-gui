@@ -6,7 +6,6 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/r-peridot.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/trident.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/commons-lang3-3.4.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/lib/univocity-parsers-2.2.0.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/substance-6.3.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/absolutelayout/AbsoluteLayout.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/commons-io-2.5.jar" path-in-jar="/" />

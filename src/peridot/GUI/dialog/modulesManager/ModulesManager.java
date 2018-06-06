@@ -230,8 +230,9 @@ public class ModulesManager extends Dialog {
         if (result == JFileChooser.APPROVE_OPTION) {
             File folder = fileChooser.getSelectedFile();
             if (folder.exists()) {
-                RModule s = RModule.availableModules.get(scriptName);
-                File file = new File(folder.getAbsolutePath()
+                //RModule s = RModule.availableModules.get(scriptName);
+                peridot.Operations.exportModule(scriptName, folder.getAbsolutePath());
+                /*File file = new File(folder.getAbsolutePath()
                         + File.separator + s.name + "." + RModule.binExtension);
                 try{
                     s.toBin(file);
@@ -240,7 +241,7 @@ public class ModulesManager extends Dialog {
                     JOptionPane.showMessageDialog(publicParent,"Error: IOException. "
                         + "Maybe you don't have permission to export to this folder.",
                         "Cannot export " + s.name, JOptionPane.ERROR_MESSAGE);
-                }
+                }*/
             }
         }
     }

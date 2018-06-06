@@ -63,7 +63,7 @@ public class ProcessingPanel extends Panel {
         isProcessing = new AtomicBoolean(false);
         this.parent = parent;
         customInit();
-        this.abortAllButton.setEnabled(false);
+        //this.abortAllButton.setEnabled(false);
         _instance = this;
     }
     
@@ -205,7 +205,7 @@ public class ProcessingPanel extends Panel {
     }
     
     private void allFinished(){
-        abortAllButton.setEnabled(false);
+        //abortAllButton.setEnabled(false);
         if(task.isFailed()){
             this.finalResultDescription.setIcon(this.failIcon);
             this.finalResultDescription.setText("Failed");
@@ -286,7 +286,7 @@ public class ProcessingPanel extends Panel {
         
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator2.setPreferredSize(new java.awt.Dimension(500, 2));
-        abortAllButton = new BigButton();
+        /*abortAllButton = new BigButton();
         abortAllButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/peridot/GUI/icons/Stop-All-icon32.png"))); // NOI18N
         abortAllButton.setText("Abort All");
         abortAllButton.setPreferredSize(new java.awt.Dimension(180, 45));
@@ -294,17 +294,17 @@ public class ProcessingPanel extends Panel {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 abortAllButtonActionPerformed(evt);
             }
-        });
+        });*/
         finalResultDescription = new BigLabel();
         finalResultDescription.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        finalResultDescription.setText("Success/Some errors/Failed");
-        finalResultDescription.setPreferredSize(new java.awt.Dimension(160, 45));
+        finalResultDescription.setText("No analysis running");
+        finalResultDescription.setPreferredSize(new java.awt.Dimension(200, 45));
         
         add(leftPanel);
         add(jSeparator1);
         add(rightPanel);
         add(jSeparator2);
-        add(abortAllButton);
+        //add(abortAllButton);
         add(finalResultDescription);
     }
     
@@ -328,5 +328,4 @@ public class ProcessingPanel extends Panel {
     String noGenesFoundStr = "Warning: "
             + "This Analysis Module dit not found genes "
             + "on the given data.";
-    
 }

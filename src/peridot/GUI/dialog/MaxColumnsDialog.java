@@ -1,5 +1,7 @@
 package peridot.GUI.dialog;
 
+import peridot.Archiver.PeridotConfig;
+import peridot.Archiver.Places;
 import peridot.GUI.WrapLayout;
 import peridot.GUI.component.BigLabel;
 import peridot.GUI.component.BiggerLabel;
@@ -30,7 +32,7 @@ public class MaxColumnsDialog extends JDialog {
         titleLabel = new peridot.GUI.component.BiggerLabel("This software was design for small analysis on personal computers");
         add(titleLabel);
         add(new BigLabel("<html>R-Peridot has a limit of 100 columns in expression files</html>"));
-        String contactLink = "http://www.bioinformatics-brazil.org/r-peridot/about.html?contact=True&from=gui";
+        String contactLink = PeridotConfig.get().rPeridotWebSite + "about.html?contact=True&from=gui";
         JLabel contactLabel = new BigLabel("<html>Please "
                 + "<a href=\\\"" + contactLink + "\\\">contact</a>"
                 + " us for requests for analyzes on large amounts of data</html>");
@@ -50,11 +52,6 @@ public class MaxColumnsDialog extends JDialog {
         okButton.setText("OK");
         okButton.addActionListener((java.awt.event.ActionEvent evt) ->
                 {
-                    try {
-                        java.awt.Desktop.getDesktop().browse(new URI(contactLink));
-                    }catch (Exception ex){
-                        ex.printStackTrace();
-                    }
                     setVisible(false);
                 }
         );

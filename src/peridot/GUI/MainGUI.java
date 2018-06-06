@@ -5,6 +5,7 @@
  */
 package peridot.GUI;
 
+import peridot.Archiver.PeridotConfig;
 import peridot.Archiver.Places;
 import peridot.GUI.component.Panel;
 import peridot.GUI.component.TabbedPane;
@@ -194,18 +195,27 @@ public class MainGUI extends javax.swing.JFrame {
         about.setEnabled(java.awt.Desktop.isDesktopSupported());
         about.addActionListener((ActionEvent evt) -> {
             try {
-                java.awt.Desktop.getDesktop().browse(new URI("http://www.bioinformatics-brazil.org/r-peridot/about.html"));
+                java.awt.Desktop.getDesktop().browse(new URI(PeridotConfig.get().rPeridotWebSite + "about.html"));
             }catch (Exception ex){
                 ex.printStackTrace();
             }
         });
-        JMenuItem developerManual = new JMenuItem("How do R-Peridot Works?");
+
+        JMenuItem developerManual = new JMenuItem("Guide for Advanced Usage");
         developerManual.setEnabled(true);
         developerManual.addActionListener((ActionEvent evt) -> {
-            File devManualFile = new File(Places.jarFolder + File.separator + "how-do-r-peridot-modules-work.pdf");
+            File devManualFile = new File(Places.jarFolder + File.separator + "advanced_guide.pdf");
             Global.openFileWithSysApp(devManualFile);
             Log.logger.info("Opening " + devManualFile.getAbsolutePath());
         });
+        JMenuItem userManual = new JMenuItem("User Guide");
+        userManual.setEnabled(true);
+        userManual.addActionListener((ActionEvent evt) -> {
+            File manualFile = new File(Places.jarFolder + File.separator + "user_guide.pdf");
+            Global.openFileWithSysApp(manualFile);
+            Log.logger.info("Opening " + manualFile.getAbsolutePath());
+        });
+        helpMenu.add(userManual);
         helpMenu.add(developerManual);
         helpMenu.add(about);
         /////////////////////////////////
