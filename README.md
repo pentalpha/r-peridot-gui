@@ -22,11 +22,6 @@ Copyright (c)2017, Kirill Grouchnikov
 All rights reserved. Full license: SUBSTANCE-LICENSE.txt.
 Available at: https://github.com/kirill-grouchnikov/substance. Accessed on 17/08/2017;
 
-### Univocity Parsers:
-Copyright (c)2017, Univocity Data Integration.
-Apache License Version 2.0, full text: APACHE-2-LICENSE.html
-Available at: https://github.com/uniVocity/univocity-parsers. Accessed on 17/08/2017;
-
 --------------------------------------------------------------
 #The following third-party graphic resources were used in R-Peridot-GUI:
 
