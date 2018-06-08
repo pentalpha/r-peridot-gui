@@ -22,7 +22,7 @@ public class MaxColumnsDialog extends JDialog {
 
     private void initComponents(){
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(590, 180));
+        setPreferredSize(new java.awt.Dimension(640, 180));
         setMinimumSize(this.getPreferredSize());
         getContentPane().setLayout(new WrapLayout(java.awt.FlowLayout.CENTER, 0, 12));
         this.setResizable(false);
@@ -31,11 +31,11 @@ public class MaxColumnsDialog extends JDialog {
         this.setTitle(question);
         titleLabel = new peridot.GUI.component.BiggerLabel("This software was design for small analysis on personal computers");
         add(titleLabel);
-        add(new BigLabel("<html>R-Peridot has a limit of 100 columns in expression files</html>"));
+        add(new BigLabel("<html>R-Peridot does not recommends using tables with a 100 or more columns.</html>"));
         String contactLink = PeridotConfig.get().rPeridotWebSite + "about.html?contact=True&from=gui";
         JLabel contactLabel = new BigLabel("<html>Please "
                 + "<a href=\\\"" + contactLink + "\\\">contact</a>"
-                + " us for requests for analyzes on large amounts of data</html>");
+                + " us for requests for analyzes on large amounts of data or use the command line version.</html>");
         contactLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

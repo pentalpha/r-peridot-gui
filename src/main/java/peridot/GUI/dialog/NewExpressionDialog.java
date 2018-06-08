@@ -252,19 +252,11 @@ public class NewExpressionDialog extends Dialog {
         return newConditions;
     }
 
-    private void loadBoxPlot(){
-        SortedMap<IndexedString, String> notUseConditions =
-                AnalysisData.getConditionsFromExpressionFile(expressionFile, info);
-        SortedMap<IndexedString, String> singleGroupConditions = new TreeMap<>();
-
-        for(Map.Entry<IndexedString, String> entry : notUseConditions.entrySet()){
-            singleGroupConditions.put(entry.getKey(), "condition1");
-        }
-
+    private void loadBoxPlot(SortedMap<IndexedString, String> conditions){
         try{
-            AnalysisData expr = new AnalysisData(expressionFile, singleGroupConditions, info,
+            AnalysisData expr = new AnalysisData(expressionFile, conditions, info,
                     "DOWN",
-                    0);
+                    1);
             expr.setCountReadsFile(rawCountReadsFile);
             expr.setConditionsFile(rawConditionsFile);
 
@@ -311,9 +303,22 @@ public class NewExpressionDialog extends Dialog {
                         info = new Spreadsheet.Info(true, true, false, ",");
                     }
                 }
-                conditions = AnalysisData.getConditionsFromExpressionFile(file, info);
+
+                File conditionsFile = new File(file.getAbsolutePath() + ".conditions");
+                if(conditionsFile.exists()){
+                    Log.logger.info("Loading conditions from saved .conditions file.");
+                    conditions = AnalysisData.loadConditionsFromFile(conditionsFile);
+                }else{
+                    conditions = AnalysisData.getConditionsFromExpressionFile(file, info);
+                }
                 expressionFile = file;
-                loadBoxPlot();
+                try {
+                    loadBoxPlot(conditions);
+                }catch (Exception ex){
+                    JOptionPane.showMessageDialog(null, "Could not create box plot for this input data.");
+                    ex.printStackTrace();
+                    Log.logger.severe(ex.getMessage());
+                }
                 updateSetList();
                 setChangedConditions(false);
                 return true;
@@ -631,6 +636,10 @@ public class NewExpressionDialog extends Dialog {
                     roundingModesComboBox.getItemAt(roundingModesComboBox.getSelectedIndex()),
                     thresholdSlider.getValue());
             return expr;
+        }catch(NullPointerException ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Errors while reading count reads table.");
+            return null;
         }catch(Exception ex){
             ex.printStackTrace();
             return null;
