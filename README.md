@@ -9,7 +9,7 @@ You just need to define your data, select what modules you want to use and speci
 
 R-Peridot will take care of the rest, efficiently parallelizing all the processing and saving the results for you!
 
-[Project Page](www.bioinformatics-brazil.org/r-peridot)
+[Project Page](http://www.bioinformatics-brazil.org/r-peridot)
 
 ## The Input
 A plain text CSV/TSV table with genes/transcripts as rows and samples as columns, in which the values of the cells are read counts from RNA-Seq or Microarray experiments.
