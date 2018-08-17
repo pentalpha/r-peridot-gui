@@ -4,3 +4,4 @@ jar/r-peridot-scripts
 r-peridot-gui.iml
 .idea/
 target/
+jar/deps

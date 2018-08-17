@@ -45,6 +45,7 @@ R-Peridot's main dependencies are:
 
 - OpenJDK 1.8;
 - R >= 3.4.1;
+- JavaFX;
 
 If you are using GNU\Linux, there are more dependencies. There are scripts to handle the dependency installing at some distros:
 
