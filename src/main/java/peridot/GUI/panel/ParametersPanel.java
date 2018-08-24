@@ -6,11 +6,14 @@
 package peridot.GUI.panel;
 
 import peridot.*;
+import peridot.GUI.GUIUtils;
 import peridot.GUI.component.CheckBox;
 import peridot.GUI.component.Label;
 import peridot.GUI.component.Panel;
 
 import javax.swing.*;
+
+import java.awt.Dimension;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -241,7 +244,9 @@ public class ParametersPanel extends Panel {
             JComponent field;
             JCheckBox checkbox = new CheckBox();
             
-            label.setText(Global.getNaturallyWritenString(pair.getKey()));
+            String labelText = Global.getNaturallyWritenString(pair.getKey());
+            label.setText(labelText);
+            GUIUtils.setToIdealTextSize(label);
             if(pair.getKey().equals("pValue") || pair.getKey().equals("fdr")){
                 JComboBox comboBox = new JComboBox();
                 comboBox.addItem("0.01");

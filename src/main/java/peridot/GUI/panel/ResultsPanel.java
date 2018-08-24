@@ -8,6 +8,7 @@ package peridot.GUI.panel;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 import peridot.Archiver.Places;
+import peridot.GUI.GUIUtils;
 import peridot.GUI.MainGUI;
 import peridot.GUI.WrapLayout;
 import peridot.GUI.component.*;
@@ -120,7 +121,9 @@ public class ResultsPanel extends Panel {
         if(analysisModules.isEmpty()){
             this.individualPanel.add(new BigLabel("None"));
         }else{
-            this.individualPanel.add(new BigLabel("Individual Packages:"));
+            JLabel individual = new BigLabel("Individual Packages:");
+            GUIUtils.setToIdealTextSize(individual);
+            this.individualPanel.add(individual);
             for(Map.Entry<String, File> entry : analysisModules.entrySet()){
                 Button newButton = new Button();
                 newButton.setText(entry.getKey());
@@ -208,6 +211,8 @@ public class ResultsPanel extends Panel {
 
         topLabel = new BiggerLabel();
         topLabel.setText("Differential Expression:");
+        topLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        topLabel.setPreferredSize(new Dimension(250,25));
         upperPanel.add(topLabel);
         //start inner panel
         Panel innerPanel = new Panel();
@@ -248,69 +253,6 @@ public class ResultsPanel extends Panel {
         add(topSeparator);
     }
     
-    private void makeUpperPanel(){
-        upperPanel = new Panel();
-        upperPanel.setPreferredSize(new java.awt.Dimension(546, 140));
-        upperPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
-        
-        topLabel = new BiggerLabel();
-        topLabel.setText("Differential Expression:");
-        
-        viewResultsButton = new BigButton();
-        viewResultsButton.setText("View All");
-        viewResultsButton.setPreferredSize(new Dimension(190, 120));
-        viewResultsButton.setMinimumSize(new Dimension(190, 120));
-
-        viewResultsButton.addActionListener((java.awt.event.ActionEvent evt) -> {
-            viewResultsButtonActionPerformed(evt);
-        });
-        viewResultsButton.setIcon(Resources.getImageIcon(getClass(),"many-documents-32.png"));
-        
-        packListArea = new Panel();
-        packListArea.setPreferredSize(new Dimension(140, 80));
-        packListArea.setLayout(new WrapLayout());
-        
-        innerUpperPanel = new Panel();
-        
-        javax.swing.GroupLayout innerUpperPanelLayout = new javax.swing.GroupLayout(innerUpperPanel);
-        innerUpperPanel.setLayout(innerUpperPanelLayout);
-        innerUpperPanelLayout.setHorizontalGroup(
-                innerUpperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGap(0, 354, Short.MAX_VALUE)
-                .addGroup(innerUpperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(innerUpperPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(innerUpperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(topLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(packListArea, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(viewResultsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        innerUpperPanelLayout.setVerticalGroup(
-                innerUpperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGap(0, 131, Short.MAX_VALUE)
-                .addGroup(innerUpperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(innerUpperPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(innerUpperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(innerUpperPanelLayout.createSequentialGroup()
-                                                .addComponent(topLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(packListArea, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                                        .addComponent(viewResultsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        
-        topSeparator = new javax.swing.JSeparator();
-        topSeparator.setPreferredSize(new java.awt.Dimension(520, 2));
-        
-        upperPanel.add(innerUpperPanel);
-        upperPanel.add(topSeparator);
-
-        add(upperPanel);
-    }
-    
     private void makeMiddlePanel(){
         middlePanel = new Panel();
         middlePanel.setPreferredSize(new java.awt.Dimension(546, 330));
@@ -318,7 +260,7 @@ public class ResultsPanel extends Panel {
         successfulOthersLabel = new BigLabel();
         successfulOthersLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         successfulOthersLabel.setText("Post Analysis:");
-        
+        GUIUtils.setToIdealTextSize(successfulOthersLabel);
         postAnalysisPanel = new Panel();
         postAnalysisPanel.setPreferredSize(new java.awt.Dimension(545, 270));
         
@@ -338,6 +280,7 @@ public class ResultsPanel extends Panel {
         
         saveInLabel = new Label();
         saveInLabel.setText("Save in:");
+        GUIUtils.setToIdealTextSize(saveInLabel);
         
         saveFolderInputField = new javax.swing.JTextField();
         saveFolderInputField.setMinimumSize(new java.awt.Dimension(40, 25));

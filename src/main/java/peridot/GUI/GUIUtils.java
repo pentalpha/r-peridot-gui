@@ -18,6 +18,22 @@ public class GUIUtils {
     }
 
     /**
+     * Changes the size of a JLabel to actually fit it's text.
+     */
+    public static void setToIdealTextSize(JLabel label){
+        FontMetrics metrics = label.getFontMetrics(label.getFont());
+        //FontMetrics metrics = graphics.getFontMetrics(label.getFont());
+        // get the height of a line of text in this font and render context
+        int hgt = metrics.getHeight();
+        // get the advance of my text in this font and render context
+        int adv = metrics.stringWidth(label.getText());
+        // calculate the size of a box to hold the text with some padding.
+        Dimension size = new Dimension(adv+2, hgt+2);
+
+        label.setPreferredSize(size);
+    }
+
+    /**
      * Converts a given Image into a BufferedImage
      *
      * @param img The Image to be converted

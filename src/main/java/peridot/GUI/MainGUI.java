@@ -33,7 +33,7 @@ import static peridot.Log.logger;
  * @author pentalpha
  */
 public class MainGUI extends javax.swing.JFrame {
-    public static final java.awt.Dimension defaultSize = new java.awt.Dimension(546, 600);
+    public static final java.awt.Dimension defaultSize = new java.awt.Dimension(570, 600);//previous width:546
     public static final String appName = "R-Peridot";
     protected NewAnalysisPanel analysisPanel;
     public ProcessingPanel processingPanel;
@@ -78,7 +78,7 @@ public class MainGUI extends javax.swing.JFrame {
             @Override
             protected int calculateTabWidth(int i, int i1, FontMetrics fm){
                 //return super.calculateTabWidth(i, i1, fm) + 30;
-                return 184;
+                return defaultSize.width/3;
             }
         });
         makeTabs();

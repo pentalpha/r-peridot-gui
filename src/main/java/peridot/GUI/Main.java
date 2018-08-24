@@ -44,11 +44,11 @@ public class Main {
             };
 
             if(Operations.loadModules()){
-                logoLoadingFrame.setVisible(false);
                 if(Operations.loadInterpreters(func)){
                     MainGUI gui = new MainGUI();
                     gui.setVisible(true);
                 }else{
+                    logoLoadingFrame.setVisible(false);
                     InterpreterManagerSwingDialog.openInterpreterManager(() -> {
                         MainGUI gui = new MainGUI();
                         gui.setVisible(true);

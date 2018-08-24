@@ -45,12 +45,13 @@ public class NewAnalysisPanel extends Panel {
     private Map<String, JCheckBox> scriptCheckboxes;
     private ParametersPanel parametersPanel;
     private NewExpressionDialog expressionGUI;
-
+    private int mainContainerWidth;
     /**
      * Creates new form NewAnalysisPanel
      */
     public NewAnalysisPanel(java.awt.Frame parentFrame) {
         super();
+        mainContainerWidth = MainGUI.defaultSize.width-16;
         //Log.logger.info("starting to build analysisPanel");
         createInterface();
         
@@ -61,7 +62,7 @@ public class NewAnalysisPanel extends Panel {
     public void createInterface(){
         this.removeAll();
 
-        modulesAlwaysVisible = false;
+        modulesAlwaysVisible = true;
         this.parentFrame = parentFrame;
         this.availableScripts = new TreeSet<String>();
         this.availablePackages = new TreeSet<String>();
@@ -156,14 +157,15 @@ public class NewAnalysisPanel extends Panel {
         setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 1));
         
         makeDefineExpressionContainer();
+        Dimension separatorSize = new java.awt.Dimension(mainContainerWidth-70, 2);
         separator1 = new JSeparator();
-        separator1.setPreferredSize(new java.awt.Dimension(490, 2));
+        separator1.setPreferredSize(separatorSize);
         makeModulesContainer();
         separator2 = new JSeparator();
-        separator2.setPreferredSize(new java.awt.Dimension(490, 2));
+        separator2.setPreferredSize(separatorSize);
         makeParametersContainer();
         separator3 = new JSeparator();
-        separator3.setPreferredSize(new java.awt.Dimension(490, 2));
+        separator3.setPreferredSize(separatorSize);
         makeCreateContainer();
         
         add(defineExpressionContainer);
@@ -192,7 +194,7 @@ public class NewAnalysisPanel extends Panel {
     
     private void makeCreateContainer(){
         createContainer = new Panel();
-        createContainer.setPreferredSize(new java.awt.Dimension(530, 75));
+        createContainer.setPreferredSize(new java.awt.Dimension(mainContainerWidth, 75));
         createContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
         createButton = new BigButton();
         createButton.setText("Start");
@@ -209,10 +211,11 @@ public class NewAnalysisPanel extends Panel {
     
     private void makeParametersContainer(){
         parametersContainer = new Panel();
-        parametersContainer.setPreferredSize(new java.awt.Dimension(530, 138));
+        parametersContainer.setPreferredSize(new java.awt.Dimension(mainContainerWidth, 138));
         parametersContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 0));
         parametersLabel = new BiggerLabel();
         parametersLabel.setText("Parameters");
+        parametersLabel.setPreferredSize(new Dimension(160,20));
         parametersContainer.add(parametersLabel);
         
         Map<String, Class> allParamsMap = new HashMap<>();
@@ -239,7 +242,7 @@ public class NewAnalysisPanel extends Panel {
     private void makeModulesContainer(){
         int sideH = 255;
         modulesContainer = new Panel();
-        modulesContainer.setPreferredSize(new java.awt.Dimension(545, sideH+25));
+        modulesContainer.setPreferredSize(new java.awt.Dimension(mainContainerWidth, sideH+25));
         modulesContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 1));
         modulesLabel = new BiggerLabel();
         modulesLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -252,6 +255,7 @@ public class NewAnalysisPanel extends Panel {
         modulesLeftSide.setRequestFocusEnabled(false);
         packagesLabel1 = new BigLabel();
         packagesLabel1.setText("Analysis:");
+        packagesLabel1.setPreferredSize(new Dimension(120,20));
                 
         packagesPanel = new Panel();
         packagesPanel.setMaximumSize(new java.awt.Dimension(modulesLeftSide.getPreferredSize().width-10, 3000));
@@ -275,6 +279,7 @@ public class NewAnalysisPanel extends Panel {
         modulesRightSide.setRequestFocusEnabled(false);
         othersPackages = new BigLabel();
         othersPackages.setText("Post Analysis:");
+        othersPackages.setPreferredSize(new Dimension(120,20));
         
         scriptsPanel = new Panel();
         scriptsPanel.setMaximumSize(new java.awt.Dimension(modulesRightSide.getPreferredSize().width-10, 3000));;
@@ -300,22 +305,24 @@ public class NewAnalysisPanel extends Panel {
     
     private void makeDefineExpressionContainer(){
         defineExpressionContainer = new Panel();
-        defineExpressionContainer.setPreferredSize(new java.awt.Dimension(530, 90));
+        Dimension containerSize = new java.awt.Dimension(MainGUI.defaultSize.width-16, 90);
+        defineExpressionContainer.setPreferredSize(containerSize);
         
         leftSide = new Panel();
-        leftSide.setPreferredSize(new java.awt.Dimension(397, 90));
+        leftSide.setPreferredSize(new java.awt.Dimension(containerSize.width-200, 90));
         leftSide.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
         geneExprLabel1 = new BiggerLabel();
         geneExprLabel1.setText("Expression Data (count reads):");
+        geneExprLabel1.setPreferredSize(new java.awt.Dimension(containerSize.width-60, 15));
         expressionDescriptionLabel = new Label();
         multiConditionsLabel = new Label();
         needsReplicatesLabel = new Label();
         expressionDescriptionLabel.setText("...");
         multiConditionsLabel.setText("");
         needsReplicatesLabel.setText("");
-        expressionDescriptionLabel.setPreferredSize(new java.awt.Dimension(370, 15));
-        multiConditionsLabel.setPreferredSize(new java.awt.Dimension(370, 15));
-        needsReplicatesLabel.setPreferredSize(new java.awt.Dimension(370, 15));
+        expressionDescriptionLabel.setPreferredSize(new java.awt.Dimension(containerSize.width-60, 15));
+        multiConditionsLabel.setPreferredSize(new java.awt.Dimension(containerSize.width-60, 15));
+        needsReplicatesLabel.setPreferredSize(new java.awt.Dimension(containerSize.width-60, 15));
         leftSide.add(geneExprLabel1);
         leftSide.add(expressionDescriptionLabel);
         leftSide.add(multiConditionsLabel);
@@ -325,7 +332,7 @@ public class NewAnalysisPanel extends Panel {
         rightSide.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
         defineButton = new BigButton();
         defineButton.setText("Open File");
-        defineButton.setPreferredSize(new java.awt.Dimension(112, 70));
+        defineButton.setPreferredSize(new java.awt.Dimension(containerSize.width-400, 70));
         defineButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 defineButtonActionPerformed(evt);
@@ -729,7 +736,7 @@ public class NewAnalysisPanel extends Panel {
     
     public void tryToHideParamsAndCreate(){
         try{
-            if(nAnalysisModules >= 1){
+            if(nAnalysisModules >= 1 || modulesAlwaysVisible){
                 if(this.parametersContainer.isVisible() == false){
                     SwingUtilities.invokeLater(() -> {
                         separator2.setVisible(true);

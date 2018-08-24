@@ -11,6 +11,7 @@ import peridot.GUI.component.Label;
 import peridot.GUI.component.Panel;
 import peridot.GUI.dialog.ScriptOutputDialog;
 import peridot.script.ScriptExec;
+import peridot.GUI.GUIUtils;
 import peridot.GUI.Resources;
 
 import javax.swing.*;
@@ -58,6 +59,7 @@ public class ScriptProgressMonitorPanel extends Panel {
         
         nameLabel = new BigLabel();
         nameLabel.setText(scriptExec.getName());
+        GUIUtils.setToIdealTextSize(nameLabel);
         
         stopButton = new Button();
         stopButton.addActionListener((java.awt.event.ActionEvent evt) -> {

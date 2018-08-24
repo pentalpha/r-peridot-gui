@@ -17,6 +17,7 @@ import peridot.script.AnalysisModule;
 import peridot.script.ScriptExec;
 import peridot.script.Task;
 import peridot.GUI.Resources;
+import peridot.GUI.GUIUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -97,6 +98,7 @@ public class ProcessingPanel extends Panel {
             _instance.scriptsBarsPanel.repaint();
             _instance.finalResultDescription.setIcon(_instance.loaderIcon);
             _instance.finalResultDescription.setText("Processing");
+            //GUIUtils.setToIdealTextSize(_instance.finalResultDescription);
         });
     }
     
@@ -216,6 +218,7 @@ public class ProcessingPanel extends Panel {
             this.finalResultDescription.setIcon(this.clearIcon);
             this.finalResultDescription.setText("Success");
         }
+        //GUIUtils.setToIdealTextSize(finalResultDescription);
         
         SwingUtilities.invokeLater(() ->{
             Log.logger.info("Updating resultsPanel now");
@@ -260,6 +263,7 @@ public class ProcessingPanel extends Panel {
         leftPanel.setPreferredSize(scriptPanelSize);
         packagesLabel = new BiggerLabel();
         packagesLabel.setText("Analysis Modules:");
+        GUIUtils.setToIdealTextSize(packagesLabel);
         packagesBarsPanel = new Panel();
         packagesBarsPanel.setMaximumSize(new java.awt.Dimension(470, 3000));
         packagesBarsPanel.setLayout(new BoxLayout(packagesBarsPanel, BoxLayout.PAGE_AXIS));
@@ -276,6 +280,7 @@ public class ProcessingPanel extends Panel {
         rightPanel.setPreferredSize(scriptPanelSize);
         othersLabel = new BiggerLabel();
         othersLabel.setText("Post Analysis Modules:");
+        GUIUtils.setToIdealTextSize(othersLabel);
         scriptsBarsPanel = new Panel();
         scriptsBarsPanel.setMaximumSize(new java.awt.Dimension(470, 3000));
         scriptsBarsPanel.setLayout(new BoxLayout(scriptsBarsPanel, BoxLayout.PAGE_AXIS));
@@ -290,8 +295,9 @@ public class ProcessingPanel extends Panel {
         finalResultDescription = new BigLabel();
         finalResultDescription.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         finalResultDescription.setText("No analysis running");
-        finalResultDescription.setPreferredSize(new java.awt.Dimension(200, 45));
-        
+        finalResultDescription.setPreferredSize(new java.awt.Dimension(500, 45));
+        //GUIUtils.setToIdealTextSize(finalResultDescription);
+
         add(leftPanel);
         add(jSeparator1);
         add(rightPanel);

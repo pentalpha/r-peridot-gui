@@ -10,6 +10,7 @@ import peridot.AnalysisData;
 import peridot.Archiver.Manager;
 import peridot.Archiver.Places;
 import peridot.Archiver.Spreadsheet;
+import peridot.GUI.GUIUtils;
 import peridot.GUI.MainGUI;
 import peridot.GUI.Resources;
 import peridot.GUI.WrapLayout;
@@ -410,6 +411,7 @@ public class NewExpressionDialog extends Dialog {
         adjustPanel.setPreferredSize(adjustPanelSize);
 
         jLabel1.setText("Adjust conditions of each sample (drag and drop):");
+        GUIUtils.setToIdealTextSize(jLabel1);
         adjustPanel.add(jLabel1);
 
         conditionsScrollPane.setFocusCycleRoot(false);
@@ -436,6 +438,7 @@ public class NewExpressionDialog extends Dialog {
         roundingPanel.setPreferredSize(new java.awt.Dimension(dialogSize.width, 30));
 
         roundingModesLabel = new Label("Integer rounding: ");
+        GUIUtils.setToIdealTextSize(roundingModesLabel);
         roundingModesComboBox = new JComboBox<>();
         for (String s : roundingModes){
             roundingModesComboBox.addItem(s);
@@ -491,7 +494,8 @@ public class NewExpressionDialog extends Dialog {
         rightPanel.removeAll();
 
         boxPlotTitle = new BiggerLabel("Box Plot:");
-        boxPlotSubtitle = new Label("         Distribution of counts in different samples.");
+        boxPlotSubtitle = new Label("Distribution of counts in different samples.");
+        boxPlotSubtitle.setPreferredSize(new Dimension(300, 20));
         boxPlot = Label.getImageLabel(boxPlotFile);
 
         rightPanel.add(boxPlotTitle);
@@ -524,8 +528,8 @@ public class NewExpressionDialog extends Dialog {
         geneExpressionLabel.setText("Count reads:");
         
         idAndConditionsLabel = new Label();
-        idAndConditionsLabel.setText("Conditions (optional):");
-        
+        idAndConditionsLabel.setText("Conditions File:");
+        GUIUtils.setToIdealTextSize(idAndConditionsLabel);
         labelsPanel.add(geneExpressionLabel);
         labelsPanel.add(idAndConditionsLabel);
 

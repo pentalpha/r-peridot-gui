@@ -11,6 +11,7 @@ import peridot.GUI.component.Panel;
 import peridot.GUI.dialog.NewExpressionDialog;
 import peridot.GUI.dragAndDrop.ListTransferHandler;
 import peridot.IndexedString;
+import peridot.GUI.GUIUtils;
 import peridot.GUI.Resources;
 
 import javax.swing.*;
@@ -61,6 +62,7 @@ public class ConditionPanel extends Panel {
         add(editNameButton);
         
         conditionNameLabel.setText(conditionName);
+        GUIUtils.setToIdealTextSize(conditionNameLabel);
         this.editNameButton.setEnabled(nameEditable);
         if(conditionName.equals("not-use")){
             editNameButton.setEnabled(false);
