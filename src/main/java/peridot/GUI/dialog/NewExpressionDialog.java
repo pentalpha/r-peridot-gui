@@ -25,6 +25,7 @@ import peridot.IndexedString;
 import peridot.Log;
 import peridot.script.r.Interpreter;
 import peridot.script.r.Script;
+import peridot.CLI.AnalysisFileParser;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -262,7 +263,7 @@ public class NewExpressionDialog extends Dialog {
             expr.setConditionsFile(rawConditionsFile);
 
             expr.writeExpression();
-        }catch (IOException ex){
+        }catch (Exception ex){
             ex.printStackTrace();
             return;
         }
@@ -292,27 +293,55 @@ public class NewExpressionDialog extends Dialog {
         }
 
     }
+
+    private SortedMap<IndexedString, String> loadConditionFile(File file, File conditionsFile, Spreadsheet.Info info){
+        SortedMap<IndexedString, String> conditions = null;
+        try{
+            Map<String, Integer> samples = AnalysisData.getIndexedSamplesFromFile(file, info);
+            conditions = AnalysisData.loadConditionsFromFile(conditionsFile, samples);
+            if (conditions == null){
+                throw new AnalysisFileParser.ParseException("Duplicated sample condition declaration in " + conditionsFile.getName());
+            }
+        }catch(AnalysisFileParser.ParseException ex){
+            ex.printStackTrace();
+            GUIUtils.showErrorMessageInDialog("Problem loading " + file.getName(), ex.getMessage(), publicParent);
+            //JOptionPane.showMessageDialog(publicParent,  ex.getMessage(), "Problem loading " + file.getName(), JOptionPane.ERROR_MESSAGE);
+        }
+        return conditions;
+    }
+
+    private Spreadsheet.Info getInfo(File file){
+        if(this.info == null){
+            try{
+                this.info = new Spreadsheet.Info(file);
+            }catch (IOException ex){
+                this.info = new Spreadsheet.Info(true, true, false, ",");
+            }
+        } 
+        return info;
+    }
     
     private boolean selectExpressionByFile(String filePath){
         File file = new File(filePath);
         if(file.canRead()){
             if(Global.fileIsPlainText(file)){
-                if(info == null){
-                    try{
-                        info = new Spreadsheet.Info(file);
-                    }catch (IOException ex){
-                        info = new Spreadsheet.Info(true, true, false, ",");
-                    }
-                }
+                info = getInfo(file);
+                SortedMap<IndexedString, String> conditions = null;
 
                 File conditionsFile = new File(file.getAbsolutePath() + ".conditions");
                 if(conditionsFile.exists()){
                     Log.logger.info("Loading conditions from saved .conditions file.");
-                    conditions = AnalysisData.loadConditionsFromFile(conditionsFile);
+                    conditions = loadConditionFile(file, conditionsFile, info);
+                    if(conditions == null){
+                        return false;
+                    }
                 }else{
                     conditions = AnalysisData.getConditionsFromExpressionFile(file, info);
                 }
+                this.conditions = conditions;
+
                 expressionFile = file;
+
                 try {
                     loadBoxPlot(conditions);
                 }catch (Exception ex){
@@ -320,6 +349,7 @@ public class NewExpressionDialog extends Dialog {
                     ex.printStackTrace();
                     Log.logger.severe(ex.getMessage());
                 }
+
                 updateSetList();
                 setChangedConditions(false);
                 return true;
@@ -335,9 +365,14 @@ public class NewExpressionDialog extends Dialog {
     
     private boolean selectConditionsByFile(String filePath){
         File file = new File(filePath);
+        if(expressionFile == null){
+            Log.logger.severe("Cannot load " + filePath + " because the count reads file is not defined.");
+            return false;
+        }
         if(file.canRead()){
+            info = getInfo(expressionFile);
             //conditions = AnalysisData.getConditionsFromExpressionFile(file, info);
-            SortedMap<IndexedString, String> newConditions = AnalysisData.loadConditionsFromFile(file);
+            SortedMap<IndexedString, String> newConditions = loadConditionFile(expressionFile, file, info);
             for(Map.Entry<IndexedString, String> entry : newConditions.entrySet()){
                 conditions.put(entry.getKey(), entry.getValue());
             }
@@ -346,7 +381,7 @@ public class NewExpressionDialog extends Dialog {
             setChangedConditions(false);
             return true;
         }else{
-            JOptionPane.showMessageDialog(null, "The file cant be read.");
+            JOptionPane.showMessageDialog(null, "The file can't be read.");
         }
         return false;
     }
@@ -358,16 +393,12 @@ public class NewExpressionDialog extends Dialog {
             setChangedConditions(false);
         }else if(Manager.fileExists(expressionPathField.getText())){
             selectExpressionByFile(expressionPathField.getText());
-        }else{
-            //Log.info("arquivo de expressao nao existe");
         }
     }
     
     public void idAndConditionsFieldValueChanged(){
         if(Manager.fileExists(idAndConditionsField.getText())){
             selectConditionsByFile(idAndConditionsField.getText());
-        }else{
-            //Log.info("arquivo de condiçoes nao existe");
         }
     }
 

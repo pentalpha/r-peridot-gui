@@ -83,4 +83,14 @@ public class GUIUtils {
         }
 
     }
+
+    public static void showErrorMessageInDialog(String title, String longMessage, Frame frame) {
+        SwingUtilities.invokeLater(() -> {
+            JTextArea textArea = new JTextArea(6, 25);
+            textArea.setText(longMessage);
+            textArea.setEditable(false);
+            JScrollPane scrollPane = new JScrollPane(textArea);
+            JOptionPane.showMessageDialog(frame, scrollPane, title, JOptionPane.ERROR_MESSAGE);
+        });
+    }
 }
