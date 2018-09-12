@@ -28,9 +28,9 @@ public class ConditionPanel extends Panel {
     private javax.swing.JButton editNameButton;
 
     private java.awt.Dimension defaultSize = new java.awt.Dimension(
-            ((int)(NewExpressionDialog.conditionsPaneSize.width/4))+6,
+            ((int)(NewExpressionDialog.conditionsPaneSize.width/4)),
             300);
-    Dimension contentsSize = new Dimension(defaultSize.width - 6, defaultSize.height-30);
+    Dimension contentsSize = new Dimension(defaultSize.width - 2, defaultSize.height-30);
     Dimension contentsMinSize = new java.awt.Dimension(contentsSize.width-23-5, 30);
     Dimension internalPanelMax = new java.awt.Dimension(contentsSize.width-23, 2000);
     Dimension internalPanelMin = new java.awt.Dimension(internalPanelMax.width, contentsSize.height-15);
@@ -71,7 +71,7 @@ public class ConditionPanel extends Panel {
         
         //((TitledBorder)this.getBorder()).setTitle(conditionName);
         contents = new JList();
-        contents.setMinimumSize(contentsMinSize);
+        
         contents.setDragEnabled(true);
         contents.setTransferHandler(new ListTransferHandler());
         this.setTransferHandler(new ListTransferHandler());
@@ -81,29 +81,23 @@ public class ConditionPanel extends Panel {
         }
         contents.setModel(model);
         contents.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        
+        //contents.setBorder(BorderFactory.createLineBorder(Color.BLUE,1));
+        contents.setMinimumSize(contentsMinSize);
+        contents.setFixedCellWidth(contentsSize.width-35);
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setFocusCycleRoot(false);
         scrollPane.setFocusTraversalPolicyProvider(true);
         scrollPane.setFocusable(false);
         scrollPane.setPreferredSize(contentsSize);
         JPanel internalPanel = new Panel();
-        //internalPanel.setBorder(null);
         internalPanel.setFocusable(false);
         internalPanel.setMaximumSize(internalPanelMax);
-        //internalPanel.setPreferredSize(new java.awt.Dimension(contentsSize.width-23, contentsSize.height-15));
         internalPanel.setMinimumSize(internalPanelMin);
         internalPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        //internalPanel.setBorder(BorderFactory.createLineBorder(Color.RED,1));
         internalPanel.add(contents);
-        //contents.setMaximumSize(contentsSize);
-        //contents.setMinimumSize(contentsSize);
-        //contents.setPreferredSize(contentsSize);
         scrollPane.setViewportView(internalPanel);
         add(scrollPane);
-        //setPreferredSize(getPreferredSize());
-        //setMinimumSize(getPreferredSize());
-        //setMaximumSize(getPreferredSize());
-        //add(new JScrollPane(contents));
     }
     
     public String getConditionName(){

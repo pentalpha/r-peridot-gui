@@ -33,13 +33,13 @@ public class ListTransferHandler extends TransferHandler {
             boolean accept = false;
             //System.out.println("checking if suport can import...");
             if (canImport(support)) {
-                System.out.println("...can import the transfer");
+                //System.out.println("...can import the transfer");
                 try {
                     Transferable t = support.getTransferable();
                     Object value = t.getTransferData(IndexedStringListTransferable.LIST_ITEMS_DATA_FLAVOR);
                     //System.out.println("value is...");
                     if(value instanceof List){
-                        System.out.println("It is a ListItem...");
+                        //System.out.println("It is a ListItem...");
                         Component component = support.getComponent();
                         //System.out.println("component is...");
                         if (component instanceof ConditionPanel) {
@@ -53,7 +53,7 @@ public class ListTransferHandler extends TransferHandler {
                             accept = true;
                             //System.out.println("accepted and added the list.");
                         } else if (component instanceof JList){
-                            System.out.println("It is a JList");
+                            //System.out.println("It is a JList");
                             DefaultListModel model = (DefaultListModel) ((JList)component).getModel();
                             List<IndexedString> list = (List<IndexedString>) value;
                             for(IndexedString string : list){
@@ -62,7 +62,7 @@ public class ListTransferHandler extends TransferHandler {
                             ((JList)component).setModel(model);
                             accept = true;
                         } else{
-                            System.out.println("It is something not defined.");
+                            //System.out.println("It is something not defined.");
                         }
                     }else{
                         //System.out.println("something not defined.");

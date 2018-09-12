@@ -74,11 +74,11 @@ public class NewExpressionDialog extends Dialog {
     
     Spreadsheet.Info info;
 
-    static private Dimension dialogSize = new java.awt.Dimension(MainGUI.defaultSize.width+100, 690);
+    static private Dimension dialogSize = new java.awt.Dimension(MainGUI.defaultSize.width+200, 690);
     static private Dimension jSeparatorSize = new java.awt.Dimension(dialogSize.width-60, 3);
     static private Dimension adjustPanelSize = new java.awt.Dimension(dialogSize.width-20, dialogSize.height-300);
     static private Dimension scrollPaneSize = new java.awt.Dimension(adjustPanelSize.width-10, adjustPanelSize.height-30);
-    static public Dimension conditionsPaneSize = new java.awt.Dimension(scrollPaneSize.width-50, scrollPaneSize.height+10);
+    static public Dimension conditionsPaneSize = new java.awt.Dimension(scrollPaneSize.width-30, scrollPaneSize.height+10);
     
     /**
      * Creates new form newExpressionGUI
@@ -186,12 +186,6 @@ public class NewExpressionDialog extends Dialog {
     }
     
     private void updateSetList(){
-        //erase this later:
-        //Log.info("[UPDATING CONDITION EDITOR PANEL]");
-        //for(Map.Entry<IndexedString, String> pair : conditions.entrySet()){
-            //Log.info(pair.getKey().toString() + " -> " + pair.getValue());
-        //}
-        
         HashMap<String, LinkedList<IndexedString>> namesByCondition = new HashMap<>();
         conditionPanels.clear();
         conditionsPane.removeAll();
@@ -281,16 +275,12 @@ public class NewExpressionDialog extends Dialog {
             return;
         }
 
-
         String[] args = {NewExpressionDialog.rawCountReadsFile.getAbsolutePath(),
                 rawConditionsFile.getAbsolutePath(),
                 boxPlotFile.getAbsolutePath()};
         Script boxPlotScript = new Script(NewExpressionDialog.boxPlotScript, args, false);
         try{
-            Log.logger.info("Running boxPlot script");
             boxPlotScript.run(Interpreter.defaultInterpreter, true);
-            Log.logger.info("boxPlot script finished");
-            Log.logger.info(boxPlotScript.getOutputString());
         }catch (Exception ex){
             ex.printStackTrace();
             Log.logger.info(boxPlotScript.getOutputString());
