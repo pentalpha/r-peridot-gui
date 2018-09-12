@@ -533,7 +533,7 @@ public class NewAnalysisPanel extends Panel {
             //FileUtil.createTempFolder();
             //expression.writeRNASeqWithConditions();
             try{
-                expression.writeExpression();
+                expression.writeExpression(true);
             }catch (java.lang.ArrayIndexOutOfBoundsException ex){
                 ex.printStackTrace();
                 Log.logger.severe("Could not write count reads file for analysis!");

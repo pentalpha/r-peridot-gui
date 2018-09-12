@@ -74,7 +74,7 @@ public class NewExpressionDialog extends Dialog {
     
     Spreadsheet.Info info;
 
-    static private Dimension dialogSize = new java.awt.Dimension(MainGUI.defaultSize.width+200, 690);
+    static private Dimension dialogSize = new java.awt.Dimension(MainGUI.defaultSize.width+80, 690);
     static private Dimension jSeparatorSize = new java.awt.Dimension(dialogSize.width-60, 3);
     static private Dimension adjustPanelSize = new java.awt.Dimension(dialogSize.width-20, dialogSize.height-300);
     static private Dimension scrollPaneSize = new java.awt.Dimension(adjustPanelSize.width-10, adjustPanelSize.height-30);
@@ -269,7 +269,7 @@ public class NewExpressionDialog extends Dialog {
                 "DOWN", 1);
             expr.setCountReadsFile(rawCountReadsFile);
 
-            expr.writeExpression();
+            expr.writeExpression(false);
         }catch (Exception ex){
             ex.printStackTrace();
             return;
@@ -430,12 +430,12 @@ public class NewExpressionDialog extends Dialog {
                 success = false;
             }
         });
-        setPreferredSize(new Dimension(dialogSize.width+620, dialogSize.height));
+        setPreferredSize(new Dimension(dialogSize.width+590, dialogSize.height));
         getContentPane().setLayout(new WrapLayout(FlowLayout.LEFT, 0, 0));
         leftPanel.setPreferredSize(new Dimension(dialogSize.width, dialogSize.height-10));
         leftPanel.setLayout(new WrapLayout(FlowLayout.CENTER, 0, 5));
 
-        rightPanel.setPreferredSize(new Dimension(610, 640));
+        rightPanel.setPreferredSize(new Dimension(580, 640));
         rightPanel.setLayout(new WrapLayout(FlowLayout.CENTER, 400, 5));
 
         makeSetFilesPanel();
