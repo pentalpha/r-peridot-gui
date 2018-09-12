@@ -30,6 +30,7 @@ import peridot.CLI.AnalysisFileParser;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -255,12 +256,24 @@ public class NewExpressionDialog extends Dialog {
     }
 
     private void loadBoxPlot(SortedMap<IndexedString, String> conditions){
+        SortedMap<IndexedString, String> allConditions = new TreeMap<>();
+        for(Map.Entry<IndexedString, String> entry : conditions.entrySet()){
+            String value;
+            if(entry.getValue().equals("not-use")){
+                value = "condition-not-set";
+            }else{
+                value = entry.getValue();
+            }
+            
+            allConditions.put(entry.getKey(), value);
+        }
+
         try{
-            AnalysisData expr = new AnalysisData(expressionFile, conditions, info,
-                    "DOWN",
-                    1);
+            AnalysisData.createConditionsFile(rawConditionsFile, allConditions, true, 
+                false);
+            AnalysisData expr = new AnalysisData(expressionFile, rawConditionsFile, info,
+                "DOWN", 1);
             expr.setCountReadsFile(rawCountReadsFile);
-            expr.setConditionsFile(rawConditionsFile);
 
             expr.writeExpression();
         }catch (Exception ex){
@@ -274,10 +287,10 @@ public class NewExpressionDialog extends Dialog {
                 boxPlotFile.getAbsolutePath()};
         Script boxPlotScript = new Script(NewExpressionDialog.boxPlotScript, args, false);
         try{
-            //Log.logger.info("Running boxPlot script");
+            Log.logger.info("Running boxPlot script");
             boxPlotScript.run(Interpreter.defaultInterpreter, true);
-            //Log.logger.info("boxPlot script finished");
-            //Log.logger.info(boxPlotScript.getOutputString());
+            Log.logger.info("boxPlot script finished");
+            Log.logger.info(boxPlotScript.getOutputString());
         }catch (Exception ex){
             ex.printStackTrace();
             Log.logger.info(boxPlotScript.getOutputString());
@@ -289,7 +302,8 @@ public class NewExpressionDialog extends Dialog {
             reloadRightPanel();
             rightPanel.repaint();
         }else{
-            Log.logger.info("Boxplot file was not created.");
+            Log.logger.info("Boxplot file was not created. Script output:");
+            Log.logger.info(boxPlotScript.getOutputString());
         }
 
     }
