@@ -214,8 +214,18 @@ public class MainGUI extends javax.swing.JFrame {
             Global.openFileWithSysApp(manualFile);
             Log.logger.info("Opening " + manualFile.getAbsolutePath());
         });
+        JMenuItem log = new JMenuItem("Read Log");
+        log.setEnabled(true);
+        log.addActionListener((ActionEvent evt) -> {
+            File logFile = new File(System.getProperty("user.home") + File.separator 
+                + ".r-peridot-files"
+                + File.separator + "log.txt");
+            Global.openFileWithSysApp(logFile);
+            Log.logger.info("Opening " + logFile.getAbsolutePath());
+        });
         helpMenu.add(userManual);
         helpMenu.add(developerManual);
+        helpMenu.add(log);
         helpMenu.add(about);
         /////////////////////////////////
         bar.add(helpMenu);
