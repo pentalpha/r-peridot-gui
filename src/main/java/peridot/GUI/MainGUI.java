@@ -240,6 +240,10 @@ public class MainGUI extends javax.swing.JFrame {
     public static void showRestartPeridotDialog(){
         JOptionPane.showMessageDialog(_instance, "Restart R-Peridot for changes to take effect", "Restart R-Peridot", JOptionPane.OK_OPTION);
     }
+
+    public static void showErrorDialog(String title, String message){
+        GUIUtils.showErrorMessageInDialog(title, message,_instance);
+    }
     
     public static boolean showYesNoDialog(String msg){
         int reply = JOptionPane.showConfirmDialog(_instance, msg, "Yes or No?"

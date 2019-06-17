@@ -19,7 +19,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import peridot.GUI.dialog.ScriptOutputDialog;
-import peridot.Output;
 import peridot.script.r.InstallationBatch;
 import peridot.script.r.Interpreter;
 import peridot.script.r.PackageInstaller;
@@ -100,7 +99,7 @@ public class InstallationBatchJX implements Initializable {
                         dialog.setVisible(true);
                     });
                 }else{
-                    Output output = installer.script.output;
+                    String output = installer.script.outputFilePath;
                     if(output != null){
                         SwingUtilities.invokeLater(() -> {
                             ScriptOutputDialog newDialog = new ScriptOutputDialog(null, false,
@@ -135,6 +134,8 @@ public class InstallationBatchJX implements Initializable {
                         && installer.status != PackageInstaller.Status.NOT_STARTED){
                     outputButtons.get(installer).setDisable(false);
                 }
+                ScriptOutputDialog dialog = outputDialogs.get(installer);
+                dialog.updateText();
             }
 
             if(!batch.isRunning()){

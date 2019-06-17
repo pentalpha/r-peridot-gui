@@ -724,8 +724,16 @@ public class NewExpressionDialog extends Dialog {
             String filePath = fileChooser.getSelectedFile().getAbsolutePath();
 
             try{
-                SpreadsheetInfoDialog dialog = new peridot.GUI.dialog.SpreadsheetInfoDialog(MainGUI._instance,
-                        fileChooser.getSelectedFile());
+                SpreadsheetInfoDialog dialog;
+                try{
+                    dialog = new peridot.GUI.dialog.SpreadsheetInfoDialog(MainGUI._instance,
+                    fileChooser.getSelectedFile());
+                }catch(NumberFormatException ex){
+                    ex.printStackTrace();
+                    MainGUI.showErrorDialog("Value parsing exception", ex.getMessage());
+                    return;
+                }
+                
                 dialog.setVisible(true);
                 if(dialog.cancel){
                     return;

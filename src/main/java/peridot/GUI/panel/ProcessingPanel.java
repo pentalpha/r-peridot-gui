@@ -14,12 +14,16 @@ import peridot.GUI.component.Panel;
 import peridot.GUI.dialog.ScriptOutputDialog;
 import peridot.Log;
 import peridot.script.AnalysisModule;
-import peridot.script.ScriptExec;
+import peridot.script.RModule;
 import peridot.script.Task;
+import peridot.tree.PipelineNode;
 import peridot.GUI.Resources;
 import peridot.GUI.GUIUtils;
 
 import javax.swing.*;
+
+//import com.sun.xml.internal.ws.api.pipe.Pipe;
+
 import java.awt.*;
 import java.util.HashSet;
 import java.util.Map;
@@ -117,18 +121,17 @@ public class ProcessingPanel extends Panel {
         task.start();
         MainGUI.updateResultsPanel();
         
-        for(Map.Entry<String, ScriptExec> pair : task.scriptExecs.entrySet()){
+        for(String module_name : task.getModules()){
             ScriptOutputDialog outputDialog = 
                             new ScriptOutputDialog(parent,
                             false,
-                            pair.getKey(),
-                            pair.getValue().output);
+                            module_name);
             ScriptProgressMonitorPanel monitorPanel = new
-                    ScriptProgressMonitorPanel(pair.getValue(), outputDialog);
-            outputDialogs.put(pair.getKey(), outputDialog);
-            scripts.add(pair.getKey());
+                    ScriptProgressMonitorPanel(module_name, task.getPipeline(), outputDialog);
+            outputDialogs.put(module_name, outputDialog);
+            scripts.add(module_name);
             //Log.info("Calling to add monitor panel for " + pair.getKey());
-            addScriptMonitor(pair.getKey(), monitorPanel, pair.getValue());
+            addScriptMonitor(module_name, monitorPanel);
         }
         
         preparePanelToStart();
@@ -165,7 +168,7 @@ public class ProcessingPanel extends Panel {
             }
         }
         try{
-            Thread.sleep(500);
+            Thread.sleep(300);
         }catch(java.lang.InterruptedException ex){
             ex.printStackTrace();
         }
@@ -175,34 +178,24 @@ public class ProcessingPanel extends Panel {
     }
     
     private void updateMonitorState(){
-        for(Map.Entry<String, ScriptExec> pair : task.scriptExecs.entrySet()){
-            Task.WaitState waitState = task.waitState.get(pair.getKey());
+        for(ScriptOutputDialog outputDialog : outputDialogs.values()){
+            outputDialog.updateText();
+        }
+
+        for(Map.Entry<String, PipelineNode.Status> pair : task.getModuleStatus().entrySet()){
             ScriptProgressMonitorPanel panel = scriptMonitor.get(pair.getKey());
             if(panel != null){
-                if(waitState.equals(Task.WaitState.WAITING) || waitState.equals(Task.WaitState.READY)){
+                if(pair.getValue().equals(PipelineNode.Status.QUEUE) 
+                || pair.getValue().equals(PipelineNode.Status.READY)){
                     panel.switchToWaitingIcon();
-                }else if(waitState.equals(Task.WaitState.PRE_FAILED)){
+                }else if(pair.getValue().equals(PipelineNode.Status.FAILED)){
                     panel.switchToFailIcon();
-                }else{
-                    if(task.successfulScripts.contains(pair.getKey())){
-                        panel.switchToSuccessIcon();
-                    }else if(task.failedScripts.contains(pair.getKey())){
-                        panel.switchToFailIcon();
-                        /*if(pair.getValue().script instanceof AnalysisModule){
-                            if(((AnalysisModule)pair.getValue().script).mandatoryFailed){
-                                if(!pair.getValue().output.getText().contains(noGenesFoundStr)){
-                                    pair.getValue().output.appendLine(noGenesFoundStr);
-                                }
-                            }
-                        }*/
-                    }else{
-                        panel.switchToStopIcon();
-                    }
+                }else if(pair.getValue().equals(PipelineNode.Status.RUNNING)){
+                    panel.switchToStopIcon();
+                }else if(pair.getValue().equals(PipelineNode.Status.DONE)){
+                    panel.switchToSuccessIcon();
                 }
-            }else{
-                //Log.info("No monitor panel for " + pair.getKey());
             }
-            
         }
     }
     
@@ -232,11 +225,11 @@ public class ProcessingPanel extends Panel {
         }
     }
     
-    public void addScriptMonitor(String name, ScriptProgressMonitorPanel watcher, ScriptExec exec){
+    public void addScriptMonitor(String name, ScriptProgressMonitorPanel watcher){
         //Log.info("Defining monitor panel for " + name + "...");
         SwingUtilities.invokeLater(() -> {
             JPanel outerPanel;
-            if(exec.script instanceof AnalysisModule){
+            if(RModule.availableModules.get(name) instanceof AnalysisModule){
                 outerPanel = packagesBarsPanel;
             }else{
                 outerPanel = scriptsBarsPanel;

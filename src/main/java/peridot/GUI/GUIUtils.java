@@ -81,7 +81,6 @@ public class GUIUtils {
             Log.logger.info("Could not load image " + file.getAbsolutePath());
             return false;
         }
-
     }
 
     public static void showErrorMessageInDialog(String title, String longMessage, Frame frame) {

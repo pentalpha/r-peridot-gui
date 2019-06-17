@@ -534,9 +534,12 @@ public class NewAnalysisPanel extends Panel {
             //expression.writeRNASeqWithConditions();
             try{
                 expression.writeExpression(true);
-            }catch (java.lang.ArrayIndexOutOfBoundsException ex){
+            }catch (NumberFormatException ex){
                 ex.printStackTrace();
                 Log.logger.severe("Could not write count reads file for analysis!");
+                MainGUI.showErrorDialog("Value parsing exception", ex.getMessage());
+                expression = null;
+                return;
             }
             deleteTempFiles();
             //updateModuleUnabled("DESeq");

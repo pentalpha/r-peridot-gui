@@ -10,7 +10,7 @@ import peridot.GUI.component.Button;
 import peridot.GUI.component.Label;
 import peridot.GUI.component.Panel;
 import peridot.GUI.dialog.ScriptOutputDialog;
-import peridot.script.ScriptExec;
+import peridot.tree.PipelineGraph;
 import peridot.GUI.GUIUtils;
 import peridot.GUI.Resources;
 
@@ -28,7 +28,7 @@ public class ScriptProgressMonitorPanel extends Panel {
         SUCCESS,
         FAIL
     };
-    
+
     private static ImageIcon failIcon = Resources.getImageIcon(
         ScriptProgressMonitorPanel.class,"Delete-icon-24.png");
     private static ImageIcon clearIcon = Resources.getImageIcon(
@@ -39,28 +39,30 @@ public class ScriptProgressMonitorPanel extends Panel {
         ScriptProgressMonitorPanel.class,"Terminal-icon-32.png");
     private static ImageIcon waitingIcon = Resources.getImageIcon(
         ScriptProgressMonitorPanel.class,"waiting32.gif");
-    
+
     private JLabel nameLabel, successLabel, waitingLabel, failLabel;
     public JButton stopButton, outputButton;
     private AtomicBoolean stoppable;
-    private ScriptExec scriptExec;
+    private PipelineGraph graph;
     private IconState iconState;
     private ScriptOutputDialog outputDialog;
+    private String moduleName;
     /**
      * Creates new form ScriptProgressMonitorPanel
      */
-    public ScriptProgressMonitorPanel(ScriptExec scriptExec, ScriptOutputDialog outputDialog) {
+    public ScriptProgressMonitorPanel(String moduleName, PipelineGraph graph, ScriptOutputDialog outputDialog) {
+        this.moduleName = moduleName;
+        this.graph = graph;
         this.outputDialog = outputDialog;
         iconState = IconState.NONE;
-        this.scriptExec = scriptExec;
         this.stoppable = new AtomicBoolean();
         this.stoppable.set(false);
         setPreferredSize(new java.awt.Dimension(228, 50));
-        
+
         nameLabel = new BigLabel();
-        nameLabel.setText(scriptExec.getName());
+        nameLabel.setText(moduleName);
         GUIUtils.setToIdealTextSize(nameLabel);
-        
+
         stopButton = new Button();
         stopButton.addActionListener((java.awt.event.ActionEvent evt) -> {
             requireToAbort();
@@ -76,19 +78,19 @@ public class ScriptProgressMonitorPanel extends Panel {
         successLabel = new Label();
         successLabel.setText("");
         successLabel.setIcon(clearIcon);
-        
+
         outputButton = new Button();
         outputButton.setIcon(consoleIcon);
         outputButton.addActionListener((java.awt.event.ActionEvent evt) -> {
             showScriptOutputDialog();
         });
-        
+
         setStoppable(false);
         add(nameLabel);
         add(waitingLabel);
         add(outputButton);
     }
-    
+
     public void switchToWaitingIcon(){
         if(this.iconState == IconState.WAITING){
             return;
@@ -106,7 +108,7 @@ public class ScriptProgressMonitorPanel extends Panel {
             repaint();
         });
     }
-    
+
     public void switchToStopIcon(){
         if(this.iconState == IconState.STOP){
             return;
@@ -126,9 +128,9 @@ public class ScriptProgressMonitorPanel extends Panel {
             revalidate();
             repaint();
         });
-        
+
     }
-    
+
     public void switchToSuccessIcon(){
         if(this.iconState == IconState.SUCCESS){
             return;
@@ -146,7 +148,7 @@ public class ScriptProgressMonitorPanel extends Panel {
             repaint();
         });
     }
-    
+
     public void switchToFailIcon(){
         if(this.iconState == IconState.FAIL){
             return;
@@ -164,26 +166,24 @@ public class ScriptProgressMonitorPanel extends Panel {
             repaint();
         });
     }
-    
+
     private void setStoppable(boolean stoppable){
         SwingUtilities.invokeLater(() -> {
             stopButton.setEnabled(stoppable);
         });
         this.stoppable.set(stoppable);
     }
-    
+
     public void requireToAbort(){
         if(stoppable.get()){
-            scriptExec.abort();
-        }else{
-            this.scriptExec.output.appendLine("Cannot abort");
+            graph.abort(moduleName);
         }
     }
-    
+
     private void showScriptOutputDialog(){
         SwingUtilities.invokeLater(() -> {
             outputDialog.setVisible(true);
         });
     }
-    
+
 }

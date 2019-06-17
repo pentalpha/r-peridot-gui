@@ -30,7 +30,7 @@ public class SpreadsheetInfoDialog extends JDialog{
     public boolean cancel = false;
     private boolean loadingInfo = true;
 
-    public SpreadsheetInfoDialog(java.awt.Frame parent, File file){
+    public SpreadsheetInfoDialog(java.awt.Frame parent, File file) throws NumberFormatException{
         super(parent, true);
         Log.logger.info("Starting Spreadsheet Info Dialog");
         try {
@@ -43,7 +43,7 @@ public class SpreadsheetInfoDialog extends JDialog{
         loadingInfo = false;
     }
     
-    public void initComponents(){
+    public void initComponents() throws NumberFormatException{
         initBasicComponents();
         initUpperPanel();
         initMiddlePanel();
@@ -76,7 +76,7 @@ public class SpreadsheetInfoDialog extends JDialog{
         });
     }
 
-    public void loadTableInScroller(){
+    public void loadTableInScroller() throws NumberFormatException{
         //Log.logger.info("Reloading preview table...");
         java.util.List<String[]> rows = table.getRows(100);
         //Log.logger.info(rows.size() + " lines");
@@ -197,7 +197,7 @@ public class SpreadsheetInfoDialog extends JDialog{
         }
     }
     
-    private void initUpperPanel(){
+    private void initUpperPanel() throws NumberFormatException{
         if(upperPanel != null) {
             remove(upperPanel);
         }
