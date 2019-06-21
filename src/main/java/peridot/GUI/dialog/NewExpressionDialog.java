@@ -123,7 +123,7 @@ public class NewExpressionDialog extends Dialog {
 
         conditionPanels = new HashMap<String, ConditionPanel>();
         addNewConditionButton = new Button();
-        addNewConditionButton.setIcon(Resources.getImageIcon(getClass(),"Add-Green-Button-icon-32.png")); // NOI18N
+        addNewConditionButton.setIcon(Resources.getImageIcon("Add-Green-Button-icon-32.png")); // NOI18N
         addNewConditionButton.setText("Add New Condition");
         addNewConditionButton.setPreferredSize(new java.awt.Dimension(conditionsPaneSize.width-50, 50));
         addNewConditionButton.setFocusable(false);
@@ -598,7 +598,7 @@ public class NewExpressionDialog extends Dialog {
                 selectExpressionFileButtonActionPerformed(evt);
             }
         });
-        selectExpressionFileButton.setIcon(Resources.getImageIcon(getClass(),"open-icon-24.png"));
+        selectExpressionFileButton.setIcon(Resources.getImageIcon("open-icon-24.png"));
         
         idAndConditionsField = new javax.swing.JTextField();
         idAndConditionsField.setPreferredSize(new java.awt.Dimension(pathsSize.width-50, 25));
@@ -619,7 +619,7 @@ public class NewExpressionDialog extends Dialog {
             }
         });
         selectConditionsFileButton.setEnabled(false);
-        selectConditionsFileButton.setIcon(Resources.getImageIcon(getClass(),"open-icon-24.png"));
+        selectConditionsFileButton.setIcon(Resources.getImageIcon("open-icon-24.png"));
         
         pathsPanel.add(expressionPathField);
         pathsPanel.add(selectExpressionFileButton);

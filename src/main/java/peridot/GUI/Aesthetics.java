@@ -46,7 +46,7 @@ public final class Aesthetics {
         
         for(String resource : fontFiles){
             try{
-                InputStream is = FontStreamer.getFontStream(resource);
+                InputStream is = Resources.getFontStream(resource);
                 Font font = Font.createFont(Font.TRUETYPE_FONT, is);
                 //Log.logger.info(font.getFontName()+ " loaded.");
                 //if(ge.)

@@ -22,18 +22,18 @@ public final class Resources {
     }
 
     public static InputStream getFontStream(String name){
-        return Resources.class.getResourceAsStream("/font/" + name);
+        return Resources.class.getClassLoader().getResourceAsStream("font/" + name);
     }
 
-    public static BufferedImage getImage(Class receiver, String name) throws IOException{
-        return ImageIO.read(receiver.getResource("/icons/" + name));
+    public static BufferedImage getImage(String name) throws IOException{
+        return ImageIO.read(Resources.class.getClassLoader().getResource("icons/" + name));
     }
 
-    public static ImageIcon getImageIcon(Class receiver, String name){
-        return new ImageIcon(receiver.getResource("/icons/"+name));
+    public static ImageIcon getImageIcon(String name){
+        return new ImageIcon(Resources.class.getClassLoader().getResource("icons/"+name));
     }
 
-    public static javafx.scene.Parent getFXML(Class receiver, String name) throws IOException{
-        return FXMLLoader.load(receiver.getResource("/fxml/" + name));
+    public static javafx.scene.Parent getFXML(String name) throws IOException{
+        return FXMLLoader.load(Resources.class.getClassLoader().getResource("fxml/" + name));
     }
 }

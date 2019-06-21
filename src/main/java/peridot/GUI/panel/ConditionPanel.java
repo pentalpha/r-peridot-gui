@@ -52,7 +52,7 @@ public class ConditionPanel extends Panel {
         conditionNameLabel.setText("condition-XXX");
         add(conditionNameLabel);
 
-        editNameButton.setIcon(Resources.getImageIcon(getClass(),"Write-Document-icon16.png"));
+        editNameButton.setIcon(Resources.getImageIcon("Write-Document-icon16.png"));
         editNameButton.setToolTipText("Edit name");
         editNameButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

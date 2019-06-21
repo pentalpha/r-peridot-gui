@@ -72,7 +72,7 @@ public class InterpreterManagerJX implements Initializable{
             stage.setTitle("Installation Queue");
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
-            java.awt.Image awtIcon = MainGUI.getDefaultIcon(this);
+            java.awt.Image awtIcon = MainGUI.getDefaultIcon();
             BufferedImage buffImage = GUIUtils.toBufferedImage(awtIcon);
             Image fxIcon = SwingFXUtils.toFXImage(buffImage, null);
             stage.getIcons().add(fxIcon);

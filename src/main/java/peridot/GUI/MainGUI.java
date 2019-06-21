@@ -88,17 +88,17 @@ public class MainGUI extends javax.swing.JFrame {
         _instance = this;
         Main.logoLoadingFrame.setVisible(false);
         setLocationRelativeTo(null);
-        this.setIconImage(getDefaultIcon(this));
+        this.setIconImage(getDefaultIcon());
     }
     
     public static MainGUI getInstance(){
         return MainGUI._instance;
     }
     
-    public static Image getDefaultIcon(Object receiver){
+    public static Image getDefaultIcon(){
         Image frameIcon = null;
         try{
-            frameIcon = Resources.getImage(receiver.getClass(), "logo64.png");
+            frameIcon = Resources.getImage("logo64.png");
         }catch(Exception ex){
             ex.printStackTrace();
             Log.logger.info("Default ImageIcon not loaded");

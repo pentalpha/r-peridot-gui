@@ -165,7 +165,7 @@ public class ResultsPanel extends Panel {
                     (new ScriptResultsDialog(parent, false, pair.getKey(), pair.getValue())).setVisible(true);
                 });
                 button.setPreferredSize(new Dimension(400, 40));
-                button.setIcon(Resources.getImageIcon(getClass(),"Document-icon-32.png"));
+                button.setIcon(Resources.getImageIcon("Document-icon-32.png"));
                 this.postAnalysisPanel.add(button);
             }
         }
@@ -231,7 +231,7 @@ public class ResultsPanel extends Panel {
             }
         });
         viewResultsButton.setIcon(
-                Resources.getImageIcon(getClass(),"Clear-Green-Button-icon32.png"));
+                Resources.getImageIcon("Clear-Green-Button-icon32.png"));
         innerPanel.add(viewResultsButton);
 
         JSeparator middleSeparator = new JSeparator(JSeparator.VERTICAL);
@@ -295,7 +295,7 @@ public class ResultsPanel extends Panel {
                 openSaveFolderFileChooserActionPerformed(evt);
             }
         });
-        openSaveFolderFileChooser.setIcon(Resources.getImageIcon(getClass(),"open-icon-24.png"));
+        openSaveFolderFileChooser.setIcon(Resources.getImageIcon("open-icon-24.png"));
         
         saveResultsButton = new Button();
         saveResultsButton.setText("Save");
@@ -305,7 +305,7 @@ public class ResultsPanel extends Panel {
                 saveResultsButtonActionPerformed(evt);
             }
         });
-        saveResultsButton.setIcon(Resources.getImageIcon(getClass(),"save-icon-24.png"));
+        saveResultsButton.setIcon(Resources.getImageIcon("save-icon-24.png"));
         saveResultsButton.setEnabled(false);
         
         bottomPanel.add(bottomSeparator);

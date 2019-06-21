@@ -429,7 +429,7 @@ public class NewModuleDialog extends Dialog {
             selectScriptFile();
         });
         //selectScriptFileButton.setText(" ");
-        selectScriptFileButton.setIcon(Resources.getImageIcon(getClass(),"open-icon-24.png"));
+        selectScriptFileButton.setIcon(Resources.getImageIcon("open-icon-24.png"));
         fileNamePanel.add(fileNameLabel);
         fileNamePanel.add(selectScriptFileButton);
         fileNamePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -474,13 +474,13 @@ public class NewModuleDialog extends Dialog {
         resultsScroller.setPreferredSize(new Dimension(scrollerSize.width, scrollerSize.height));
         
         addNewResultButton = new Button();
-        addNewResultButton.setIcon(Resources.getImageIcon(getClass(),"add-icon-24.png"));
+        addNewResultButton.setIcon(Resources.getImageIcon("add-icon-24.png"));
         addNewResultButton.addActionListener((java.awt.event.ActionEvent evt) -> {
             addNewResult();
         });
         
         eraseResultButton = new Button();
-        eraseResultButton.setIcon(Resources.getImageIcon(getClass(),"Delete-icon-24.png"));
+        eraseResultButton.setIcon(Resources.getImageIcon("Delete-icon-24.png"));
         eraseResultButton.setEnabled(false);
         eraseResultButton.addActionListener((java.awt.event.ActionEvent evt) -> {
             eraseResult();
@@ -516,14 +516,14 @@ public class NewModuleDialog extends Dialog {
         inputsScroller.setPreferredSize(new Dimension(scrollerSize.width, scrollerSize.height));
         
         addNewInputButton = new Button();
-        addNewInputButton.setIcon(Resources.getImageIcon(getClass(),"add-icon-24.png"));
+        addNewInputButton.setIcon(Resources.getImageIcon("add-icon-24.png"));
         addNewInputButton.addActionListener((java.awt.event.ActionEvent evt) -> {
             addNewInput();
         });
         addNewInputButton.setEnabled(scriptType != AnalysisModule.class);
         
         eraseInputButton = new Button();
-        eraseInputButton.setIcon(Resources.getImageIcon(getClass(),"Delete-icon-24.png"));
+        eraseInputButton.setIcon(Resources.getImageIcon("Delete-icon-24.png"));
         eraseInputButton.setEnabled(false);
         eraseInputButton.addActionListener((java.awt.event.ActionEvent evt) -> {
             eraseInput();
@@ -559,13 +559,13 @@ public class NewModuleDialog extends Dialog {
         paramsScroller.setPreferredSize(new Dimension(scrollerSize.width, scrollerSize.height));
         
         addNewParamButton = new Button();
-        addNewParamButton.setIcon(Resources.getImageIcon(getClass(),"add-icon-24.png"));
+        addNewParamButton.setIcon(Resources.getImageIcon("add-icon-24.png"));
         addNewParamButton.addActionListener((java.awt.event.ActionEvent evt) -> {
             addNewParam();
         });
         
         eraseParamButton = new Button();
-        eraseParamButton.setIcon(Resources.getImageIcon(getClass(),"Delete-icon-24.png"));
+        eraseParamButton.setIcon(Resources.getImageIcon("Delete-icon-24.png"));
         eraseParamButton.setEnabled(false);
         eraseParamButton.addActionListener((java.awt.event.ActionEvent evt) -> {
             eraseParam();
@@ -600,13 +600,13 @@ public class NewModuleDialog extends Dialog {
         packagesScroller.setPreferredSize(new Dimension(scrollerSize.width, scrollerSize.height));
 
         addPackageButton = new Button();
-        addPackageButton.setIcon(Resources.getImageIcon(getClass(),"add-icon-24.png"));
+        addPackageButton.setIcon(Resources.getImageIcon("add-icon-24.png"));
         addPackageButton.addActionListener((java.awt.event.ActionEvent evt) -> {
             addNewPackage();
         });
 
         rmPackageButton = new Button();
-        rmPackageButton.setIcon(Resources.getImageIcon(getClass(),"Delete-icon-24.png"));
+        rmPackageButton.setIcon(Resources.getImageIcon("Delete-icon-24.png"));
         rmPackageButton.setEnabled(false);
         rmPackageButton.addActionListener((java.awt.event.ActionEvent evt) -> {
             rmPackage();
@@ -660,7 +660,7 @@ public class NewModuleDialog extends Dialog {
         }else{
             createButton.setText("Create");
         }
-        createButton.setIcon(Resources.getImageIcon(getClass(),"check-icon-32.png"));
+        createButton.setIcon(Resources.getImageIcon("check-icon-32.png"));
         createButton.setPreferredSize(buttonSize);
         createButton.addActionListener((java.awt.event.ActionEvent evt) ->{
             create();
@@ -668,7 +668,7 @@ public class NewModuleDialog extends Dialog {
         
         cancelButton = new BigButton();
         cancelButton.setText("Cancel");
-        cancelButton.setIcon(Resources.getImageIcon(getClass(),"cancel-icon-32.png"));
+        cancelButton.setIcon(Resources.getImageIcon("cancel-icon-32.png"));
         cancelButton.setPreferredSize(buttonSize);
         cancelButton.addActionListener((java.awt.event.ActionEvent evt) ->{
             cancel();

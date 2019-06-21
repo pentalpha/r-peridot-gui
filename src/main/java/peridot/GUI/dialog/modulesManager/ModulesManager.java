@@ -61,7 +61,7 @@ public class ModulesManager extends Dialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, wGap, 1));
         setResizable(false);
-        this.setIconImage(MainGUI.getInstance().getDefaultIcon(this));
+        this.setIconImage(MainGUI.getInstance().getDefaultIcon());
         makeModulesContainer();
         makeButtonsContainer();
         add(modulesContainer);
@@ -73,7 +73,7 @@ public class ModulesManager extends Dialog {
     public Image getDefaultIcon(){
         Image frameIcon = null;
         try{
-            frameIcon = Resources.getImage(getClass(), "logo64.png");
+            frameIcon = Resources.getImage("logo64.png");
         }catch(Exception ex){
             ex.printStackTrace();
             Log.logger.info("Default ImageIcon not loaded");
@@ -146,13 +146,13 @@ public class ModulesManager extends Dialog {
         buttonsContainer.setPreferredSize(containerSize);
         
         addButton = getButton("Create Module", buttonSize, true,
-                Resources.getImageIcon(getClass(),"add-green-button-icon-24.png"));
+                Resources.getImageIcon("add-green-button-icon-24.png"));
         addButton.addActionListener((java.awt.event.ActionEvent evt) -> {
             addScript();
         });
         
         importButton = getButton("Import", buttonSize, true,
-                Resources.getImageIcon(getClass(),"import-icon-24.png"));
+                Resources.getImageIcon("import-icon-24.png"));
         importButton.addActionListener((java.awt.event.ActionEvent evt) -> {
             boolean success = importScript();
             if(success){
@@ -162,25 +162,25 @@ public class ModulesManager extends Dialog {
         });
         
         exportButton = getButton("Export", buttonSize, false,
-                Resources.getImageIcon(getClass(),"export-icon-24.png"));
+                Resources.getImageIcon("export-icon-24.png"));
         exportButton.addActionListener((java.awt.event.ActionEvent evt) -> {
             exportScript(selectedScript);
         });
         
         editButton = getButton("Edit", buttonSize, false,
-                Resources.getImageIcon(getClass(),"write-icon-24.png"));
+                Resources.getImageIcon("write-icon-24.png"));
         editButton.addActionListener((java.awt.event.ActionEvent evt) -> {
             editScript(selectedScript);
         });
         
         detailsButton = getButton("Details", buttonSize, false,
-                Resources.getImageIcon(getClass(),"Document-icon-24.png"));
+                Resources.getImageIcon("Document-icon-24.png"));
         detailsButton.addActionListener((java.awt.event.ActionEvent evt) -> {
             scriptDetails(selectedScript);
         });
         
         deleteButton = getButton("Delete", buttonSize, false, 
-                Resources.getImageIcon(getClass(),"Delete-icon-24.png"));
+                Resources.getImageIcon("Delete-icon-24.png"));
         deleteButton.addActionListener((java.awt.event.ActionEvent evt) -> {
             deleteScript(selectedScript);
         });

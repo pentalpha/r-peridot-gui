@@ -58,13 +58,13 @@ public class ProcessingPanel extends Panel {
     public ProcessingPanel(JFrame parent) {
         super();
         
-        failIcon = Resources.getImageIcon(getClass(),"Delete-icon-24.png");
-        failIconBig = Resources.getImageIcon(getClass(),"Delete-icon-32.png");
-        clearIcon = Resources.getImageIcon(getClass(),"Clear-Green-Button-icon24.png");
-        clearIconBig = Resources.getImageIcon(getClass(),"Clear-Green-Button-icon32.png");
-        stopIcon = Resources.getImageIcon(getClass(),"Stop-icon24.png");
-        stopAllIconBig = Resources.getImageIcon(getClass(),"Stop-All-icon32.png");
-        loaderIcon = Resources.getImageIcon(getClass(),"loading40.gif");
+        failIcon = Resources.getImageIcon("Delete-icon-24.png");
+        failIconBig = Resources.getImageIcon("Delete-icon-32.png");
+        clearIcon = Resources.getImageIcon("Clear-Green-Button-icon24.png");
+        clearIconBig = Resources.getImageIcon("Clear-Green-Button-icon32.png");
+        stopIcon = Resources.getImageIcon("Stop-icon24.png");
+        stopAllIconBig = Resources.getImageIcon("Stop-All-icon32.png");
+        loaderIcon = Resources.getImageIcon("loading40.gif");
         isProcessing = new AtomicBoolean(false);
         this.parent = parent;
         customInit();

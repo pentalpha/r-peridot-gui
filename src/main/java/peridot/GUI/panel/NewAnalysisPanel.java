@@ -204,7 +204,7 @@ public class NewAnalysisPanel extends Panel {
                 createButtonActionPerformed(evt);
             }
         });
-        createButton.setIcon(Resources.getImageIcon(getClass(),"play-icon-32.png"));
+        createButton.setIcon(Resources.getImageIcon("play-icon-32.png"));
         
         createContainer.add(createButton);
     }
@@ -338,7 +338,7 @@ public class NewAnalysisPanel extends Panel {
                 defineButtonActionPerformed(evt);
             }
         });
-        defineButton.setIcon(Resources.getImageIcon(getClass(),"write-document-32.png"));
+        defineButton.setIcon(Resources.getImageIcon("write-document-32.png"));
         rightSide.add(defineButton);
         
         defineExpressionContainer.add(leftSide);
@@ -605,7 +605,7 @@ public class NewAnalysisPanel extends Panel {
             //checkBox.setHorizontalAlignment(JLabel.LEFT);
 
             JButton detailButton = new Button();
-            detailButton.setIcon(Resources.getImageIcon(getClass(),"open-icon-16.png"));
+            detailButton.setIcon(Resources.getImageIcon("open-icon-16.png"));
             detailButton.setText("Detail");
             detailButton.setEnabled(true);
             detailButton.addActionListener((java.awt.event.ActionEvent evt) -> {
@@ -620,7 +620,7 @@ public class NewAnalysisPanel extends Panel {
             if(isAnalysisModule){
                 JButton paramsButton = new Button();
                 paramsButton.setIcon(
-                    Resources.getImageIcon(getClass(),"Write-Document-icon16.png"));
+                    Resources.getImageIcon("Write-Document-icon16.png"));
                 paramsButton.setText("");
                 paramsButton.setEnabled(false);
                 paramsButton.addActionListener((java.awt.event.ActionEvent evt) -> {

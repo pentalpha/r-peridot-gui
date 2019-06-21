@@ -107,7 +107,7 @@ public class ParametersPanel extends Panel {
                             try{
                                 floatValue = Float.parseFloat((String)fieldValue);
                             }catch(Exception ex){
-                                floatValue = new Float(0);
+                                floatValue = Float.valueOf(0);
                             }
                             values.passParameter(pair.getKey(), floatValue);
                         }
@@ -121,7 +121,7 @@ public class ParametersPanel extends Panel {
                             try{
                                 intValue = Integer.parseInt((String)fieldValue);
                             }catch(Exception ex){
-                                intValue = new Integer(0);
+                                intValue = Integer.valueOf(0);
                             }
                             values.passParameter(pair.getKey(), intValue);
                         }
@@ -155,7 +155,7 @@ public class ParametersPanel extends Panel {
                             try{
                                 floatValue = Float.parseFloat((String)fieldValue);
                             }catch(Exception ex){
-                                floatValue = new Float(0);
+                                floatValue = Float.valueOf(0);
                             }
                             values.passParameter(pair.getKey(), floatValue);
                         }
@@ -190,7 +190,7 @@ public class ParametersPanel extends Panel {
             if(value == null){
                 if(this.defaultValues.containsKey(name)){
                     Float defaultValue = (Float)defaultValues.get(name);
-                    if(defaultValue.equals(new Float(0))){
+                    if(defaultValue.equals(Float.valueOf(0))){
                         model = getSpinnerNotUseOrFloatModel();
                     }else{
                         model = new javax.swing.SpinnerNumberModel(
@@ -201,7 +201,7 @@ public class ParametersPanel extends Panel {
                                                         0.01f, 0f, null, 0.1f);
                 }
             }else{
-                if(value.equals(new Float(0))){
+                if(value.equals(Float.valueOf(0))){
                     model = getSpinnerNotUseOrFloatModel();
                 }else{
                     model = new javax.swing.SpinnerNumberModel(
@@ -214,7 +214,7 @@ public class ParametersPanel extends Panel {
             if(value == null){
                 if(this.defaultValues.containsKey(name)){
                     Integer defaultValue = (Integer)defaultValues.get(name);
-                    if(defaultValue.equals(new Integer(0))){
+                    if(defaultValue.equals(Integer.valueOf(0))){
                         model = getSpinnerNotUseOrIntModel();
                     }else{
                         model = new javax.swing.SpinnerNumberModel(
@@ -225,7 +225,7 @@ public class ParametersPanel extends Panel {
                     model = getSpinnerNotUseOrIntModel();
                 }
             }else{
-                if(value.equals(new Integer(0))){
+                if(value.equals(Integer.valueOf(0))){
                     model = getSpinnerNotUseOrIntModel();
                 }else{
                     model = new javax.swing.SpinnerNumberModel(
@@ -237,23 +237,27 @@ public class ParametersPanel extends Panel {
     }
     
     private void customInitComponents(){
-        
+        //Log.logger.info(""+params.requiredParameters.size());
         for(Map.Entry<String, Class> pair : params.requiredParameters.entrySet()){
+
             JPanel panel = new Panel();
             JLabel label = new Label();
             JComponent field;
             JCheckBox checkbox = new CheckBox();
-            
+            //Log.logger.info("getting label");
             String labelText = Global.getNaturallyWritenString(pair.getKey());
             label.setText(labelText);
             GUIUtils.setToIdealTextSize(label);
+            //Log.logger.info("defining field");
             if(pair.getKey().equals("pValue") || pair.getKey().equals("fdr")){
+                //Log.logger.info("defining pvalue field");
                 JComboBox comboBox = new JComboBox();
                 comboBox.addItem("0.01");
                 comboBox.addItem("0.05");
                 comboBox.addItem("not-use");
                 field = comboBox;
             }else if(pair.getValue() == Integer.class || pair.getValue() == Float.class){
+                //Log.logger.info("defining numeric field");
                 JSpinner spinner = new JSpinner();
                 spinner.setPreferredSize(new java.awt.Dimension(90, 28));
                 Class type = pair.getValue();
@@ -274,18 +278,28 @@ public class ParametersPanel extends Panel {
                 });
                 field = spinner;
             }else if(pair.getValue() == GeneIdType.class){
+                //Log.logger.info("defining geneid field");
                 JComboBox comboBox = new JComboBox();
                 for(String idType : GeneIdType.defaultIDTypes){
                     comboBox.addItem(new GeneIdType(idType));
                 }
                 field = comboBox;
             }else if(pair.getValue() == Organism.class){
+                //Log.logger.info("defining organism field");
                 JComboBox comboBox = new JComboBox();
                 for(String idType : Organism.defaultDBs){
                     comboBox.addItem(new Organism(idType));
                 }
                 field = comboBox;
+            }else if(pair.getValue() == ConsensusThreshold.class){
+                //Log.logger.info("defining consensus field");
+                JComboBox comboBox = new JComboBox();
+                for(String idType : peridot.ConsensusThreshold.getDefaultValues()){
+                    comboBox.addItem(new ConsensusThreshold(idType));
+                }
+                field = comboBox;
             }else{
+                //Log.logger.info("defining unknown field");
                 field = null;
             }
             

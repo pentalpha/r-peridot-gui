@@ -52,7 +52,7 @@ public class InterpreterManagerSwingDialog extends JDialog {
             }
         });
         setResizable(false);
-        this.setIconImage(MainGUI.getDefaultIcon(this));
+        this.setIconImage(MainGUI.getDefaultIcon());
         this.setLayout(new FlowLayout(FlowLayout.LEFT ,spacing, spacing));
         this.setMinimumSize(defaultSize);
         this.setPreferredSize(defaultSize);
@@ -63,7 +63,7 @@ public class InterpreterManagerSwingDialog extends JDialog {
         Platform.runLater(() -> {
             try {
                 Log.logger.severe("Loading InterpreterManagerJX scene.");
-                Parent root = Resources.getFXML(getClass(), "InterpreterManager.fxml");
+                Parent root = Resources.getFXML("InterpreterManager.fxml");
                 jfxPanel.setScene(new Scene(root, defaultSize.width-7, defaultSize.height-28));
                 Log.logger.severe("Loaded InterpreterManagerJX scene.");
             }catch (IOException ex){
@@ -137,7 +137,7 @@ public class InterpreterManagerSwingDialog extends JDialog {
             setUndecorated(true);
             setVisible(true);
             setLocationRelativeTo(null);
-            this.setIconImage(MainGUI.getDefaultIcon(this));
+            this.setIconImage(MainGUI.getDefaultIcon());
         }
     }
 

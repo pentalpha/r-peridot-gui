@@ -115,7 +115,7 @@ public class ViewResultsPanel extends Panel {
             }
         });
         openButton.setSize(new Dimension(120, 70));
-        openButton.setIcon(Resources.getImageIcon(ViewResultsPanel.class,"Write-Document-icon16.png"));
+        openButton.setIcon(Resources.getImageIcon("Write-Document-icon16.png"));
         panel.add(message);
         //panel.add(message2);
         panel.add(openButton);

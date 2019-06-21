@@ -29,16 +29,11 @@ public class ScriptProgressMonitorPanel extends Panel {
         FAIL
     };
 
-    private static ImageIcon failIcon = Resources.getImageIcon(
-        ScriptProgressMonitorPanel.class,"Delete-icon-24.png");
-    private static ImageIcon clearIcon = Resources.getImageIcon(
-        ScriptProgressMonitorPanel.class,"Clear-Green-Button-icon24.png");
-    private static ImageIcon stopIcon = Resources.getImageIcon(
-        ScriptProgressMonitorPanel.class,"Stop-icon24.png");
-    private static ImageIcon consoleIcon = Resources.getImageIcon(
-        ScriptProgressMonitorPanel.class,"Terminal-icon-32.png");
-    private static ImageIcon waitingIcon = Resources.getImageIcon(
-        ScriptProgressMonitorPanel.class,"waiting32.gif");
+    private static ImageIcon failIcon = Resources.getImageIcon("Delete-icon-24.png");
+    private static ImageIcon clearIcon = Resources.getImageIcon("Clear-Green-Button-icon24.png");
+    private static ImageIcon stopIcon = Resources.getImageIcon("Stop-icon24.png");
+    private static ImageIcon consoleIcon = Resources.getImageIcon("Terminal-icon-32.png");
+    private static ImageIcon waitingIcon = Resources.getImageIcon("waiting32.gif");
 
     private JLabel nameLabel, successLabel, waitingLabel, failLabel;
     public JButton stopButton, outputButton;

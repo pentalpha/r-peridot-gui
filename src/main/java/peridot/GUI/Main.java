@@ -14,9 +14,12 @@ import peridot.Operations;
 import peridot.script.RModule;
 
 import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
+import java.net.URL;
+import java.net.URLClassLoader;
 /**
  *
  * @author pentalpha
@@ -31,6 +34,15 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        //ClassLoader cl = Main.class.getClassLoader();
+        //URL url =  cl.getResource("icons");
+        //String path = url.getPath();
+        //System.out.println(path);
+        //File[] files = new File(path).listFiles();// ((URLClassLoader)cl).getURLs();
+        //String[] files = System.getProperty("java.class.path").split(":");
+        //for(File f: files){
+        //    System.out.println(f.getPath());
+        //}
         showLogoLoadingScreen();
         SubstanceLookAndFeel.setSkin(new org.pushingpixels.substance.api.skin.GraphiteSkin());
         /* Create and display the form */
@@ -81,7 +93,7 @@ public class Main {
     public static void showLogoLoadingScreen(){
         logoLoadingFrame = new JDialog();
         ImageIcon logoImage;
-        logoImage = Resources.getImageIcon(logoLoadingFrame.getClass(),"logo.png");
+        logoImage = Resources.getImageIcon("logo.png");
         
         JLabel logoLabel = new Label();
         logoLabel.setIcon(logoImage);
