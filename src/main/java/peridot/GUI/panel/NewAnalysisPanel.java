@@ -692,15 +692,23 @@ public class NewAnalysisPanel extends Panel {
                     nPostAnalysisModules--;
                 }
             }
+            updateConsensusThreshold();
 
             if(analysisScript){
                 editModuleParamsButtons.get(name).setEnabled(add);
-                Log.logger.info("nAnalysisModules: " + nAnalysisModules);
+                //Log.logger.info("nAnalysisModules: " + nAnalysisModules);
             }
 
             updateDependantModulesUnabled(name);
         }
         
+    }
+
+    private void updateConsensusThreshold(){
+        //Log.logger.info("updating consensus threshold");
+        if(parametersPanel != null){
+            parametersPanel.updateConsensusThreshold(nAnalysisModules);
+        }
     }
     
     public void tryToHideModules(){

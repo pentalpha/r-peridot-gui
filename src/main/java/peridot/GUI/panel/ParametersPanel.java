@@ -5,6 +5,7 @@
  */
 package peridot.GUI.panel;
 
+import javafx.scene.control.ComboBox;
 import peridot.*;
 import peridot.GUI.GUIUtils;
 import peridot.GUI.component.CheckBox;
@@ -15,6 +16,7 @@ import javax.swing.*;
 
 import java.awt.Dimension;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -159,6 +161,19 @@ public class ParametersPanel extends Panel {
                             }
                             values.passParameter(pair.getKey(), floatValue);
                         }
+                    }else if(pair.getValue() == ConsensusThreshold.class){
+                        Object fieldValue = comboBox.getSelectedItem();
+                        if(fieldValue instanceof ConsensusThreshold){
+                            values.passParameter(pair.getKey(), (ConsensusThreshold)fieldValue);
+                        }else if(fieldValue instanceof String){
+                            ConsensusThreshold value = null;
+                            try{
+                                value = new ConsensusThreshold((String)fieldValue);
+                            }catch(Exception ex){
+                                value = new ConsensusThreshold("5");
+                            }
+                            values.passParameter(pair.getKey(), value);
+                        }
                     }
                 }else{
                     Log.logger.info("unidentified field");
@@ -294,8 +309,10 @@ public class ParametersPanel extends Panel {
             }else if(pair.getValue() == ConsensusThreshold.class){
                 //Log.logger.info("defining consensus field");
                 JComboBox comboBox = new JComboBox();
-                for(String idType : peridot.ConsensusThreshold.getDefaultValues()){
-                    comboBox.addItem(new ConsensusThreshold(idType));
+                LinkedList<String> list = peridot.ConsensusThreshold.getDefaultValues();
+                Iterator<String> iter = list.descendingIterator();
+                while(iter.hasNext()){
+                    comboBox.addItem(new ConsensusThreshold(iter.next()));
                 }
                 field = comboBox;
             }else{
@@ -325,7 +342,20 @@ public class ParametersPanel extends Panel {
             add(panel);
         }
     }
-    
+
+    public void updateConsensusThreshold(int n){
+        JComboBox field = (JComboBox)paramFields.get("minimumPackagesForConsensus");
+        for (int i = 0; i < field.getItemCount(); i++){
+            ConsensusThreshold c = (ConsensusThreshold)field.getItemAt(i);
+            if(c.toString().equals(new ConsensusThreshold(n).toString())){
+                field.setSelectedIndex(i);
+                //Log.logger.info("selecting index " + i);
+                break;
+            }
+        }
+
+    }
+
     private void checkForNotUseFloat(javax.swing.JSpinner Adjust){
         if(Adjust.getValue().toString().contentEquals("0.001"))
         {
