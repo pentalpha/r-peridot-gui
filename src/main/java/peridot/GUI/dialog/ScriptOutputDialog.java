@@ -6,6 +6,7 @@
 package peridot.GUI.dialog;
 
 import peridot.GUI.component.Dialog;
+import peridot.Log;
 import peridot.script.RModule;
 import peridot.Global;
 
@@ -35,8 +36,7 @@ public class ScriptOutputDialog extends Dialog {
     public ScriptOutputDialog(java.awt.Frame parent, boolean modal, String scriptName) {
         super(parent, modal);
         this.scriptName = scriptName;
-        outputFilePath = RModule.availableModules.get(scriptName).resultsFolder.getAbsolutePath()
-         + File.separator + "output.txt";
+        outputFilePath = getOutputFile(scriptName);
         setTitle(scriptName);
         builder();
     }
@@ -50,6 +50,7 @@ public class ScriptOutputDialog extends Dialog {
     }
 
     private void builder(){
+        output = "";
         setFocusable(false);
         setPreferredSize(new java.awt.Dimension(550, 550));
         setResizable(false);
@@ -64,6 +65,9 @@ public class ScriptOutputDialog extends Dialog {
         textArea.setEditable(false);
         textArea.setFont(new java.awt.Font("Ubuntu Mono", 0, 12)); // NOI18N
         textArea.setLineWrap(true);
+        SwingUtilities.invokeLater(() -> {
+            textArea.setText("Nothing here yet.");
+        });
         //textPanel.add(textArea);
 
         scrollPanel = new JScrollPane(textArea);
@@ -91,12 +95,18 @@ public class ScriptOutputDialog extends Dialog {
         output = "";
     }
 
+    static String getOutputFile(String module_name){
+        return RModule.availableModules.get(module_name).resultsFolder + File.separator + "output.txt";
+    }
+
     public void stop(){
         stopFlag.set(true);
     }
 
     public void updateText(){
         String newContent = Global.readFileUsingSystem(outputFilePath);
+        Log.logger.info("Updating " + this.scriptName + " from "
+                + this.output.length() + " to " + newContent.length());
         if(newContent.length() > 0){
             output = newContent;
             SwingUtilities.invokeLater(() -> {

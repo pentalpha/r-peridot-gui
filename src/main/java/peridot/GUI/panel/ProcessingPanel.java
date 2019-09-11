@@ -147,6 +147,7 @@ public class ProcessingPanel extends Panel {
     }
     
     public void watchForUpdatesOnTask(){
+        Log.logger.info("Watching for updates on the task");
         /**
          * -2 = waiting
          * -1 = processing
@@ -156,19 +157,25 @@ public class ProcessingPanel extends Panel {
          */
         //Map<String, Integer> scriptState;
         //scriptState = new HashMap<>();
+        task.updateStatus();
         while(task.isProcessing() || task.isNotStarted()){
             try{
-                Thread.sleep(500);
+                Thread.sleep(1000);
             }catch(java.lang.InterruptedException ex){
                 ex.printStackTrace();
                 break;
             }
+            task.updateStatus();
             if(task.isProcessing()){
+                Log.logger.info("Task is processing, updating...");
                 updateMonitorState();
+            }else{
+                Log.logger.info("Task is not processing, not updating...");
             }
         }
+        Log.logger.info("Task is finished, updating one last time...");
         try{
-            Thread.sleep(300);
+            Thread.sleep(1000);
         }catch(java.lang.InterruptedException ex){
             ex.printStackTrace();
         }
@@ -178,6 +185,7 @@ public class ProcessingPanel extends Panel {
     }
     
     private void updateMonitorState(){
+        Log.logger.info("updateMonitorState()");
         for(ScriptOutputDialog outputDialog : outputDialogs.values()){
             outputDialog.updateText();
         }
