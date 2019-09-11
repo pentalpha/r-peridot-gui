@@ -40,6 +40,7 @@ public class NewAnalysisPanel extends Panel {
     public TreeSet<String> selectedScripts;
     public TreeSet<String> availableScripts;
     public TreeSet<String> availablePackages;
+    public TreeSet<String> unabledModules;
     //public AnalysisParameters parameters;
     public TreeMap<String, AnalysisParameters> specificParameters;
     private Map<String, JCheckBox> scriptCheckboxes;
@@ -51,6 +52,7 @@ public class NewAnalysisPanel extends Panel {
      */
     public NewAnalysisPanel(java.awt.Frame parentFrame) {
         super();
+        unabledModules = new TreeSet<>();
         mainContainerWidth = MainGUI.defaultSize.width-16;
         //Log.logger.info("starting to build analysisPanel");
         createInterface();
@@ -348,174 +350,60 @@ public class NewAnalysisPanel extends Panel {
     public void updateUnabledScripts(){
         for(String name : RModule.getAvailableAnalysisModules()){
             //Log.logger.info("Trying to unable " + name);
-            updateAnalysisModuleUnabledNoRecursion(name);
+            updateUnabled(name);
+            //updateAnalysisModuleUnabledNoRecursion(name);
         }
         for(String name : RModule.getAvailablePostAnalysisModules()){
+            updateUnabled(name);
             //Log.logger.info("Trying to unable " + name);
-            updateModuleUnabled(name);
+            //updateModuleUnabled(name);
             //if(this.scriptCheckboxes.get(name).isEnabled() == false){
                 //Log.logger.info("But could not.");
             //}
         }
-        /*boolean multiConditions = this.moreThan2Conditions();
-        if(multiConditions){
-            for(Map.Entry<String,RModule> pair : RModule.availableScripts.entrySet()){
-                if(pair.getValue().max2Conditions){
-                    String name = pair.getKey();
-                    JCheckBox checkbox = this.scriptCheckboxes.get(name);
-                    if(checkbox != null){
-                        if(checkbox.isSelected()){
-                            checkbox.doClick();
-                        }
-                        checkbox.setEnabled(false);
-                    }
-                }
-            }
-        }else{
-            for(Map.Entry<String, JCheckBox> pair : scriptCheckboxes.entrySet()){
-                pair.getValue().setEnabled(true);
-            }
-        }
-        
-        for(Map.Entry<String,RModule> pair : RModule.availableScripts.entrySet()){
-            String name = pair.getKey();
-            JCheckBox checkbox = this.scriptCheckboxes.get(name);
-            if(checkbox != null){
-                updateModuleUnabled(name);
-            }
-        }*/
     }
-    
-    private void updateAnalysisModuleUnabledNoRecursion(String module){
-        boolean unabled = true;
-        RModule script = RModule.availableModules.get(module);
-        JCheckBox checkbox = this.scriptCheckboxes.get(module);
 
-        if(script instanceof AnalysisModule){
+    private void updateUnabled(String module_name){
+        RModule module = RModule.availableModules.get(module_name);
+        JCheckBox checkbox = this.scriptCheckboxes.get(module_name);
+        boolean unabled = true;
+        if(module instanceof AnalysisModule){
             if(this.expression != null){
-                if((script.max2Conditions && this.expression.hasMoreThanTwoConditions())
-                        ||(script.needsReplicates && this.expression.hasReplicatesInSamples() == false)){
+                if((module.max2Conditions && this.expression.hasMoreThanTwoConditions())
+                        ||(module.needsReplicates && this.expression.hasReplicatesInSamples() == false)){
                     unabled = false;
                 }
             }
-            /*if(expression != null){
-                if(expression.info.dataType == Spreadsheet.DataType.Float){
-                    if(script.canHandleFloatValues == false){
-                        Log.logger.info(script.name + " cannot handle rational values, only integers.");
-                        unabled = false;
-                    }
-                }
-            }*/
         }
 
-        if(!script.requiredPackagesInstalled()){
+        if(!module.requiredPackagesInstalled()){
             unabled = false;
         }
-        
-        if(unabled == false){
-            //Log.logger.info(module + " wont be unabled this time.");
+
+        if(unabled != false){
+            unabled = module.runnableWith(selectedScripts) && module.runnableWith(unabledModules);
         }
-        if(checkbox != null){
+
+        if (unabled == false){
+            this.unabledModules.remove(module_name);
+        }else{
+            this.unabledModules.add(module_name);
+        }
+
         if(unabled != checkbox.isEnabled()){
-            JButton paramsButton = editModuleParamsButtons.get(module);
-            if(paramsButton != null){
-                //if(unabled)
-                //paramsButton.setEnabled(unabled);
-                //this.updateUnabledScripts();
-            }
             if(unabled){
                 checkbox.setEnabled(true);
-            }else{    
+            }else{
                 if(checkbox.isSelected()){
                     checkbox.doClick();
                 }
                 checkbox.setEnabled(false);
-                //paramsButton.setEnabled(false);
-            }
-        }
-        }
-    }
-    
-    private void updateModuleUnabled(String module){
-        boolean unabled = true;
-        RModule script = RModule.availableModules.get(module);
-        JCheckBox checkbox = this.scriptCheckboxes.get(module);
-        
-        if(script instanceof AnalysisModule){
-            if(this.expression != null){
-                if((script.max2Conditions && this.expression.hasMoreThanTwoConditions())
-                        ||(script.needsReplicates && this.expression.hasReplicatesInSamples() == false)){
-                    unabled = false;
-                }
-            }
-            /*if(expression != null){
-                if(expression.info.dataType == Spreadsheet.DataType.Float){
-                    if(script.canHandleFloatValues == false){
-                        Log.logger.info(script.name + " cannot handle rational values.");
-                        unabled = false;
-                    }
-                }
-            }*/
-        }else{
-            if(this.nAnalysisModules < 1){
-                unabled = false;
-            }
-            for(String name : RModule.availableModules.get(module).requiredScripts){
-                if(selectedScripts.contains(name) == false){
-                    unabled = false;
-                    break;
-                }
             }
         }
 
-        if(!script.requiredPackagesInstalled()){
-            unabled = false;
-        }
-        if(checkbox != null){
-            if(unabled != checkbox.isEnabled()){
-                JButton paramsButton = editModuleParamsButtons.get(module);
-                if(paramsButton != null){
-                    paramsButton.setEnabled(unabled);
-                    this.updateUnabledScripts();
-                }
-                if(unabled){
-                    checkbox.setEnabled(true);
-                }else{
-                    if(checkbox.isSelected()){
-                        checkbox.doClick();
-                    }
-                    checkbox.setEnabled(false);
-                }
-                updateDependantModulesUnabled(module);
-            }
-        }else{
-            unabled = false;
-        }
-
-    }
-    
-    private void updateDependantModulesUnabled(String module){
-        //Log.logger.info("Updating dependencies of " + module);
-        if(RModule.availableModules.get(module) instanceof AnalysisModule){
-            //Log.logger.info("Which is a package.");
-            for(String script : RModule.getAvailablePostAnalysisModules()){
-                this.updateModuleUnabled(script);
-            }
-        }else{
-            
-            for(Map.Entry<String,RModule> pair : RModule.availableModules.entrySet()){
-                boolean depends = false;
-                for(String required : pair.getValue().requiredScripts){
-                    if(required.equals(module)){
-                        depends = true;
-                        break;
-                    }
-                }
-                if(depends){
-                    //Log.logger.info(pair.getKey() + " depends of " + module);
-                    updateModuleUnabled(pair.getKey());
-                }
-            }
+        for(RModule mod : module.children){
+            Log.logger.info("Updating for " + module_name + "'s children " + mod.name);
+            updateUnabled(mod.name);
         }
     }
     
@@ -645,9 +533,9 @@ public class NewAnalysisPanel extends Panel {
                 scriptsPanel.add(panel, BorderLayout.WEST);
             }
             scriptCheckboxes.put(pack, checkBox);
-            if(isAnalysisModule){
-                updateModuleUnabled(pack);
-            }
+            /*if(isAnalysisModule){
+                updateUnabled(pack);
+            }*/
         }
         this.updateUnabledScripts();
     }
@@ -668,7 +556,7 @@ public class NewAnalysisPanel extends Panel {
                 if(!selectedScripts.contains("VennDiagram")){
                     selectedScripts.add(name);
                     nPostAnalysisModules++;
-                    updateDependantModulesUnabled("VennDiagram");
+                    updateUnabled("VennDiagram");
                 }
             }else{
                 scriptCheckboxes.get("VennDiagram").doClick();
@@ -699,7 +587,7 @@ public class NewAnalysisPanel extends Panel {
                 //Log.logger.info("nAnalysisModules: " + nAnalysisModules);
             }
 
-            updateDependantModulesUnabled(name);
+            updateUnabled(name);
         }
         
     }
