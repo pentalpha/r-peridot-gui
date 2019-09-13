@@ -78,7 +78,8 @@ public class ResultsPanel extends Panel {
                 if(scriptName.equals("VennDiagram")){
                     vennDiagramDir = dir;
                     ScriptResultsDialog.fillCountPlots(vennDiagramDir);
-                }else {
+                    updateVennDiagramButton();
+                }else if(!scriptName.equals("CountPlots")) {
                     this.postAnalysisModules.put(scriptName, dir);
                 }
             }
@@ -99,7 +100,19 @@ public class ResultsPanel extends Panel {
                 }
             }
             if (dir != null) {
-                this.analysisModules.put(packName, dir);
+                boolean found_results = false;
+                for (String result : RModule.availableModules.get(packName).results){
+                    File resFile = new File(dir.getAbsolutePath() + File.separator + result);
+                    if(resFile.exists()){
+                        found_results = true;
+                        break;
+                    }
+                }
+                if(found_results) {
+                        this.analysisModules.put(packName, dir);
+                }else{
+                    Log.logger.info("No results for " + packName + " not adding respective button.");
+                }
             }
         }
     }
@@ -116,7 +129,7 @@ public class ResultsPanel extends Panel {
     }
 
     private void updateUpperPanel(){
-        viewResultsButton.setEnabled(vennDiagramDir != null);
+        updateVennDiagramButton();
         individualPanel.removeAll();
         if(analysisModules.isEmpty()){
             this.individualPanel.add(new BigLabel("None"));
@@ -131,6 +144,7 @@ public class ResultsPanel extends Panel {
                     (new ScriptResultsDialog(parent, false, entry.getKey(), entry.getValue())).setVisible(true);
                 });
                 newButton.setPreferredSize(smallButtonSize);
+
                 individualPanel.add(newButton);
             }
         }
@@ -223,15 +237,13 @@ public class ResultsPanel extends Panel {
         viewResultsButton.setText("Consensus");
         viewResultsButton.setPreferredSize(subSize);
         viewResultsButton.setMinimumSize(subSize);
-
         viewResultsButton.addActionListener((java.awt.event.ActionEvent evt) -> {
             if(vennDiagramDir != null) {
                 (new ScriptResultsDialog(parent, false,
                         "VennDiagram", vennDiagramDir)).setVisible(true);
             }
         });
-        viewResultsButton.setIcon(
-                Resources.getImageIcon("Clear-Green-Button-icon32.png"));
+        updateVennDiagramButton();
         innerPanel.add(viewResultsButton);
 
         JSeparator middleSeparator = new JSeparator(JSeparator.VERTICAL);
@@ -251,6 +263,25 @@ public class ResultsPanel extends Panel {
 
         add(upperPanel);
         add(topSeparator);
+    }
+
+    private void updateVennDiagramButton(){
+        RModule vennModule = RModule.availableModules.get("VennDiagram");
+
+        File vennDiagramDir = new File(Places.finalResultsDir + File.separator
+                + vennModule.workingDirectory.getName());
+        boolean vennSuccess = vennModule.verifyResults(vennDiagramDir);
+        if(vennSuccess){
+            //Log.logger.info("VennDiagram was successful, updating button");
+            viewResultsButton.setEnabled(true);
+            viewResultsButton.setIcon(
+                    Resources.getImageIcon("Clear-Green-Button-icon32.png"));
+        }else{
+            //Log.logger.info("VennDiagram was not successful, updating UI accordingly");
+            viewResultsButton.setEnabled(false);
+            viewResultsButton.setIcon(
+                    Resources.getImageIcon("Delete-icon-32.png"));
+        }
     }
     
     private void makeMiddlePanel(){

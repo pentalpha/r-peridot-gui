@@ -147,7 +147,7 @@ public class ProcessingPanel extends Panel {
     }
     
     public void watchForUpdatesOnTask(){
-        Log.logger.info("Watching for updates on the task");
+        Log.logger.finest("Watching for updates on the task");
         /**
          * -2 = waiting
          * -1 = processing
@@ -167,13 +167,13 @@ public class ProcessingPanel extends Panel {
             }
             task.updateStatus();
             if(task.isProcessing()){
-                Log.logger.info("Task is processing, updating...");
+                Log.logger.finest("Task is processing, updating...");
                 updateMonitorState();
             }else{
-                Log.logger.info("Task is not processing, not updating...");
+                Log.logger.finest("Task is not processing, not updating...");
             }
         }
-        Log.logger.info("Task is finished, updating one last time...");
+        Log.logger.finest("Task is finished, updating one last time...");
         try{
             Thread.sleep(1000);
         }catch(java.lang.InterruptedException ex){
@@ -182,10 +182,22 @@ public class ProcessingPanel extends Panel {
         updateMonitorState();
         allFinished();
         isProcessing.set(false);
+        SwingUtilities.invokeLater(() ->{
+            int n_updates = 5;
+            while(n_updates > 0){
+                try{
+                    Thread.sleep(1000);
+                }catch(java.lang.InterruptedException ex){
+                    ex.printStackTrace();
+                }
+                updateMonitorState();
+                n_updates--;
+            }
+        });
     }
     
     private void updateMonitorState(){
-        Log.logger.info("updateMonitorState()");
+        Log.logger.finest("updateMonitorState()");
         for(ScriptOutputDialog outputDialog : outputDialogs.values()){
             outputDialog.updateText();
         }

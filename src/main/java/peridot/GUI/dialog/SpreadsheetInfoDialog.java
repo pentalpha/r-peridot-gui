@@ -34,7 +34,7 @@ public class SpreadsheetInfoDialog extends JDialog{
         super(parent, true);
         Log.logger.info("Starting Spreadsheet Info Dialog");
         try {
-            this.table = new Spreadsheet(file);
+            this.table = new Spreadsheet(file, true);
         }catch (IOException ex){
             ex.printStackTrace();
         }

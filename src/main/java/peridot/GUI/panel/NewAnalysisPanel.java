@@ -402,7 +402,7 @@ public class NewAnalysisPanel extends Panel {
         }
 
         for(RModule mod : module.children){
-            Log.logger.info("Updating for " + module_name + "'s children " + mod.name);
+            Log.logger.finest("Updating for " + module_name + "'s children " + mod.name);
             updateUnabled(mod.name);
         }
     }
@@ -580,9 +580,10 @@ public class NewAnalysisPanel extends Panel {
                     nPostAnalysisModules--;
                 }
             }
-            updateConsensusThreshold();
+
 
             if(analysisScript){
+                updateConsensusThreshold();
                 editModuleParamsButtons.get(name).setEnabled(add);
                 //Log.logger.info("nAnalysisModules: " + nAnalysisModules);
             }

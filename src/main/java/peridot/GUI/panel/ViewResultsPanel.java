@@ -72,7 +72,7 @@ public class ViewResultsPanel extends Panel {
                 content = peridot.GUI.component.Label.getImageLabel(file);
             }else if (Global.fileIsPlainText(file)){
                 try {
-                    Spreadsheet spreadsheet = new Spreadsheet(file);
+                    Spreadsheet spreadsheet = new Spreadsheet(file, false);
                     content = JTableUtils.getJTable(spreadsheet);
                 }catch (IOException ex){
                     Log.logger.warning("Could not open file " + file.getAbsolutePath());

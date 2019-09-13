@@ -8,6 +8,7 @@ package peridot.GUI.dialog;
 import org.apache.commons.lang3.SystemUtils;
 import peridot.AnalysisData;
 import peridot.Archiver.Manager;
+import peridot.Archiver.PeridotConfig;
 import peridot.Archiver.Places;
 import peridot.Archiver.Spreadsheet;
 import peridot.GUI.GUIUtils;
@@ -720,9 +721,16 @@ public class NewExpressionDialog extends Dialog {
         //
         //fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         //fileChooser.setFileFilter(Places.Spreadsheet.getGeneFileFilter());
+        String lastDir = PeridotConfig.get().lastInputDir;
+        if(lastDir != null){
+            File f = new File(lastDir);
+            if (f.exists()){
+                fileChooser.setCurrentDirectory(f);
+            }
+        }
         if(fileChooser.showDialog(null, "Open File") == JFileChooser.APPROVE_OPTION){
             String filePath = fileChooser.getSelectedFile().getAbsolutePath();
-
+            Log.logger.info("Starting SpreadsheetInfoDialog");
             try{
                 SpreadsheetInfoDialog dialog;
                 try{
@@ -733,12 +741,14 @@ public class NewExpressionDialog extends Dialog {
                     MainGUI.showErrorDialog("Value parsing exception", ex.getMessage());
                     return;
                 }
-                
+
+                Log.logger.info("Setting SpreadsheetInfoDialog visible");
                 dialog.setVisible(true);
                 if(dialog.cancel){
                     return;
                 }
                 Spreadsheet.Info info = dialog.table.getInfo();
+                Log.logger.info("Getting Info from SpreadsheetInfoDialog");
 
                 if(tableOverColumnLimit(new File(filePath), info.separator)){
                     MaxColumnsDialog dialogMax = new MaxColumnsDialog(parent);

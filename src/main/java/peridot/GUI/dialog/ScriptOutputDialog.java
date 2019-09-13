@@ -5,6 +5,7 @@
  */
 package peridot.GUI.dialog;
 
+import peridot.Archiver.Places;
 import peridot.GUI.component.Dialog;
 import peridot.Log;
 import peridot.script.RModule;
@@ -24,7 +25,7 @@ public class ScriptOutputDialog extends Dialog {
     JTextArea textArea;
     //Output buffer;
     Thread updater;
-    String output, scriptName, outputFilePath;
+    String output, scriptName, outputFilePath, outputFilePath_f;
     public AtomicBoolean stopFlag;
     public AtomicBoolean newTextFlag;
 
@@ -37,6 +38,8 @@ public class ScriptOutputDialog extends Dialog {
         super(parent, modal);
         this.scriptName = scriptName;
         outputFilePath = getOutputFile(scriptName);
+        outputFilePath_f = getFinalOutputFile(scriptName);
+        Log.logger.info("Final output for " + scriptName + " is " + outputFilePath_f);
         setTitle(scriptName);
         builder();
     }
@@ -65,9 +68,7 @@ public class ScriptOutputDialog extends Dialog {
         textArea.setEditable(false);
         textArea.setFont(new java.awt.Font("Ubuntu Mono", 0, 12)); // NOI18N
         textArea.setLineWrap(true);
-        SwingUtilities.invokeLater(() -> {
-            textArea.setText("Nothing here yet.");
-        });
+        textArea.setText("");
         //textPanel.add(textArea);
 
         scrollPanel = new JScrollPane(textArea);
@@ -99,14 +100,25 @@ public class ScriptOutputDialog extends Dialog {
         return RModule.availableModules.get(module_name).resultsFolder + File.separator + "output.txt";
     }
 
+    static String getFinalOutputFile(String module_name){
+        return Places.finalResultsDir + File.separator
+                + RModule.availableModules.get(module_name).workingDirectory.getName()
+                + File.separator + "output.txt";
+    }
+
     public void stop(){
         stopFlag.set(true);
     }
 
     public void updateText(){
         String newContent = Global.readFileUsingSystem(outputFilePath);
-        Log.logger.info("Updating " + this.scriptName + " from "
-                + this.output.length() + " to " + newContent.length());
+        String newContent_f = Global.readFileUsingSystem(outputFilePath_f);
+        if(newContent.length() < newContent_f.length()){
+            newContent = newContent_f;
+            //Log.logger.info("Reading from final output file " + outputFilePath_f);
+        }
+        //Log.logger.finest("Updating " + this.scriptName + " from "
+        //        + this.output.length() + " to " + newContent.length());
         if(newContent.length() > 0){
             output = newContent;
             SwingUtilities.invokeLater(() -> {
