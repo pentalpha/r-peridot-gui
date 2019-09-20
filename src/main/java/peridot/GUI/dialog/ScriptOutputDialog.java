@@ -10,6 +10,7 @@ import peridot.GUI.component.Dialog;
 import peridot.Log;
 import peridot.script.RModule;
 import peridot.Global;
+import peridot.script.r.Script;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,6 +29,7 @@ public class ScriptOutputDialog extends Dialog {
     String output, scriptName, outputFilePath, outputFilePath_f;
     public AtomicBoolean stopFlag;
     public AtomicBoolean newTextFlag;
+    protected peridot.script.r.Script script;
 
 
 
@@ -36,6 +38,7 @@ public class ScriptOutputDialog extends Dialog {
      */
     public ScriptOutputDialog(java.awt.Frame parent, boolean modal, String scriptName) {
         super(parent, modal);
+        script = null;
         this.scriptName = scriptName;
         outputFilePath = getOutputFile(scriptName);
         outputFilePath_f = getFinalOutputFile(scriptName);
@@ -46,8 +49,17 @@ public class ScriptOutputDialog extends Dialog {
 
     public ScriptOutputDialog(java.awt.Frame parent, boolean modal, String scriptName, String outputFilePath) {
         super(parent, modal);
+        script = null;
         this.scriptName = scriptName;
         this.outputFilePath = outputFilePath;
+        setTitle(scriptName);
+        builder();
+    }
+    public ScriptOutputDialog(java.awt.Frame parent, boolean modal, String scriptName, Script script) {
+        super(parent, modal);
+        this.script = script;
+        this.scriptName = scriptName;
+        this.outputFilePath = null;
         setTitle(scriptName);
         builder();
     }
@@ -111,23 +123,34 @@ public class ScriptOutputDialog extends Dialog {
     }
 
     public void updateText(){
-        String newContent = Global.readFileUsingSystem(outputFilePath);
-        String newContent_f = Global.readFileUsingSystem(outputFilePath_f);
-        if(newContent.length() < newContent_f.length()){
-            newContent = newContent_f;
-            //Log.logger.info("Reading from final output file " + outputFilePath_f);
-        }
-        //Log.logger.finest("Updating " + this.scriptName + " from "
-        //        + this.output.length() + " to " + newContent.length());
-        if(newContent.length() > 0){
-            output = newContent;
+        if(script != null){
+            output = script.getOutputString();
             SwingUtilities.invokeLater(() -> {
                 textArea.setText(output);
-                //scrollPanel.revalidate();
-                //scrollPanel.updateUI();
-                //pack();
             });
+        }else if (outputFilePath != null){
+            String newContent = Global.readFileUsingSystem(outputFilePath);
+            String newContent_f = Global.readFileUsingSystem(outputFilePath_f);
+            if(newContent.length() < newContent_f.length()){
+                newContent = newContent_f;
+                //Log.logger.info("Reading from final output file " + outputFilePath_f);
+            }
+            //Log.logger.finest("Updating " + this.scriptName + " from "
+            //        + this.output.length() + " to " + newContent.length());
+            if(newContent.length() > 0){
+                output = newContent;
+                SwingUtilities.invokeLater(() -> {
+                    textArea.setText(output);
+                    //scrollPanel.revalidate();
+                    //scrollPanel.updateUI();
+                    //pack();
+                });
+            }
+        }else{
+            Log.logger.severe("Neither Script instance or outputFilePath to read output from, "
+                    + "not updating output dialog.");
         }
+
     }
 
     /*public void appendLine(String text){

@@ -1,4 +1,4 @@
 #!/bin/bash
 
 ACTUAL_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-java -jar $ACTUAL_DIR/r-peridot-gui.jar $@
+java -jar $ACTUAL_DIR/r-peridot-gui.jar --module-path /usr/share/openjfx/lib/ --add-modules javafx.controls,javafx.fxml,javafx.swing $@

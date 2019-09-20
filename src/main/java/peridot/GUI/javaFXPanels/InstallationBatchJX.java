@@ -6,6 +6,7 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -13,30 +14,37 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import peridot.GUI.dialog.ScriptOutputDialog;
+import peridot.Log;
 import peridot.script.r.InstallationBatch;
 import peridot.script.r.Interpreter;
 import peridot.script.r.PackageInstaller;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.Level;
 
 /**
  * Created by pentalpha on 23/03/2018.
  */
-public class InstallationBatchJX implements Initializable {
+//public class InstallationBatchJX implements Initializable {
+public class InstallationBatchJX extends AnchorPane {
 
     public List<PackageInstaller> installers = null;
     protected Map<PackageInstaller, Label> statusIndicators = null;
     protected Map<PackageInstaller, Button> outputButtons = null;
     protected Map<PackageInstaller, ScriptOutputDialog> outputDialogs = null;
+    protected AtomicInteger dialogsToCreate = null;
 
     public Interpreter interpreter = null;
     public InstallationBatch batch = null;
@@ -47,9 +55,19 @@ public class InstallationBatchJX implements Initializable {
     @FXML private CheckBox autoCloseCheckBox;
     @FXML private FlowPane flowPane;
 
-    @Override
+    /*@Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         peridot.Log.logger.info("Initializing InstallationBatch GUI");
+    }*/
+    public InstallationBatchJX(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/InstallationBatchJX.fxml"));
+        loader.setRoot(this);
+        loader.setController(this);
+        try {
+            loader.load();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     public void installPackagesIn(Interpreter interpreter) {
@@ -62,13 +80,31 @@ public class InstallationBatchJX implements Initializable {
         statusIndicators = new HashMap<>();
         outputButtons = new HashMap<>();
         outputDialogs = new HashMap<>();
+        dialogsToCreate = new AtomicInteger(installers.size());
 
         createWatchRows();
+        while(dialogsToCreate.get() > 0){
+            Log.logger.info("Not all dialogs have been created, waiting a little more...");
+            try{
+                Thread.sleep(250);
+            }catch (InterruptedException ex){
+                ex.printStackTrace();
+            }
+        }
         startInstallations();
     }
 
     private void createWatchRows(){
         for(PackageInstaller installer : installers){
+            Log.logger.info("Creating watch row for " + installer.getPackageName());
+            SwingUtilities.invokeLater(() -> {
+                Log.logger.info("Directly creating output dialog for " + installer.getPackageName());
+                ScriptOutputDialog newDialog = new ScriptOutputDialog(null, false,
+                        installer.getPackageName() + " Installation",
+                        installer.script);
+                outputDialogs.put(installer, newDialog);
+                dialogsToCreate.decrementAndGet();
+            });
             createWatchRow(installer);
         }
     }
@@ -95,21 +131,12 @@ public class InstallationBatchJX implements Initializable {
             @Override public void handle(ActionEvent e) {
                 ScriptOutputDialog dialog = outputDialogs.get(installer);
                 if(dialog != null){
+                    Log.logger.info(("Dialog already exists, setting it visible"));
                     SwingUtilities.invokeLater(() -> {
                         dialog.setVisible(true);
                     });
                 }else{
-                    String output = installer.script.outputFilePath;
-                    if(output != null){
-                        SwingUtilities.invokeLater(() -> {
-                            ScriptOutputDialog newDialog = new ScriptOutputDialog(null, false,
-                                    installer.getPackageName() + " Installation",
-                                    output);
-                            outputDialogs.put(installer, newDialog);
-                            newDialog.setVisible(true);
-                        });
-                    }
-
+                    Log.logger.info("Null dialog output, doing nothing.");
                 }
             }
         });
@@ -135,7 +162,11 @@ public class InstallationBatchJX implements Initializable {
                     outputButtons.get(installer).setDisable(false);
                 }
                 ScriptOutputDialog dialog = outputDialogs.get(installer);
-                dialog.updateText();
+                if (dialog == null){
+                    Log.logger.severe("Null dialog being used for " + installer.getPackageName());
+                }else {
+                    dialog.updateText();
+                }
             }
 
             if(!batch.isRunning()){

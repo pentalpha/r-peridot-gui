@@ -13,10 +13,11 @@
     <property name="main-class"  value="peridot.GUI.Main"/>
     <property name="deps.dir" value="${jar.dir}/deps/"/>
     <property name="lib.dir"     value="lib"/>
+    <property name="openjfx.dir"     value="/usr/share/openjfx/lib/"/>
     <path id="classpath">
         <fileset dir="${lib.dir}" includes="**/*.jar"/>
+        <fileset dir="${openjfx.dir}" includes="**/*.jar"/>
     </path>
-
 
     <target name="clean">
         <delete dir="${build.dir}"/>
@@ -24,7 +25,10 @@
 
     <target name="compile">
         <mkdir dir="${classes.dir}"/>
-        <javac  target="1.8" source="1.8" includeantruntime="false" srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath"/>
+        <javac  target="11" source="11" includeantruntime="false" srcdir="${src.dir}" 
+        destdir="${classes.dir}" classpathref="classpath">
+                        <compilerarg line="--module-path ${openjfx.dir} --add-modules javafx.controls,javafx.fxml,javafx.swing"/>
+        </javac>
     </target>
 
     <!-- Group all dependencies into a big dependency-all.jar -->
@@ -34,6 +38,11 @@
 		<jar jarfile="${deps.dir}/dependencies-all.jar">
 			<zipgroupfileset dir="${lib.dir}">
 				<include name="**/*.jar" />
+			</zipgroupfileset>
+            <zipgroupfileset dir="${openjfx.dir}">
+				<include name="javafx.swing" />
+                <include name="javafx.controls" />
+                <include name="javafx.fxml" />
 			</zipgroupfileset>
 		</jar>
 	</target>
@@ -64,7 +73,9 @@
     </target> -->
 
     <target name="run" depends="jar">
-        <java jar="${jar.dir}/${ant.project.name}.jar" fork="true"/>
+        <java jar="${jar.dir}/${ant.project.name}.jar" fork="true">
+            <arg line="--module-path ${openjfx.dir} --add-modules javafx.controls,javafx.fxml,javafx.swing"/>
+        </java>
     </target>
 
     <target name="clean-build" depends="clean,jar"/>

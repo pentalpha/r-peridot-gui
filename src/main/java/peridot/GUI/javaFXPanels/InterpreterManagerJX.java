@@ -60,38 +60,27 @@ public class InterpreterManagerJX implements Initializable{
         if(selectedPane == null){
             return;
         }
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/InstallationBatchJX.fxml"));
-            //Parent root = FXMLLoader.load(getClass().getResource("InstallationBatchJX.fxml"));
-            loader.load();
-            Parent root = loader.getRoot();
-            InstallationBatchJX control = loader.getController();
-            Stage stage = new Stage();
-            Scene scene = new Scene(root, 396, 400);
-            stage.initStyle(StageStyle.DECORATED);
-            stage.setTitle("Installation Queue");
-            stage.setScene(scene);
-            stage.initModality(Modality.APPLICATION_MODAL);
-            java.awt.Image awtIcon = MainGUI.getDefaultIcon();
-            BufferedImage buffImage = GUIUtils.toBufferedImage(awtIcon);
-            Image fxIcon = SwingFXUtils.toFXImage(buffImage, null);
-            stage.getIcons().add(fxIcon);
-            control.installPackagesIn(Interpreter.interpreters.get(interpreterOfPane.get(selectedPane)));
-            stage.setResizable(false);
-            stage.show();
-            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-                public void handle(WindowEvent we) {
-                    control.askToStopNow();
-                    startAccordion();
-                }
-            });
-            // Hide this current window (if this is what you want)
-            //((Node)(event.getSource())).getScene().getWindow().hide();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        InstallationBatchJX ibJX = new InstallationBatchJX();
+        Stage stage = new Stage();
+        //Scene scene = new Scene(ibJX, 396, 400);
+        Scene scene = new Scene(ibJX);
+        //stage.initStyle(StageStyle.DECORATED);
+        stage.setTitle("Installation Queue");
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        java.awt.Image awtIcon = MainGUI.getDefaultIcon();
+        BufferedImage buffImage = GUIUtils.toBufferedImage(awtIcon);
+        Image fxIcon = SwingFXUtils.toFXImage(buffImage, null);
+        stage.getIcons().add(fxIcon);
+        //stage.setResizable(false);
+        ibJX.installPackagesIn(Interpreter.interpreters.get(interpreterOfPane.get(selectedPane)));
+        stage.show();
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            public void handle(WindowEvent we) {
+                ibJX.askToStopNow();
+                startAccordion();
+            }
+        });
     }
 
     public void chooseInterpreter(TitledPane expanded){
