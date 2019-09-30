@@ -5,11 +5,13 @@
  */
 package peridot.GUI.dialog.modulesManager;
 
+import peridot.GUI.GUIUtils;
 import peridot.GUI.MainGUI;
 import peridot.GUI.component.BigButton;
 import peridot.GUI.component.BigLabel;
 import peridot.GUI.component.Dialog;
 import peridot.GUI.component.Panel;
+import peridot.Global;
 import peridot.Log;
 import peridot.GUI.Resources;
 import peridot.script.AnalysisModule;
@@ -145,11 +147,11 @@ public class ModulesManager extends Dialog {
         buttonsContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 0, hGap));
         buttonsContainer.setPreferredSize(containerSize);
         
-        addButton = getButton("Create Module", buttonSize, true,
+        /*addButton = getButton("Create Module", buttonSize, true,
                 Resources.getImageIcon("add-green-button-icon-24.png"));
         addButton.addActionListener((java.awt.event.ActionEvent evt) -> {
             addScript();
-        });
+        });*/
         
         importButton = getButton("Import", buttonSize, true,
                 Resources.getImageIcon("import-icon-24.png"));
@@ -185,7 +187,7 @@ public class ModulesManager extends Dialog {
             deleteScript(selectedScript);
         });
         
-        buttonsContainer.add(addButton);
+        //buttonsContainer.add(addButton);
         buttonsContainer.add(importButton);
         buttonsContainer.add(exportButton);
         buttonsContainer.add(editButton);
@@ -223,68 +225,62 @@ public class ModulesManager extends Dialog {
     }
     
     private void exportScript(String scriptName){
-        //TODO
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int result = fileChooser.showOpenDialog(publicParent);
         if (result == JFileChooser.APPROVE_OPTION) {
             File folder = fileChooser.getSelectedFile();
             if (folder.exists()) {
-                //RModule s = RModule.availableModules.get(scriptName);
                 peridot.Operations.exportModule(scriptName, folder.getAbsolutePath());
-                /*File file = new File(folder.getAbsolutePath()
-                        + File.separator + s.name + "." + RModule.binExtension);
-                try{
-                    s.toBin(file);
-                }catch (IOException ex){
-                    Log.logger.log(Level.SEVERE, ex.getMessage(), ex);
-                    JOptionPane.showMessageDialog(publicParent,"Error: IOException. "
-                        + "Maybe you don't have permission to export to this folder.",
-                        "Cannot export " + s.name, JOptionPane.ERROR_MESSAGE);
-                }*/
             }
         }
     }
-    
+
+    private Class askUserForType(){
+        AskModuleType dialog = new AskModuleType(publicParent);
+        dialog.setVisible(true);
+        return dialog.type;
+    }
+
     private boolean importScript(){
+        Class moduleType = askUserForType();
+        String extension;
+        if(moduleType == PostAnalysisModule.class){
+            extension = ".PostAnalysisModule";
+        }else if(moduleType == AnalysisModule.class){
+            extension = ".AnalysisModule";
+        }else{
+            return false;
+        }
+
         JFileChooser fileChooser = new JFileChooser(){
             public void approveSelection() {
                 File f = getSelectedFile();
-                if (f.isFile() && f.getName().contains("." + RModule.binExtension)) {
+                if(f.isDirectory()
+                    && (new File(f.getAbsolutePath() + File.separator + RModule.moduleFileName)).exists()
+                    && f.getName().contains(extension))
+                {
                     super.approveSelection();
-                } else{
-                    return;
                 }
             }
         };
         
-        if(fileChooser.showDialog(null, "Select a ." + RModule.binExtension + " file:") == JFileChooser.APPROVE_OPTION){
-            File binFile = fileChooser.getSelectedFile();
-            Object bin = peridot.Archiver.Persistence.loadObjectFromBin(binFile.getAbsolutePath());
-            if(bin == null){
-                Log.logger.log(Level.SEVERE, "Could not load RModule binary.");
-                JOptionPane.showMessageDialog(publicParent, "Error loading module. "
-                    + "Maybe you don't have permission to read this file.",
-                    "Cannot import " + binFile.getName(), JOptionPane.ERROR_MESSAGE);
-                return false;
-            }
-            
-            if(bin instanceof AnalysisModule || bin instanceof PostAnalysisModule){
-                RModule script = null;
-                Class type = null;
-                if(bin instanceof AnalysisModule){
-                    script = (AnalysisModule)bin;
+        if(fileChooser.showDialog(null, "Select a module to import:") == JFileChooser.APPROVE_OPTION){
+            File dir = fileChooser.getSelectedFile();
+            RModule module;
+            try{
+                if(extension.equals(".PostAnalysisModule")){
+                    module = new PostAnalysisModule(dir);
                 }else{
-                    script = (PostAnalysisModule)bin;
+                    module = new AnalysisModule(dir);
                 }
-                script.createEnvironment(null);
-                RModule.availableModules.put(script.name, script);
+                module.createEnvironment(null);
+                RModule.availableModules.put(module.name, module);
                 return true;
-            }else{
-                Log.logger.log(Level.SEVERE, "Could not load RModule binary. Unknown class.");
-                JOptionPane.showMessageDialog(publicParent,"Error loading module"
-                    + "The file is in an unknown format.",
-                    "Cannot import " + binFile.getName(), JOptionPane.ERROR_MESSAGE);
+            }catch (Exception ex){
+                Log.logger.log(Level.SEVERE, "Could not load RModule");
+                GUIUtils.showErrorMessageInDialog("Could not load RModule", ex.toString(), this.publicParent);
+                return false;
             }
         }
         return false;
@@ -292,33 +288,18 @@ public class ModulesManager extends Dialog {
     
     private void editScript(String scriptName){
         RModule script = RModule.availableModules.get(scriptName);
-        NewModuleDialog dialog = new NewModuleDialog(publicParent, true, script.getClass(), script);
+        Global.openFileWithSysApp(script.getScriptFile());
+        Global.openFileWithSysApp(script.getDescriptionFile());
+        JOptionPane.showMessageDialog(null,
+                "Restart R-Peridot in order to load any changes made to the module.");
+        /*NewModuleDialog dialog = new NewModuleDialog(publicParent, true, script.getClass(), script);
         dialog.setVisible(true);
         if(dialog.script != null && dialog.editedScript){
             MainGUI.showRestartPeridotDialog();
             closeThisAndMainGUI();
-        }
+        }*/
     }
-    
-    private void addScript(){
-        Class scriptType = askUserForType();
-        if(scriptType == null){
-            return;
-        }
-        NewModuleDialog dialog = new NewModuleDialog(publicParent, true, scriptType, null);
-        dialog.setVisible(true);
-        if(dialog.script != null){
-            MainGUI.showRestartPeridotDialog();
-            closeThisAndMainGUI();
-        }
-    }
-    
-    private Class askUserForType(){
-        AskModuleType dialog = new AskModuleType(publicParent);
-        dialog.setVisible(true);
-        return dialog.type;
-    }
-    
+
     private void scriptDetails(String script){
         new ModuleDetailsDialog(script, publicParent, true).setVisible(true);
     }
@@ -343,7 +324,7 @@ public class ModulesManager extends Dialog {
             MainGUI.close();
         });
     }
-    
+
     private Panel modulesContainer;
     private Panel buttonsContainer;
     private Panel analysisModListContainer;
@@ -352,11 +333,15 @@ public class ModulesManager extends Dialog {
     private BigLabel analysisModLabel;
     private BigLabel postAnalysisModLabel;
     
-    private BigButton addButton;
+    //private BigButton addButton;
     private BigButton editButton;
     private BigButton detailsButton;
     private BigButton deleteButton;
     private BigButton importButton, exportButton;
     
-    public static final String mandatoryString = " (mandatory)"; 
+    public static final String mandatoryString = " (mandatory)";
+
+    /*
+
+    */
 }
