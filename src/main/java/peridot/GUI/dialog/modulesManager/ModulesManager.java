@@ -264,6 +264,8 @@ public class ModulesManager extends Dialog {
                 }
             }
         };
+
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         
         if(fileChooser.showDialog(null, "Select a module to import:") == JFileChooser.APPROVE_OPTION){
             File dir = fileChooser.getSelectedFile();
@@ -274,7 +276,7 @@ public class ModulesManager extends Dialog {
                 }else{
                     module = new AnalysisModule(dir);
                 }
-                module.createEnvironment(null);
+                module.createEnvironment(dir + File.separator + module.scriptName);
                 RModule.availableModules.put(module.name, module);
                 return true;
             }catch (Exception ex){
