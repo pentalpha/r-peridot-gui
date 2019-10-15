@@ -124,19 +124,21 @@ public class ScriptOutputDialog extends Dialog {
 
     public void updateText(){
         if(script != null){
+            Log.logger.finest("Updating from script instance");
             output = script.getOutputString();
             SwingUtilities.invokeLater(() -> {
                 textArea.setText(output);
             });
         }else if (outputFilePath != null){
+            Log.logger.finest("Updating from output file " + outputFilePath);
             String newContent = Global.readFileUsingSystem(outputFilePath);
             String newContent_f = Global.readFileUsingSystem(outputFilePath_f);
             if(newContent.length() < newContent_f.length()){
                 newContent = newContent_f;
-                //Log.logger.info("Reading from final output file " + outputFilePath_f);
+                Log.logger.finest("Reading from final output file " + outputFilePath_f);
             }
-            //Log.logger.finest("Updating " + this.scriptName + " from "
-            //        + this.output.length() + " to " + newContent.length());
+            Log.logger.finest("Updating " + this.scriptName + " from "
+                    + this.output.length() + " to " + newContent.length());
             if(newContent.length() > 0){
                 output = newContent;
                 SwingUtilities.invokeLater(() -> {
